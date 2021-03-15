@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"flag"
 )
 
 var (
@@ -13,7 +12,6 @@ var (
 	Owner string
 	IgnoreBots string
 	config *configStruct
-	VersionStartup bool
 )
 
 type configStruct struct {
@@ -22,11 +20,6 @@ type configStruct struct {
 	Owner string `json:"Owner"`
 }
 
-func flags() *types.Nil {
-	flag.BoolVar(&VersionStartup, "v", false, "Display Version information and exit")
-	flag.Parse()
-	return nil
-}
 func ReadConfig() error {
 	fmt.Println("Getting data from config file.")
 
