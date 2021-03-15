@@ -1,6 +1,5 @@
 {
     "Token": "YOUR TOKEN",
     "BotPrefix": "YOUR PREFIX",
-    "IgnoreBots": "true",
     "Owner": "YOUR ID"
 }

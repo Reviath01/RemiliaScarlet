@@ -17,7 +17,6 @@ var (
 type configStruct struct {
 	Token     string `json:"Token"`
 	BotPrefix string `json:"BotPrefix"`
-	IgnoreBots string `json:"IgnoreBots"`
 	Owner string `json:"Owner"`
 }
 
@@ -41,7 +40,6 @@ func ReadConfig() error {
 	Token = config.Token
 	BotPrefix = config.BotPrefix
 	Owner = config.Owner
-	IgnoreBots = config.IgnoreBots
 
 	return nil
 }
