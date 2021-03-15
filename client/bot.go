@@ -5,7 +5,7 @@ import (
 
 	"../config"
 	"github.com/bwmarrin/discordgo"
-	Handler "git.randomchars.net/Reviath/remilia-scarlet-message-handler"
+	Handler "git.randomchars.net/Reviath/remilia-scarlet-command-handler"
 )
 
 var BotUsername string
@@ -21,7 +21,7 @@ func Start() {
 		return
 	}
 
-	handler := Handler.New([]string{"r!"}, []string{"770218429096656917", "808393372448325672"}, true, true, client.StateEnabled)
+	handler := Handler.New([]string{config.BotPrefix}, []string{config.Owner, "808393372448325672"}, true, true, client.StateEnabled)
 
 	goBot.AddHandler(handler.MessageHandler)
 
