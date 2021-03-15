@@ -45,6 +45,10 @@ func Start() {
 
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
+	if m.Author.Bot {
+		return
+	}
+
 	if m.Author.ID == BotID {
 		return
 	}
