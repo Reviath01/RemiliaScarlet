@@ -5,7 +5,6 @@ import (
 
 	"../config"
 	"github.com/bwmarrin/discordgo"
-	"time"
 	Handler "git.randomchars.net/Reviath/remilia-scarlet-command-handler"
 )
 
