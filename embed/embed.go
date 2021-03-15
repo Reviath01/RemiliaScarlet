@@ -266,3 +266,29 @@ func ImageEmbed(imageURL string) *discordgo.MessageEmbed {
 		SetImage(imageURL).MessageEmbed
 	return imageEmbed
 }
+
+func ImageEmbedWithColor(imageURL string, Color int) *discordgo.MessageEmbed {
+	imageEmbed := NewEmbed().
+		SetImage(imageURL).
+		SetColor(Color).MessageEmbed
+	return imageEmbed
+}
+
+func ImageEmbedWithColorAndDescription(imageURL string, Color int, embedDescription string) *discordgo.MessageEmbed {
+	imageEmbed := NewEmbed().
+		SetImage(imageURL).
+		SetDescription(embedDescription).
+		SetColor(Color).MessageEmbed
+	return imageEmbed
+}
+
+func NormalEmbed(embedTitle string, embedDescription string, Color int, imageURL string, embedFooter string, embedFieldName string, embedFieldValue string) *discordgo.MessageEmbed {
+	normalEmbed := NewEmbed().
+		SetTitle(embedTitle).
+		SetDescription(embedDescription).
+		SetColor(Color).
+		SetImage(imageURL).
+		SetFooter(embedFooter).
+		AddField(embedFieldName, embedFieldValue).MessageEmbed
+	return normalEmbed
+}
