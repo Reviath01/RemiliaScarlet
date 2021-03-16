@@ -5,7 +5,7 @@ import (
 
 	"../config"
 	"github.com/bwmarrin/discordgo"
-	Handler "git.randomchars.net/Reviath/handlers"
+	Handler "git.randomchars.net/Reviath/handlers/message"
 )
 
 var BotUsername string
