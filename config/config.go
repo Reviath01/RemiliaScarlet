@@ -8,16 +8,11 @@ import (
 
 var (
 	Token     string
-	BotPrefix string
-	Owner string
-	IgnoreBots string
 	config *configStruct
 )
 
 type configStruct struct {
 	Token     string `json:"Token"`
-	BotPrefix string `json:"BotPrefix"`
-	Owner string `json:"Owner"`
 }
 
 func ReadConfig() error {
@@ -38,8 +33,6 @@ func ReadConfig() error {
 	}
 
 	Token = config.Token
-	BotPrefix = config.BotPrefix
-	Owner = config.Owner
 
 	return nil
 }
