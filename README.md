@@ -1,10 +1,3 @@
-
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![GNU GPLv3 License][license-shield]][license-url]
-
-
 <br />
 <p align="center">
   <a href="https://git.randomchars.net/reviath/remilia-scarlet">
@@ -91,15 +84,3 @@ Distributed under the GNU GPLv3 License. See `LICENSE` for more information.
 ## Contact
 
 Discord - [Reviath#0001](https://discord.com/users/770218429096656917)
-
-
-
-
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://git.randomchars.net/Reviath/remilia-scarlet/-/forks
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://git.randomchars.net/Reviath/remilia-scarlet/-/starrers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://git.randomchars.net/Reviath/remilia-scarlet/-/blob/master/LICENSE
