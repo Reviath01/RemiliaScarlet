@@ -10,9 +10,6 @@ import (
 	commandMap "git.randomchars.net/Reviath/handlers/CommandMap"
 )
 
-var BotUsername string
-var BotDiscriminator string
-var BotID string
 var goBot *discordgo.Session
 
 func Start() {
@@ -44,9 +41,9 @@ var prefixes = []string{config.Prefix1, config.Prefix2}
 
 	goBot.AddHandler(Ready)
 
-	BotID = u.ID
-	BotUsername = u.Username
-	BotDiscriminator = u.Discriminator
+	BotID := u.ID
+	BotUsername := u.Username
+	BotDiscriminator := u.Discriminator
 
 	err = goBot.Open()
 
