@@ -22,7 +22,7 @@ func Start() {
 		return
 	}
 
-var prefixes = []string{"r!", "r?"}
+var prefixes = []string{config.Prefix1, config.Prefix2}
 
 	handler := CommandHandler.New(goBot, commandMap.New(), prefixes)
 	handler.GetCommandMap().RegisterCommand("ping", Ping{}, true)

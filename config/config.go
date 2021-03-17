@@ -8,11 +8,15 @@ import (
 
 var (
 	Token     string
+	Prefix1 string
+	Prefix2 string
 	config *configStruct
 )
 
 type configStruct struct {
 	Token     string `json:"Token"`
+	Prefix1 string `json:"Prefix1"`
+	Prefix2 string `json:"Prefix2"`
 }
 
 func ReadConfig() error {
@@ -33,6 +37,8 @@ func ReadConfig() error {
 	}
 
 	Token = config.Token
+	Prefix1 = config.Prefix1
+	Prefix2 = config.Prefix2
 
 	return nil
 }

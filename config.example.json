@@ -1,3 +1,5 @@
 {
-    "Token": "INSERT_TOKEN_HERE"
+    "Token": "INSERT_TOKEN_HERE",
+    "Prefix1": "YOUR_FIRST_PREFIX",
+    "Prefix2": "YOUR_SECOND_PREFIX"
 }
