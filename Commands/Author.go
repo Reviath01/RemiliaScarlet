@@ -1,4 +1,4 @@
-package Commands
+package commands
 
 import (
 	ctx "git.randomchars.net/Reviath/handlers/Context"
