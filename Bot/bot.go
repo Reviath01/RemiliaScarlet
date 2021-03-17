@@ -5,7 +5,7 @@ import (
 
 	"../config"
 	"github.com/bwmarrin/discordgo"
-	CommandHandler "git.randomchars.net/Reviath/handlers"
+	CommandHandler "git.randomchars.net/Reviath/handlers/CommandHandler"
 	commandMap "git.randomchars.net/Reviath/handlers/CommandMap"
 )
 
@@ -22,18 +22,17 @@ func Start() {
 		return
 	}
 
-	handler := CommandHandler.New(goBot,commandMap.New(),true,config.BotPrefix)
-	pg := commandGroup.New("User")
-	pg.AddCommand("ping", Ping{})
-	handler.GetCommandMap().RegisterCommandGroup("User", pg)
+var prefixes = []string{"r!", "r?"}
+
+	handler := CommandHandler.New(goBot, commandMap.New(), prefixes)
+	handler.GetCommandMap().RegisterCommand("ping", Ping{}, true)
+
 
 	u, err := goBot.User("@me")
 
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-
-	goBot.AddHandler(Handler.MessageHandler)
 
 	BotID = u.ID
 	BotUsername = u.Username
