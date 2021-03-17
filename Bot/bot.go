@@ -3,6 +3,7 @@ package client
 import (
 	"fmt"
 
+	"../Commands"
 	"../config"
 	"github.com/bwmarrin/discordgo"
 	CommandHandler "git.randomchars.net/Reviath/handlers/CommandHandler"
@@ -25,13 +26,13 @@ func Start() {
 var prefixes = []string{config.Prefix1, config.Prefix2}
 
 	handler := CommandHandler.New(goBot, commandMap.New(), prefixes)
-	handler.GetCommandMap().RegisterCommand("ping", Ping{}, true)
-	handler.GetCommandMap().RegisterCommand("stats", Stats{}, true)
-	handler.GetCommandMap().RegisterCommand("avatar", Avatar{}, true)
-	handler.GetCommandMap().RegisterCommand("invite", Invite{}, true)
-	handler.GetCommandMap().RegisterCommand("author", Author{}, true)
-	handler.GetCommandMap().RegisterCommand("issue", Issue{}, true)
-	handler.GetCommandMap().RegisterCommand("guild_info", GuildInfo{}, true)
+	handler.GetCommandMap().RegisterCommand("ping", Commands.Ping{}, true)
+	handler.GetCommandMap().RegisterCommand("stats", Commands.Stats{}, true)
+	handler.GetCommandMap().RegisterCommand("avatar", Commands.Avatar{}, true)
+	handler.GetCommandMap().RegisterCommand("invite", Commands.Invite{}, true)
+	handler.GetCommandMap().RegisterCommand("author", Commands.Author{}, true)
+	handler.GetCommandMap().RegisterCommand("issue", Commands.Issue{}, true)
+	handler.GetCommandMap().RegisterCommand("guild_info", Commands.GuildInfo{}, true)
 
 	u, err := goBot.User("@me")
 
