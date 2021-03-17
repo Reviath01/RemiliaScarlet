@@ -39,6 +39,8 @@ var prefixes = []string{config.Prefix1, config.Prefix2}
 		fmt.Println(err.Error())
 	}
 
+	goBot.Identify.Intents = discordgo.IntentsAll
+
 	goBot.AddHandler(Ready)
 
 	BotID = u.ID
