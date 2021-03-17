@@ -1,4 +1,4 @@
-package client
+package Commands
 
 import (
     "strconv"
