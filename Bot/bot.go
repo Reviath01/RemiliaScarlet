@@ -56,5 +56,5 @@ var prefixes = []string{config.Prefix1, config.Prefix2}
 }
 
 func Ready(s *discordgo.Session, event *discordgo.Ready) {
-	s.UpdateGameStatus(0, "r!help | r!invite")
+	s.UpdateGameStatus(0, config.Presence)
 }

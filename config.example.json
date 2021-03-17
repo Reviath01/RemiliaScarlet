@@ -1,5 +1,6 @@
 {
     "Token": "INSERT_TOKEN_HERE",
     "Prefix1": "YOUR_FIRST_PREFIX",
-    "Prefix2": "YOUR_SECOND_PREFIX"
+    "Prefix2": "YOUR_SECOND_PREFIX",
+    "Presence": "YOUR_BOTS_GAME_ACTIVITY"
 }

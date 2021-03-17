@@ -10,6 +10,7 @@ var (
 	Token     string
 	Prefix1 string
 	Prefix2 string
+	Presence string
 	config *configStruct
 )
 
@@ -17,6 +18,7 @@ type configStruct struct {
 	Token     string `json:"Token"`
 	Prefix1 string `json:"Prefix1"`
 	Prefix2 string `json:"Prefix2"`
+	Presence string `json:"Presence"`
 }
 
 func ReadConfig() error {
@@ -39,6 +41,7 @@ func ReadConfig() error {
 	Token = config.Token
 	Prefix1 = config.Prefix1
 	Prefix2 = config.Prefix2
+	Presence = config.Presence
 
 	return nil
 }
