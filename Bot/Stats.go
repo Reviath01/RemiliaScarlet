@@ -33,6 +33,6 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             AddField("Discordgo version", discordgo.VERSION).
             AddField("Server size", strconv.Itoa(len(session.State.Guilds))).
             AddField("Goroutines", strconv.Itoa(runtime.NumGoroutine())).MessageEmbed
-        _, err := session.ChannelMessageSendEmbed(ctx.GetChannel().ID, statembed)
+        _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
         return err
 }

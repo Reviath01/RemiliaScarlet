@@ -13,7 +13,7 @@ type Avatar struct {
 func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     avatarembed := embedutil.NewEmbed().
     SetColor(0xff1000).
-    SetImage(ctx.GetAuthor().AvatarURL("avatar")).MessageEmbed
-	_, err := session.ChannelMessageSendEmbed(ctx.GetChannel().ID, avatarembed)
+    SetImage(ctx.Author().AvatarURL("avatar")).MessageEmbed
+	_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 	return err
 }
