@@ -39,6 +39,8 @@ var prefixes = []string{"r!", "r?"}
 		fmt.Println(err.Error())
 	}
 
+	goBot.AddHandler(Ready)
+
 	BotID = u.ID
 	BotUsername = u.Username
 	BotDiscriminator = u.Discriminator
@@ -51,4 +53,8 @@ var prefixes = []string{"r!", "r?"}
 	}
 
 	fmt.Println("Logging in as " + BotUsername + "#" + BotDiscriminator + " (" + BotID + ")")
+}
+
+func Ready(s *discordgo.Session, event *discordgo.Ready) {
+	s.UpdateGameStatus(0, "r!help | r!invite")
 }
