@@ -30,6 +30,7 @@ var prefixes = []string{"r!", "r?"}
 	handler.GetCommandMap().RegisterCommand("avatar", Avatar{}, true)
 	handler.GetCommandMap().RegisterCommand("invite", Invite{}, true)
 	handler.GetCommandMap().RegisterCommand("author", Author{}, true)
+	handler.GetCommandMap().RegisterCommand("issue", Issue{}, true)
 
 	u, err := goBot.User("@me")
 
