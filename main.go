@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./client"
+	"./Bot"
 	"./config"
 	"fmt"
 )
