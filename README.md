@@ -3,9 +3,6 @@
   <a href="https://git.randomchars.net/reviath/remilia-scarlet">
     <img src="https://cdn.discordapp.com/avatars/811652323159834646/06f90b922c91a9751df56be91833033c.webp" alt="Logo" width="160" height="160">
   </a>
-
-  <h3 align="center">Remilia Scarlet</h3>
-
   <p align="center">
   </p>
 </p>
