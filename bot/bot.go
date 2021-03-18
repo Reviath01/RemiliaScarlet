@@ -19,10 +19,8 @@ func Start() {
 		fmt.Println(err.Error())
 		return
 	}
-
-		var prefix string
-
-		prefix = config.BotPrefix
+	var prefix string
+	prefix = config.BotPrefix
 
 	handler := CommandHandler.New(goBot, commandMap.New(), prefix)
 	handler.GetCommandMap().RegisterCommand("ping", commands.Ping{}, true)
@@ -35,6 +33,7 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("embed", commands.Embed{}, true)
 	handler.GetCommandMap().RegisterCommand("icon", commands.Icon{}, true)
 	handler.GetCommandMap().RegisterCommand("spoiler", commands.Spoiler{}, true)
+	handler.GetCommandMap().RegisterCommand("hug", commands.Hug{}, true)
 
 	u, err := goBot.User("@me")
 
