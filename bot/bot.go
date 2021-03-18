@@ -20,9 +20,11 @@ func Start() {
 		return
 	}
 
-var prefixes = []string{config.Prefix1, config.Prefix2}
+		var prefix string
 
-	handler := CommandHandler.New(goBot, commandMap.New(), prefixes)
+		prefix = config.BotPrefix
+
+	handler := CommandHandler.New(goBot, commandMap.New(), prefix)
 	handler.GetCommandMap().RegisterCommand("ping", commands.Ping{}, true)
 	handler.GetCommandMap().RegisterCommand("stats", commands.Stats{}, true)
 	handler.GetCommandMap().RegisterCommand("avatar", commands.Avatar{}, true)
