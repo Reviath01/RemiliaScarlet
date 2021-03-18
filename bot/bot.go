@@ -37,6 +37,7 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("kiss", commands.Kiss{}, true)
 	handler.GetCommandMap().RegisterCommand("slap", commands.Slap{}, true)
 	handler.GetCommandMap().RegisterCommand("roles", commands.Roles{}, true)
+	handler.GetCommandMap().RegisterCommand("ban", commands.Ban{}, true)
 
 	u, err := goBot.User("@me")
 
