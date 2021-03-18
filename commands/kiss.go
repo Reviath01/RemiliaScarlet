@@ -12,10 +12,6 @@ type Kiss struct {
 }
 
 func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-    if strings.Join(ctx.Args(), " ") == "" {
-        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-	        return err
-    }
     if len(strings.Join(ctx.Args(), " ")) != 22 {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 	        return err
