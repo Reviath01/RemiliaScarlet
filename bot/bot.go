@@ -38,6 +38,7 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("slap", commands.Slap{}, true)
 	handler.GetCommandMap().RegisterCommand("roles", commands.Roles{}, true)
 	handler.GetCommandMap().RegisterCommand("ban", commands.Ban{}, true)
+	handler.GetCommandMap().RegisterCommand("start_vote", commands.StartVote{}, true)
 
 	u, err := goBot.User("@me")
 
