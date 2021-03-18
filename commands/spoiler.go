@@ -12,6 +12,10 @@ type Spoiler struct {
 }
 
 func (e Spoiler) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
+    if strings.Join(ctx.Args()," ") == "" {
+    _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the message.")
+    return err
+    }
       spoilerembed := embedutil.NewEmbed().
             SetColor(0xe9ff00).
             SetDescription("|| " + strings.Join(ctx.Args()," ") + " ||").MessageEmbed
