@@ -23,14 +23,14 @@ func Start() {
 var prefixes = []string{config.Prefix1, config.Prefix2}
 
 	handler := CommandHandler.New(goBot, commandMap.New(), prefixes)
-	handler.GetCommandMap().RegisterCommand("ping", Commands.Ping{}, true)
-	handler.GetCommandMap().RegisterCommand("stats", Commands.Stats{}, true)
-	handler.GetCommandMap().RegisterCommand("avatar", Commands.Avatar{}, true)
-	handler.GetCommandMap().RegisterCommand("invite", Commands.Invite{}, true)
-	handler.GetCommandMap().RegisterCommand("author", Commands.Author{}, true)
-	handler.GetCommandMap().RegisterCommand("issue", Commands.Issue{}, true)
-	handler.GetCommandMap().RegisterCommand("guild_info", Commands.GuildInfo{}, true)
-	handler.GetCommandMap().RegisterCommand("embed", Commands.Embed{}, true)
+	handler.GetCommandMap().RegisterCommand("ping", commands.Ping{}, true)
+	handler.GetCommandMap().RegisterCommand("stats", commands.Stats{}, true)
+	handler.GetCommandMap().RegisterCommand("avatar", commands.Avatar{}, true)
+	handler.GetCommandMap().RegisterCommand("invite", commands.Invite{}, true)
+	handler.GetCommandMap().RegisterCommand("author", commands.Author{}, true)
+	handler.GetCommandMap().RegisterCommand("issue", commands.Issue{}, true)
+	handler.GetCommandMap().RegisterCommand("guild_info", commands.GuildInfo{}, true)
+	handler.GetCommandMap().RegisterCommand("embed", commands.Embed{}, true)
 
 	u, err := goBot.User("@me")
 
