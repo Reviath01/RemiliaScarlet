@@ -35,10 +35,6 @@ go get git.randomchars.net/Reviath/embed-util
 
 go get git.randomchars.net/Reviath/handlers
 
-go get git.randomchars.net/FreeNitori/Log
-
-go get git.randomchars.net/FreeNitori/Multiplexer
-
 go get github.com/bwmarrin/discordgo
 
 ```
