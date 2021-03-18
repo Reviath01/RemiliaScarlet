@@ -16,7 +16,7 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         _, err4 := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 	        return err4
     }
-    if len(strings.Join(ctx.Args(), " ")) < 18 {
+    if len(strings.Join(ctx.Args(), " ")) < 19 {
         _, err4 := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 	        return err4
     }
