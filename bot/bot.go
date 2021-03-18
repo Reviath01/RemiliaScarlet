@@ -32,6 +32,7 @@ var prefixes = []string{config.Prefix1, config.Prefix2}
 	handler.GetCommandMap().RegisterCommand("guild_info", commands.GuildInfo{}, true)
 	handler.GetCommandMap().RegisterCommand("embed", commands.Embed{}, true)
 	handler.GetCommandMap().RegisterCommand("icon", commands.Icon{}, true)
+	handler.GetCommandMap().RegisterCommand("spoiler", commands.Spoiler{}, true)
 
 	u, err := goBot.User("@me")
 
