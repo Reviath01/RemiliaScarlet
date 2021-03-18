@@ -3,7 +3,7 @@ package client
 import (
 	"fmt"
 
-	"../Commands"
+	"../commands"
 	"../config"
 	"github.com/bwmarrin/discordgo"
 	CommandHandler "git.randomchars.net/Reviath/handlers/CommandHandler"
