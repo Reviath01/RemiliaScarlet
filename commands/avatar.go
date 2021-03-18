@@ -12,27 +12,43 @@ type Avatar struct {
 }
 
 func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
+    if len(strings.Join(ctx.Args()," ")) < 19 {
     u, err := session.User(strings.Join(ctx.Args()," "))
     if err == nil {
-        avatarembed2 := embedutil.NewEmbed().
+        avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
-            SetImage(u.AvatarURL("avatar")).MessageEmbed
-	    _, err2 := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed2)
-	return err2
-    } else {	
-        u2, err := session.User(strings.Join(ctx.Args()," ")[3:][:18])
+            SetImage(u.AvatarURL("1024")).MessageEmbed
+	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+	return err 
+    } else {
+        avatarembed := embedutil.NewEmbed().
+            SetColor(0xff1000).
+            SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
+	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+	        return err
+    }
+} else {
+    if len(strings.Join(ctx.Args()," ")) > 21 {
+     u, err := session.User(strings.Join(ctx.Args()," ")[3:][:18])
         if err == nil {
         avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
-            SetImage(u2.AvatarURL("avatar")).MessageEmbed
-	    _, err3 := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
-	    return err3
+            SetImage(u.AvatarURL("1024")).MessageEmbed
+	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+	    return err
         } else {
-        avatarembed3 := embedutil.NewEmbed().
+        avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
-            SetImage(ctx.Author().AvatarURL("avatar")).MessageEmbed
-	    _, err4 := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed3)
-	        return err4
+            SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
+	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+	        return err
         }
+    } else {
+        avatarembed := embedutil.NewEmbed().
+            SetColor(0xff1000).
+            SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
+	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+	        return err
     }
+}
 }
