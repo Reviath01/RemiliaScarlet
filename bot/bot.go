@@ -67,7 +67,3 @@ func Start() {
 
 	fmt.Println("Logging in as " + BotUsername + "#" + BotDiscriminator + " (" + BotID + ")")
 }
-
-func Ready(s *discordgo.Session, event *discordgo.Ready) {
-	s.UpdateGameStatus(0, config.Presence)
-}
