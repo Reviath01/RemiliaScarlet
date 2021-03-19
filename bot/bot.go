@@ -44,7 +44,8 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("kick", commands.Kick{}, true)
 	handler.GetCommandMap().RegisterCommand("afk", commands.Afk{}, true)
 	handler.GetCommandMap().RegisterCommand("help", commands.Help{}, true)
-
+	handler.GetCommandMap().RegisterCommand("welcome_channel", commands.WelcomeChannel{}, true)
+	
 	u, err := goBot.User("@me")
 
 	if err != nil {
