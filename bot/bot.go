@@ -8,6 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 	CommandHandler "git.randomchars.net/Reviath/handlers/CommandHandler"
 	commandMap "git.randomchars.net/Reviath/handlers/CommandMap"
+	"../events"
 )
 
 var goBot *discordgo.Session
@@ -52,7 +53,8 @@ func Start() {
 
 	goBot.Identify.Intents = discordgo.IntentsAll
 
-	goBot.AddHandler(Ready)
+	goBot.AddHandler(events.Ready)
+	goBot.AddHandler(events.GuildMemberAdd)
 
 	BotID := u.ID
 	BotUsername := u.Username
