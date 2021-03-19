@@ -41,6 +41,7 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("start_vote", commands.StartVote{}, true)
 	handler.GetCommandMap().RegisterCommand("unban", commands.Unban{}, true)
 	handler.GetCommandMap().RegisterCommand("kick", commands.Kick{}, true)
+	handler.GetCommandMap().RegisterCommand("afk", commands.Afk{}, true)
 
 	u, err := goBot.User("@me")
 
