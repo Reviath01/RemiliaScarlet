@@ -11,6 +11,12 @@ type Ban struct {
 }
 
 func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
+    perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
+	if err == nil && (int(perms)&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers) == false {
+        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need ban members permission to run this command.")
+	return err
+    }
+
     if len(strings.Join(ctx.Args()," ")) < 19 {
     u, err := session.User(strings.Join(ctx.Args()," "))
     if err == nil {
