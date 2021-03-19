@@ -12,6 +12,11 @@ type StartVote struct {
 }
 
 func (s StartVote) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
+    perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
+	if err == nil && (int(perms)&discordgo.PermissionManageMessages == discordgo.PermissionManageMessages) == false {
+        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need manage messages permission to run this command.")
+	return err
+    }
     if strings.Join(ctx.Args()," ") == "" {
     _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a message.")
     return err
