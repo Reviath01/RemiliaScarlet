@@ -17,6 +17,7 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 
 	type Tag struct {
 		channelid string `json:"channelid"`
+		roleid string `json:"roleid"`
 	}
 
 	var tag Tag
@@ -30,5 +31,14 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 			return
 		}
 		s.ChannelMessageSend(channel.ID, "Welcome to server <@" + event.User.ID + ">")
+	}
+	err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + event.GuildID + "'").Scan(&tag.roleid)
+	if err != nil {
+		return
+	} else {
+		_, err = s.GuildMemberRoleAdd(event.GuildID, event.User.ID, tag.roleid)
+		if err != nil {
+			return
+		}
 	}
 }
