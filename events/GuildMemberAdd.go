@@ -36,7 +36,7 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	if err != nil {
 		return
 	} else {
-		_, err = s.GuildMemberRoleAdd(event.GuildID, event.User.ID, tag.roleid)
+		err = s.GuildMemberRoleAdd(event.GuildID, event.User.ID, tag.roleid)
 		if err != nil {
 			return
 		}
