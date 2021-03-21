@@ -29,10 +29,6 @@ func ReadConfig() error {
 		return err
 	}
 
-	if config.Token == "INSERT_TOKEN_HERE" || config.BotPrefix == "BOTS_PREFIX" || config.Presence == "YOUR_BOTS_GAME_ACTIVITY" {
-		fmt.Println("Please edit the configuration file (config.json) before using.")
-	}
-
 	err = json.Unmarshal(file, &config)
 
 	if err != nil {
