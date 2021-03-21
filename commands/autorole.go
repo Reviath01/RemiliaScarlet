@@ -56,7 +56,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             return err
         }
     } else {
-        if len(strings.Join(ctx.Args()," ")) == 21 {
+        if len(strings.Join(ctx.Args()," ")) == 22 {
     db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
 
 	if err != nil {
@@ -76,7 +76,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     _, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
     return err
     } else {
-        insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + strings.Join(ctx.Args()," ")[:3][18:] + "', '" + ctx.Guild().ID + "')")
+        insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + strings.Join(ctx.Args()," ")[3:][:18] + "', '" + ctx.Guild().ID + "')")
         if err != nil {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured, please try again.")
             return err
