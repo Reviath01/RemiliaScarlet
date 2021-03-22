@@ -49,6 +49,7 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("auto_role", commands.AutoRole{}, true)
 	handler.GetCommandMap().RegisterCommand("reset_auto_role", commands.ResetAutorole{}, true)
 	handler.GetCommandMap().RegisterCommand("settings", commands.Settings{}, true)
+	handler.GetCommandMap().RegisterCommand("leave_message", commands.LeaveMessage{}, true)
 
 	u, err := goBot.User("@me")
 
