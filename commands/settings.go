@@ -59,6 +59,6 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		AddField("Leave Channel:", leavechannel).
 		AddField("Autorole:", autorole).MessageEmbed
         
-	_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 	return err
 }
