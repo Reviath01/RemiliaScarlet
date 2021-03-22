@@ -19,7 +19,6 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 		channelid string `json:"channelid"`
 		roleid string `json:"roleid"`
 		welcomemessage string `json:"message"`
-		leavemessage string `json:"message"`
 	}
 
 	var tag Tag
