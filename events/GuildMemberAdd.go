@@ -18,9 +18,19 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	type Tag struct {
 		channelid string `json:"channelid"`
 		roleid string `json:"roleid"`
+		welcomemessage string `json:"message"`
+		leavemessage string `json:"message"`
 	}
 
 	var tag Tag
+	var welcomemsg string
+
+	err = db.QueryRow("SELECT message FROM welcomemessage WHERE guildid ='" + event.GuildID + "'").Scan(&tag.welcomemessage)
+	if err != nil {
+		welcomemsg = "Welcome to server <@" + event.User.ID + ">"
+	} else {
+		welcomemsg = tag.welcomemessage
+	}
 
 	err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
@@ -30,7 +40,7 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 		if err != nil {
 			return
 		}
-		s.ChannelMessageSend(channel.ID, "Welcome to server <@" + event.User.ID + ">")
+		s.ChannelMessageSend(channel.ID, welcomemsg)
 	}
 	err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + event.GuildID + "'").Scan(&tag.roleid)
 	if err != nil {
