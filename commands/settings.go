@@ -25,12 +25,16 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		welcomechannelid string `json:"channelid"`
 		leavechannelid string `json:"channelid"`
 		roleid string `json:"roleid"`
+		welcomemessage string `json:"message"`
+		leavemessage string `json:"message"`
 	}
 
 	var tag Tag
 	var welcomechannel string
 	var leavechannel string
 	var autorole string
+	var leavemsg string
+	var welcomemsg string
 
 	err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
 	if err == nil {
@@ -53,11 +57,27 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		autorole = "Not existing."
 	}
 
+	err = db.QueryRow("SELECT message FROM welcomemessage WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomemessage)
+	if err == nil {
+		welcomemsg = tag.welcomemessage
+	} else {
+		welcomemsg = "Not existing."
+	}
+
+	err = db.QueryRow("SELECT message FROM leavemessage WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.leavemessage)
+	if err == nil {
+		leavemsg = tag.leavemessage
+	} else {
+		leavemsg = "Not existing."
+	}
+
 	embed := embedutil.NewEmbed().
         SetTitle(ctx.Guild().Name + " Settings").
 		AddField("Welcome Channel:", welcomechannel).
 		AddField("Leave Channel:", leavechannel).
-		AddField("Autorole:", autorole).MessageEmbed
+		AddField("Autorole:", autorole).
+		AddField("Leave Message:", leavemsg).
+		AddField("Welcome Message:", welcomemsg).MessageEmbed
         
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 	return err
