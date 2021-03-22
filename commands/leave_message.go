@@ -23,6 +23,11 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return err
 	}
 
+	if len(strings.Join(ctx.Args(), " ")) > 254 {
+		_, err = session.ChannelMessageSend(ctx.Channel().ID, "Your message can be up to 255 characters long.")
+		return err
+	}
+
     db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
 
 	if err != nil {
