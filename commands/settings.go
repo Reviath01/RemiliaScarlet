@@ -4,6 +4,8 @@ import (
 	ctx "git.randomchars.net/Reviath/handlers/Context"
 	"github.com/bwmarrin/discordgo"
     embedutil "git.randomchars.net/Reviath/embed-util"
+	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Settings struct {
