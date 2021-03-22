@@ -17,9 +17,19 @@ func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove)
 
 	type Tag struct {
 		channelid string `json:"channelid"`
+		leavemessage string `json:"message"`
 	}
 
 	var tag Tag
+	var leavemessage string
+
+	err = db.QueryRow("SELECT message FROM leavemessage WHERE guildid ='" + event.GuildID + "'").Scan(&tag.leavemessage)
+	if err != nil {
+		leavemessage = "<@" + event.User.ID + "> left the server!"
+	} else {
+		leavemessage = tag.leavemessage
+	}
+
 
 	err = db.QueryRow("SELECT channelid FROM leavechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
@@ -29,6 +39,6 @@ func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove)
 		if err != nil {
 			return
 		}
-		s.ChannelMessageSend(channel.ID, "<@" + event.User.ID + "> left the server!")
+		s.ChannelMessageSend(channel.ID, leavemessage)
 	}
 }
