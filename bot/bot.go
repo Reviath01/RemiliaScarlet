@@ -69,6 +69,7 @@ func Start() {
 	goBot.AddHandler(events.GuildMemberAdd)
 	goBot.AddHandler(events.GuildMemberRemove)
 	goBot.AddHandler(events.ChannelCreate)
+	goBot.AddHandler(events.ChannelDelete)
 
 	BotID := u.ID
 	BotUsername := u.Username
