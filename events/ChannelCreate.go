@@ -2,11 +2,10 @@ package events
 
 import (
 	"database/sql"
-	"go/types"
 
+	embedutil "git.randomchars.net/Reviath/embed-util"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
-	embedutil "git.randomchars.net/Reviath/embed-util"
 )
 
 func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
@@ -28,17 +27,12 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 	if err != nil {
 		return
 	} else {
-		channel, err := discordgo.Channel(tag.channelid)
-		if err != nil {
-			return
-		}
-
 		embed := embedutil.NewEmbed().
-		SetTitle("Channel Created!").
-		AddField("Channel Name:", event.Channel.Name + " ( <#" + event.Channel.ID + "> )").
-		AddField("Channel ID:", event.Channel.ID).
-		AddField("Channel Type:", event.Channel.Type).MessageEmbed
+			SetTitle("Channel Created!").
+			AddField("Channel Name:", event.Channel.Name+" ( <#"+event.Channel.ID+"> )").
+			AddField("Channel ID:", event.Channel.ID).
+			AddField("Channel Type:", string(event.Channel.Type)).MessageEmbed
 
-		_, err = s.ChannelMessageSendEmbed(channel.ID, embed)
+		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
 	}
 }
