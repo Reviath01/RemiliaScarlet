@@ -55,6 +55,7 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("reset_welcome_channel", commands.ResetWelcomeChannel{}, true)
 	handler.GetCommandMap().RegisterCommand("reset_welcome_message", commands.ResetWelcomeMessage{}, true)
 	handler.GetCommandMap().RegisterCommand("reset_leave_message", commands.ResetLeaveMessage{}, true)
+	handler.GetCommandMap().RegisterCommand("log", commands.Log{}, true)
 
 	u, err := goBot.User("@me")
 
