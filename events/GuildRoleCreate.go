@@ -6,6 +6,7 @@ import (
 	embedutil "git.randomchars.net/Reviath/embed-util"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
+	"strconv"
 )
 
 func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
@@ -31,7 +32,7 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 			SetTitle("Role Created!").
 			AddField("Role Name:", event.Role.Name + " ( <@&" + event.Role.ID + "> )").
 			AddField("Role ID:", event.Role.ID).
-			AddField("Role Color:", event.Role.Color).
+			AddField("Role Color:", strconv.Itoa(event.Role.Color)).
 			SetColor(0xefff00).MessageEmbed
 
 		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
