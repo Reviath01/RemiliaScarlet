@@ -8,7 +8,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelDelete) {
+func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
 
 	if err != nil {
