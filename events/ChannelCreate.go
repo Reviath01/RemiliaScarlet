@@ -34,5 +34,8 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 			AddField("Channel Type:", string(event.Channel.Type)).MessageEmbed
 
 		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+		if err != nil {
+			return
+		}
 	}
 }
