@@ -23,7 +23,7 @@ This is my first Golang Discord bot project, but I've written in javascript (Nod
 git clone https://git.randomchars.net/Reviath/remilia-scarlet
 ```
 
-2. Change config file (config.example.json)
+2. Edit config file (config.json)
 
 
 3. Get required packages
