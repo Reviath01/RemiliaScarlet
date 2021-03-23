@@ -31,7 +31,8 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 			SetTitle("Channel Deleted!").
 			AddField("Channel Name:", event.Channel.Name).
 			AddField("Channel ID:", event.Channel.ID).
-			AddField("Channel Type:", string(event.Channel.Type)).MessageEmbed
+			AddField("Channel Type:", string(event.Channel.Type)).
+			SetColor(0xff1000).MessageEmbed
 
 		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
 		if err != nil {

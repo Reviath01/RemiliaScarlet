@@ -31,7 +31,8 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 			SetTitle("Channel Created!").
 			AddField("Channel Name:", event.Channel.Name+" ( <#"+event.Channel.ID+"> )").
 			AddField("Channel ID:", event.Channel.ID).
-			AddField("Channel Type:", string(event.Channel.Type)).MessageEmbed
+			AddField("Channel Type:", string(event.Channel.Type)).
+			SetColor(0xff1000).MessageEmbed
 
 		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
 		if err != nil {
