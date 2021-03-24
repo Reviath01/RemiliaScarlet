@@ -4,6 +4,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	"strings"
 )
 
 func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
@@ -28,7 +29,7 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	if err != nil {
 		welcomemsg = "Welcome to server <@" + event.User.ID + ">"
 	} else {
-		welcomemsg = tag.welcomemessage
+		welcomemsg = strings.NewReplacer("{mention}", "<@" + event.User.ID + ">", "{username}", event.User.Username).Replace(tag.welcomemessage)
 	}
 
 	err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
