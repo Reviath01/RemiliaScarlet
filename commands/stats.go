@@ -8,6 +8,7 @@ import (
     "runtime"
    	ctx "git.randomchars.net/Reviath/handlers/Context"
     embedutil "git.randomchars.net/Reviath/embed-util"
+    "github.com/mackerelio/go-osstat/memory"
 )
 
 type Stats struct {
@@ -32,6 +33,8 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             AddField("Go version", runtime.Version()).
             AddField("Discordgo version", discordgo.VERSION).
             AddField("Server size", strconv.Itoa(len(session.State.Guilds))).
+            AddField("Total Memory", memory.Total + "bytes").
+            AddField("Free Memory", memory.Free + "bytes").
             AddField("Goroutines", strconv.Itoa(runtime.NumGoroutine())).MessageEmbed
         _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
         return err
