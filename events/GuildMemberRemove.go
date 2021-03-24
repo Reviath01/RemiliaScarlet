@@ -4,6 +4,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	"strings"
 )
 
 func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove) {
@@ -27,9 +28,8 @@ func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove)
 	if err != nil {
 		leavemessage = "<@" + event.User.ID + "> left the server!"
 	} else {
-		leavemessage = tag.leavemessage
+		leavemessage = strings.NewReplacer("{mention}", "<@" + event.User.ID + ">", "{username}", event.User.Username).Replace(tag.leavemessage)
 	}
-
 
 	err = db.QueryRow("SELECT channelid FROM leavechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
