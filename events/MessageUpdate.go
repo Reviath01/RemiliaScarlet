@@ -31,7 +31,6 @@ func MessageUpdate(s *discordgo.Session, event *discordgo.MessageUpdate) {
 			SetTitle("Message Updated!").
 			AddField("Channel:", event.ChannelID + " ( <#" + event.ChannelID + "> )").
 			AddField("User:", "<@" + event.Author.ID + "> ( " + event.Author.ID + " )").
-			AddField("Old Message:", event.BeforeUpdate.Content).
 			AddField("New Message:", event.Content).
 			SetColor(0xefff00).MessageEmbed
 
