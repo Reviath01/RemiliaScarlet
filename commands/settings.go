@@ -77,7 +77,8 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		AddField("Leave Channel:", leavechannel).
 		AddField("Autorole:", autorole).
 		AddField("Leave Message:", leavemsg).
-		AddField("Welcome Message:", welcomemsg).MessageEmbed
+		AddField("Welcome Message:", welcomemsg).
+		SetColor(0x00f0ff).MessageEmbed
         
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 	return err
