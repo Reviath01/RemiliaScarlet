@@ -27,6 +27,7 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		roleid string `json:"roleid"`
 		welcomemessage string `json:"message"`
 		leavemessage string `json:"message"`
+		logid string `json:"channelid"`
 	}
 
 	var tag Tag
@@ -35,6 +36,7 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	var autorole string
 	var leavemsg string
 	var welcomemsg string
+	var logchannel string
 
 	err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
 	if err == nil {
@@ -71,6 +73,13 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		leavemsg = "Not existing."
 	}
 
+	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.logid)
+	if err == nil {
+		logchannel = "<#" + tag.logid + "> (" + tag.logid + ")"
+	} else {
+		logchannel = "Not existing."
+	}
+
 	embed := embedutil.NewEmbed().
         SetTitle(ctx.Guild().Name + " Settings").
 		AddField("Welcome Channel:", welcomechannel).
@@ -78,6 +87,7 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		AddField("Autorole:", autorole).
 		AddField("Leave Message:", leavemsg).
 		AddField("Welcome Message:", welcomemsg).
+		AddField("Log Channel:", logchannel).
 		SetColor(0x00f0ff).MessageEmbed
         
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
