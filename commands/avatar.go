@@ -17,12 +17,14 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
+            SetDescription("Avatar of " + u.Username + "#" + u.Discriminator).
             SetImage(u.AvatarURL("1024")).MessageEmbed
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 	return err 
     } else {
         avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
+            SetDescription("Avatar of " + ctx.Author().Username + "#" + ctx.Author().Discriminator).
             SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 	        return err
@@ -33,12 +35,14 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         if err == nil {
         avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
+            SetDescription("Avatar of " + u.Username + "#" + u.Discriminator).
             SetImage(u.AvatarURL("1024")).MessageEmbed
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 	    return err
         } else {
         avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
+            SetDescription("Avatar of " + ctx.Author().Username + "#" + ctx.Author().Discriminator).
             SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 	        return err
