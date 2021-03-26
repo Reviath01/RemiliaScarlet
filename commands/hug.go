@@ -17,11 +17,11 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	        return err
     }
         u, err := session.User(strings.Join(ctx.Args()," ")[3:][:18])
+        if err == nil {
         if u.ID == ctx.Author().ID {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You can't hug yourself.")
             return err
         }
-        if err == nil {
         embed := embedutil.NewEmbed().
             SetColor(0xff1000).
             SetDescription("<@" + ctx.Author().ID + "> hugs <@" + u.ID + ">").
