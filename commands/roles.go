@@ -45,6 +45,6 @@ func (r Roles) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     embed := embedutil.NewEmbed().
         AddField("Roles:", roles).MessageEmbed
         
-	_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 	return err
 }
