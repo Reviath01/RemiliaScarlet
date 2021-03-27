@@ -10,6 +10,8 @@ import (
 	ctx "git.randomchars.net/Reviath/handlers/Context"
 	"github.com/bwmarrin/discordgo"
     "github.com/pbnjay/memory"
+	"database/sql"
+    _ "github.com/go-sql-driver/mysql"
 )
 
 type Stats struct {
@@ -27,6 +29,29 @@ func getDuration(duration time.Duration) string {
 	)
 }
 func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
+	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
+
+    if err != nil {
+        panic(err.Error())
+    }
+
+    defer db.Close()
+
+    type Tag struct {
+        isblocked string `json:"isblocked"`
+    }
+
+    var tag Tag
+
+    err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
+
+    if err == nil {
+        if tag.isblocked == "True" {
+            _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            return err
+        }
+    }
+
     statembed := embedutil.NewEmbed().
             SetTitle("Stats").
             SetColor(0x00ff03).
@@ -36,6 +61,6 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             AddField("Server size", strconv.Itoa(len(session.State.Guilds))).
             AddField("Total Memory", strconv.FormatUint(memory.TotalMemory(), 10) + " bytes").
             AddField("Goroutines", strconv.Itoa(runtime.NumGoroutine())).MessageEmbed
-        _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
+        _, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
         return err
 }
