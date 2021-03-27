@@ -20,6 +20,21 @@ func (a Afk) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
     defer db.Close()
 
+    type Tag struct {
+        isblocked string `json:"isblocked"`
+    }
+
+    var tag Tag
+
+    err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
+
+    if err == nil {
+        if tag.isblocked == "True" {
+            _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            return err
+        }
+    }
+
     insert, err := db.Query("INSERT INTO afk (isafk, userid) VALUES ('true', '" + ctx.Author().ID + "')")
 
     if err != nil {
@@ -31,5 +46,4 @@ func (a Afk) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "I set you as AFK.")
         return err
-
 }
