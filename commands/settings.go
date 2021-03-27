@@ -28,6 +28,7 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		welcomemessage string `json:"message"`
 		leavemessage string `json:"message"`
 		logid string `json:"channelid"`
+		isblocked string `json:"isblocked"`
 	}
 
 	var tag Tag
@@ -37,6 +38,15 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	var leavemsg string
 	var welcomemsg string
 	var logchannel string
+
+	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
+
+    if err == nil {
+        if tag.isblocked == "True" {
+            _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            return err
+        }
+    }
 
 	err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
 	if err == nil {
