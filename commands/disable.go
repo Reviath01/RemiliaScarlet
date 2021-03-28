@@ -41,6 +41,11 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+			
+				if err != nil {
+					return nil
+				}
+			
 				return err
 			}
 		} else {
@@ -50,15 +55,31 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 			if err != nil {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled afk command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "author" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -68,15 +89,31 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 			if err != nil {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled author command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "avatar" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='avatar' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -86,15 +123,31 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 			if err != nil {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+				
+				if err != nil {
+					return nil
+				}
+				
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled avatar command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "ban" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ban' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+				
 				return err
 			}
 		} else {
@@ -104,15 +157,31 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 			if err != nil {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+				
+				if err != nil {
+					return nil
+				}
+				
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled ban command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "embed" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='embed' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -122,15 +191,31 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 			if err != nil {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+				
+				if err != nil {
+					return nil
+				}
+				
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled embed command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "guild_info" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+				
 				return err
 			}
 		} else {
@@ -140,15 +225,31 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 			if err != nil {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+				
+				if err != nil {
+					return nil
+				}
+				
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled guild_info command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "hug" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -158,15 +259,31 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 			if err != nil {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+				
+				if err != nil {
+					return nil
+				}
+				
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled hug command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "icon" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='icon' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -176,15 +293,31 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 			if err != nil {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled icon command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "kick" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -197,12 +330,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled kick command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "kiss" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -215,12 +359,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled kiss command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "ping" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ping' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -233,12 +388,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled ping command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "roles" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='roles' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -251,12 +417,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled roles command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "settings" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -269,12 +446,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled settings command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "slap" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='slap' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -287,12 +475,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled slap command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "spoiler" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='spoiler' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -305,12 +504,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled spoiler command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "start_vote" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='start_vote' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -323,12 +533,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled start_vote command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "stats" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -341,12 +562,23 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled stats command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else if strings.Join(ctx.Args()," ") == "unban" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='unban' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
@@ -359,6 +591,12 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled unban command.")
+			
+			if err != nil {
+				return nil
+			}
+
+			return err
 		}
 	} else {
 		_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the command.")
