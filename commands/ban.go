@@ -32,6 +32,11 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+
+            if err != nil {
+                return
+            }
+
             return err
         }
     }
@@ -48,12 +53,27 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
         if err != nil {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
+
+            if err != nil {
+                return
+            }
+
             return err
         }
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "Banned specified user.")
-		return err
+		
+        if err != nil {
+            return
+        }
+
+        return err
 	} else {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+        
+        if err != nil {
+            return
+        }
+
         return err
     }
 } else {
@@ -63,16 +83,36 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
             if err != nil {
                 _, err = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
+                
+                if err != nil {
+                    return
+                }
+
                 return err
             }
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "Banned specified user.")
-		    return err
+		    
+            if err != nil {
+                return
+            }
+
+            return err
         } else {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+
+            if err != nil {
+                return
+            }
+
            return err
         }
     } else {
             _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+            
+            if err != nil {
+                return
+            }
+
             return err
         }
     }
