@@ -43,18 +43,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "author" {	
@@ -64,18 +64,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "avatar" {	
@@ -85,18 +85,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "ban" {	
@@ -106,18 +106,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "embed" {	
@@ -127,39 +127,39 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
-	} else if strings.Join(ctx.Args(), " ") == "guild_info" {	
+	} else if strings.Join(ctx.Args(), " ") == "Channel_info" {	
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + strings.Join(ctx.Args(), " ") + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "hug" {	
@@ -169,18 +169,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "kick" {	
@@ -190,18 +190,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "afk" {	
@@ -211,18 +211,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "kiss" {	
@@ -232,18 +232,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "ping" {	
@@ -253,18 +253,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "roles" {	
@@ -274,18 +274,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "settings" {	
@@ -295,18 +295,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "slap" {	
@@ -316,18 +316,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "spoiler" {	
@@ -337,18 +337,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "start_vote" {	
@@ -358,18 +358,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "stats" {	
@@ -379,18 +379,18 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "unban" {	
@@ -400,20 +400,22 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + strings.Join(ctx.Args(), " ") + "'")
 
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Guild().ID, "An error occured.")
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
 				}
 
 				defer delete.Close()
 
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 				return err
 			}
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Guild().ID, "This command is not disabled.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return err
 		}
+	} else {
+		_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the command.")
 	}
 
 	return db.Close()
