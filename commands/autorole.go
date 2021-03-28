@@ -44,15 +44,28 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + strings.Join(ctx.Args()," ") + "', '" + ctx.Guild().ID + "')")
         if err != nil {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured, please try again.")
+            
+            if err != nil {
+                return
+            }
+
             return err
         }
         defer insert.Close()
 
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
+
+        if err != nil {
+            return
+        }
+
 		return err
 	}
         } else {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
+            if err != nil {
+                return
+            }
             return err
         }
     } else {
@@ -73,21 +86,39 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
 	if err == nil {
-    _, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
-    return err
+        _, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
+        if err != nil {
+            return
+        }
+        return err
     } else {
         insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + strings.Join(ctx.Args()," ")[3:][:18] + "', '" + ctx.Guild().ID + "')")
         if err != nil {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured, please try again.")
+            
+            if err != nil {
+                return
+            }
+            
             return err
         }
         defer insert.Close()
 
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
-		return err
+		
+        if err != nil {
+            return
+        }
+
+        return err
 	    }
         } else {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
+           
+            if err != nil {
+                return
+            }
+
            return err
         }
 	}
