@@ -33,6 +33,11 @@ func (s StartVote) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            
+            if err != nil {
+                return nil
+            }
+
             return err
         }
     }
@@ -40,10 +45,20 @@ func (s StartVote) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && (int(perms)&discordgo.PermissionManageMessages == discordgo.PermissionManageMessages) == false {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need manage messages permission to run this command.")
-	return err
+	
+        if err != nil {
+            return nil
+        }
+
+        return err
     }
     if strings.Join(ctx.Args()," ") == "" {
     _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a message.")
+    
+    if err != nil {
+        return nil
+    }
+
     return err
     }
     embed := embedutil.NewEmbed().
@@ -53,5 +68,10 @@ func (s StartVote) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	msg, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
     session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👍")
 	session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👎")
-	return err
+	
+    if err != nil {
+        return nil
+    }
+
+    return err
 }

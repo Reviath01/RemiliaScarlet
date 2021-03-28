@@ -48,7 +48,12 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-            return err
+            
+			if err != nil {
+				return nil
+			}
+
+			return err
         }
     }
 
@@ -62,5 +67,10 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             AddField("Total Memory", strconv.FormatUint(memory.TotalMemory(), 10) + " bytes").
             AddField("Goroutines", strconv.Itoa(runtime.NumGoroutine())).MessageEmbed
         _, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
-        return err
+        
+		if err != nil {
+			return nil
+		}
+
+		return err
 }
