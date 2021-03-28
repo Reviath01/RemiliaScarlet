@@ -58,6 +58,7 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("log", commands.Log{}, true)
 	handler.GetCommandMap().RegisterCommand("reset_log", commands.ResetLog{}, true)
 	handler.GetCommandMap().RegisterCommand("disable", commands.Disable{}, true)
+	handler.GetCommandMap().RegisterCommand("enable", commands.Enable{}, true)
 	
 	u, err := goBot.User("@me")
 
