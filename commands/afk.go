@@ -31,6 +31,9 @@ func (a Afk) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            if err != nil {
+                return
+            }
             return err
         }
     }
@@ -45,5 +48,10 @@ func (a Afk) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
        defer insert.Close()
 
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "I set you as AFK.")
+        
+        if err != nil {
+            return
+        }
+        
         return err
 }
