@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2021 at 07:37 AM
+-- Generation Time: Mar 28, 2021 at 06:21 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -41,6 +41,18 @@ CREATE TABLE `afk` (
 CREATE TABLE `autorole` (
   `roleid` varchar(255) NOT NULL,
   `guildid` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `disabledcommands`
+--
+
+CREATE TABLE `disabledcommands` (
+  `commandname` varchar(255) NOT NULL,
+  `guildid` varchar(255) NOT NULL,
+  `isblocked` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
