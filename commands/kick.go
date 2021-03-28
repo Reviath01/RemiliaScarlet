@@ -32,6 +32,11 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            
+            if err != nil {
+                return nil
+            }
+            
             return err
         }
     }
@@ -39,7 +44,12 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && (int(perms)&discordgo.PermissionKickMembers == discordgo.PermissionKickMembers) == false {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need kick members permission to run this command.")
-	return err
+	
+        if err != nil {
+            return nil
+        }
+    
+        return err
     }
     if len(strings.Join(ctx.Args()," ")) < 19 {
     u, err := session.User(strings.Join(ctx.Args()," "))
@@ -47,12 +57,27 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
         if err != nil {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
+            
+            if err != nil {
+                return nil
+            }
+            
             return err
         }
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "Kicked specified user.")
-		return err
+		
+        if err != nil {
+            return nil
+        }
+        
+        return err
 	} else {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+        
+        if err != nil {
+            return nil
+        }
+        
         return err
     }
 } else {
@@ -62,16 +87,36 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
             if err != nil {
                 _, err = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
+                
+                if err != nil {
+                    return nil
+                }
+                
                 return err
             }
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "Kicked specified user.")
-		    return err
+		    
+            if err != nil {
+                return nil
+            }
+            
+            return err
         } else {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-           return err
+           
+            if err != nil {
+                return nil
+            }
+           
+            return err
         }
     } else {
             _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+            
+            if err != nil {
+                return nil
+            }
+            
             return err
         }
     }
