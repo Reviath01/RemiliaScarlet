@@ -33,6 +33,11 @@ func (g GuildInfo) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            
+            if err != nil {
+                return nil
+            }
+
             return err
         }
     }
@@ -48,5 +53,10 @@ func (g GuildInfo) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     AddField("ID:", ctx.Guild().ID).
     AddField("Locale", ctx.Guild().PreferredLocale).MessageEmbed
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-	return err
+	
+    if err != nil {
+        return nil
+    }
+
+    return err
 }
