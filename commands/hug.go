@@ -33,18 +33,33 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            
+            if err != nil {
+                return nil
+            }
+            
             return err
         }
     }
 
     if len(strings.Join(ctx.Args(), " ")) != 22 {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-	        return err
+	    
+        if err != nil {
+            return nil
+        }
+        
+        return err
     }
         u, err := session.User(strings.Join(ctx.Args()," ")[3:][:18])
         if err == nil {
         if u.ID == ctx.Author().ID {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You can't hug yourself.")
+            
+            if err != nil {
+                return nil
+            }
+            
             return err
         }
         embed := embedutil.NewEmbed().
@@ -52,9 +67,19 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             SetDescription("<@" + ctx.Author().ID + "> hugs <@" + u.ID + ">").
             SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-	    return err
+	    
+        if err != nil {
+            return nil
+        }
+        
+        return err
         } else {
             _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-	        return err
+	        
+            if err != nil {
+                return nil
+            }
+            
+            return err
         }
     }
