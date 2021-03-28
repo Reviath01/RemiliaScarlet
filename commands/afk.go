@@ -50,7 +50,7 @@ func (a Afk) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "I set you as AFK.")
         
         if err != nil {
-            return
+            return nil
         }
         
         return err
