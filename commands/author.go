@@ -40,5 +40,10 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     SetColor(0x007bff).
     AddField("My Author:", "<@770218429096656917> ([Reviath#0001](https://discord.com/users/770218429096656917))").MessageEmbed
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
-	return err
+	
+    if err != nil {
+        return
+    }
+
+    return err
 }
