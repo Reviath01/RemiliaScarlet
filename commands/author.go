@@ -42,7 +42,7 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
 	
     if err != nil {
-        return
+        return nil
     }
 
     return err

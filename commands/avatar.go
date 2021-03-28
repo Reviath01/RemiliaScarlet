@@ -47,7 +47,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 	   
         if err != nil {
-            return
+            return nil
         }
 
        return err 
@@ -59,7 +59,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
         
         if err != nil {
-            return
+            return nil
         }
 
         return err
@@ -75,7 +75,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
         if err != nil {
-            return
+            return nil
         }
 
 	    return err
@@ -87,7 +87,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 	
         if err != nil {
-            return
+            return nil
         }
 
             return err
@@ -99,7 +99,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 	    
         if err != nil {
-            return
+            return nil
         }
 
             return err

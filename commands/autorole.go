@@ -46,7 +46,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured, please try again.")
             
             if err != nil {
-                return
+                return nil
             }
 
             return err
@@ -56,7 +56,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
 
         if err != nil {
-            return
+            return nil
         }
 
 		return err
@@ -64,7 +64,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         } else {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
             if err != nil {
-                return
+                return nil
             }
             return err
         }
@@ -88,7 +88,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
         if err != nil {
-            return
+            return nil
         }
         return err
     } else {
@@ -97,7 +97,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured, please try again.")
             
             if err != nil {
-                return
+                return nil
             }
             
             return err
@@ -107,7 +107,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
 		
         if err != nil {
-            return
+            return nil
         }
 
         return err
@@ -116,7 +116,7 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
            
             if err != nil {
-                return
+                return nil
             }
 
            return err

@@ -34,7 +34,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 
             if err != nil {
-                return
+                return nil
             }
 
             return err
@@ -55,7 +55,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
 
             if err != nil {
-                return
+                return nil
             }
 
             return err
@@ -63,7 +63,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "Banned specified user.")
 		
         if err != nil {
-            return
+            return nil
         }
 
         return err
@@ -71,7 +71,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
         
         if err != nil {
-            return
+            return nil
         }
 
         return err
@@ -85,7 +85,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
                 _, err = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
                 
                 if err != nil {
-                    return
+                    return nil
                 }
 
                 return err
@@ -93,7 +93,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "Banned specified user.")
 		    
             if err != nil {
-                return
+                return nil
             }
 
             return err
@@ -101,7 +101,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
             if err != nil {
-                return
+                return nil
             }
 
            return err
@@ -110,7 +110,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
             
             if err != nil {
-                return
+                return nil
             }
 
             return err

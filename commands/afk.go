@@ -32,7 +32,7 @@ func (a Afk) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
             if err != nil {
-                return
+                return nil
             }
             return err
         }
