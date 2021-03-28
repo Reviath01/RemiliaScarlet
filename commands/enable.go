@@ -45,6 +45,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -66,6 +68,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -87,6 +91,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -108,6 +114,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -129,6 +137,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -150,6 +160,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -171,6 +183,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -192,6 +206,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -213,6 +229,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -234,6 +252,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -255,6 +275,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -276,6 +298,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -297,6 +321,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -318,6 +344,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -339,6 +367,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -360,6 +390,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -381,6 +413,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
@@ -402,6 +436,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 					return err
+				} else {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
 				}
 
 				defer delete.Close()
