@@ -32,7 +32,12 @@ func (i Icon) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-            return err
+            
+			if err != nil {
+				return nil
+			}
+			
+			return err
         }
     }
 
@@ -40,5 +45,10 @@ func (i Icon) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             SetColor(0x00f6ff).
             SetImage(ctx.Guild().IconURL()).MessageEmbed
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, iconeembed)
+	
+	if err != nil {
+		return nil
+	}
+	
 	return err
 }
