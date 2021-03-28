@@ -33,17 +33,32 @@ func (e Embed) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            
+        if err != nil {
+            return nil
+        }
+
             return err
         }
     }
 
     if strings.Join(ctx.Args()," ") == "" {
     _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the message.")
+    
+    if err != nil {
+        return nil
+    }
+
     return err
     }
       embed := embedutil.NewEmbed().
             SetColor(0xc000ff).
             SetDescription(strings.Join(ctx.Args()," ")).MessageEmbed
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-	return err
+	
+if err != nil {
+    return nil
+}
+
+    return err
 }
