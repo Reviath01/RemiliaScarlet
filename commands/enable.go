@@ -16,11 +16,21 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
-	return err
+	
+	if err != nil {
+		return nil
+	}
+
+		return err
     }
 
 	if len(strings.Join(ctx.Args()," ")) < 1 {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
+		
+		if err != nil {
+			return nil
+		}
+
 		return err
 	}
 
@@ -44,6 +54,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -53,10 +68,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "author" {	
@@ -67,6 +92,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -76,10 +106,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "avatar" {	
@@ -90,6 +130,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -99,10 +144,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "ban" {	
@@ -113,6 +168,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -122,10 +182,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "embed" {	
@@ -136,6 +206,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -145,10 +220,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "Channel_info" {	
@@ -159,6 +244,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -168,10 +258,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "hug" {	
@@ -182,6 +282,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -191,10 +296,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "kick" {	
@@ -205,6 +320,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -214,10 +334,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "afk" {	
@@ -228,6 +358,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -237,10 +372,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "kiss" {	
@@ -251,6 +396,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -260,10 +410,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "ping" {	
@@ -274,6 +434,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -283,10 +448,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "roles" {	
@@ -297,6 +472,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -306,10 +486,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "settings" {	
@@ -320,6 +510,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -329,10 +524,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "slap" {	
@@ -343,6 +548,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -352,10 +562,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "spoiler" {	
@@ -366,6 +586,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -375,10 +600,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "start_vote" {	
@@ -389,6 +624,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -398,10 +638,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "stats" {	
@@ -412,6 +662,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -421,10 +676,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else if strings.Join(ctx.Args(), " ") == "unban" {	
@@ -435,6 +700,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
+					
+					if err != nil {
+						return nil
+					}
+
 					return err
 				} else {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled " + strings.Join(ctx.Args(), " "))
@@ -444,10 +714,20 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+				
+				if err != nil {
+					return nil
+				}
+
 				return err
 			}
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		}
 	} else {
