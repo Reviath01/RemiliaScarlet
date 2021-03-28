@@ -34,6 +34,11 @@ func (r Roles) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            
+            if err != nil {
+                return nil
+            }
+            
             return err
         }
     }
@@ -46,5 +51,10 @@ func (r Roles) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         AddField("Roles:", roles).MessageEmbed
         
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-	return err
+	
+    if err != nil {
+        return nil
+    }
+    
+    return err
 }
