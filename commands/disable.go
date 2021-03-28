@@ -30,8 +30,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         panic(err.Error())
     }
 
-    defer db.Close()
-
 	type Tag struct {
 		isblocked string `json:"isblocked"`
 	}
@@ -362,7 +360,9 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Disabled unban command.")
 		}
+	} else {
+		_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the command.")
+		return err
 	}
-	_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the command.")
-	return err
+	return db.Close()
 }
