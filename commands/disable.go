@@ -19,7 +19,10 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	return err
     }
 
-	if len(strings.Join(ctx.Args()," ")) < 1 {
+	var args string
+	args = ctx.Args()[0]
+
+	if len(strings.Join(ctx.Args()[0])) < 1 {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
 		return err
 	}
@@ -36,7 +39,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	var tag Tag
 
-	if strings.Join(ctx.Args()," ") == "afk" {
+	if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -70,7 +73,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "author" {
+	} else if args == "author" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -104,7 +107,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "avatar" {
+	} else if args == "avatar" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='avatar' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -138,7 +141,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "ban" {
+	} else if args == "ban" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ban' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -172,7 +175,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "embed" {
+	} else if args == "embed" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='embed' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -206,7 +209,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "guild_info" {
+	} else if args == "guild_info" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -240,7 +243,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "hug" {
+	} else if args == "hug" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -274,7 +277,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "icon" {
+	} else if args == "icon" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='icon' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -308,7 +311,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "kick" {
+	} else if args == "kick" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -337,7 +340,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "kiss" {
+	} else if args == "kiss" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -366,7 +369,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "ping" {
+	} else if args == "ping" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ping' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -395,7 +398,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "roles" {
+	} else if args == "roles" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='roles' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -424,7 +427,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "settings" {
+	} else if args == "settings" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -453,7 +456,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "slap" {
+	} else if args == "slap" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='slap' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -482,7 +485,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "spoiler" {
+	} else if args == "spoiler" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='spoiler' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -511,7 +514,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "start_vote" {
+	} else if args == "start_vote" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='start_vote' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -540,7 +543,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "stats" {
+	} else if args == "stats" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -569,7 +572,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			return err
 		}
-	} else if strings.Join(ctx.Args()," ") == "unban" {
+	} else if args == "unban" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='unban' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
