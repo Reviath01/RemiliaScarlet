@@ -27,7 +27,7 @@ func (h Help) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     _, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 
     if err != nil {
-        return nil,
+        return nil
     }
 
     return err
