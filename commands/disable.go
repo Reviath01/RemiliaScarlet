@@ -22,7 +22,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	return err
     }
 
-	if len(strings.Join(ctx.Args()[0])) < 1 {
+	if len(strings.Join(ctx.Args(), " ")) < 1 {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
 		
 		if err != nil {
