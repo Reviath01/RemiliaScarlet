@@ -37,8 +37,24 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         }
     }
 
-    if len(strings.Join(ctx.Args()," ")) < 19 {
-    u, err := session.User(strings.Join(ctx.Args()," "))
+    if len(strings.Join(ctx.Args(), " ")) < 1 {
+        avatarembed := embedutil.NewEmbed().
+        SetColor(0xff1000).
+        SetDescription("Avatar of " + ctx.Author().Username + "#" + ctx.Author().Discriminator).
+        SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
+        _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+
+    if err != nil {
+        return nil
+    }
+        return err
+    }
+
+    var args string
+    args = ctx.Args()[0]
+
+    if len(args) < 19 {
+    u, err := session.User(args)
     if err == nil {
         avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
@@ -65,8 +81,8 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         return err
     }
 } else {
-    if len(strings.Join(ctx.Args()," ")) > 21 {
-     u, err := session.User(strings.Join(ctx.Args()," ")[3:][:18])
+    if len(args) > 21 {
+     u, err := session.User(args[3:][:18])
         if err == nil {
         avatarembed := embedutil.NewEmbed().
             SetColor(0xff1000).
