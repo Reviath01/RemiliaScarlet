@@ -41,8 +41,9 @@ func (s Slap) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             return err
         }
     }
-
-    if len(strings.Join(ctx.Args(), " ")) != 22 {
+    
+    var args string
+    if len(strings.Join(ctx.Args()," ")) < 1 {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 	    
         if err != nil {
@@ -51,7 +52,18 @@ func (s Slap) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         
         return err
     }
-        u, err := session.User(strings.Join(ctx.Args()," ")[3:][:18])
+    args = ctx.Args()[0]
+
+    if len(args) != 22 {
+        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+	    
+        if err != nil {
+            return nil
+        }
+        
+        return err
+    }
+        u, err := session.User(args[3:][:18])
         if err == nil {
         embed := embedutil.NewEmbed().
             SetColor(0xff1000).
