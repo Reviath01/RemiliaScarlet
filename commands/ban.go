@@ -47,8 +47,19 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	return err
     }
 
-    if len(strings.Join(ctx.Args()," ")) < 19 {
-    u, err := session.User(strings.Join(ctx.Args()," "))
+    var args string
+    args = ctx.Args()[0]
+
+    if len(strings.Join(ctx.Args(), " ")) < 1 {
+        _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+        if err != nil {
+            return nil
+        }
+        return err
+    }
+
+    if len(args) < 19 {
+    u, err := session.User(args)
     if err == nil {
         err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
         if err != nil {
@@ -77,8 +88,8 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         return err
     }
 } else {
-    if len(strings.Join(ctx.Args()," ")) > 21 {
-     u, err := session.User(strings.Join(ctx.Args()," ")[3:][:18])
+    if len(args) > 21 {
+     u, err := session.User(args[3:][:18])
         if err == nil {
             err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
             if err != nil {
