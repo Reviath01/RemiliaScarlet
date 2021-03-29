@@ -24,8 +24,20 @@ func (w WelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         return err
     }
 
-    if len(strings.Join(ctx.Args()," ")) < 19 {
-    c, err := session.Channel(strings.Join(ctx.Args()," "))
+    var args string
+    if len(strings.Join(ctx.Args()," ")) < 1 {
+        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+	    
+        if err != nil {
+            return nil
+        }
+        
+        return err
+    }
+    args = ctx.Args()[0]
+
+    if len(args) < 19 {
+    c, err := session.Channel(args)
     if err == nil {
     db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
 
@@ -81,8 +93,8 @@ func (w WelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             return err
         }
     } else {
-        if len(strings.Join(ctx.Args()," ")) > 20 {
-        c, err := session.Channel(strings.Join(ctx.Args()," ")[2:][:18])
+        if len(args) > 20 {
+        c, err := session.Channel(args[2:][:18])
         if err == nil {
     db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
 
