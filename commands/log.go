@@ -26,7 +26,7 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
     var args string
     if len(strings.Join(ctx.Args()," ")) < 1 {
-        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the channel.")
 	    
         if err != nil {
             return nil
