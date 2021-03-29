@@ -23,17 +23,20 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		return err
     }
-	if strings.Join(ctx.Args(), " ") == "" {
-		_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the message.")
-		
-		if err != nil {
-			return nil
-		}
+	var args string
+    if len(strings.Join(ctx.Args(), " ")) < 1 {
+        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+	    
+        if err != nil {
+            return nil
+        }
+        
+        return err
+    }
+    args = ctx.Args()[0]
 
-		return err
-	}
 
-	if len(strings.Join(ctx.Args(), " ")) > 254 {
+	if len(args) > 254 {
 		_, err = session.ChannelMessageSend(ctx.Channel().ID, "Your message can be up to 255 characters long.")
 		
 		if err != nil {
@@ -67,7 +70,7 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	return err
     } else {
-        insert, err := db.Query("INSERT INTO leavemessage (message, guildid) VALUES ('" + strings.Join(ctx.Args(), " ") + "', '" + ctx.Guild().ID + "')")
+        insert, err := db.Query("INSERT INTO leavemessage (message, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
         if err != nil {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured, please try again.")
             
