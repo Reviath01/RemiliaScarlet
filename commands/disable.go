@@ -16,16 +16,24 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
+		if err != nil {
+			return nil
+		}
 	return err
     }
 
-	var args string
-	args = ctx.Args()[0]
-
 	if len(strings.Join(ctx.Args()[0])) < 1 {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
+		
+		if err != nil {
+			return nil
+		}
+		
 		return err
 	}
+
+	var args string
+	args = ctx.Args()[0]
 
 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
 
