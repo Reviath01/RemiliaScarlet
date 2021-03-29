@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <a href="https://git.randomchars.net/reviath/remilia-scarlet">
+  <a href="https://git.randomchars.net/reviath/RemiliaScarlet">
     <img src="https://cdn.discordapp.com/attachments/820587437801209856/822117411708338236/New_Project.png" alt="Logo" width="380" height="160">
   </a>
   <p align="center">
