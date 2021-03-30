@@ -23,15 +23,47 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
     type Tag struct {
         isblocked string `json:"isblocked"`
+        lang string `json:"language"`
     }
 
     var tag Tag
+
+    err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
+    if err == nil {
+        if tag.lang == "tr" {
+           
+            err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
+
+            if err == nil {
+                if tag.isblocked == "True" {
+                    _, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+                    if err != nil {
+                        return nil
+                    }
+                    return err
+                }
+            }
+            
+        authorembed := embedutil.NewEmbed().
+            SetColor(0x007bff).
+            AddField("Sahibim:", "<@770218429096656917> ([Reviath#0001](https://discord.com/users/770218429096656917))").MessageEmbed
+	    _, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
+	
+        if err != nil {
+            return nil
+        }
+            return err
+        }
+    }
 
     err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
     if err == nil {
         if tag.isblocked == "True" {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+            if err != nil {
+                return nil
+            }
             return err
         }
     }
