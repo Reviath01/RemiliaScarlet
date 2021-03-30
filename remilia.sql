@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2021 at 06:21 PM
+-- Generation Time: Mar 30, 2021 at 09:54 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -53,6 +53,17 @@ CREATE TABLE `disabledcommands` (
   `commandname` varchar(255) NOT NULL,
   `guildid` varchar(255) NOT NULL,
   `isblocked` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `languages`
+--
+
+CREATE TABLE `languages` (
+  `language` varchar(255) NOT NULL,
+  `guildid` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
