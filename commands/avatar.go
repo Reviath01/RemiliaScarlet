@@ -24,9 +24,109 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
     type Tag struct {
         isblocked string `json:"isblocked"`
+        lang string `json:"language"`
     }
 
     var tag Tag
+
+    err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
+    if err == nil {
+        if tag.lang == "tr" {
+            err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
+
+            if err == nil {
+                if tag.isblocked == "True" {
+                    _, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+                    return err
+                }
+            }
+        
+            if len(strings.Join(ctx.Args(), " ")) < 1 {
+                avatarembed := embedutil.NewEmbed().
+                SetColor(0xff1000).
+                SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
+                SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
+                _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+        
+            if err != nil {
+                return nil
+            }
+                return err
+            }
+        
+            var args string
+            args = ctx.Args()[0]
+        
+            if len(args) < 19 {
+            u, err := session.User(args)
+            if err == nil {
+                avatarembed := embedutil.NewEmbed().
+                    SetColor(0xff1000).
+                    SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
+                    SetImage(u.AvatarURL("1024")).MessageEmbed
+                _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+               
+                if err != nil {
+                    return nil
+                }
+        
+               return err 
+            } else {
+                avatarembed := embedutil.NewEmbed().
+                    SetColor(0xff1000).
+                    SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
+                    SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
+                _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+                
+                if err != nil {
+                    return nil
+                }
+        
+                return err
+            }
+        } else {
+            if len(args) > 21 {
+             u, err := session.User(args[3:][:18])
+                if err == nil {
+                avatarembed := embedutil.NewEmbed().
+                    SetColor(0xff1000).
+                    SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
+                    SetImage(u.AvatarURL("1024")).MessageEmbed
+                _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+        
+                if err != nil {
+                    return nil
+                }
+        
+                return err
+                } else {
+                avatarembed := embedutil.NewEmbed().
+                    SetColor(0xff1000).
+                    SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
+                    SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
+                    _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+            
+                if err != nil {
+                    return nil
+                }
+        
+                    return err
+                }
+            } else {
+                avatarembed := embedutil.NewEmbed().
+                    SetColor(0xff1000).
+                    SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
+                _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+                
+                if err != nil {
+                    return nil
+                }
+        
+                    return err
+            }
+        }
+        }
+    }
 
     err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
