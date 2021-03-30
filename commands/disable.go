@@ -654,7 +654,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 			
 				if err != nil {
 					return nil
@@ -688,7 +688,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -722,7 +722,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='avatar' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -756,7 +756,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ban' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -790,7 +790,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='embed' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -824,7 +824,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -858,7 +858,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -892,7 +892,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='icon' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -926,7 +926,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -955,7 +955,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -984,7 +984,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ping' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -1013,7 +1013,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='roles' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -1042,7 +1042,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -1071,7 +1071,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='slap' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -1100,7 +1100,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='spoiler' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -1129,7 +1129,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='start_vote' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -1158,7 +1158,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
@@ -1187,7 +1187,7 @@ if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='unban' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is alredy blocked.")
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 				
 				if err != nil {
 					return nil
