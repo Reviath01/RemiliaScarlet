@@ -46,7 +46,7 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			} else if args[0] == "en" {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Dili ingilizce olarak ayarlıyorum...")
-				insert, err := db.Query("UPDATE languages SET language ='en' WHERE guildid ='" + ctx.Guild().ID + "'")
+				delete, err := db.Query("DELETE FROM languages WHERE guildid ='" + ctx.Guild().ID + "'")
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 					if err != nil {
@@ -56,11 +56,14 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				return err
 
-				defer insert.Close()
+				defer delete.Close()
 			}
 		} else if tag.lang == "en" {
 			if len(strings.Join(ctx.Args(), " ")) < 1 {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the language.")
+				if err != nil {
+					return nil
+				}
 				return err
 			} else if args[0] == "tr" {
 				_,err = session.ChannelMessageSend(ctx.Channel().ID, "Setting language as Turkish...")
