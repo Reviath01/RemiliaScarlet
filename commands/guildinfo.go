@@ -24,9 +24,47 @@ func (g GuildInfo) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
     type Tag struct {
         isblocked string `json:"isblocked"`
+        lang string `json:"language"`
     }
 
     var tag Tag
+
+    err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID +"'").Scan(&tag.lang)
+    if err == nil {
+        if tag.lang == "tr" {
+            err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
+
+            if err == nil {
+                if tag.isblocked == "True" {
+                    _, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+                    
+                    if err != nil {
+                        return nil
+                    }
+        
+                    return err
+                }
+            }
+        
+            embed := embedutil.NewEmbed().
+            SetColor(0xefff00).
+            AddField("Sunucu İsmi", ctx.Guild().Name).
+            AddField("Kişi Sayısı", strconv.Itoa(ctx.Guild().MemberCount)).
+            AddField("Bölge", ctx.Guild().Region).
+            AddField("Sunucu Sahibi", "<@" + ctx.Guild().OwnerID + ">").
+            AddField("Sunucu Sahibinin ID'si", ctx.Guild().OwnerID).
+            AddField("Afk Süresi", strconv.Itoa(ctx.Guild().AfkTimeout)).
+            AddField("ID:", ctx.Guild().ID).
+            AddField("Yer", ctx.Guild().PreferredLocale).MessageEmbed
+            _, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+            
+            if err != nil {
+                return nil
+            }
+        
+            return err
+        }
+    }
 
     err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
