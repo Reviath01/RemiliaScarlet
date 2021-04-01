@@ -766,7 +766,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     }
 
 	if len(strings.Join(ctx.Args()," ")) < 1 {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need Bir komut belirtmelisin
+		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
+		
 		if err != nil {
 			return nil
 		}
