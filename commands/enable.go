@@ -32,7 +32,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
-        _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
+        _, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
 	
 	if err != nil {
 		return nil
@@ -42,7 +42,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     }
 
 	if len(strings.Join(ctx.Args()," ")) < 1 {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
+		_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bir komut belirtmelisin.")
 		
 		if err != nil {
 			return nil
@@ -766,8 +766,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     }
 
 	if len(strings.Join(ctx.Args()," ")) < 1 {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
-		
+		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need Bir komut belirtmelisin
 		if err != nil {
 			return nil
 		}
