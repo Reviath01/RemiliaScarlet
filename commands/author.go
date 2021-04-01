@@ -6,6 +6,7 @@ import (
 	embedutil "git.randomchars.net/Reviath/embed-util"
 	"database/sql"
     _ "github.com/go-sql-driver/mysql"
+    "../config"
 )
 
 type Author struct {
@@ -44,11 +45,15 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
                 }
             }
             
+            u, err := session.User(config.Owner)
+            if err != nil {
+                return nil
+            }
         authorembed := embedutil.NewEmbed().
             SetColor(0x007bff).
-            AddField("Sahibim:", "<@770218429096656917> ([Reviath#0001](https://discord.com/users/770218429096656917))").MessageEmbed
+            AddField("Sahibim:", "<@" + u.ID +"> ([" + u.Username + "#" + u.Discriminator + "](https://discord.com/users/" + u.ID + "))").MessageEmbed
 	    _, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
-	
+
         if err != nil {
             return nil
         }
@@ -66,11 +71,15 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             }
             return err
         }
+    }            
+    u, err := session.User(config.Owner)
+    if err != nil {
+        return nil
     }
 
     authorembed := embedutil.NewEmbed().
     SetColor(0x007bff).
-    AddField("My Author:", "<@770218429096656917> ([Reviath#0001](https://discord.com/users/770218429096656917))").MessageEmbed
+    AddField("My Author:", "<@" + u.ID +"> ([" + u.Username + "#" + u.Discriminator + "](https://discord.com/users/" + u.ID + "))").MessageEmbed
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
 	
     if err != nil {

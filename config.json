@@ -1,5 +1,6 @@
 {
     "Token": "INSERT_TOKEN_HERE",
     "BotPrefix": "BOTS_PREFIX",
-    "Presence": "YOUR_BOTS_GAME_ACTIVITY"
+    "Presence": "YOUR_BOTS_GAME_ACTIVITY",
+    "Owner": "OWNER_ID"
 }

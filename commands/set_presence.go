@@ -5,6 +5,7 @@ import (
 
 	ctx "git.randomchars.net/Reviath/handlers/Context"
 	"github.com/bwmarrin/discordgo"
+	"../config"
 )
 
 type SetPresence struct {
@@ -12,7 +13,12 @@ type SetPresence struct {
 }
 
 func (s SetPresence) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-if ctx.Author().ID != "770218429096656917" {
+	u, err := session.User(config.Owner)
+	if err != nil {
+		return nil
+	}
+
+	if ctx.Author().ID != u.ID {
 	_, err := session.ChannelMessageSend(ctx.Channel().ID, "You do not own this bot.")
 	if err != nil {
 		return nil

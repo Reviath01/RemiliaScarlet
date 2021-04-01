@@ -10,6 +10,7 @@ var (
 	Token     string
 	BotPrefix string
 	Presence string
+	Owner string
 	config *configStruct
 )
 
@@ -17,6 +18,7 @@ type configStruct struct {
 	Token     string `json:"Token"`
 	BotPrefix string `json:"BotPrefix"`
 	Presence string `json:"Presence"`
+	Owner string `json:"Owner"`
 }
 
 func ReadConfig() error {
@@ -39,6 +41,7 @@ func ReadConfig() error {
 	Token = config.Token
 	BotPrefix = config.BotPrefix
 	Presence = config.Presence
+	Owner = config.Owner
 
 	return nil
 }
