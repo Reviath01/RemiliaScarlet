@@ -57,33 +57,11 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 
 				defer delete.Close()
-			}
-		} else if tag.lang == "en" {
-			if len(strings.Join(ctx.Args(), " ")) < 1 {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the language.")
+			} else {
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Kullanılabilir diller: `tr`, `en`")
 				if err != nil {
 					return nil
 				}
-				return err
-			} else if args[0] == "tr" {
-				_,err = session.ChannelMessageSend(ctx.Channel().ID, "Setting language as Turkish...")
-				
-				if err != nil {
-					return nil
-				}
-				
-				insert, err := db.Query("UPDATE languages SET language ='tr' WHERE guildid ='" + ctx.Guild().ID + "'")
-				
-				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
-					if err != nil {
-						return nil
-					}
-					return err
-				}
-
-				defer insert.Close()
-
 				return err
 			}
 		} else {
