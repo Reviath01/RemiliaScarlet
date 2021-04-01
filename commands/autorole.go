@@ -5,6 +5,7 @@ import (
 	ctx "git.randomchars.net/Reviath/handlers/Context"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
+    "strings"
 )
 
 type AutoRole struct {
@@ -36,8 +37,15 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
                 _, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
             return err
             }
-            var args string
+    if strings.Join(ctx.Args(), " ") == "" {
+        _, err = session.ChannelMessageSend(ctx.Channel().ID, "Rolü belirtmelisin")
+        if err != nil {
+            return nil
+        }
 
+        return err
+    } else {
+    var args string
     args = ctx.Args()[0]
 
     if len(args) == 18 {
@@ -110,11 +118,20 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
         }
     }
+    }
     perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
 	return err
     }
+
+    if strings.Join(ctx.Args(), " ") == "" {
+        _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
+        if err != nil {
+            return nil
+        }
+        return err
+    } else {
 
     var args string
 
@@ -201,4 +218,5 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
            return err
         }
 	}
+}
 }
