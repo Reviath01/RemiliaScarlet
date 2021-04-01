@@ -20,9 +20,33 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 
 	type Tag struct {
 		channelid string `json:"channelid"`
+		lang string `json:"language"`
 	}
 
 	var tag Tag
+
+	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + event.GuildID + "'").Scan(&tag.lang)
+
+	if err == nil {
+		if tag.lang == "tr" {
+			err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+			if err != nil {
+				return
+			} else {
+				embed := embedutil.NewEmbed().
+					SetTitle("Rol Oluşturuldu!").
+					AddField("Rolün İsmi:", event.Role.Name + " ( <@&" + event.Role.ID + "> )").
+					AddField("Rol İD'si:", event.Role.ID).
+					AddField("Rol Rengi:", strconv.Itoa(event.Role.Color)).
+					SetColor(0xefff00).MessageEmbed
+		
+				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+				if err != nil {
+					return
+				}
+			}
+		}
+	}
 
 	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
