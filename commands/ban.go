@@ -50,10 +50,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
                 _, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için üyeleri yasakla yetkisine sahip olmalısın.")
             return err
             }
-        
-            var args string
-            args = ctx.Args()[0]
-        
+
             if strings.Join(ctx.Args(), " ") == "" {
                 _, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
                 if err != nil {
@@ -61,6 +58,8 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
                 }
                 return err
             } else {
+                var args string
+                args = ctx.Args()[0]
             if len(args) < 19 {
             u, err := session.User(args)
             if err == nil {
@@ -154,17 +153,15 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	return err
     }
 
-    var args string
-    args = ctx.Args()[0]
-
     if len(strings.Join(ctx.Args(), " ")) < 1 {
         _, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
         if err != nil {
             return nil
         }
         return err
-    }
-
+    } else {
+        var args string
+        args = ctx.Args()[0]
     if len(args) < 19 {
     u, err := session.User(args)
     if err == nil {
@@ -234,4 +231,5 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             return err
         }
     }
+}
 }
