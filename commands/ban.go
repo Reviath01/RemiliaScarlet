@@ -54,14 +54,13 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             var args string
             args = ctx.Args()[0]
         
-            if len(strings.Join(ctx.Args(), " ")) < 1 {
+            if strings.Join(ctx.Args(), " ") == "" {
                 _, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
                 if err != nil {
                     return nil
                 }
                 return err
-            }
-        
+            } else {
             if len(args) < 19 {
             u, err := session.User(args)
             if err == nil {
@@ -131,6 +130,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
                     return err
                 }
             }
+        }
         }
     }
 
