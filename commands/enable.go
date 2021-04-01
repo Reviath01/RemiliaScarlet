@@ -52,15 +52,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	var args string
-
-	if strings.Join(ctx.Args(), " ") == "" {
-		_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir komut belirtmelisin.")
-		if err != nil {
-			return nil
-		}
-		return err
-	}
-
 	args = ctx.Args()[0]
 
 	if args == "afk" {	
@@ -752,6 +743,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 		}
+		return nil
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
