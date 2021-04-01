@@ -19,9 +19,31 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 
 	type Tag struct {
 		channelid string `json:"channelid"`
+		lang string `json:"language"`
 	}
 
 	var tag Tag
+
+	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + event.GuildID + "'").Scan(&tag.lang)
+
+	if err == nil {
+		if tag.lang == "tr" {
+			err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+			if err != nil {
+				return
+			} else {
+				embed := embedutil.NewEmbed().
+					SetTitle("Rol Silindi!").
+					AddField("Rol İD'si:", event.RoleID).
+					SetColor(0xefff00).MessageEmbed
+		
+				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+				if err != nil {
+					return
+				}
+			}		
+		}
+	}
 
 	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
