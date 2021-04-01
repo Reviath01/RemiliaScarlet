@@ -60,6 +60,7 @@ func Start() {
 	handler.GetCommandMap().RegisterCommand("disable", commands.Disable{}, true)
 	handler.GetCommandMap().RegisterCommand("enable", commands.Enable{}, true)
 	handler.GetCommandMap().RegisterCommand("language", commands.Language{}, true)
+	handler.GetCommandMap().RegisterCommand("set_presence", commands.SetPresence{}, true)
 	
 	u, err := goBot.User("@me")
 
