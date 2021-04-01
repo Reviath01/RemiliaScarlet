@@ -25,7 +25,7 @@ func (s SetPresence) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 	return err
 }
-err := session.UpdateGameStatus(0, strings.Join(ctx.Args(), " "))
+err = session.UpdateGameStatus(0, strings.Join(ctx.Args(), " "))
 if err != nil {
 	_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured.")
 	if err != nil {
