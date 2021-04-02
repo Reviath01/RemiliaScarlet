@@ -46,6 +46,8 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 				}
 			}
 		}
+		return 
+	return
 	}
 
 	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
