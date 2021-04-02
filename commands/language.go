@@ -84,10 +84,12 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					return nil
 				}
 	
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Dil Türkçe yapıldı!")
+
 				defer insert.Close()
 	
 			} else if args[0] == "en" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is already en.")
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is en.")
 				if err != nil {
 					return nil
 				}
@@ -126,7 +128,7 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			defer insert.Close()
 
 		} else if args[0] == "en" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is already en.")
+			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is en.")
 			if err != nil {
 				return nil
 			}
