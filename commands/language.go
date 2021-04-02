@@ -67,6 +67,9 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		} else {
 			if len(strings.Join(ctx.Args(), " ")) < 1 {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the language.")
+				if err != nil {
+					return nil
+				}
 				return err
 			} else if args[0] == "tr" {
 				_,err = session.ChannelMessageSend(ctx.Channel().ID, "Setting language as Turkish...")
@@ -85,15 +88,27 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	
 			} else if args[0] == "en" {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is already en.")
+				if err != nil {
+					return nil
+				}
 				return err
 			} else {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language options: `tr`, `en`")
+				if err != nil {
+					return nil
+				}
 				return err
 			}
 		}
+		return nil
 	} else {
 		if len(strings.Join(ctx.Args(), " ")) < 1 {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the language.")
+			
+			if err != nil {
+				return nil
+			}
+
 			return err
 		} else if args[0] == "tr" {
 			_,err = session.ChannelMessageSend(ctx.Channel().ID, "Setting language as Turkish...")
@@ -112,9 +127,15 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		} else if args[0] == "en" {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is already en.")
+			if err != nil {
+				return nil
+			}
 			return err
 		} else {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language options: `tr`, `en`")
+			if err != nil {
+				return nil
+			}
 			return err
 		}
 	}
