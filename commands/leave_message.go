@@ -41,7 +41,6 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		
 				return err
 			}
-			var args string
 			if len(strings.Join(ctx.Args(), " ")) < 1 {
 				_, err := session.ChannelMessageSend(ctx.Channel().ID, "Yeni mesajı belirtmelisin.")
 				
@@ -51,10 +50,8 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				
 				return err
 			}
-			args = ctx.Args()[0]
 		
-		
-			if len(args) > 254 {
+			if len(strings.Join(ctx.Args(), " ")) > 254 {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Mesaj maksimum 255 karakter uzunluğunda olabilir.")
 				
 				if err != nil {
@@ -74,7 +71,7 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		
 			return err
 			} else {
-				insert, err := db.Query("INSERT INTO leavemessage (message, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
+				insert, err := db.Query("INSERT INTO leavemessage (message, guildid) VALUES ('" + strings.Join(ctx.Args(), " ") + "', '" + ctx.Guild().ID + "')")
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 					
@@ -107,7 +104,6 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		return err
     }
-	var args string
     if len(strings.Join(ctx.Args(), " ")) < 1 {
         _, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the message.")
 	    
@@ -117,10 +113,8 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
         
         return err
     }
-    args = ctx.Args()[0]
 
-
-	if len(args) > 254 {
+	if len(strings.Join(ctx.Args(), " ")) > 254 {
 		_, err = session.ChannelMessageSend(ctx.Channel().ID, "Your message can be up to 255 characters long.")
 		
 		if err != nil {
@@ -140,7 +134,7 @@ func (l LeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	return err
     } else {
-        insert, err := db.Query("INSERT INTO leavemessage (message, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
+        insert, err := db.Query("INSERT INTO leavemessage (message, guildid) VALUES ('" + strings.Join(ctx.Args(), " ") + "', '" + ctx.Guild().ID + "')")
         if err != nil {
             _, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occured, please try again.")
             
