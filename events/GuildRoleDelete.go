@@ -41,8 +41,10 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 				if err != nil {
 					return
 				}
-			}		
+			}
+			return
 		}
+		return
 	}
 
 	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
