@@ -56,7 +56,9 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 					return
 				}
 			}
+			return
 		}
+		return
 	}
 
 	err = db.QueryRow("SELECT message FROM welcomemessage WHERE guildid ='" + event.GuildID + "'").Scan(&tag.welcomemessage)
