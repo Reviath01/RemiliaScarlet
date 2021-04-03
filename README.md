@@ -54,3 +54,6 @@ Distributed under the GNU GPLv3 License. See `LICENSE` for more information.
 ## Contact
 
 Discord - [Reviath#0001](https://discord.com/users/770218429096656917)
+
+## Vote
+[Top.gg](https://top.gg/bot/811652323159834646/vote)
