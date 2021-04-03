@@ -62,7 +62,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             if err == nil {
                 avatarembed := embedutil.NewEmbed().
                     SetColor(0xff1000).
-                    SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
+                    SetDescription(u.Username + "#" + u.Discriminator + " isimli kişinin profil fotoğrafı").
                     SetImage(u.AvatarURL("1024")).MessageEmbed
                 _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
                
@@ -90,7 +90,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
                 if err == nil {
                 avatarembed := embedutil.NewEmbed().
                     SetColor(0xff1000).
-                    SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
+                    SetDescription(u.Username + "#" + u.Discriminator + " isimli kişinin profil fotoğrafı").
                     SetImage(u.AvatarURL("1024")).MessageEmbed
                 _, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
         
