@@ -12,9 +12,6 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-var goBot *discordgo.Session
-
-
 var (
 	Token     string
 	BotPrefix string
