@@ -36,7 +36,7 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 					SetTitle("Kanal Silindi!").
 					AddField("Kanalın İsmi:", event.Channel.Name).
 					AddField("Kanalın İD'si:", event.Channel.ID).
-					AddField("Kanal Tipi:", string(event.Channel.Type)).
+					AddField("Kanal Tipi:", string(rune(event.Channel.Type))).
 					SetColor(0xff1000).MessageEmbed
 		
 				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
@@ -57,7 +57,7 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 			SetTitle("Channel Deleted!").
 			AddField("Channel Name:", event.Channel.Name).
 			AddField("Channel ID:", event.Channel.ID).
-			AddField("Channel Type:", string(event.Channel.Type)).
+			AddField("Channel Type:", string(rune(event.Channel.Type))).
 			SetColor(0xff1000).MessageEmbed
 
 		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)

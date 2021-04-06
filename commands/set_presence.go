@@ -1,11 +1,13 @@
 package commands
 
 import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"strings"
 
 	ctx "git.randomchars.net/Reviath/handlers/Context"
 	"github.com/bwmarrin/discordgo"
-	"../config"
 )
 
 type SetPresence struct {
@@ -13,6 +15,31 @@ type SetPresence struct {
 }
 
 func (s SetPresence) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
+    file, err := ioutil.ReadFile("../config.json")
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
+    type configStruct struct {
+        Token     string `json:"Token"`
+        BotPrefix string `json:"BotPrefix"`
+        Presence string `json:"Presence"`
+        Owner string `json:"Owner"`
+    }
+    
+    var (
+        config *configStruct
+    ) 
+    
+    err = json.Unmarshal(file, &config)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
 	u, err := session.User(config.Owner)
 	if err != nil {
 		return nil

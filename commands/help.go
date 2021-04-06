@@ -1,12 +1,15 @@
 package commands
 
 import (
+	"database/sql"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+
+	embedutil "git.randomchars.net/Reviath/embed-util"
 	ctx "git.randomchars.net/Reviath/handlers/Context"
 	"github.com/bwmarrin/discordgo"
-	embedutil "git.randomchars.net/Reviath/embed-util"
-    "../config"
-    "database/sql"
-    _ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Help struct {
@@ -14,6 +17,31 @@ type Help struct {
 }
 
 func (h Help) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
+    file, err := ioutil.ReadFile("../config.json")
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
+    type configStruct struct {
+        Token     string `json:"Token"`
+        BotPrefix string `json:"BotPrefix"`
+        Presence string `json:"Presence"`
+        Owner string `json:"Owner"`
+    }
+    
+    var (
+        config *configStruct
+    ) 
+    
+    err = json.Unmarshal(file, &config)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
     db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
 
     if err != nil {

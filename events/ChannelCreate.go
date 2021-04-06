@@ -36,7 +36,7 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 			SetTitle("Kanal Oluşturuldu!").
 			AddField("Kanal İsmi:", event.Channel.Name+" ( <#"+event.Channel.ID+"> )").
 			AddField("Kanalın İD'si:", event.Channel.ID).
-			AddField("Kanal Tipi:", string(event.Channel.Type)).
+			AddField("Kanal Tipi:", string(rune(event.Channel.Type))).
 			SetColor(0xff1000).MessageEmbed
 
 		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)

@@ -1,21 +1,135 @@
 package main
 
 import (
-	"./bot"
-	"./config"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+
+	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
+	"git.randomchars.net/Reviath/RemiliaScarlet/events"
+	CommandHandler "git.randomchars.net/Reviath/handlers/CommandHandler"
+	commandMap "git.randomchars.net/Reviath/handlers/CommandMap"
+	"github.com/bwmarrin/discordgo"
 )
 
+var goBot *discordgo.Session
+
+
+var (
+	Token     string
+	BotPrefix string
+	Presence string
+	Owner string
+	config *configStruct
+)
+
+type configStruct struct {
+	Token     string `json:"Token"`
+	BotPrefix string `json:"BotPrefix"`
+	Presence string `json:"Presence"`
+	Owner string `json:"Owner"`
+}
+
+func ReadConfig() error {
+	fmt.Println("Getting data from config file.")
+
+	file, err := ioutil.ReadFile("./config.json")
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
+	err = json.Unmarshal(file, &config)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
+	Token = config.Token
+	BotPrefix = config.BotPrefix
+	Presence = config.Presence
+	Owner = config.Owner
+
+	return nil
+}
+
 func main() {
-	err := config.ReadConfig()
+	ReadConfig()
+	goBot, err := discordgo.New("Bot " + Token)
+	
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	handler := CommandHandler.New(goBot, commandMap.New(), BotPrefix)
+	handler.GetCommandMap().RegisterCommand("ping", commands.Ping{}, true)
+	handler.GetCommandMap().RegisterCommand("stats", commands.Stats{}, true)
+	handler.GetCommandMap().RegisterCommand("avatar", commands.Avatar{}, true)
+	handler.GetCommandMap().RegisterCommand("invite", commands.Invite{}, true)
+	handler.GetCommandMap().RegisterCommand("author", commands.Author{}, true)
+	handler.GetCommandMap().RegisterCommand("issue", commands.Issue{}, true)
+	handler.GetCommandMap().RegisterCommand("guild_info", commands.GuildInfo{}, true)
+	handler.GetCommandMap().RegisterCommand("embed", commands.Embed{}, true)
+	handler.GetCommandMap().RegisterCommand("icon", commands.Icon{}, true)
+	handler.GetCommandMap().RegisterCommand("spoiler", commands.Spoiler{}, true)
+	handler.GetCommandMap().RegisterCommand("hug", commands.Hug{}, true)
+	handler.GetCommandMap().RegisterCommand("kiss", commands.Kiss{}, true)
+	handler.GetCommandMap().RegisterCommand("slap", commands.Slap{}, true)
+	handler.GetCommandMap().RegisterCommand("roles", commands.Roles{}, true)
+	handler.GetCommandMap().RegisterCommand("ban", commands.Ban{}, true)
+	handler.GetCommandMap().RegisterCommand("start_vote", commands.StartVote{}, true)
+	handler.GetCommandMap().RegisterCommand("unban", commands.Unban{}, true)
+	handler.GetCommandMap().RegisterCommand("kick", commands.Kick{}, true)
+	handler.GetCommandMap().RegisterCommand("afk", commands.Afk{}, true)
+	handler.GetCommandMap().RegisterCommand("help", commands.Help{}, true)
+	handler.GetCommandMap().RegisterCommand("welcome_channel", commands.WelcomeChannel{}, true)
+	handler.GetCommandMap().RegisterCommand("leave_channel", commands.LeaveChannel{}, true)
+	handler.GetCommandMap().RegisterCommand("auto_role", commands.AutoRole{}, true)
+	handler.GetCommandMap().RegisterCommand("reset_auto_role", commands.ResetAutorole{}, true)
+	handler.GetCommandMap().RegisterCommand("settings", commands.Settings{}, true)
+	handler.GetCommandMap().RegisterCommand("leave_message", commands.LeaveMessage{}, true)
+	handler.GetCommandMap().RegisterCommand("welcome_message", commands.WelcomeMessage{}, true)
+	handler.GetCommandMap().RegisterCommand("reset_leave_channel", commands.ResetLeaveChannel{}, true)
+	handler.GetCommandMap().RegisterCommand("reset_welcome_channel", commands.ResetWelcomeChannel{}, true)
+	handler.GetCommandMap().RegisterCommand("reset_welcome_message", commands.ResetWelcomeMessage{}, true)
+	handler.GetCommandMap().RegisterCommand("reset_leave_message", commands.ResetLeaveMessage{}, true)
+	handler.GetCommandMap().RegisterCommand("log", commands.Log{}, true)
+	handler.GetCommandMap().RegisterCommand("reset_log", commands.ResetLog{}, true)
+	handler.GetCommandMap().RegisterCommand("disable", commands.Disable{}, true)
+	handler.GetCommandMap().RegisterCommand("enable", commands.Enable{}, true)
+	handler.GetCommandMap().RegisterCommand("language", commands.Language{}, true)
+	handler.GetCommandMap().RegisterCommand("set_presence", commands.SetPresence{}, true)
+	
+	u, err := goBot.User("@me")
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	goBot.Identify.Intents = discordgo.IntentsAll
+
+	goBot.AddHandler(events.GuildMemberAdd)
+	goBot.AddHandler(events.GuildMemberRemove)
+	goBot.AddHandler(events.ChannelCreate)
+	goBot.AddHandler(events.ChannelDelete)
+	goBot.AddHandler(events.GuildRoleCreate)
+	goBot.AddHandler(events.GuildRoleDelete)
+
+	BotID := u.ID
+	BotUsername := u.Username
+	BotDiscriminator := u.Discriminator
+
+	err = goBot.Open()
 
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-	
-	client.Start()
+
+	fmt.Println("Logging in as " + BotUsername + "#" + BotDiscriminator + " (" + BotID + ")")
 
 	<-make(chan struct{})
-	return
 }
