@@ -2,6 +2,7 @@ package events
 
 import (
 	"database/sql"
+	"strconv"
 
 	embedutil "git.randomchars.net/Reviath/embed-util"
 	"github.com/bwmarrin/discordgo"
@@ -26,6 +27,22 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 	
 	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + event.GuildID + "'").Scan(&tag.lang)
 
+	var channeltype string
+
+	if strconv.Itoa(int(event.Channel.Type)) == "0" {
+		channeltype = "Text"
+	} else if strconv.Itoa(int(event.Channel.Type)) == "2" {
+		channeltype = "Voice"
+	} else if strconv.Itoa(int(event.Channel.Type)) == "6" {
+		channeltype = "Store"
+	} else if strconv.Itoa(int(event.Channel.Type)) == "13" {
+		channeltype = "Stage"
+	} else if strconv.Itoa(int(event.Channel.Type)) == "5" {
+		channeltype = "News"
+	} else {
+		channeltype = "Unknown Type (Type ID: " + strconv.Itoa(int(event.Channel.Type))
+	}
+
 	if err == nil {
 		if tag.lang == "tr" {
 			err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
@@ -36,7 +53,7 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 					SetTitle("Kanal Silindi!").
 					AddField("Kanalın İsmi:", event.Channel.Name).
 					AddField("Kanalın İD'si:", event.Channel.ID).
-					AddField("Kanal Tipi:", string(rune(event.Channel.Type))).
+					AddField("Kanal Tipi:", channeltype).
 					SetColor(0xff1000).MessageEmbed
 		
 				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
@@ -57,7 +74,7 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 			SetTitle("Channel Deleted!").
 			AddField("Channel Name:", event.Channel.Name).
 			AddField("Channel ID:", event.Channel.ID).
-			AddField("Channel Type:", string(rune(event.Channel.Type))).
+			AddField("Channel Type:", channeltype).
 			SetColor(0xff1000).MessageEmbed
 
 		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
