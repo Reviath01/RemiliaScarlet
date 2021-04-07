@@ -20,8 +20,7 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
     file, err := ioutil.ReadFile("./config.json")
 
 	if err != nil {
-		fmt.Println(err.Error())
-		return err
+		return nil
 	}
 
     type configStruct struct {
