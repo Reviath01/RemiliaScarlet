@@ -101,6 +101,7 @@ func main() {
 	handler.GetCommandMap().RegisterCommand("set_presence", commands.SetPresence{}, true)
 	handler.GetCommandMap().RegisterCommand("shutdown", commands.ShutDown{}, true)
 	handler.GetCommandMap().RegisterCommand("vote", commands.Vote{}, true)
+	handler.GetCommandMap().RegisterCommand("rank", commands.Rank{}, true)
 
 	u, err := goBot.User("@me")
 
