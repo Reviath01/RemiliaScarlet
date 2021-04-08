@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2021 at 09:54 PM
+-- Generation Time: Apr 08, 2021 at 09:19 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -91,6 +91,18 @@ CREATE TABLE `leavemessage` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `levels`
+--
+
+CREATE TABLE `levels` (
+  `userid` varchar(255) NOT NULL,
+  `guildid` varchar(255) NOT NULL,
+  `level` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `log`
 --
 
@@ -119,6 +131,18 @@ CREATE TABLE `welcomechannel` (
 CREATE TABLE `welcomemessage` (
   `message` varchar(255) NOT NULL,
   `guildid` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `xps`
+--
+
+CREATE TABLE `xps` (
+  `userid` varchar(255) NOT NULL,
+  `guildid` varchar(255) NOT NULL,
+  `xp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;
 
