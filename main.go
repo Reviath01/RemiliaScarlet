@@ -100,7 +100,8 @@ func main() {
 	handler.GetCommandMap().RegisterCommand("language", commands.Language{}, true)
 	handler.GetCommandMap().RegisterCommand("set_presence", commands.SetPresence{}, true)
 	handler.GetCommandMap().RegisterCommand("shutdown", commands.ShutDown{}, true)
-	
+	handler.GetCommandMap().RegisterCommand("vote", commands.Vote{}, true)
+
 	u, err := goBot.User("@me")
 
 	if err != nil {
