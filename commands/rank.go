@@ -1,15 +1,15 @@
 package commands
 
 import (
-	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
-	"github.com/bwmarrin/discordgo"
-    embedutil "git.randomchars.net/Reviath/embed-util"
 	"database/sql"
+
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
+	embedutil "git.randomchars.net/Reviath/embed-util"
+	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 type Rank struct {
-
 }
 
 func (r Rank) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
@@ -22,9 +22,9 @@ func (r Rank) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		xp string `json:"xp"`
+		xp    string `json:"xp"`
 		level string `json:"level"`
-		lang string `json:"language"`
+		lang  string `json:"language"`
 	}
 
 	var tag Tag
@@ -36,7 +36,7 @@ func (r Rank) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err != nil {
 		level = "0"
 	} else {
-		level = tag.level	
+		level = tag.level
 	}
 
 	err = db.QueryRow("SELECT xp FROM xps WHERE userid ='" + ctx.Author().ID + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.xp)
@@ -112,17 +112,17 @@ func (r Rank) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	embed := embedutil.NewEmbed().
-            SetColor(0xff1000).
-            SetTitle("Rank").
-			SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator).
-			AddField("Level", level).
-			SetThumbnail(ctx.Author().AvatarURL("1024")).
-			AddField("XP", xp + "/" + maxxp).MessageEmbed
+		SetColor(0xff1000).
+		SetTitle("Rank").
+		SetDescription(ctx.Author().Username+"#"+ctx.Author().Discriminator).
+		AddField("Level", level).
+		SetThumbnail(ctx.Author().AvatarURL("1024")).
+		AddField("XP", xp+"/"+maxxp).MessageEmbed
 	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-	
+
 	if err != nil {
 		return nil
 	}
-	
+
 	return err
 }

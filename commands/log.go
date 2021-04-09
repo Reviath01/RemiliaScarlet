@@ -29,11 +29,66 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	var tag Tag
 
 	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
-	if err == nil {
-		if tag.lang == "tr" {
-			perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-			if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
+	if err == nil && tag.lang == "tr" {
+		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
+		if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
+			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
+
+			if err != nil {
+				return nil
+			}
+
+			return err
+		}
+
+		var args string
+		if len(strings.Join(ctx.Args(), " ")) < 1 {
+			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Log kanalını belirtmelisin.")
+
+			if err != nil {
+				return nil
+			}
+
+			return err
+		}
+		args = ctx.Args()[0]
+
+		if len(args) < 19 {
+			c, err := session.Channel(args)
+			if err == nil {
+
+				err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.channelid)
+				if err == nil {
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı zaten ayarlanmış, sıfırlamak için reset_log komutunu kullan.")
+
+					if err != nil {
+						return nil
+					}
+
+					return err
+				} else {
+					insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
+					if err != nil {
+						_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
+
+						if err != nil {
+							return nil
+						}
+
+						return err
+					}
+					defer insert.Close()
+
+					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı başarıyla ayarlandı!")
+
+					if err != nil {
+						return nil
+					}
+
+					return err
+				}
+			} else {
+				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalını belirtmelisin.")
 
 				if err != nil {
 					return nil
@@ -41,21 +96,9 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				return err
 			}
-
-			var args string
-			if len(strings.Join(ctx.Args(), " ")) < 1 {
-				_, err := session.ChannelMessageSend(ctx.Channel().ID, "Log kanalını belirtmelisin.")
-
-				if err != nil {
-					return nil
-				}
-
-				return err
-			}
-			args = ctx.Args()[0]
-
-			if len(args) < 19 {
-				c, err := session.Channel(args)
+		} else {
+			if len(args) > 20 {
+				c, err := session.Channel(args[2:][:18])
 				if err == nil {
 
 					err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.channelid)
@@ -80,7 +123,7 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 						}
 						defer insert.Close()
 
-						_, err = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı başarıyla ayarlandı!")
+						_, err = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı başarıyla ayarlandı.")
 
 						if err != nil {
 							return nil
@@ -98,58 +141,13 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					return err
 				}
 			} else {
-				if len(args) > 20 {
-					c, err := session.Channel(args[2:][:18])
-					if err == nil {
+				_, err := session.ChannelMessageSend(ctx.Channel().ID, "Log kanalını belirtmelisin.")
 
-						err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.channelid)
-						if err == nil {
-							_, err = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı zaten ayarlanmış, sıfırlamak için reset_log komutunu kullan.")
-
-							if err != nil {
-								return nil
-							}
-
-							return err
-						} else {
-							insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
-							if err != nil {
-								_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
-
-								if err != nil {
-									return nil
-								}
-
-								return err
-							}
-							defer insert.Close()
-
-							_, err = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı başarıyla ayarlandı.")
-
-							if err != nil {
-								return nil
-							}
-
-							return err
-						}
-					} else {
-						_, err = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalını belirtmelisin.")
-
-						if err != nil {
-							return nil
-						}
-
-						return err
-					}
-				} else {
-					_, err := session.ChannelMessageSend(ctx.Channel().ID, "Log kanalını belirtmelisin.")
-
-					if err != nil {
-						return nil
-					}
-
-					return err
+				if err != nil {
+					return nil
 				}
+
+				return err
 			}
 		}
 	}

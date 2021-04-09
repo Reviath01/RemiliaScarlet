@@ -11,26 +11,25 @@ import (
 )
 
 type ShutDown struct {
-
 }
 
 func (s ShutDown) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-    file, err := ioutil.ReadFile("./config.json")
+	file, err := ioutil.ReadFile("./config.json")
 
 	if err != nil {
 		fmt.Println(err.Error())
 		return err
 	}
 
-    type configStruct struct {
-        Owner string `json:"Owner"`
-    }
-    
-    var (
-        config *configStruct
-    ) 
-    
-    err = json.Unmarshal(file, &config)
+	type configStruct struct {
+		Owner string `json:"Owner"`
+	}
+
+	var (
+		config *configStruct
+	)
+
+	err = json.Unmarshal(file, &config)
 
 	if err != nil {
 		fmt.Println(err.Error())
