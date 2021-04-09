@@ -55,10 +55,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -67,27 +63,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -97,10 +81,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -109,27 +89,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -139,10 +107,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -151,27 +115,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -181,10 +133,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -193,27 +141,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -223,10 +159,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -235,27 +167,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -265,10 +185,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -277,27 +193,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -307,10 +211,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -319,27 +219,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -348,10 +236,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if err == nil {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -362,26 +246,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					return nil
 				}
 
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -390,10 +263,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if err == nil {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -404,10 +273,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					return nil
 				}
 
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -416,9 +281,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -427,10 +289,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if err == nil {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -441,10 +299,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					return nil
 				}
 
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -453,9 +307,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -464,10 +315,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if err == nil {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -478,10 +325,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					return nil
 				}
 
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -490,9 +333,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -501,10 +341,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if err == nil {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -515,10 +351,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					return nil
 				}
 
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -527,9 +359,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -538,10 +367,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if err == nil {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -552,10 +377,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					return nil
 				}
 
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -564,9 +385,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -576,10 +394,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -588,11 +402,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -601,9 +410,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -613,10 +419,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -625,11 +427,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -638,9 +435,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -650,10 +444,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -662,11 +452,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -675,9 +460,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -687,17 +469,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guizldid) VALUES ('True', 'stats', '" + ctx.Guild().ID + "')")
+				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'stats', '" + ctx.Guild().ID + "')")
+				
 				if err != nil {
 					return nil
 				}
+
 				defer insert.Close()
 
 				if err != nil {
@@ -706,9 +486,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -718,10 +495,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if tag.isblocked == "True" {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut zaten engellenmiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -730,11 +503,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-
-				if err != nil {
-					return nil
-				}
-
 				defer insert.Close()
 
 				if err != nil {
@@ -743,9 +511,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen komut engellendi.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -782,9 +547,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -795,14 +557,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return nil
 			}
 
+			if err != nil {
+				return nil
+			}
+
 			defer insert.Close()
 
 			if err != nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -816,9 +579,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -829,14 +589,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return nil
 			}
 
+			if err != nil {
+				return nil
+			}
+
 			defer insert.Close()
 
 			if err != nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -850,9 +611,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -863,14 +621,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return nil
 			}
 
+			if err != nil {
+				return nil
+			}
+
 			defer insert.Close()
 
 			if err != nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -884,9 +643,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -897,14 +653,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return nil
 			}
 
+			if err != nil {
+				return nil
+			}
+
 			defer insert.Close()
 
 			if err != nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -918,9 +675,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -931,14 +685,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return nil
 			}
 
+			if err != nil {
+				return nil
+			}
+
 			defer insert.Close()
 
 			if err != nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -952,9 +707,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -965,14 +717,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return nil
 			}
 
+			if err != nil {
+				return nil
+			}
+
 			defer insert.Close()
 
 			if err != nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -986,9 +739,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -999,14 +749,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return nil
 			}
 
+			if err != nil {
+				return nil
+			}
+
 			defer insert.Close()
 
 			if err != nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -1020,9 +771,6 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -1033,14 +781,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return nil
 			}
 
+			if err != nil {
+				return nil
+			}
+
 			defer insert.Close()
 
 			if err != nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
@@ -1054,14 +803,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kick', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1083,14 +833,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kiss', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1112,14 +863,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ping', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1141,14 +893,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'roles', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1170,14 +923,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'settings', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1199,14 +953,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'slap', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1228,14 +983,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'spoiler', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1257,14 +1013,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'start_vote', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1286,14 +1043,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'stats', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
@@ -1315,14 +1073,15 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if tag.isblocked == "True" {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is already blocked.")
 
-				if err != nil {
-					return nil
-				}
 
 				return nil
 			}
 		} else {
 			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'unban', '" + ctx.Guild().ID + "')")
+
+			if err != nil {
+				return nil
+			}
 
 			if err != nil {
 				return nil
