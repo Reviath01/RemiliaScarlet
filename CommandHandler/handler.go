@@ -78,264 +78,148 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	}
 
 	var tag Tag
+	var level string
+	var xp string
 
-	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + msg.GuildID + "'").Scan(&tag.lang)
-	if err == nil {
-		if tag.lang == "tr" {
-			err = db.QueryRow("SELECT isafk FROM afk WHERE userid ='" + msg.Author.ID + "'").Scan(&tag.isafk)
+	err = db.QueryRow("SELECT level FROM levels WHERE userid ='" + msg.Author.ID + "' AND guildid ='" + msg.GuildID + "'").Scan(&tag.level)
+
+	if err != nil {
+		level = "0"
+	} else {
+		level = tag.level
+	}
+
+	err = db.QueryRow("SELECT xp FROM xps WHERE userid ='" + msg.Author.ID + "' AND guildid ='" + msg.GuildID + "'").Scan(&tag.xp)
+
+	if err != nil {
+		xp = "0"
+	} else {
+		xp = tag.xp
+	}
+
+	var maxxp string
+
+	if level == "0" {
+		maxxp = "150"
+	} else if level == "1" {
+		maxxp = "200"
+	} else if level == "2" {
+		maxxp = "250"
+	} else if level == "3" {
+		maxxp = "300"
+	} else if level == "4" {
+		maxxp = "250"
+	} else if level == "5" {
+		maxxp = "300"
+	} else if level == "6" {
+		maxxp = "350"
+	} else if level == "7" {
+		maxxp = "400"
+	} else if level == "8" {
+		maxxp = "500"
+	} else if level == "9" {
+		maxxp = "600"
+	} else if level == "10" {
+		maxxp = "700"
+	} else if level == "11" {
+		maxxp = "800"
+	} else if level == "12" {
+		maxxp = "900"
+	} else if level == "13" {
+		maxxp = "1000"
+	} else if level == "14" {
+		maxxp = "1100"
+	} else if level == "15" {
+		maxxp = "1200"
+	} else if level == "16" {
+		maxxp = "1400"
+	} else if level == "17" {
+		maxxp = "1600"
+	} else if level == "18" {
+		maxxp = "1800"
+	} else if level == "19" {
+		maxxp = "2000"
+	} else if level == "20" {
+		maxxp = "2200"
+	} else if level == "21" {
+		maxxp = "2400"
+	} else if level == "22" {
+		maxxp = "2600"
+	} else if level == "23" {
+		maxxp = "2800"
+	} else if level == "24" {
+		maxxp = "3000"
+	} else if level == "25" {
+		maxxp = "3200"
+	} else if level == "26" {
+		maxxp = "3400"
+	} else if level == "27" {
+		maxxp = "3600"
+	} else if level == "28" {
+		maxxp = "3800"
+	} else {
+		maxxp = "4000"
+	}
+
+	if len(msg.Content) > 3 {
+		if xp == maxxp {
+			update, err := db.Query("UPDATE xps SET xp ='0' WHERE guildid ='" + msg.GuildID + "' AND userid ='" + msg.Author.ID + "'")
 			if err != nil {
-				if strings.HasPrefix(msg.Content, h.Prefixs) {
-					args := strings.Split(strings.TrimPrefix(msg.Content, h.Prefixs), " ")
-					args, cmd := Shift(args, 0)
-					err := h.cmds.Execute(cmd, ctx.New(args, msg, s), s)
-					if err != nil {
-						_, err = s.ChannelMessageSend(msg.ChannelID, "Bir hata oluştu.")
-						if err != nil {
-							return
-						}
-					}
-				}
-			} else {
-				var level string
-				var xp string
+				return
+			}
+			defer update.Close()
 
-				err = db.QueryRow("SELECT level FROM levels WHERE userid ='" + msg.Author.ID + "' AND guildid ='" + msg.GuildID + "'").Scan(&tag.level)
+			newlevel, err := strconv.Atoi(level)
 
+			if err != nil {
+				return
+			}
+
+			newlevel2 := newlevel + 1
+
+			update2, err := db.Query("UPDATE levels SET level ='" + strconv.Itoa(newlevel2) + "' WHERE guildid ='" + msg.GuildID + "' AND userid ='" + msg.Author.ID + "'")
+
+			if err != nil {
+				return
+			}
+
+			defer update2.Close()
+
+		}
+		insert, err := db.Query("INSERT INTO xps (xp, guildid, userid) VALUES ('3', '" + msg.GuildID + "', " + msg.Author.ID + ")")
+		if err != nil {
+			return
+		}
+		insert.Close()
+	}
+	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + msg.GuildID + "'").Scan(&tag.lang)
+	if err == nil && tag.lang == "tr" {
+		err = db.QueryRow("SELECT isafk FROM afk WHERE userid ='" + msg.Author.ID + "'").Scan(&tag.isafk)
+		if err != nil {
+			if strings.HasPrefix(msg.Content, h.Prefixs) {
+				args := strings.Split(strings.TrimPrefix(msg.Content, h.Prefixs), " ")
+				args, cmd := Shift(args, 0)
+				err := h.cmds.Execute(cmd, ctx.New(args, msg, s), s)
 				if err != nil {
-					level = "0"
-				} else {
-					level = tag.level
-				}
-
-				err = db.QueryRow("SELECT xp FROM xps WHERE userid ='" + msg.Author.ID + "' AND guildid ='" + msg.GuildID + "'").Scan(&tag.xp)
-
-				if err != nil {
-					xp = "0"
-				} else {
-					xp = tag.xp
-				}
-
-				var maxxp string
-
-				if level == "0" {
-					maxxp = "150"
-				} else if level == "1" {
-					maxxp = "200"
-				} else if level == "2" {
-					maxxp = "250"
-				} else if level == "3" {
-					maxxp = "300"
-				} else if level == "4" {
-					maxxp = "250"
-				} else if level == "5" {
-					maxxp = "300"
-				} else if level == "6" {
-					maxxp = "350"
-				} else if level == "7" {
-					maxxp = "400"
-				} else if level == "8" {
-					maxxp = "500"
-				} else if level == "9" {
-					maxxp = "600"
-				} else if level == "10" {
-					maxxp = "700"
-				} else if level == "11" {
-					maxxp = "800"
-				} else if level == "12" {
-					maxxp = "900"
-				} else if level == "13" {
-					maxxp = "1000"
-				} else if level == "14" {
-					maxxp = "1100"
-				} else if level == "15" {
-					maxxp = "1200"
-				} else if level == "16" {
-					maxxp = "1400"
-				} else if level == "17" {
-					maxxp = "1600"
-				} else if level == "18" {
-					maxxp = "1800"
-				} else if level == "19" {
-					maxxp = "2000"
-				} else if level == "20" {
-					maxxp = "2200"
-				} else if level == "21" {
-					maxxp = "2400"
-				} else if level == "22" {
-					maxxp = "2600"
-				} else if level == "23" {
-					maxxp = "2800"
-				} else if level == "24" {
-					maxxp = "3000"
-				} else if level == "25" {
-					maxxp = "3200"
-				} else if level == "26" {
-					maxxp = "3400"
-				} else if level == "27" {
-					maxxp = "3600"
-				} else if level == "28" {
-					maxxp = "3800"
-				} else {
-					maxxp = "4000"
-				}
-
-				if len(msg.Content) > 3 {
-					if xp == maxxp {
-						update, err := db.Query("UPDATE xps SET xp ='0' WHERE guildid ='" + msg.GuildID + "' AND userid ='" + msg.Author.ID + "'")
-						if err != nil {
-							return
-						}
-						defer update.Close()
-
-						newlevel, err := strconv.Atoi(level)
-
-						if err != nil {
-							return
-						}
-
-						newlevel2 := newlevel + 1
-
-						update2, err := db.Query("UPDATE levels SET level ='" + strconv.Itoa(newlevel2) + "' WHERE guildid ='" + msg.GuildID + "' AND userid ='" + msg.Author.ID + "'")
-
-						if err != nil {
-							return
-						}
-
-						defer update2.Close()
-
-					}
-					insert, err := db.Query("INSERT INTO xps (xp, guildid, userid) VALUES ('3', '" + msg.GuildID + "', " + msg.Author.ID + ")")
+					_, err = s.ChannelMessageSend(msg.ChannelID, "Bir hata oluştu.")
 					if err != nil {
 						return
 					}
-					insert.Close()
 				}
-				_, _ = s.ChannelMessageSend(msg.ChannelID, "Tekrar hoş geldin <@"+msg.Author.ID+"> !")
-				delete, err := db.Query("DELETE FROM afk WHERE userid ='" + msg.Author.ID + "'")
-				if err != nil {
-					return
-				}
-				defer delete.Close()
 			}
+		} else {
+			_, _ = s.ChannelMessageSend(msg.ChannelID, "Tekrar hoş geldin <@"+msg.Author.ID+"> !")
+			delete, err := db.Query("DELETE FROM afk WHERE userid ='" + msg.Author.ID + "'")
+			if err != nil {
+				return
+			}
+			defer delete.Close()
 		}
+		return
 	}
 
 	err = db.QueryRow("SELECT isafk FROM afk WHERE userid ='" + msg.Author.ID + "'").Scan(&tag.isafk)
 	if err != nil {
-		var level string
-		var xp string
-
-		err = db.QueryRow("SELECT level FROM levels WHERE userid ='" + msg.Author.ID + "' AND guildid ='" + msg.GuildID + "'").Scan(&tag.level)
-
-		if err != nil {
-			level = "0"
-		} else {
-			level = tag.level
-		}
-
-		err = db.QueryRow("SELECT xp FROM xps WHERE userid ='" + msg.Author.ID + "' AND guildid ='" + msg.GuildID + "'").Scan(&tag.xp)
-
-		if err != nil {
-			xp = "0"
-		} else {
-			xp = tag.xp
-		}
-
-		var maxxp string
-
-		if level == "0" {
-			maxxp = "150"
-		} else if level == "1" {
-			maxxp = "200"
-		} else if level == "2" {
-			maxxp = "250"
-		} else if level == "3" {
-			maxxp = "300"
-		} else if level == "4" {
-			maxxp = "250"
-		} else if level == "5" {
-			maxxp = "300"
-		} else if level == "6" {
-			maxxp = "350"
-		} else if level == "7" {
-			maxxp = "400"
-		} else if level == "8" {
-			maxxp = "500"
-		} else if level == "9" {
-			maxxp = "600"
-		} else if level == "10" {
-			maxxp = "700"
-		} else if level == "11" {
-			maxxp = "800"
-		} else if level == "12" {
-			maxxp = "900"
-		} else if level == "13" {
-			maxxp = "1000"
-		} else if level == "14" {
-			maxxp = "1100"
-		} else if level == "15" {
-			maxxp = "1200"
-		} else if level == "16" {
-			maxxp = "1400"
-		} else if level == "17" {
-			maxxp = "1600"
-		} else if level == "18" {
-			maxxp = "1800"
-		} else if level == "19" {
-			maxxp = "2000"
-		} else if level == "20" {
-			maxxp = "2200"
-		} else if level == "21" {
-			maxxp = "2400"
-		} else if level == "22" {
-			maxxp = "2600"
-		} else if level == "23" {
-			maxxp = "2800"
-		} else if level == "24" {
-			maxxp = "3000"
-		} else if level == "25" {
-			maxxp = "3200"
-		} else if level == "26" {
-			maxxp = "3400"
-		} else if level == "27" {
-			maxxp = "3600"
-		} else if level == "28" {
-			maxxp = "3800"
-		} else {
-			maxxp = "4000"
-		}
-
-		if len(msg.Content) > 3 {
-			if xp == maxxp {
-				update, err := db.Query("UPDATE xps SET xp ='0' WHERE guildid ='" + msg.GuildID + "' AND userid ='" + msg.Author.ID + "'")
-				if err != nil {
-					return
-				}
-				defer update.Close()
-
-				newlevel, err := strconv.Atoi(level)
-
-				if err != nil {
-					return
-				}
-
-				newlevel2 := newlevel + 1
-
-				update2, err := db.Query("UPDATE levels SET level ='" + strconv.Itoa(newlevel2) + "' WHERE guildid ='" + msg.GuildID + "' AND userid ='" + msg.Author.ID + "'")
-
-				if err != nil {
-					return
-				}
-
-				defer update2.Close()
-
-			}
-			insert, err := db.Query("INSERT INTO xps (xp, guildid, userid) VALUES ('3', '" + msg.GuildID + "', " + msg.Author.ID + ")")
-			if err != nil {
-				return
-			}
-			insert.Close()
-		}
 		if strings.HasPrefix(msg.Content, h.Prefixs) {
 			args := strings.Split(strings.TrimPrefix(msg.Content, h.Prefixs), " ")
 			args, cmd := Shift(args, 0)
