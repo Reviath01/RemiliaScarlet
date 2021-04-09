@@ -6,5 +6,5 @@ import (
 )
 
 type Command interface {
-	Execute(ctx ctx.Ctx,session *discordgo.Session) error
+	Execute(ctx ctx.Ctx, session *discordgo.Session) error
 }

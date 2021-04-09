@@ -71,10 +71,10 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	defer db.Close()
 
 	type Tag struct {
-		isafk string `json:"isafk"`
-		lang  string `json:"language"`
-		xp    string `json:"xp"`
-		level string `json:"level"`
+		isafk string
+		lang  string
+		xp    string
+		level string
 	}
 
 	var tag Tag
