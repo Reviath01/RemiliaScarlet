@@ -38,8 +38,8 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		isblocked string `json:"isblocked"`
-		lang      string `json:"language"`
+		isblocked string
+		lang      string
 	}
 
 	var tag Tag

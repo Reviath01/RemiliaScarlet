@@ -22,8 +22,8 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		isblocked string `json:"isblocked"`
-		lang      string `json:"language"`
+		isblocked string
+		lang      string
 	}
 
 	var tag Tag
@@ -45,7 +45,7 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-		if err == nil && (int(perms)&discordgo.PermissionKickMembers == discordgo.PermissionKickMembers) == false {
+		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için üyeleri at yetkisine sahip olmalısın.")
 
 			if err != nil {
@@ -150,7 +150,7 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-	if err == nil && (int(perms)&discordgo.PermissionKickMembers == discordgo.PermissionKickMembers) == false {
+	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need kick members permission to run this command.")
 
 		if err != nil {

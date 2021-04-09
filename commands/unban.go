@@ -22,8 +22,8 @@ func (u Unban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		isblocked string `json:"isblocked"`
-		lang      string `json:"language"`
+		isblocked string
+		lang      string
 	}
 
 	var tag Tag
@@ -45,7 +45,7 @@ func (u Unban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-		if err == nil && (int(perms)&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers) == false {
+		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanabilmek için üyeleri yasakla yetkisine sahip olmalısın.")
 
 			if err != nil {
@@ -153,7 +153,7 @@ func (u Unban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-	if err == nil && (int(perms)&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers) == false {
+	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need ban members permission to run this command.")
 
 		if err != nil {

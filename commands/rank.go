@@ -22,9 +22,8 @@ func (r Rank) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		xp    string `json:"xp"`
-		level string `json:"level"`
-		lang  string `json:"language"`
+		xp    string
+		level string
 	}
 
 	var tag Tag

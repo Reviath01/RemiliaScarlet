@@ -21,8 +21,8 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	type Tag struct {
-		isblocked string `json:"isblocked"`
-		lang      string `json:"language"`
+		isblocked string
+		lang      string
 	}
 
 	var tag Tag
@@ -30,7 +30,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
 	if err == nil && tag.lang == "tr" {
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-		if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
+		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
 			if err != nil {
 				return nil
@@ -48,8 +48,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			return err
 		}
 
-		var args string
-		args = ctx.Args()[0]
+		args := ctx.Args()[0]
 
 		db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
 
@@ -639,7 +638,9 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 			} else {
 				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guizldid) VALUES ('True', 'stats', '" + ctx.Guild().ID + "')")
-
+				if err != nil {
+					return nil
+				}
 				defer insert.Close()
 
 				if err != nil {
@@ -694,7 +695,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-	if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
+	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
 		if err != nil {
 			return nil
@@ -712,8 +713,7 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return err
 	}
 
-	var args string
-	args = ctx.Args()[0]
+	args := ctx.Args()[0]
 
 	if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)

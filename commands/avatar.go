@@ -23,8 +23,8 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		isblocked string `json:"isblocked"`
-		lang      string `json:"language"`
+		isblocked string
+		lang      string
 	}
 
 	var tag Tag
@@ -53,8 +53,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			return err
 		}
 
-		var args string
-		args = ctx.Args()[0]
+		args := ctx.Args()[0]
 
 		if len(args) < 19 {
 			u, err := session.User(args)
@@ -147,9 +146,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 		return err
 	}
-
-	var args string
-	args = ctx.Args()[0]
+	args := ctx.Args()[0]
 
 	if len(args) < 19 {
 		u, err := session.User(args)

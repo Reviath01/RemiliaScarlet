@@ -20,8 +20,8 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	type Tag struct {
-		isblocked string `json:"isblocked"`
-		lang      string `json:"language"`
+		isblocked string
+		lang      string
 	}
 
 	var tag Tag
@@ -29,7 +29,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
 	if err == nil && tag.lang == "tr" {
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-		if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
+		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
 
 			if err != nil {
@@ -49,8 +49,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			return err
 		}
 
-		var args string
-		args = ctx.Args()[0]
+		args := ctx.Args()[0]
 
 		if args == "afk" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
@@ -776,7 +775,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-	if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
+	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
 
 		if err != nil {
@@ -1096,47 +1095,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			return err
 		}
 	} else if args == "kick" {
-		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
-		if err == nil {
-			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild().ID + "' AND commandname ='" + args + "'")
-
-				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
-
-					if err != nil {
-						return nil
-					}
-
-					return err
-				} else {
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
-				}
-
-				defer delete.Close()
-
-			} else {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-				if err != nil {
-					return nil
-				}
-
-				return err
-			}
-		} else {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			if err != nil {
-				return nil
-			}
-
-			return err
-		}
-	} else if args == "afk" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -1548,6 +1506,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 	} else {
 		_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the command.")
+		if err != nil {
+			return nil
+		}
 	}
 
 	return db.Close()

@@ -21,8 +21,8 @@ func (r ResetAutorole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		roleid string `json:"roleid"`
-		lang   string `json:"language"`
+		roleid string
+		lang   string
 	}
 
 	var tag Tag
@@ -30,7 +30,7 @@ func (r ResetAutorole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
 	if err == nil && tag.lang == "tr" {
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-		if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
+		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısınız.")
 
 			if err != nil {
@@ -76,7 +76,7 @@ func (r ResetAutorole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-	if err == nil && (int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) == false {
+	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
 
 		if err != nil {

@@ -22,14 +22,14 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		welcomechannelid string `json:"channelid"`
-		leavechannelid   string `json:"channelid"`
-		roleid           string `json:"roleid"`
-		welcomemessage   string `json:"message"`
-		leavemessage     string `json:"message"`
-		logid            string `json:"channelid"`
-		isblocked        string `json:"isblocked"`
-		lang             string `json:"language"`
+		welcomechannelid string
+		leavechannelid   string
+		roleid           string
+		welcomemessage   string
+		leavemessage     string
+		logid            string
+		isblocked        string
+		lang             string
 	}
 
 	var tag Tag

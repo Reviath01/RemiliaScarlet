@@ -22,8 +22,8 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		isblocked string `json:"isblocked"`
-		lang      string `json:"language"`
+		isblocked string
+		lang      string
 	}
 
 	var tag Tag
@@ -45,7 +45,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-		if err == nil && (int(perms)&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers) == false {
+		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için üyeleri yasakla yetkisine sahip olmalısın.")
 			return err
 		}
@@ -57,8 +57,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			return err
 		} else {
-			var args string
-			args = ctx.Args()[0]
+			args := ctx.Args()[0]
 			if len(args) < 19 {
 				u, err := session.User(args)
 				if err == nil {
@@ -146,7 +145,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
-	if err == nil && (int(perms)&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers) == false {
+	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need ban members permission to run this command.")
 		return err
 	}
@@ -158,8 +157,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 		return err
 	} else {
-		var args string
-		args = ctx.Args()[0]
+		args := ctx.Args()[0]
 		if len(args) < 19 {
 			u, err := session.User(args)
 			if err == nil {

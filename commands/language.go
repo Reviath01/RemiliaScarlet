@@ -22,7 +22,7 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	defer db.Close()
 
 	type Tag struct {
-		lang string `json:"language"`
+		lang string
 	}
 
 	var tag Tag
