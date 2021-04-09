@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <a href="https://git.randomchars.net/reviath/RemiliaScarlet">
+  <a href="https://git.randomchars.net/Reviath/RemiliaScarlet">
     <img src="https://cdn.discordapp.com/attachments/820587437801209856/822117411708338236/New_Project.png" alt="Logo" width="380" height="160">
   </a>
   <p align="center">
@@ -30,6 +30,8 @@ git clone https://git.randomchars.net/Reviath/RemiliaScarlet
 
 ```
 go get git.randomchars.net/Reviath/embed-util
+
+go get github.com/go-sql-driver/mysql
 
 go get github.com/bwmarrin/discordgo
 
