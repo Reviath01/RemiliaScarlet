@@ -7,8 +7,8 @@ import (
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
 	"git.randomchars.net/Reviath/RemiliaScarlet/events"
-	CommandHandler "git.randomchars.net/Reviath/handlers/CommandHandler"
-	commandMap "git.randomchars.net/Reviath/handlers/CommandMap"
+	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler"
+	commandMap "git.randomchars.net/Reviath/RemiliaScarlet/CommandMap"
 	"github.com/bwmarrin/discordgo"
 )
 

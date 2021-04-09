@@ -7,7 +7,7 @@ import (
 	"time"
 
 	embedutil "git.randomchars.net/Reviath/embed-util"
-	ctx "git.randomchars.net/Reviath/handlers/Context"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
 	"github.com/bwmarrin/discordgo"
     "github.com/pbnjay/memory"
 	"database/sql"

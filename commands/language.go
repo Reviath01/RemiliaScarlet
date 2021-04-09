@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/bwmarrin/discordgo"
-	ctx "git.randomchars.net/Reviath/handlers/Context"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
 	"strings"
 )
 
@@ -46,6 +46,9 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				return err
 			} else if args[0] == "en" {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Dili ingilizce olarak ayarlıyorum...")
+				if err != nil {
+					return nil
+				}
 				delete, err := db.Query("DELETE FROM languages WHERE guildid ='" + ctx.Guild().ID + "'")
 				if err != nil {
 					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
@@ -54,7 +57,6 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					}
 					return err 
 				}
-				return err
 
 				defer delete.Close()
 			} else {
@@ -88,10 +90,10 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					return nil
 				}
-				return err
-
 				defer insert.Close()
-	
+
+				return err
+				
 			} else if args[0] == "en" {
 				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is en.")
 				if err != nil {
@@ -132,8 +134,9 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if err != nil {
 				return nil
 			}
-			return err
 			defer insert.Close()
+
+			return err
 
 		} else if args[0] == "en" {
 			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is en.")
@@ -149,5 +152,4 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			return err
 		}
 	}
-	return nil
 }

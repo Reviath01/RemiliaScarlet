@@ -1,7 +1,7 @@
 package commands
 
 import (
-	ctx "git.randomchars.net/Reviath/handlers/Context"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
 	"github.com/bwmarrin/discordgo"
     "strings"
     "database/sql"
@@ -36,7 +36,7 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
             if err == nil {
                 if tag.isblocked == "True" {
                     _, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
-        
+
                     if err != nil {
                         return nil
                     }

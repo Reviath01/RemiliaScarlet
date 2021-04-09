@@ -1,7 +1,7 @@
 package commands
 
 import (
-	ctx "git.randomchars.net/Reviath/handlers/Context"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
 	"github.com/bwmarrin/discordgo"
     "database/sql"
     _ "github.com/go-sql-driver/mysql"

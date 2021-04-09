@@ -1,7 +1,5 @@
 git.randomchars.net/Reviath/embed-util v0.0.0-20210323160227-e3f3dc6a4f4d h1:eHrM0e85DXs5MBusytBtVoG0NOrDWDJoKxQSOcQMPfQ=
 git.randomchars.net/Reviath/embed-util v0.0.0-20210323160227-e3f3dc6a4f4d/go.mod h1:THzUsDoMw5JSjoPcTEO1So0cJ9uSylEuxdcwFMgCmm0=
-git.randomchars.net/Reviath/handlers v0.0.0-20210402073358-b1d40b13d28a h1:hhlgIAzPLcA+NThn/HhgRIyzKgJWcL4CKSbjNWq60VQ=
-git.randomchars.net/Reviath/handlers v0.0.0-20210402073358-b1d40b13d28a/go.mod h1:D7g6btWXTYTPmzmdNL1ResPiWDS0hIhDs5UM6bVsOrI=
 github.com/bwmarrin/discordgo v0.23.2 h1:BzrtTktixGHIu9Tt7dEE6diysEF9HWnXeHuoJEt2fH4=
 github.com/bwmarrin/discordgo v0.23.2/go.mod h1:c1WtWUGN6nREDmzIpyTp/iD3VYt4Fpx+bVyfBG7JE+M=
 github.com/go-sql-driver/mysql v1.6.0 h1:BCTh4TKNUYmOmMUcQ3IipzF5prigylS7XXjEkfCHuOE=

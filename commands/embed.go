@@ -2,7 +2,7 @@ package commands
 
 import (
     "strings"
-	ctx "git.randomchars.net/Reviath/handlers/Context"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
 	"github.com/bwmarrin/discordgo"
     embedutil "git.randomchars.net/Reviath/embed-util"
     "database/sql"

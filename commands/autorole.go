@@ -2,7 +2,7 @@ package commands
 
 import (
 	"database/sql"
-	ctx "git.randomchars.net/Reviath/handlers/Context"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
     "strings"

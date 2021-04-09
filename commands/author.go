@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 
 	embedutil "git.randomchars.net/Reviath/embed-util"
-	ctx "git.randomchars.net/Reviath/handlers/Context"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
