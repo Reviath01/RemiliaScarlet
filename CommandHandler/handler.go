@@ -90,6 +90,9 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 					err := h.cmds.Execute(cmd, ctx.New(args, msg, s), s)
 					if err != nil {
 						_, err = s.ChannelMessageSend(msg.ChannelID, "Bir hata oluştu.")
+						if err != nil {
+							return
+						}
 					}
 				}
 			} else {
