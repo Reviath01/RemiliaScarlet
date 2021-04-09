@@ -20,7 +20,7 @@ This is my first Golang Discord bot project, but I've written in javascript (Nod
 
 1. Clone this project.
 ```
-git clone https://git.randomchars.net/Reviath/remilia-scarlet
+git clone https://git.randomchars.net/Reviath/RemiliaScarlet
 ```
 
 2. Edit config file (config.json)
@@ -29,11 +29,7 @@ git clone https://git.randomchars.net/Reviath/remilia-scarlet
 3. Get required packages
 
 ```
-go get git.randomchars.net/Reviath/remilia-scarlet
-
 go get git.randomchars.net/Reviath/embed-util
-
-go get git.randomchars.net/Reviath/handlers
 
 go get github.com/bwmarrin/discordgo
 
@@ -41,7 +37,7 @@ go get github.com/bwmarrin/discordgo
 
 ## Issue
 
-You can open issues [here](https://git.randomchars.net/Reviath/remilia-scarlet/-/issues/new) or you can come to my Discord [server](https://discord.gg/xqsTvtM2hk).
+You can open issues [here](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new) or you can come to my Discord [server](https://discord.gg/xqsTvtM2hk).
 
 
 
