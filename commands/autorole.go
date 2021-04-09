@@ -33,16 +33,13 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil && tag.lang == "tr" {
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
-			return err
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
+			return nil
 		}
 		if strings.Join(ctx.Args(), " ") == "" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Rolü belirtmelisin")
-			if err != nil {
-				return nil
-			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Rolü belirtmelisin")
 
-			return err
+			return nil
 		} else {
 			args := ctx.Args()[0]
 
@@ -50,84 +47,58 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
 				if err == nil {
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
-					return err
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
+					return nil
 				} else {
 					insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
 					if err != nil {
-						_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
+						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-						if err != nil {
-							return nil
-						}
-
-						return err
+						return nil
 					}
 					defer insert.Close()
 
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Otorol başarıyla ayarlandı.")
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol başarıyla ayarlandı.")
 
-					if err != nil {
-						return nil
-					}
-
-					return err
+					return nil
 				}
 			} else {
 				if len(args) == 22 {
 
 					err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
 					if err == nil {
-						_, err = session.ChannelMessageSend(ctx.Channel().ID, "Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
-						if err != nil {
-							return nil
-						}
-						return err
+						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
+						return nil
 					} else {
 						insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args[3:][:18] + "', '" + ctx.Guild().ID + "')")
 						if err != nil {
-							_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
+							_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-							if err != nil {
-								return nil
-							}
-
-							return err
+							return nil
 						}
 						defer insert.Close()
 
-						_, err = session.ChannelMessageSend(ctx.Channel().ID, "Otorol başarıyla ayarlandı.")
+						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol başarıyla ayarlandı.")
 
-						if err != nil {
-							return nil
-						}
-
-						return err
-					}
-				} else {
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir rol belirtmelisin.")
-
-					if err != nil {
 						return nil
 					}
+				} else {
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir rol belirtmelisin.")
 
-					return err
+					return nil
 				}
 			}
 		}
 	}
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
-		return err
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
+		return nil
 	}
 
 	if strings.Join(ctx.Args(), " ") == "" {
-		_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
-		if err != nil {
-			return nil
-		}
-		return err
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
+		return nil
 	} else {
 		args := ctx.Args()[0]
 
@@ -135,28 +106,18 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 			err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
 			if err == nil {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
+				return nil
 			} else {
 				insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
-
-					if err != nil {
-						return nil
-					}
-
-					return err
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
+					return nil
 				}
 				defer insert.Close()
 
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
-
-				if err != nil {
-					return nil
-				}
-
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
+				return nil
 			}
 		} else {
 			if len(args) == 22 {
@@ -176,40 +137,25 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
 				if err == nil {
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
-					if err != nil {
-						return nil
-					}
-					return err
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
+					return nil
 				} else {
 					insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args[3:][:18] + "', '" + ctx.Guild().ID + "')")
 					if err != nil {
-						_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
+						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
 
-						if err != nil {
-							return nil
-						}
-
-						return err
+						return nil
 					}
 					defer insert.Close()
 
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
 
-					if err != nil {
-						return nil
-					}
-
-					return err
-				}
-			} else {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
-
-				if err != nil {
 					return nil
 				}
+			} else {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
 
-				return err
+				return nil
 			}
 		}
 	}

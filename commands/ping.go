@@ -34,18 +34,14 @@ func (p Ping) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		}
 
-		_, err = session.ChannelMessageSend(ctx.Channel().ID, "Pong! "+strconv.Itoa(int(session.HeartbeatLatency().Milliseconds()))+"ms")
-		return err
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Pong! "+strconv.Itoa(int(session.HeartbeatLatency().Milliseconds()))+"ms")
+		return nil
 
 	}
 
@@ -53,16 +49,12 @@ func (p Ping) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
-	_, err = session.ChannelMessageSend(ctx.Channel().ID, "Pong! "+strconv.Itoa(int(session.HeartbeatLatency().Milliseconds()))+"ms")
-	return err
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Pong! "+strconv.Itoa(int(session.HeartbeatLatency().Milliseconds()))+"ms")
+	return nil
 }

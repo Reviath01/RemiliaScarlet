@@ -18,7 +18,7 @@ func (s ShutDown) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err != nil {
 		fmt.Println(err.Error())
-		return err
+		return nil
 	}
 
 	type configStruct struct {
@@ -33,20 +33,16 @@ func (s ShutDown) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err != nil {
 		fmt.Println(err.Error())
-		return err
+		return nil
 	}
 
 	if ctx.Author().ID != config.Owner {
-		_, err = session.ChannelMessageSend(ctx.Channel().ID, "You do not own this bot.")
-		if err != nil {
-			return nil
-		}
-		return err
-	}
-	_, err = session.ChannelMessageSend(ctx.Channel().ID, "Performing shutdown.")
-	if err != nil {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You do not own this bot.")
+
 		return nil
 	}
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Performing shutdown.")
+
 	os.Exit(1)
-	return err
+	return nil
 }

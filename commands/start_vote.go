@@ -35,94 +35,69 @@ func (s StartVote) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		}
 
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için mesajları yönet yetkisine sahip olmalısın.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için mesajları yönet yetkisine sahip olmalısın.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 		if strings.Join(ctx.Args(), " ") == "" {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Oylama başlatmak için bir mesaj belirtmelisin.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Oylama başlatmak için bir mesaj belirtmelisin.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 		embed := embedutil.NewEmbed().
 			SetTitle("Oylama Başladı!").
 			SetColor(0xff9100).
 			AddField("Oylama Sorusu:", strings.Join(ctx.Args(), " ")).MessageEmbed
 		msg, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+        if err != nil {
+            return nil
+        }
 		session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👍")
 		session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👎")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='start_vote' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need manage messages permission to run this command.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need manage messages permission to run this command.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 	if strings.Join(ctx.Args(), " ") == "" {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a message.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a message.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 	embed := embedutil.NewEmbed().
 		SetTitle("Vote started!").
 		SetColor(0xff9100).
 		AddField("Vote question:", strings.Join(ctx.Args(), " ")).MessageEmbed
 	msg, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-	session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👍")
-	session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👎")
-
+    
 	if err != nil {
 		return nil
 	}
 
-	return err
+	session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👍")
+	session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👎")
+	return nil
 }

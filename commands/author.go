@@ -37,7 +37,7 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err != nil {
 		fmt.Println(err.Error())
-		return err
+		return nil
 	}
 
 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
@@ -61,41 +61,35 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
-				if err != nil {
-					return nil
-				}
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				return nil
 			}
 		}
 
 		u, err := session.User(config.Owner)
-		if err != nil {
-			return nil
-		}
+
+        if err != nil {
+            return nil
+        }
+
 		authorembed := embedutil.NewEmbed().
 			SetColor(0x007bff).
 			AddField("Sahibim:", "<@"+u.ID+"> (["+u.Username+"#"+u.Discriminator+"](https://discord.com/users/"+u.ID+"))").MessageEmbed
-		_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
+		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
 
-		if err != nil {
-			return nil
-		}
-		return err
+		return nil
 	}
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-			if err != nil {
-				return nil
-			}
-			return err
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			return nil
 		}
 	}
 	u, err := session.User(config.Owner)
+
 	if err != nil {
 		return nil
 	}
@@ -103,11 +97,7 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	authorembed := embedutil.NewEmbed().
 		SetColor(0x007bff).
 		AddField("My Author:", "<@"+u.ID+"> (["+u.Username+"#"+u.Discriminator+"](https://discord.com/users/"+u.ID+"))").MessageEmbed
-	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
+	_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, authorembed)
 
-	if err != nil {
-		return nil
-	}
-
-	return err
+	return nil
 }

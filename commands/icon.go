@@ -34,50 +34,34 @@ func (i Icon) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		}
 
 		iconeembed := embedutil.NewEmbed().
 			SetColor(0x00f6ff).
 			SetImage(ctx.Guild().IconURL()).MessageEmbed
-		_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, iconeembed)
+		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, iconeembed)
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='icon' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
 	iconeembed := embedutil.NewEmbed().
 		SetColor(0x00f6ff).
 		SetImage(ctx.Guild().IconURL()).MessageEmbed
-	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, iconeembed)
+	_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, iconeembed)
 
-	if err != nil {
-		return nil
-	}
-
-	return err
+	return nil
 }

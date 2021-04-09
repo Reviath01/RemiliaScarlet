@@ -35,8 +35,8 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				return nil
 			}
 		}
 
@@ -45,12 +45,9 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				SetColor(0xff1000).
 				SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
 				SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
-			_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+			_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-			if err != nil {
-				return nil
-			}
-			return err
+			return nil
 		}
 
 		args := ctx.Args()[0]
@@ -62,25 +59,17 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					SetColor(0xff1000).
 					SetDescription(u.Username + "#" + u.Discriminator + " isimli kişinin profil fotoğrafı").
 					SetImage(u.AvatarURL("1024")).MessageEmbed
-				_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+				_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			} else {
 				avatarembed := embedutil.NewEmbed().
 					SetColor(0xff1000).
 					SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
 					SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
-				_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+				_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		} else {
 			if len(args) > 21 {
@@ -90,37 +79,25 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 						SetColor(0xff1000).
 						SetDescription(u.Username + "#" + u.Discriminator + " isimli kişinin profil fotoğrafı").
 						SetImage(u.AvatarURL("1024")).MessageEmbed
-					_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+					_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-					if err != nil {
-						return nil
-					}
-
-					return err
+					return nil
 				} else {
 					avatarembed := embedutil.NewEmbed().
 						SetColor(0xff1000).
 						SetDescription(ctx.Author().Username + "#" + ctx.Author().Discriminator + " isimli kişinin profil fotoğrafı").
 						SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
-					_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+					_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-					if err != nil {
-						return nil
-					}
-
-					return err
+					return nil
 				}
 			} else {
 				avatarembed := embedutil.NewEmbed().
 					SetColor(0xff1000).
 					SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
-				_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+				_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		}
 	}
@@ -129,8 +106,8 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-			return err
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			return nil
 		}
 	}
 
@@ -139,12 +116,9 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			SetColor(0xff1000).
 			SetDescription("Avatar of " + ctx.Author().Username + "#" + ctx.Author().Discriminator).
 			SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
-		_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-		if err != nil {
-			return nil
-		}
-		return err
+		return nil
 	}
 	args := ctx.Args()[0]
 
@@ -155,25 +129,17 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				SetColor(0xff1000).
 				SetDescription("Avatar of " + u.Username + "#" + u.Discriminator).
 				SetImage(u.AvatarURL("1024")).MessageEmbed
-			_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+			_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		} else {
 			avatarembed := embedutil.NewEmbed().
 				SetColor(0xff1000).
 				SetDescription("Avatar of " + ctx.Author().Username + "#" + ctx.Author().Discriminator).
 				SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
-			_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+			_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	} else {
 		if len(args) > 21 {
@@ -183,37 +149,24 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					SetColor(0xff1000).
 					SetDescription("Avatar of " + u.Username + "#" + u.Discriminator).
 					SetImage(u.AvatarURL("1024")).MessageEmbed
-				_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+				_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			} else {
 				avatarembed := embedutil.NewEmbed().
 					SetColor(0xff1000).
 					SetDescription("Avatar of " + ctx.Author().Username + "#" + ctx.Author().Discriminator).
 					SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
-				_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
-
-				if err != nil {
-					return nil
-				}
-
-				return err
+				_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+				return nil
 			}
 		} else {
 			avatarembed := embedutil.NewEmbed().
 				SetColor(0xff1000).
 				SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
-			_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
+			_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 }

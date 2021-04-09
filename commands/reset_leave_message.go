@@ -31,88 +31,56 @@ func (r ResetLeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) erro
 	if err == nil && tag.lang == "tr" {
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 
 		err = db.QueryRow("SELECT message FROM leavemessage WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.message)
 		if err == nil {
 			delete, err := db.Query("DELETE FROM leavemessage WHERE guildid ='" + ctx.Guild().ID + "'")
 			if err != nil {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 
 			defer delete.Close()
 
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Başarıyla çıkış mesajı sıfırlandı.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Başarıyla çıkış mesajı sıfırlandı.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 
 	err = db.QueryRow("SELECT message FROM leavemessage WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.message)
 	if err == nil {
 		delete, err := db.Query("DELETE FROM leavemessage WHERE guildid ='" + ctx.Guild().ID + "'")
 		if err != nil {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 
 		defer delete.Close()
 
-		_, err = session.ChannelMessageSend(ctx.Channel().ID, "Successfully reset leave message.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Successfully reset leave message.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	} else {
-		_, err = session.ChannelMessageSend(ctx.Channel().ID, "Leave message is not existing, so you can't reset.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Leave message is not existing, so you can't reset.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 }

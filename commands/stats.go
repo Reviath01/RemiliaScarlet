@@ -50,13 +50,9 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		}
 
@@ -69,13 +65,9 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			AddField("Sunucular", strconv.Itoa(len(session.State.Guilds))).
 			AddField("Toplam RAM", strconv.FormatUint(memory.TotalMemory(), 10)+" bytes").
 			AddField("Goroutine'ler", strconv.Itoa(runtime.NumGoroutine())).MessageEmbed
-		_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
+		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 
 	}
 
@@ -83,13 +75,9 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
@@ -102,11 +90,7 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		AddField("Server size", strconv.Itoa(len(session.State.Guilds))).
 		AddField("Total Memory", strconv.FormatUint(memory.TotalMemory(), 10)+" bytes").
 		AddField("Goroutines", strconv.Itoa(runtime.NumGoroutine())).MessageEmbed
-	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
+	_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, statembed)
 
-	if err != nil {
-		return nil
-	}
-
-	return err
+	return nil
 }

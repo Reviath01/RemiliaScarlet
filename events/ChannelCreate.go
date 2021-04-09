@@ -56,7 +56,7 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 					AddField("Kanal Tipi:", channeltype).
 					SetColor(0xff1000).MessageEmbed
 
-				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+				_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
 				if err != nil {
 					return
 				}
@@ -77,7 +77,7 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 			AddField("Channel Type:", channeltype).
 			SetColor(0xff1000).MessageEmbed
 
-		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+		_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
 		if err != nil {
 			return
 		}

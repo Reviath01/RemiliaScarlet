@@ -33,123 +33,89 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil {
 		if tag.lang == "tr" {
 			if len(strings.Join(ctx.Args(), " ")) < 1 {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Yeni dili belirtmelisiniz.")
-				if err != nil {
-					return nil
-				}
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeni dili belirtmelisiniz.")
+
+				return nil
 			} else if args[0] == "tr" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Dil zaten Türkçe ayarlı.")
-				if err != nil {
-					return nil
-				}
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Dil zaten Türkçe ayarlı.")
+
+				return nil
 			} else if args[0] == "en" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Dili ingilizce olarak ayarlıyorum...")
-				if err != nil {
-					return nil
-				}
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Dili ingilizce olarak ayarlıyorum...")
+
 				delete, err := db.Query("DELETE FROM languages WHERE guildid ='" + ctx.Guild().ID + "'")
 				if err != nil {
-					_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 					if err != nil {
 						return nil
 					}
-					return err
+					return nil
 				}
 
 				defer delete.Close()
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Kullanılabilir diller: `tr`, `en`")
-				if err != nil {
-					return nil
-				}
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Kullanılabilir diller: `tr`, `en`")
+
+				return nil
 			}
 		} else {
 			if len(strings.Join(ctx.Args(), " ")) < 1 {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the language.")
-				if err != nil {
-					return nil
-				}
-				return err
-			} else if args[0] == "tr" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Setting language as Turkish...")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the language.")
 
-				if err != nil {
-					return nil
-				}
+				return nil
+			} else if args[0] == "tr" {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Setting language as Turkish...")
 
 				insert, err := db.Query("INSERT INTO languages (language, guildid) VALUES ('tr', '" + ctx.Guild().ID + "')")
-
 				if err != nil {
 					return nil
 				}
 
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Dil Türkçe yapıldı!")
-				if err != nil {
-					return nil
-				}
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Dil Türkçe yapıldı!")
+
 				defer insert.Close()
 
-				return err
+				return nil
 
 			} else if args[0] == "en" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is en.")
-				if err != nil {
-					return nil
-				}
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Language is en.")
+
+				return nil
 			} else {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language options: `tr`, `en`")
-				if err != nil {
-					return nil
-				}
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Language options: `tr`, `en`")
+
+				return nil
 			}
 		}
 		return nil
 	} else {
 		if len(strings.Join(ctx.Args(), " ")) < 1 {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the language.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the language.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		} else if args[0] == "tr" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Setting language as Turkish...")
-
-			if err != nil {
-				return nil
-			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Setting language as Turkish...")
 
 			insert, err := db.Query("INSERT INTO languages (language, guildid) VALUES ('tr', '" + ctx.Guild().ID + "')")
 
 			if err != nil {
 				return nil
 			}
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Dil Türkçe yapıldı!")
-			if err != nil {
-				return nil
-			}
+
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Dil Türkçe yapıldı!")
+
 			defer insert.Close()
 
-			return err
+			return nil
 
 		} else if args[0] == "en" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language is en.")
-			if err != nil {
-				return nil
-			}
-			return err
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Language is en.")
+
+			return nil
 		} else {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "Language options: `tr`, `en`")
-			if err != nil {
-				return nil
-			}
-			return err
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Language options: `tr`, `en`")
+
+			return nil
 		}
 	}
 }

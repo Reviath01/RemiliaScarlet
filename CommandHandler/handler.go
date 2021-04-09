@@ -56,10 +56,7 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	}
 
 	if msg.Content == "<@!"+s.State.User.ID+">" {
-		_, err := s.ChannelMessageSend(msg.ChannelID, "My prefix is "+config.BotPrefix)
-		if err != nil {
-			return
-		}
+		_, _ = s.ChannelMessageSend(msg.ChannelID, "My prefix is "+config.BotPrefix)
 	}
 
 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
@@ -198,7 +195,7 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 				if err != nil {
 					return
 				}
-	
+
 				newxp2 := newxp + 3
 				update, err := db.Query("UPDATE xps SET xp ='" + strconv.Itoa(newxp2) + "' WHERE guildid ='" + msg.GuildID + "' AND userid ='" + msg.Author.ID + "'")
 				if err != nil {
@@ -217,10 +214,7 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 				args, cmd := Shift(args, 0)
 				err := h.cmds.Execute(cmd, ctx.New(args, msg, s), s)
 				if err != nil {
-					_, err = s.ChannelMessageSend(msg.ChannelID, "Bir hata oluştu.")
-					if err != nil {
-						return
-					}
+					_, _ = s.ChannelMessageSend(msg.ChannelID, "Bir hata oluştu.")
 				}
 			}
 		} else {
@@ -241,10 +235,7 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 			args, cmd := Shift(args, 0)
 			err := h.cmds.Execute(cmd, ctx.New(args, msg, s), s)
 			if err != nil {
-				_, err = s.ChannelMessageSend(msg.ChannelID, "An error occurred.")
-				if err != nil {
-					return
-				}
+				_, _ = s.ChannelMessageSend(msg.ChannelID, "An error occurred.")
 			}
 		}
 	} else {

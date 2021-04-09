@@ -35,58 +35,44 @@ func (a Afk) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
-				if err != nil {
-					return nil
-				}
-				return err
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				return nil
 			}
 		}
 
 		insert, err := db.Query("INSERT INTO afk (isafk, userid) VALUES ('true', '" + ctx.Author().ID + "')")
 
 		if err != nil {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
-			return err
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
+			return nil
 		}
 
 		defer insert.Close()
 
-		_, err = session.ChannelMessageSend(ctx.Channel().ID, "Başarıyla AFK moduna geçtin.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Başarıyla AFK moduna geçtin.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-			if err != nil {
-				return nil
-			}
-			return err
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			return nil
 		}
 	}
 
 	insert, err := db.Query("INSERT INTO afk (isafk, userid) VALUES ('true', '" + ctx.Author().ID + "')")
 
 	if err != nil {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
-		return err
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
+		return nil
 	}
 
 	defer insert.Close()
 
-	_, err = session.ChannelMessageSend(ctx.Channel().ID, "I set you as AFK.")
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "I set you as AFK.")
 
-	if err != nil {
-		return nil
-	}
-
-	return err
+	return nil
 }

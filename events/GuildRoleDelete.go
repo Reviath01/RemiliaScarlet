@@ -37,7 +37,7 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 					AddField("Rol İD'si:", event.RoleID).
 					SetColor(0xefff00).MessageEmbed
 
-				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+				_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
 				if err != nil {
 					return
 				}
@@ -55,7 +55,7 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 			AddField("Role ID:", event.RoleID).
 			SetColor(0xefff00).MessageEmbed
 
-		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+		_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
 		if err != nil {
 			return
 		}

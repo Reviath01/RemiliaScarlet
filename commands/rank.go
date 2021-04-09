@@ -117,11 +117,7 @@ func (r Rank) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		AddField("Level", level).
 		SetThumbnail(ctx.Author().AvatarURL("1024")).
 		AddField("XP", xp+"/"+maxxp).MessageEmbed
-	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+	_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 
-	if err != nil {
-		return nil
-	}
-
-	return err
+	return nil
 }

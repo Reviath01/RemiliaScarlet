@@ -78,11 +78,8 @@ func (m *Map) Execute(command string, c ctx.Ctx, s *discordgo.Session) error {
 				nocmd := embedutil.NewEmbed().
 					SetDescription(command + " isimli bir komut bulunamadı!").
 					SetColor(0xff8c00).MessageEmbed
-				_, err = s.ChannelMessageSendEmbed(c.Channel().ID, nocmd)
-				if err != nil {
-					return nil
-				}
-				return err
+				_, _ = s.ChannelMessageSendEmbed(c.Channel().ID, nocmd)
+				return nil
 			}
 		}
 	} else {
@@ -105,11 +102,9 @@ func (m *Map) Execute(command string, c ctx.Ctx, s *discordgo.Session) error {
 			nocmd := embedutil.NewEmbed().
 				SetDescription("No command match with: " + command).
 				SetColor(0xff8c00).MessageEmbed
-			_, err = s.ChannelMessageSendEmbed(c.Channel().ID, nocmd)
-			if err != nil {
-				return nil
-			}
-			return err
+			_, _ = s.ChannelMessageSendEmbed(c.Channel().ID, nocmd)
+
+			return nil
 		}
 	}
 	return nil

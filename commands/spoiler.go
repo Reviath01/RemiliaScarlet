@@ -35,35 +35,23 @@ func (s Spoiler) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		}
 
 		if strings.Join(ctx.Args(), " ") == "" {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Spoiler olarak gönderilecek mesajı belirtmelisin.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Spoiler olarak gönderilecek mesajı belirtmelisin.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 		spoilerembed := embedutil.NewEmbed().
 			SetColor(0xe9ff00).
 			SetDescription("|| " + strings.Join(ctx.Args(), " ") + " ||").MessageEmbed
-		_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, spoilerembed)
+		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, spoilerembed)
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 
 	}
 
@@ -71,33 +59,21 @@ func (s Spoiler) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
 	if strings.Join(ctx.Args(), " ") == "" {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the message.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the message.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 	spoilerembed := embedutil.NewEmbed().
 		SetColor(0xe9ff00).
 		SetDescription("|| " + strings.Join(ctx.Args(), " ") + " ||").MessageEmbed
-	_, err = session.ChannelMessageSendEmbed(ctx.Channel().ID, spoilerembed)
+	_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, spoilerembed)
 
-	if err != nil {
-		return nil
-	}
-
-	return err
+	return nil
 }

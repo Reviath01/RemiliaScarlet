@@ -41,7 +41,7 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 					AddField("Rol Rengi:", strconv.Itoa(event.Role.Color)).
 					SetColor(0xefff00).MessageEmbed
 
-				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+				_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
 				if err != nil {
 					return
 				}
@@ -62,7 +62,7 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 			AddField("Role Color:", strconv.Itoa(event.Role.Color)).
 			SetColor(0xefff00).MessageEmbed
 
-		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+		_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
 		if err != nil {
 			return
 		}

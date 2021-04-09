@@ -35,36 +35,24 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		}
 
 		var args string
 		if len(strings.Join(ctx.Args(), " ")) < 1 {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 		args = ctx.Args()[0]
 
 		if len(args) != 22 {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 		u, err := session.User(args[3:][:18])
 		if err == nil {
@@ -72,21 +60,13 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				SetColor(0xff1000).
 				SetDescription("<@" + ctx.Author().ID + ">, <@" + u.ID + "> isimli kişiyi öptü 😘").
 				SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif").MessageEmbed
-			_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+			_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		} else {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
@@ -94,36 +74,24 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
 	var args string
 	if len(strings.Join(ctx.Args(), " ")) < 1 {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 	args = ctx.Args()[0]
 
 	if len(args) != 22 {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 	u, err := session.User(args[3:][:18])
 	if err == nil {
@@ -131,20 +99,12 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			SetColor(0xff1000).
 			SetDescription("<@" + ctx.Author().ID + "> kisses <@" + u.ID + ">").
 			SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif").MessageEmbed
-		_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	} else {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 }

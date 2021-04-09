@@ -35,69 +35,45 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		if err == nil {
 			if tag.isblocked == "True" {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 		}
 
 		var args string
 		if len(strings.Join(ctx.Args(), " ")) < 1 {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 
 		}
 
 		args = ctx.Args()[0]
 
 		if len(args) != 22 {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 		u, err := session.User(strings.Join(ctx.Args(), " ")[3:][:18])
 		if err == nil {
 			if u.ID == ctx.Author().ID {
-				_, err = session.ChannelMessageSend(ctx.Channel().ID, "Kendine sarılamazsın.")
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Kendine sarılamazsın.")
 
-				if err != nil {
-					return nil
-				}
-
-				return err
+				return nil
 			}
 			embed := embedutil.NewEmbed().
 				SetColor(0xff1000).
 				SetDescription("<@" + ctx.Author().ID + ">, <@" + u.ID + "> isimli kişiye sarıldı 💖").
 				SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
-			_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+			_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		} else {
-			_, err := session.ChannelMessageSend(ctx.Channel().ID, "Bir kişiyi etiketlemelisin.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir kişiyi etiketlemelisin.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
@@ -105,68 +81,44 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if err == nil {
 		if tag.isblocked == "True" {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 	}
 
 	var args string
 	if len(strings.Join(ctx.Args(), " ")) < 1 {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 
 	}
 
 	args = ctx.Args()[0]
 
 	if len(args) != 22 {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 	u, err := session.User(strings.Join(ctx.Args(), " ")[3:][:18])
 	if err == nil {
 		if u.ID == ctx.Author().ID {
-			_, err = session.ChannelMessageSend(ctx.Channel().ID, "You can't hug yourself.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You can't hug yourself.")
 
-			if err != nil {
-				return nil
-			}
-
-			return err
+			return nil
 		}
 		embed := embedutil.NewEmbed().
 			SetColor(0xff1000).
 			SetDescription("<@" + ctx.Author().ID + "> hugs <@" + u.ID + ">").
 			SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
-		_, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
+		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	} else {
-		_, err := session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
-		if err != nil {
-			return nil
-		}
-
-		return err
+		return nil
 	}
 }
