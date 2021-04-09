@@ -1,10 +1,11 @@
 package events
 
 import (
-	"github.com/bwmarrin/discordgo"
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
 	"strings"
+
+	"github.com/bwmarrin/discordgo"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
@@ -17,10 +18,10 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	defer db.Close()
 
 	type Tag struct {
-		channelid string `json:"channelid"`
-		roleid string `json:"roleid"`
-		welcomemessage string `json:"message"`
-		lang string `json:"language"`
+		channelid      string
+		roleid         string
+		welcomemessage string
+		lang           string
 	}
 
 	var tag Tag
@@ -34,7 +35,7 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 			if err != nil {
 				welcomemsg = "Sunucuya hoş geldin <@" + event.User.ID + ">!"
 			} else {
-				welcomemsg = strings.NewReplacer("{mention}", "<@" + event.User.ID + ">", "{username}", event.User.Username).Replace(tag.welcomemessage)
+				welcomemsg = strings.NewReplacer("{mention}", "<@"+event.User.ID+">", "{username}", event.User.Username).Replace(tag.welcomemessage)
 			}
 
 			err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
@@ -65,7 +66,7 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	if err != nil {
 		welcomemsg = "Welcome to server <@" + event.User.ID + ">"
 	} else {
-		welcomemsg = strings.NewReplacer("{mention}", "<@" + event.User.ID + ">", "{username}", event.User.Username).Replace(tag.welcomemessage)
+		welcomemsg = strings.NewReplacer("{mention}", "<@"+event.User.ID+">", "{username}", event.User.Username).Replace(tag.welcomemessage)
 	}
 
 	err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)

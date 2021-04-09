@@ -18,8 +18,8 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 	defer db.Close()
 
 	type Tag struct {
-		channelid string `json:"channelid"`
-		lang string `json:"language"`
+		channelid string
+		lang      string
 	}
 
 	var tag Tag
@@ -36,7 +36,7 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 					SetTitle("Rol Silindi!").
 					AddField("Rol İD'si:", event.RoleID).
 					SetColor(0xefff00).MessageEmbed
-		
+
 				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
 				if err != nil {
 					return

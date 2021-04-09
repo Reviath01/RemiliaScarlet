@@ -3,10 +3,11 @@ package events
 import (
 	"database/sql"
 
+	"strconv"
+
 	embedutil "git.randomchars.net/Reviath/embed-util"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
-	"strconv"
 )
 
 func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
@@ -19,8 +20,8 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 	defer db.Close()
 
 	type Tag struct {
-		channelid string `json:"channelid"`
-		lang string `json:"language"`
+		channelid string
+		lang      string
 	}
 
 	var tag Tag
@@ -35,11 +36,11 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 			} else {
 				embed := embedutil.NewEmbed().
 					SetTitle("Rol Oluşturuldu!").
-					AddField("Rolün İsmi:", event.Role.Name + " ( <@&" + event.Role.ID + "> )").
+					AddField("Rolün İsmi:", event.Role.Name+" ( <@&"+event.Role.ID+"> )").
 					AddField("Rol İD'si:", event.Role.ID).
 					AddField("Rol Rengi:", strconv.Itoa(event.Role.Color)).
 					SetColor(0xefff00).MessageEmbed
-		
+
 				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
 				if err != nil {
 					return
@@ -56,7 +57,7 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 	} else {
 		embed := embedutil.NewEmbed().
 			SetTitle("Role Created!").
-			AddField("Role Name:", event.Role.Name + " ( <@&" + event.Role.ID + "> )").
+			AddField("Role Name:", event.Role.Name+" ( <@&"+event.Role.ID+"> )").
 			AddField("Role ID:", event.Role.ID).
 			AddField("Role Color:", strconv.Itoa(event.Role.Color)).
 			SetColor(0xefff00).MessageEmbed

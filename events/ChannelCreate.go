@@ -19,8 +19,8 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 	defer db.Close()
 
 	type Tag struct {
-		channelid string `json:"channelid"`
-		lang string `json:"language"`
+		channelid string
+		lang      string
 	}
 
 	var tag Tag
@@ -46,22 +46,22 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 	if err == nil {
 		if tag.lang == "tr" {
 			err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
-	if err != nil {
-		return
-	} else {
-		embed := embedutil.NewEmbed().
-			SetTitle("Kanal Oluşturuldu!").
-			AddField("Kanal İsmi:", event.Channel.Name+" ( <#"+event.Channel.ID+"> )").
-			AddField("Kanalın İD'si:", event.Channel.ID).
-			AddField("Kanal Tipi:", channeltype).
-			SetColor(0xff1000).MessageEmbed
+			if err != nil {
+				return
+			} else {
+				embed := embedutil.NewEmbed().
+					SetTitle("Kanal Oluşturuldu!").
+					AddField("Kanal İsmi:", event.Channel.Name+" ( <#"+event.Channel.ID+"> )").
+					AddField("Kanalın İD'si:", event.Channel.ID).
+					AddField("Kanal Tipi:", channeltype).
+					SetColor(0xff1000).MessageEmbed
 
-		_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
-		if err != nil {
+				_, err = s.ChannelMessageSendEmbed(tag.channelid, embed)
+				if err != nil {
+					return
+				}
+			}
 			return
-		}
-	}
-	return
 		}
 		return
 	}
