@@ -57,9 +57,9 @@ func (s StartVote) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			SetColor(0xff9100).
 			AddField("Oylama Sorusu:", strings.Join(ctx.Args(), " ")).MessageEmbed
 		msg, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-        if err != nil {
-            return nil
-        }
+		if err != nil {
+			return nil
+		}
 		session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👍")
 		session.MessageReactionAdd(ctx.Channel().ID, msg.ID, "👎")
 
@@ -92,7 +92,7 @@ func (s StartVote) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		SetColor(0xff9100).
 		AddField("Vote question:", strings.Join(ctx.Args(), " ")).MessageEmbed
 	msg, err := session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-    
+
 	if err != nil {
 		return nil
 	}

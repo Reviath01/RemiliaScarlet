@@ -68,9 +68,9 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		u, err := session.User(config.Owner)
 
-        if err != nil {
-            return nil
-        }
+		if err != nil {
+			return nil
+		}
 
 		authorembed := embedutil.NewEmbed().
 			SetColor(0x007bff).

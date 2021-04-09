@@ -5,26 +5,26 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
-	"git.randomchars.net/Reviath/RemiliaScarlet/events"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler"
 	commandMap "git.randomchars.net/Reviath/RemiliaScarlet/CommandMap"
+	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
+	"git.randomchars.net/Reviath/RemiliaScarlet/events"
 	"github.com/bwmarrin/discordgo"
 )
 
 var (
 	Token     string
 	BotPrefix string
-	Presence string
-	Owner string
-	config *configStruct
+	Presence  string
+	Owner     string
+	config    *configStruct
 )
 
 type configStruct struct {
 	Token     string `json:"Token"`
 	BotPrefix string `json:"BotPrefix"`
-	Presence string `json:"Presence"`
-	Owner string `json:"Owner"`
+	Presence  string `json:"Presence"`
+	Owner     string `json:"Owner"`
 }
 
 func ReadConfig() error {
@@ -55,7 +55,7 @@ func ReadConfig() error {
 func main() {
 	ReadConfig()
 	goBot, err := discordgo.New("Bot " + Token)
-	
+
 	if err != nil {
 		fmt.Println(err.Error())
 		return
