@@ -185,12 +185,28 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 
 			defer update2.Close()
 
+		} else {
+			if xp == "0" {
+				insert, err := db.Query("INSERT INTO xps (xp, guildid, userid) VALUES ('3', '" + msg.GuildID + "', " + msg.Author.ID + ")")
+				if err != nil {
+					return
+				}
+				insert.Close()
+			} else {
+				newxp, err := strconv.Atoi(xp)
+
+				if err != nil {
+					return
+				}
+	
+				newxp2 := newxp + 3
+				update, err := db.Query("UPDATE xps SET xp ='" + strconv.Itoa(newxp2) + "' WHERE guildid ='" + msg.GuildID + "' AND userid ='" + msg.Author.ID + "'")
+				if err != nil {
+					return
+				}
+				defer update.Close()
+			}
 		}
-		insert, err := db.Query("INSERT INTO xps (xp, guildid, userid) VALUES ('3', '" + msg.GuildID + "', " + msg.Author.ID + ")")
-		if err != nil {
-			return
-		}
-		insert.Close()
 	}
 	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + msg.GuildID + "'").Scan(&tag.lang)
 	if err == nil && tag.lang == "tr" {
