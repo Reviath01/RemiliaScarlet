@@ -2,6 +2,9 @@ package CommandHandler
 
 import (
 	"database/sql"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"strconv"
 	"strings"
 
@@ -26,12 +29,34 @@ type Handler struct {
 }
 
 func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
+	file, err := ioutil.ReadFile("./config.json")
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return 
+	}
+
+    type configStruct struct {
+        BotPrefix string `json:"BotPrefix"`
+    }
+    
+    var (
+        config *configStruct
+    ) 
+    
+    err = json.Unmarshal(file, &config)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	
 	if msg.Author.Bot {
 		return
 	}
 
 	if msg.Content == "<@!" + s.State.User.ID + ">" {
-		_, err := s.ChannelMessageSend(msg.ChannelID, "My prefix is ")
+		_, err := s.ChannelMessageSend(msg.ChannelID, "My prefix is " + config.BotPrefix)
 		if err != nil {
 			return
 		}
