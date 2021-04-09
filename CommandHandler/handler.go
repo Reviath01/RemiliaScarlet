@@ -218,7 +218,7 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 				}
 			}
 		} else {
-			_, _ = s.ChannelMessageSend(msg.ChannelID, "Tekrar hoş geldin <@"+msg.Author.ID+"> !")
+			_, _ = s.ChannelMessageSend(msg.ChannelID, "Tekrar hoş geldin <@"+msg.Author.ID+">")
 			delete, err := db.Query("DELETE FROM afk WHERE userid ='" + msg.Author.ID + "'")
 			if err != nil {
 				return
