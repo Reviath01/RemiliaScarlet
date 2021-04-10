@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
 	"github.com/bwmarrin/discordgo"
 )
 

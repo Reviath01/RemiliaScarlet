@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler"
-	commandMap "git.randomchars.net/Reviath/RemiliaScarlet/CommandMap"
+	commandMap "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/CommandMap"
 	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
 	"git.randomchars.net/Reviath/RemiliaScarlet/events"
 	"github.com/bwmarrin/discordgo"

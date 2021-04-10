@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	commandMap "git.randomchars.net/Reviath/RemiliaScarlet/CommandMap"
-	ctx "git.randomchars.net/Reviath/RemiliaScarlet/Context"
+	commandMap "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/CommandMap"
+	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
