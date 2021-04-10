@@ -43,9 +43,8 @@ func (e *Embed) AddField(name, value string) *Embed {
 	}
 
 	if len(value) > EmbedLimitFieldValue {
-		i := EmbedLimitFieldValue
 		extended := false
-		for i = EmbedLimitFieldValue; i < len(value); {
+		for i := EmbedLimitFieldValue; i < len(value); {
 			if i != EmbedLimitFieldValue && !extended {
 				name += " (extended)"
 				extended = true
@@ -69,11 +68,12 @@ func (e *Embed) AddField(name, value string) *Embed {
 				break
 			}
 		}
-		if i < len(value) {
+		ii := EmbedLimitFieldValue
+		if ii < len(value) {
 			name += " (extended)"
 			fields = append(fields, &discordgo.MessageEmbedField{
 				Name:  name,
-				Value: value[i:],
+				Value: value[ii:],
 			})
 		}
 	} else {
