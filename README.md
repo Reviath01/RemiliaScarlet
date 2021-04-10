@@ -29,8 +29,6 @@ git clone https://git.randomchars.net/Reviath/RemiliaScarlet
 3. Get required packages
 
 ```
-go get git.randomchars.net/Reviath/embed-util
-
 go get github.com/go-sql-driver/mysql
 
 go get github.com/bwmarrin/discordgo

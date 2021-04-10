@@ -5,7 +5,7 @@ import (
 
 	"strconv"
 
-	embedutil "git.randomchars.net/Reviath/embed-util"
+	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )

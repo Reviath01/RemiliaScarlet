@@ -2,7 +2,7 @@ package commands
 
 import (
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
-	embedutil "git.randomchars.net/Reviath/embed-util"
+	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
 	"github.com/bwmarrin/discordgo"
 )
 

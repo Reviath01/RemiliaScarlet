@@ -6,7 +6,7 @@ import (
 	command "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Command"
 	commandGroup "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/CommandGroup"
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
-	embedutil "git.randomchars.net/Reviath/embed-util"
+	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
