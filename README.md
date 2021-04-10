@@ -14,8 +14,6 @@ This is my first Golang Discord bot project, but I've written in javascript (Nod
 
 * [Golang](https://golang.org/)
 
-
-
 ## Installation
 
 1. Clone this project.
@@ -39,11 +37,9 @@ go get github.com/bwmarrin/discordgo
 You can open issues [here](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new) or you can come to my Discord [server](https://discord.gg/xqsTvtM2hk).
 
 
-
 ## License
 
-Distributed under the GNU GPLv3 License. See `LICENSE` for more information.
-
+Distributed under the GNU GPLv3 License. See [LICENSE](LICENSE) for more information.
 
 
 ## Contact
