@@ -43,8 +43,7 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 		channeltype = "Unknown Type (Type ID: " + strconv.Itoa(int(event.Channel.Type))
 	}
 
-	if err == nil {
-		if tag.lang == "tr" {
+	if err == nil && tag.lang == "tr" {
 			err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 			if err != nil {
 				return
