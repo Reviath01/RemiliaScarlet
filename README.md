@@ -32,7 +32,6 @@ git clone https://git.randomchars.net/Reviath/RemiliaScarlet
 go get github.com/go-sql-driver/mysql
 
 go get github.com/bwmarrin/discordgo
-
 ```
 
 ## Issue
