@@ -52,29 +52,17 @@ func (w WelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err == nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin kanalı zaten ayarlanmış, sıfırlamak için reset_welcome_channel komutunu kullan.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					insert, err := db.Query("INSERT INTO welcomechannel (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
 					if err != nil {
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					}
 					defer insert.Close()
 
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin kanalı başarıyla ayarlandı.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -90,10 +78,6 @@ func (w WelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.channelid)
 					if err == nil {
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin kanalı zaten ayarlanmış, sıfırlamak için reset_welcome_channel komutunu kullan.")
-
-						if err != nil {
-							return nil
-						}
 
 						return nil
 					} else {
@@ -111,18 +95,10 @@ func (w WelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin kanalı başarıyla ayarlandı.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					}
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir kanal belirtmelisin.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -162,10 +138,6 @@ func (w WelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				defer insert.Close()
@@ -187,29 +159,17 @@ func (w WelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err == nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Welcome channel is already existing (to reset, use reset_welcome_channel command).")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					insert, err := db.Query("INSERT INTO welcomechannel (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
 					if err != nil {
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					}
 					defer insert.Close()
 
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Welcome channel set successfully.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}

@@ -62,10 +62,6 @@ func (u Unban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu üye banlanmamış veya yeterli yetkiye sahip değilim.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişinin banı kaldırıldı.")
@@ -84,25 +80,13 @@ func (u Unban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					if err != nil {
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu üye banlanmamış veya yeterli yetkiye sahip değilim.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					}
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişinin banı kaldırıldı.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -163,10 +147,6 @@ func (u Unban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				err = session.GuildBanDelete(ctx.Guild().ID, u.ID)
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This user is not banned or I don't have enough permission.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}

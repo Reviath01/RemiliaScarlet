@@ -53,29 +53,17 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err == nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı zaten ayarlanmış, sıfırlamak için reset_log komutunu kullan.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
 					if err != nil {
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					}
 					defer insert.Close()
 
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı başarıyla ayarlandı!")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -93,10 +81,6 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					if err == nil {
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı zaten ayarlanmış, sıfırlamak için reset_log komutunu kullan.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					} else {
 						insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
@@ -113,18 +97,10 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı başarıyla ayarlandı.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					}
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalını belirtmelisin.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -165,10 +141,6 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				defer insert.Close()
@@ -191,29 +163,17 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err == nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Logging channel is already existing (to reset, use reset_log command).")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
 					if err != nil {
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					}
 					defer insert.Close()
 
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Logging channel set successfully.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}

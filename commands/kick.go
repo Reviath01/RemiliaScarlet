@@ -62,10 +62,6 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkim yok.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişi sunucudan atıldı.")
@@ -84,25 +80,13 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 					if err != nil {
 						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkim yok.")
 
-						if err != nil {
-							return nil
-						}
-
 						return nil
 					}
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişi sunucudan atıldı!")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -162,10 +146,6 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}

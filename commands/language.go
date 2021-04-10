@@ -46,9 +46,7 @@ func (l Language) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				delete, err := db.Query("DELETE FROM languages WHERE guildid ='" + ctx.Guild().ID + "'")
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
-					if err != nil {
-						return nil
-					}
+
 					return nil
 				}
 

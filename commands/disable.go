@@ -505,18 +505,12 @@ func (d Disable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
-		if err != nil {
-			return nil
-		}
+
 		return nil
 	}
 
 	if len(strings.Join(ctx.Args(), " ")) < 1 {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
-
-		if err != nil {
-			return nil
-		}
 
 		return nil
 	}

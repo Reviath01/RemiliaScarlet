@@ -62,10 +62,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -91,10 +87,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -122,10 +114,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -151,10 +139,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -182,10 +166,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -211,10 +191,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -242,10 +218,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -271,10 +243,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -302,10 +270,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -331,10 +295,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -362,10 +322,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -391,10 +347,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -422,10 +374,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -451,10 +399,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -482,10 +426,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -511,10 +451,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-					if err != nil {
-						return nil
-					}
 
 					return nil
 				}
@@ -542,10 +478,6 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				}
 			} else {
@@ -564,19 +496,11 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need administrator permission to run this command.")
 
-		if err != nil {
-			return nil
-		}
-
 		return nil
 	}
 
 	if len(strings.Join(ctx.Args(), " ")) < 1 {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify a command.")
-
-		if err != nil {
-			return nil
-		}
 
 		return nil
 	}
@@ -585,9 +509,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	if strings.Join(ctx.Args(), " ") == "" {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the command.")
-		if err != nil {
-			return nil
-		}
+
 		return nil
 	}
 
@@ -602,16 +524,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -635,16 +551,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -668,16 +578,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -701,16 +605,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -734,16 +632,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -767,16 +659,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -800,16 +686,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -833,16 +713,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -866,16 +740,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -899,16 +767,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -932,16 +794,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -965,16 +821,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -998,16 +848,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -1031,16 +875,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -1064,16 +902,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -1097,16 +929,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -1130,16 +956,10 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				if err != nil {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
-					if err != nil {
-						return nil
-					}
-
 					return nil
 				} else {
 					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Enabled "+args)
-					if err != nil {
-						return nil
-					}
+
 				}
 
 				defer delete.Close()
@@ -1156,9 +976,7 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 	} else {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the command.")
-		if err != nil {
-			return nil
-		}
+		return nil
 	}
 
 	return db.Close()
