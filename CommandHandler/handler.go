@@ -208,7 +208,7 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + msg.GuildID + "'").Scan(&tag.lang)
 	if err == nil && tag.lang == "tr" {
 		err = db.QueryRow("SELECT isafk FROM afk WHERE userid ='" + msg.Author.ID + "'").Scan(&tag.isafk)
-		if err != nil {
+		if err != nil && tag.isafk != "true" {
 			if strings.HasPrefix(msg.Content, h.Prefixs) {
 				args := strings.Split(strings.TrimPrefix(msg.Content, h.Prefixs), " ")
 				args, cmd := Shift(args, 0)
