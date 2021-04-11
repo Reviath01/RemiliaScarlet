@@ -63,7 +63,6 @@ func (l LeaveChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir kanal belirtmelisin.")
 			return nil
 		}
-		return nil
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
