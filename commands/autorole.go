@@ -39,7 +39,6 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 		if strings.Join(ctx.Args(), " ") == "" {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Rolü belirtmelisin.")
-
 			return nil
 		} else {
 			args := multiplexer.GetRole(ctx.Args()[0])
@@ -76,63 +75,27 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
 		return nil
 	} else {
-		args := ctx.Args()[0]
-
-		if len(args) == 18 {
-
-			err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
-			if err == nil {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
-				return nil
-			} else {
-				insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
-				if err != nil {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
-					return nil
-				}
-				defer insert.Close()
-
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
-				return nil
-			}
+		args := multiplexer.GetRole(ctx.Args()[0])
+		if args == "Error" {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
+			return nil
+		}
+		err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
+		if err == nil {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Autorole is already existing, use reset_auto_role command to reset!")
+			return nil
 		} else {
-			if len(args) == 22 {
-				db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
-
-				if err != nil {
-					panic(err.Error())
-				}
-
-				defer db.Close()
-
-				type Tag struct {
-					roleid string
-				}
-
-				var tag Tag
-
-				err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
-				if err == nil {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is already existing (to reset, use reset_autorole command).")
-					return nil
-				} else {
-					insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args[3:][:18] + "', '" + ctx.Guild().ID + "')")
-					if err != nil {
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
-
-						return nil
-					}
-					defer insert.Close()
-
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role set successfully.")
-
-					return nil
-				}
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the role.")
+			insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
+			if err != nil {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred.")
 
 				return nil
 			}
+			defer insert.Close()
+
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Successfully set autorole.")
+
+			return nil
 		}
 	}
 }
