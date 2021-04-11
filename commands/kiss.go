@@ -6,6 +6,7 @@ import (
 
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	"git.randomchars.net/Reviath/RemiliaScarlet/multiplexer"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -33,28 +34,18 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil && tag.lang == "tr" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-		if err == nil {
-			if tag.isblocked == "True" {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
-
-				return nil
-			}
+		if err == nil && tag.isblocked == "True" {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+			return nil
 		}
 
-		var args string
 		if len(strings.Join(ctx.Args(), " ")) < 1 {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
 
 			return nil
 		}
-		args = ctx.Args()[0]
 
-		if len(args) != 22 {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-			return nil
-		}
-		u, err := session.User(args[3:][:18])
+		u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
 		if err == nil {
 			embed := embedutil.NewEmbed().
 				SetColor(0xff1000).
@@ -65,35 +56,24 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			return nil
 		} else {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin")
-
 			return nil
 		}
 	}
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-	if err == nil {
-		if tag.isblocked == "True" {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-
-			return nil
-		}
+	if err == nil && tag.isblocked == "True" {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+		return nil
 	}
 
-	var args string
 	if len(strings.Join(ctx.Args(), " ")) < 1 {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
 		return nil
 	}
-	args = ctx.Args()[0]
 
-	if len(args) != 22 {
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
-		return nil
-	}
-	u, err := session.User(args[3:][:18])
+	u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
 	if err == nil {
 		embed := embedutil.NewEmbed().
 			SetColor(0xff1000).
@@ -104,7 +84,6 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return nil
 	} else {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
 		return nil
 	}
 }
