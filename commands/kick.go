@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
+	"git.randomchars.net/Reviath/RemiliaScarlet/multiplexer"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -32,71 +33,40 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil && tag.lang == "tr" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-		if err == nil {
-			if tag.isblocked == "True" {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-
-				return nil
-			}
+		if err == nil && tag.isblocked == "True" {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+			return nil
 		}
 
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komutu kullanmak için üyeleri at yetkisine sahip olmalısın.")
-
 			return nil
 		}
 
-		var args string
 		if len(strings.Join(ctx.Args(), " ")) < 1 {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
 
 			return nil
 		}
-		args = ctx.Args()[0]
-
-		if len(args) < 19 {
-			u, err := session.User(args)
-			if err == nil {
-				err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
-				if err != nil {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkim yok.")
-
-					return nil
-				}
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişi sunucudan atıldı.")
-
-				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
+		u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
+		if err == nil {
+			err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
+			if err != nil {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkim yok.")
 
 				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişi sunucudan atıldı.")
+
+			return nil
 		} else {
-			if len(args) > 21 {
-				u, err := session.User(args[3:][:18])
-				if err == nil {
-					err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
-					if err != nil {
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkim yok.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
 
-						return nil
-					}
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişi sunucudan atıldı!")
-
-					return nil
-				} else {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-					return nil
-				}
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-				return nil
-			}
+			return nil
 		}
 	}
+
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
 	if err == nil {
@@ -114,53 +84,26 @@ func (k Kick) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return nil
 	}
 
-	var args string
 	if len(strings.Join(ctx.Args(), " ")) < 1 {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
 		return nil
 	}
-	args = ctx.Args()[0]
 
-	if len(args) < 19 {
-		u, err := session.User(args)
-		if err == nil {
-			err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
-			if err != nil {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
-
-				return nil
-			}
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Kicked specified user.")
-
-			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+	u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
+	if err == nil {
+		err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
+		if err != nil {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
 
 			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Kicked specified user.")
+
+		return nil
 	} else {
-		if len(args) > 21 {
-			u, err := session.User(args[3:][:18])
-			if err == nil {
-				err = session.GuildMemberDelete(ctx.Guild().ID, u.ID)
-				if err != nil {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
-					return nil
-				}
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Kicked specified user.")
-
-				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
-				return nil
-			}
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
-			return nil
-		}
+		return nil
 	}
 }
