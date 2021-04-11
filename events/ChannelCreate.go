@@ -62,8 +62,6 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 			}
 			return
 		}
-		return
-	}
 
 	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
