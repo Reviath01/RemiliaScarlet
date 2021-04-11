@@ -6,7 +6,7 @@ import (
 
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
-	"git.randomchars.net/Reviath/RemiliaScarlet/multiplexer"
+	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
