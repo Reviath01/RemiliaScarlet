@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
+	"git.randomchars.net/Reviath/RemiliaScarlet/multiplexer"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -47,48 +48,16 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 
 		if strings.Join(ctx.Args(), " ") == "" {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisiniz.")
 			return nil
 		} else {
-			args := ctx.Args()[0]
-			if len(args) < 19 {
-				u, err := session.User(args)
-				if err == nil {
-					err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
-					if err != nil {
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkim yok.")
-
-						return nil
-					}
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişi banlandı!")
-
-					return nil
-				} else {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-					return nil
-				}
+			u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
+			if err != nil {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisiniz.")
 			} else {
-				if len(args) > 21 {
-					u, err := session.User(args[3:][:18])
-					if err == nil {
-						err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
-						if err != nil {
-							_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkim yok")
-							return nil
-						}
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişi banlandı!")
-
-						return nil
-					} else {
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-						return nil
-					}
-				} else {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-					return nil
+				err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
+				if err != nil {
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkiye sahip değilim.")
 				}
 			}
 		}
@@ -99,7 +68,6 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil {
 		if tag.isblocked == "True" {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-
 			return nil
 		}
 	}
@@ -110,50 +78,19 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return nil
 	}
 
-	if len(strings.Join(ctx.Args(), " ")) < 1 {
+	if strings.Join(ctx.Args(), " ") == "" {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 		return nil
 	} else {
-		args := ctx.Args()[0]
-		if len(args) < 19 {
-			u, err := session.User(args)
-			if err == nil {
-				err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
-				if err != nil {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
-
-					return nil
-				}
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Banned specified user.")
-
-				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
-				return nil
-			}
+		u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
+		if err != nil {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 		} else {
-			if len(args) > 21 {
-				u, err := session.User(args[3:][:18])
-				if err == nil {
-					err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
-					if err != nil {
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "I do not have enough permission.")
-
-						return nil
-					}
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Banned specified user.")
-					return nil
-				} else {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
-					return nil
-				}
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
-				return nil
+			err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
+			if err != nil {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Cannot ban that user.")
 			}
 		}
 	}
+	return nil
 }
