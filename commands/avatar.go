@@ -73,11 +73,9 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-	if err == nil {
-		if tag.isblocked == "True" {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-			return nil
-		}
+	if err == nil && tag.isblocked == "True" {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+		return nil
 	}
 
 	if len(strings.Join(ctx.Args(), " ")) < 1 {
@@ -105,7 +103,6 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			SetDescription("Avatar of " + ctx.Author().Username + "#" + ctx.Author().Discriminator).
 			SetImage(ctx.Author().AvatarURL("1024")).MessageEmbed
 		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, avatarembed)
-
 		return nil
 	}
 }

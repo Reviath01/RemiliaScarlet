@@ -44,12 +44,9 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil && tag.lang == "tr" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-		if err == nil {
-			if tag.isblocked == "True" {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
-
-				return nil
-			}
+		if err == nil && tag.isblocked == "True" {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+			return nil
 		}
 
 		err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
