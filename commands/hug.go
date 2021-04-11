@@ -6,6 +6,7 @@ import (
 
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	"git.randomchars.net/Reviath/RemiliaScarlet/multiplexer"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -33,30 +34,17 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if err == nil && tag.lang == "tr" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-		if err == nil {
-			if tag.isblocked == "True" {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
-
-				return nil
-			}
+		if err == nil && tag.isblocked == "True" {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+			return nil
 		}
 
-		var args string
 		if len(strings.Join(ctx.Args(), " ")) < 1 {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
-			return nil
-
-		}
-
-		args = ctx.Args()[0]
-
-		if len(args) != 22 {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-
 			return nil
 		}
-		u, err := session.User(strings.Join(ctx.Args(), " ")[3:][:18])
+
+		u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
 		if err == nil {
 			if u.ID == ctx.Author().ID {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Kendine sarılamazsın.")
@@ -68,7 +56,6 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				SetDescription("<@" + ctx.Author().ID + ">, <@" + u.ID + "> isimli kişiye sarıldı 💖").
 				SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
 			_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
-
 			return nil
 		} else {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir kişiyi etiketlemelisin.")
@@ -79,15 +66,11 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-	if err == nil {
-		if tag.isblocked == "True" {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-
-			return nil
-		}
+	if err == nil && tag.isblocked == "True" {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+		return nil
 	}
 
-	var args string
 	if len(strings.Join(ctx.Args(), " ")) < 1 {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 
@@ -95,14 +78,7 @@ func (h Hug) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	}
 
-	args = ctx.Args()[0]
-
-	if len(args) != 22 {
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
-		return nil
-	}
-	u, err := session.User(strings.Join(ctx.Args(), " ")[3:][:18])
+	u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
 	if err == nil {
 		if u.ID == ctx.Author().ID {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You can't hug yourself.")
