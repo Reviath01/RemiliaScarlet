@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
+	"git.randomchars.net/Reviath/RemiliaScarlet/multiplexer"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -37,56 +38,31 @@ func (a AutoRole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			return nil
 		}
 		if strings.Join(ctx.Args(), " ") == "" {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Rolü belirtmelisin")
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Rolü belirtmelisin.")
 
 			return nil
 		} else {
-			args := ctx.Args()[0]
-
-			if len(args) == 18 {
-
-				err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
-				if err == nil {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
-					return nil
-				} else {
-					insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
-					if err != nil {
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
-
-						return nil
-					}
-					defer insert.Close()
-
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol başarıyla ayarlandı.")
-
-					return nil
-				}
+			args := multiplexer.GetRole(ctx.Args()[0])
+			if args == "Error" {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Rolü belirtmelisin.")
+				return nil
+			}
+			err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
+			if err == nil {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
+				return nil
 			} else {
-				if len(args) == 22 {
-
-					err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
-					if err == nil {
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
-						return nil
-					} else {
-						insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args[3:][:18] + "', '" + ctx.Guild().ID + "')")
-						if err != nil {
-							_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
-
-							return nil
-						}
-						defer insert.Close()
-
-						_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol başarıyla ayarlandı.")
-
-						return nil
-					}
-				} else {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir rol belirtmelisin.")
+				insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args + "', '" + ctx.Guild().ID + "')")
+				if err != nil {
+					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
 					return nil
 				}
+				defer insert.Close()
+
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol başarıyla ayarlandı.")
+
+				return nil
 			}
 		}
 	}
