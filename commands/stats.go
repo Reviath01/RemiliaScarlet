@@ -68,12 +68,9 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-	if err == nil {
-		if tag.isblocked == "True" {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-
-			return nil
-		}
+	if err == nil && tag.isblocked == "True" {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+		return nil
 	}
 
 	statembed := embedutil.NewEmbed().

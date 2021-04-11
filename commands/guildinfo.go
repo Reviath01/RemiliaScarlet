@@ -55,12 +55,9 @@ func (g GuildInfo) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-	if err == nil {
-		if tag.isblocked == "True" {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-
-			return nil
-		}
+	if err == nil && tag.isblocked == "True" {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+		return nil
 	}
 
 	embed := embedutil.NewEmbed().

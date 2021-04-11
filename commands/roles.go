@@ -53,12 +53,9 @@ func (r Roles) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='roles' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
-	if err == nil {
-		if tag.isblocked == "True" {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
-
-			return nil
-		}
+	if err == nil && tag.isblocked == "True" {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+		return nil
 	}
 
 	for _, i := range ctx.Guild().Roles {
