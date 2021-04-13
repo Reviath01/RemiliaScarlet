@@ -1,21 +1,14 @@
 package events
 
 import (
-	"database/sql"
 	"strings"
 
+	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := sql.Connect()
 
 	type Tag struct {
 		channelid      string
@@ -27,7 +20,7 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	var tag Tag
 	var welcomemsg string
 
-	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + event.GuildID + "'").Scan(&tag.lang)
+	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + event.GuildID + "'").Scan(&tag.lang)
 
 	if err == nil {
 		if tag.lang == "tr" {

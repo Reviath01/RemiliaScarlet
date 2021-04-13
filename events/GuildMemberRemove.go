@@ -1,21 +1,14 @@
 package events
 
 import (
-	"database/sql"
 	"strings"
 
+	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove) {
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := sql.Connect()
 
 	type Tag struct {
 		channelid    string
@@ -25,7 +18,7 @@ func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove)
 	var tag Tag
 	var leavemessage string
 
-	err = db.QueryRow("SELECT message FROM leavemessage WHERE guildid ='" + event.GuildID + "'").Scan(&tag.leavemessage)
+	err := db.QueryRow("SELECT message FROM leavemessage WHERE guildid ='" + event.GuildID + "'").Scan(&tag.leavemessage)
 	if err != nil {
 		leavemessage = "<@" + event.User.ID + "> left the server!"
 	} else {
