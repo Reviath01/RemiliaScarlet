@@ -6,12 +6,10 @@ import (
 	"strconv"
 	"time"
 
-	"database/sql"
-
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 type Stats struct {
@@ -28,13 +26,7 @@ func getDuration(duration time.Duration) string {
 	)
 }
 func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := sql.Connect()
 
 	type Tag struct {
 		isblocked string
@@ -43,7 +35,7 @@ func (s Stats) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	var tag Tag
 
-	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
+	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
 	if err == nil && tag.lang == "tr" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 

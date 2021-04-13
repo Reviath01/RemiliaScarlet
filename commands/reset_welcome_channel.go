@@ -1,24 +1,16 @@
 package commands
 
 import (
-	"database/sql"
-
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
+	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 type ResetWelcomeChannel struct {
 }
 
 func (r ResetWelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := sql.Connect()
 
 	type Tag struct {
 		channelid string
@@ -26,7 +18,7 @@ func (r ResetWelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) er
 	}
 
 	var tag Tag
-	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
+	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
 	if err == nil && tag.lang == "tr" {
 		perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {

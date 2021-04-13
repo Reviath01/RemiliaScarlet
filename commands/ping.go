@@ -1,25 +1,18 @@
 package commands
 
 import (
-	"database/sql"
 	"strconv"
 
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
+	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 type Ping struct {
 }
 
 func (p Ping) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := sql.Connect()
 
 	type Tag struct {
 		isblocked string
@@ -28,7 +21,7 @@ func (p Ping) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	var tag Tag
 
-	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
+	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
 	if err == nil && tag.lang == "tr" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ping' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 

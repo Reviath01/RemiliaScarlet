@@ -1,15 +1,14 @@
 package commands
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 
 	ctx "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Context"
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 type Help struct {
@@ -41,13 +40,7 @@ func (h Help) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return nil
 	}
 
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
-
-	if err != nil {
-		panic(err.Error())
-	}
-
-	defer db.Close()
+	db := sql.Connect()
 
 	type Tag struct {
 		lang string
