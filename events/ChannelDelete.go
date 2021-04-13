@@ -36,29 +36,25 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 		channeltype = "Unknown Type (Type ID: " + strconv.Itoa(int(event.Channel.Type))
 	}
 
-	if err == nil {
-		if tag.lang == "tr" {
-			err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+	if err == nil && tag.lang == "tr" {
+		err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+		if err != nil {
+			return
+		} else {
+			embed := embedutil.NewEmbed().
+				SetTitle("Kanal Silindi!").
+				AddField("Kanalın İsmi:", event.Channel.Name).
+				AddField("Kanalın İD'si:", event.Channel.ID).
+				AddField("Kanal Tipi:", channeltype).
+				SetColor(0xff1000).MessageEmbed
+
+			_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
 			if err != nil {
 				return
-			} else {
-				embed := embedutil.NewEmbed().
-					SetTitle("Kanal Silindi!").
-					AddField("Kanalın İsmi:", event.Channel.Name).
-					AddField("Kanalın İD'si:", event.Channel.ID).
-					AddField("Kanal Tipi:", channeltype).
-					SetColor(0xff1000).MessageEmbed
-
-				_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
-				if err != nil {
-					return
-				}
 			}
-			return
 		}
 		return
 	}
-
 	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
 		return
