@@ -23,12 +23,6 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	}
 
 	var tag Tag
-	var welcomechannel string
-	var leavechannel string
-	var autorole string
-	var leavemsg string
-	var welcomemsg string
-	var logchannel string
 
 	if sql.CheckLanguage(ctx.Guild().ID) == "tr" {
 		if sql.IsBlocked(ctx.Guild().ID, "settings") == "true" {
@@ -37,55 +31,43 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 
 		err := db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
-		if err == nil {
-			welcomechannel = "<#" + tag.welcomechannelid + "> (" + tag.welcomechannelid + ")"
-		} else {
-			welcomechannel = "Ayarlanmamış."
+		if err != nil {
+			tag.welcomechannelid = "Ayarlanmamış."
 		}
 
 		err = db.QueryRow("SELECT channelid FROM leavechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.leavechannelid)
-		if err == nil {
-			leavechannel = "<#" + tag.leavechannelid + "> (" + tag.leavechannelid + ")"
-		} else {
-			leavechannel = "Ayarlanmamış."
+		if err != nil {
+			tag.leavechannelid = "Ayarlanmamış."
 		}
 
 		err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
-		if err == nil {
-			autorole = "<@&" + tag.roleid + "> (" + tag.roleid + ")"
-		} else {
-			autorole = "Ayarlanmamış."
+		if err != nil {
+			tag.roleid = "Ayarlanmamış."
 		}
 
 		err = db.QueryRow("SELECT message FROM welcomemessage WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomemessage)
-		if err == nil {
-			welcomemsg = tag.welcomemessage
-		} else {
-			welcomemsg = "Ayarlanmamış."
+		if err != nil {
+			tag.welcomemessage = "Ayarlanmamış."
 		}
 
 		err = db.QueryRow("SELECT message FROM leavemessage WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.leavemessage)
-		if err == nil {
-			leavemsg = tag.leavemessage
-		} else {
-			leavemsg = "Ayarlanmamış."
+		if err != nil {
+			tag.leavemessage = "Ayarlanmamış."
 		}
 
 		err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.logid)
-		if err == nil {
-			logchannel = "<#" + tag.logid + "> (" + tag.logid + ")"
-		} else {
-			logchannel = "Ayarlanmamış."
+		if err != nil {
+			tag.logid = "Ayarlanmamış."
 		}
 
 		embed := embedutil.NewEmbed().
-			SetTitle(ctx.Guild().Name+" Settings").
-			AddField("Hoş Geldin Kanalı:", welcomechannel).
-			AddField("Çıkış Kanalı:", leavechannel).
-			AddField("Otorol:", autorole).
-			AddField("Çıkış Mesajı:", leavemsg).
-			AddField("Hoş Geldin Mesajı:", welcomemsg).
-			AddField("Log Kanalı:", logchannel).
+			SetTitle(ctx.Guild().Name+" Ayarları").
+			AddField("Hoş Geldin Kanalı:", tag.welcomechannelid).
+			AddField("Çıkış Kanalı:", tag.leavechannelid).
+			AddField("Otorol:", tag.roleid).
+			AddField("Çıkış Mesajı:", tag.leavemessage).
+			AddField("Hoş Geldin Mesajı:", tag.welcomemessage).
+			AddField("Log Kanalı:", tag.logid).
 			SetColor(0x00f0ff).MessageEmbed
 
 		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
@@ -97,57 +79,44 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 		return nil
 	}
-
 	err := db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
-	if err == nil {
-		welcomechannel = "<#" + tag.welcomechannelid + "> (" + tag.welcomechannelid + ")"
-	} else {
-		welcomechannel = "Not existing."
+	if err != nil {
+		tag.welcomechannelid = "Not existing."
 	}
 
 	err = db.QueryRow("SELECT channelid FROM leavechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.leavechannelid)
-	if err == nil {
-		leavechannel = "<#" + tag.leavechannelid + "> (" + tag.leavechannelid + ")"
-	} else {
-		leavechannel = "Not existing."
+	if err != nil {
+		tag.leavechannelid = "Not existing."
 	}
 
 	err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.roleid)
-	if err == nil {
-		autorole = "<@&" + tag.roleid + "> (" + tag.roleid + ")"
-	} else {
-		autorole = "Not existing."
+	if err != nil {
+		tag.roleid = "Not existing."
 	}
 
 	err = db.QueryRow("SELECT message FROM welcomemessage WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomemessage)
-	if err == nil {
-		welcomemsg = tag.welcomemessage
-	} else {
-		welcomemsg = "Not existing."
+	if err != nil {
+		tag.welcomemessage = "Not existing."
 	}
 
 	err = db.QueryRow("SELECT message FROM leavemessage WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.leavemessage)
-	if err == nil {
-		leavemsg = tag.leavemessage
-	} else {
-		leavemsg = "Not existing."
+	if err != nil {
+		tag.leavemessage = "Not existing."
 	}
 
 	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.logid)
-	if err == nil {
-		logchannel = "<#" + tag.logid + "> (" + tag.logid + ")"
-	} else {
-		logchannel = "Not existing."
+	if err != nil {
+		tag.logid = "Not existing."
 	}
 
 	embed := embedutil.NewEmbed().
 		SetTitle(ctx.Guild().Name+" Settings").
-		AddField("Welcome Channel:", welcomechannel).
-		AddField("Leave Channel:", leavechannel).
-		AddField("Autorole:", autorole).
-		AddField("Leave Message:", leavemsg).
-		AddField("Welcome Message:", welcomemsg).
-		AddField("Log Channel:", logchannel).
+		AddField("Welcome Channel:", tag.welcomechannelid).
+		AddField("Leave Channel:", tag.leavechannelid).
+		AddField("Autorole:", tag.roleid).
+		AddField("Leave Message:", tag.leavemessage).
+		AddField("Welcome Message:", tag.welcomemessage).
+		AddField("Log Channel:", tag.logid).
 		SetColor(0x00f0ff).MessageEmbed
 
 	_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
