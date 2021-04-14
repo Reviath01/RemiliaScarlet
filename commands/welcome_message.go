@@ -44,19 +44,18 @@ func (w WelcomeMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin mesajı zaten ayarlanmış, sıfırlamak için reset_welcome_message komutunu kullan.")
 
 			return nil
-		} else {
-			insert, err := db.Query("INSERT INTO welcomemessage (message, guildid) VALUES ('" + strings.Join(ctx.Args(), " ") + "', '" + ctx.Guild().ID + "')")
-			if err != nil {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
-
-				return nil
-			}
-			defer insert.Close()
-
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin mesajı başarıyla ayarlandı.")
+		}
+		insert, err := db.Query("INSERT INTO welcomemessage (message, guildid) VALUES ('" + strings.Join(ctx.Args(), " ") + "', '" + ctx.Guild().ID + "')")
+		if err != nil {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 
 			return nil
 		}
+		defer insert.Close()
+
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin mesajı başarıyla ayarlandı.")
+
+		return nil
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
@@ -82,17 +81,16 @@ func (w WelcomeMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Welcome message is already existing (to reset, use reset_welcome_message command).")
 
 		return nil
-	} else {
-		insert, err := db.Query("INSERT INTO welcomemessage (message, guildid) VALUES ('" + strings.Join(ctx.Args(), " ") + "', '" + ctx.Guild().ID + "')")
-		if err != nil {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
-
-			return nil
-		}
-		defer insert.Close()
-
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Welcome message set successfully.")
+	}
+	insert, err := db.Query("INSERT INTO welcomemessage (message, guildid) VALUES ('" + strings.Join(ctx.Args(), " ") + "', '" + ctx.Guild().ID + "')")
+	if err != nil {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
 
 		return nil
 	}
+	defer insert.Close()
+
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Welcome message set successfully.")
+
+	return nil
 }
