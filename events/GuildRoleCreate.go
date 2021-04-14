@@ -21,18 +21,17 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 		err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 		if err != nil {
 			return
-		} else {
-			embed := embedutil.NewEmbed().
-				SetTitle("Rol Oluşturuldu!").
-				AddField("Rolün İsmi:", event.Role.Name+" ( <@&"+event.Role.ID+"> )").
-				AddField("Rol İD'si:", event.Role.ID).
-				AddField("Rol Rengi:", strconv.Itoa(event.Role.Color)).
-				SetColor(0xefff00).MessageEmbed
+		}
+		embed := embedutil.NewEmbed().
+			SetTitle("Rol Oluşturuldu!").
+			AddField("Rolün İsmi:", event.Role.Name+" ( <@&"+event.Role.ID+"> )").
+			AddField("Rol İD'si:", event.Role.ID).
+			AddField("Rol Rengi:", strconv.Itoa(event.Role.Color)).
+			SetColor(0xefff00).MessageEmbed
 
-			_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
-			if err != nil {
-				return
-			}
+		_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
+		if err != nil {
+			return
 		}
 		return
 	}
@@ -40,17 +39,16 @@ func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 	err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
 		return
-	} else {
-		embed := embedutil.NewEmbed().
-			SetTitle("Role Created!").
-			AddField("Role Name:", event.Role.Name+" ( <@&"+event.Role.ID+"> )").
-			AddField("Role ID:", event.Role.ID).
-			AddField("Role Color:", strconv.Itoa(event.Role.Color)).
-			SetColor(0xefff00).MessageEmbed
+	}
+	embed := embedutil.NewEmbed().
+		SetTitle("Role Created!").
+		AddField("Role Name:", event.Role.Name+" ( <@&"+event.Role.ID+"> )").
+		AddField("Role ID:", event.Role.ID).
+		AddField("Role Color:", strconv.Itoa(event.Role.Color)).
+		SetColor(0xefff00).MessageEmbed
 
-		_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
-		if err != nil {
-			return
-		}
+	_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
+	if err != nil {
+		return
 	}
 }
