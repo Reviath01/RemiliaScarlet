@@ -55,16 +55,17 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	if strings.Join(ctx.Args(), " ") == "" {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
 		return nil
-	} else {
-		u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
-		if err != nil {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-		} else {
-			err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
-			if err != nil {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Cannot ban that user.")
-			}
-		}
 	}
+	u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
+	if err != nil {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+		return nil
+	}
+	err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
+	if err != nil {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Cannot ban that user.")
+		return nil
+	}
+
 	return nil
 }
