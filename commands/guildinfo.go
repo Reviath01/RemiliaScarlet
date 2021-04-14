@@ -13,18 +13,8 @@ type GuildInfo struct {
 }
 
 func (g GuildInfo) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-	db := sql.Connect()
-
-	type Tag struct {
-		isblocked string
-	}
-
-	var tag Tag
-
 	if sql.CheckLanguage(ctx.Guild().ID) == "tr" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
-
-		if err == nil && tag.isblocked == "True" {
+		if sql.IsBlocked(ctx.Guild().ID, "guild_info") == "true" {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 			return nil
 		}
@@ -44,9 +34,7 @@ func (g GuildInfo) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return nil
 	}
 
-	err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
-
-	if err == nil && tag.isblocked == "True" {
+	if sql.IsBlocked(ctx.Guild().ID, "guild_info") == "true" {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 		return nil
 	}
