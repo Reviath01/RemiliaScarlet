@@ -28,11 +28,10 @@ func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove)
 	err = db.QueryRow("SELECT channelid FROM leavechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
 		return
-	} else {
-		channel, err := s.Channel(tag.channelid)
-		if err != nil {
-			return
-		}
-		s.ChannelMessageSend(channel.ID, leavemessage)
 	}
+	channel, err := s.Channel(tag.channelid)
+	if err != nil {
+		return
+	}
+	s.ChannelMessageSend(channel.ID, leavemessage)
 }
