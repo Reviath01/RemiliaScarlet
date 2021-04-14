@@ -28,16 +28,16 @@ func (b Ban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		if strings.Join(ctx.Args(), " ") == "" {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisiniz.")
 			return nil
-		} else {
-			u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
-			if err != nil {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisiniz.")
-			} else {
-				err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
-				if err != nil {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkiye sahip değilim.")
-				}
-			}
+		}
+		u, err := session.User(multiplexer.GetUser(ctx.Args()[0]))
+		if err != nil {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisiniz.")
+			return nil
+		}
+		err = session.GuildBanCreate(ctx.Guild().ID, u.ID, 0)
+		if err != nil {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Yeterli yetkiye sahip değilim.")
+			return nil
 		}
 	}
 
