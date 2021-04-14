@@ -3,7 +3,7 @@ package client
 import (
 	"fmt"
 
-	commands "git.randomchars.net/Reviath/RemiliaScarlet/commands"
+	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
 	"git.randomchars.net/Reviath/RemiliaScarlet/events"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"github.com/bwmarrin/discordgo"
@@ -32,6 +32,8 @@ func Start() {
 	client.AddHandler(handler.MessageHandler)
 
 	handler.AddCommand("ping", "Check the bot's ping.", []string{"pong"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.PingCommand)
+
+	handler.AddCommand("autorole", "Set auto role.", []string{"auto_role"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AutoRoleCommand)
 
 	handler.AddCommand("afk", "Sets you as AFK.", []string{"set_afk"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AfkCommand)
 
