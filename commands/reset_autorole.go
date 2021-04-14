@@ -42,11 +42,9 @@ func (r ResetAutorole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Başarıyla otorol sıfırlandı.")
 
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol ayarlanmadığı için sıfırlanamaz.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Otorol ayarlanmadığı için sıfırlanamaz.")
+		return nil
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
@@ -70,9 +68,7 @@ func (r ResetAutorole) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Successfully reset auto role.")
 
 		return nil
-	} else {
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is not existing, so you can't reset.")
-
-		return nil
 	}
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Auto role is not existing, so you can't reset.")
+	return nil
 }
