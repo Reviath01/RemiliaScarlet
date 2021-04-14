@@ -43,13 +43,11 @@ func (a Author) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	type Tag struct {
 		isblocked string
-		lang      string
 	}
 
 	var tag Tag
 
-	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
-	if err == nil && tag.lang == "tr" {
+	if sql.CheckLanguage(ctx.Guild().ID) == "tr" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 
 		if err == nil {

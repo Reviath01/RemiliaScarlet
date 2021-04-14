@@ -11,16 +11,7 @@ type Issue struct {
 }
 
 func (i Issue) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-	db := sql.Connect()
-
-	type Tag struct {
-		lang string
-	}
-
-	var tag Tag
-
-	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
-	if err == nil && tag.lang == "tr" {
+	if sql.CheckLanguage(ctx.Guild().ID) == "tr" {
 		issueembed := embedutil.NewEmbed().
 			SetColor(0xffa935).
 			SetDescription("GitLab üzerinden bir issue oluşturmak için [buraya](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new) tıkla!").

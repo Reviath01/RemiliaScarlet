@@ -40,16 +40,7 @@ func (h Help) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return nil
 	}
 
-	db := sql.Connect()
-
-	type Tag struct {
-		lang string
-	}
-
-	var tag Tag
-
-	err = db.QueryRow("SELECT language FROM languages WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.lang)
-	if err == nil && tag.lang == "tr" {
+	if sql.CheckLanguage(ctx.Guild().ID) == "tr" {
 		u, err := session.User("@me")
 
 		if err != nil {
