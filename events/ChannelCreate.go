@@ -13,12 +13,9 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 
 	type Tag struct {
 		channelid string
-		lang      string
 	}
 
 	var tag Tag
-
-	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + event.GuildID + "'").Scan(&tag.lang)
 
 	var channeltype string
 
@@ -36,8 +33,8 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 		channeltype = "Unknown Type (Type ID: " + strconv.Itoa(int(event.Channel.Type))
 	}
 
-	if err == nil && tag.lang == "tr" {
-		err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+	if sql.CheckLanguage(event.GuildID) == "tr" {
+		err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 		if err != nil {
 			return
 		} else {
@@ -56,7 +53,7 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 		return
 	}
 
-	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+	err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
 		return
 	} else {

@@ -11,15 +11,12 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 
 	type Tag struct {
 		channelid string
-		lang      string
 	}
 
 	var tag Tag
 
-	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + event.GuildID + "'").Scan(&tag.lang)
-
-	if err == nil && tag.lang == "tr" {
-		err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+	if sql.CheckLanguage(event.GuildID) == "tr" {
+		err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 		if err != nil {
 			return
 		} else {
@@ -36,7 +33,7 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 		}
 	}
 
-	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+	err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
 		return
 	} else {

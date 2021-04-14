@@ -13,12 +13,9 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 
 	type Tag struct {
 		channelid string
-		lang      string
 	}
 
 	var tag Tag
-
-	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + event.GuildID + "'").Scan(&tag.lang)
 
 	var channeltype string
 
@@ -36,8 +33,8 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 		channeltype = "Unknown Type (Type ID: " + strconv.Itoa(int(event.Channel.Type))
 	}
 
-	if err == nil && tag.lang == "tr" {
-		err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+	if sql.CheckLanguage(event.GuildID) == "tr" {
+		err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 		if err != nil {
 			return
 		} else {
@@ -55,7 +52,7 @@ func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 		}
 		return
 	}
-	err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+	err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
 		return
 	} else {
