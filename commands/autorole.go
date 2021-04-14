@@ -3,8 +3,8 @@ package commands
 import (
 	"strings"
 
+	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
-	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
