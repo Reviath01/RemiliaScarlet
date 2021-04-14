@@ -39,18 +39,17 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			if err == nil {
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı zaten ayarlanmış, sıfırlamak için reset_log komutunu kullan.")
 				return nil
-			} else {
-				insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
-				if err != nil {
-					_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
-					return nil
-				}
-				defer insert.Close()
-
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı başarıyla ayarlandı!")
-
+			}
+			insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
+			if err != nil {
+				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir hata oluştu.")
 				return nil
 			}
+			defer insert.Close()
+
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalı başarıyla ayarlandı!")
+
+			return nil
 		} else {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log kanalını belirtmelisin.")
 			return nil
@@ -76,19 +75,18 @@ func (l Log) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Log is already existing (to reset, use reset_log command).")
 
 			return nil
-		} else {
-			insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
-			if err != nil {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
-
-				return nil
-			}
-			defer insert.Close()
-
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Logging channel set successfully.")
+		}
+		insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild().ID + "')")
+		if err != nil {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "An error occurred, please try again.")
 
 			return nil
 		}
+		defer insert.Close()
+
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Logging channel set successfully.")
+
+		return nil
 	} else {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the channel.")
 
