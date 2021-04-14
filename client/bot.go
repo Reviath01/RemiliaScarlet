@@ -43,6 +43,8 @@ func Start() {
 
 	handler.AddCommand("ban", "Bans the user.", []string{"yasakla"}, false, false, discordgo.PermissionBanMembers, discordgo.PermissionBanMembers, CommandHandler.CommandTypeGuild, commands.BanCommand)
 
+	handler.AddCommand("disable", "Disables specified command.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.DisableCommand)
+
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetOnErrorFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string, err error) {
