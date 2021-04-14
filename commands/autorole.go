@@ -6,7 +6,6 @@ import (
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
-	"github.com/bwmarrin/discordgo"
 )
 
 func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
@@ -19,11 +18,6 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 	var tag Tag
 
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
-		perms, err := ctx.Session.State.UserChannelPermissions(ctx.Message.Author.ID, ctx.Channel.ID)
-		if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
-			ctx.Reply("Bu komutu kullanmak için yönetici yetkisine sahip olmalısın.")
-			return nil
-		}
 		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
 			ctx.Reply("Rolü belirtmelisin.")
 			return nil
@@ -33,7 +27,7 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 				ctx.Reply("Rolü belirtmelisin.")
 				return nil
 			}
-			err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.roleid)
+			err := db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.roleid)
 			if err == nil {
 				ctx.Reply("Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
 				return nil
@@ -52,12 +46,6 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 			}
 		}
 	}
-	perms, err := ctx.Session.State.UserChannelPermissions(ctx.Message.Author.ID, ctx.Channel.ID)
-	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
-		ctx.Reply("You need administrator permission to run this command.")
-		return nil
-	}
-
 	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
 		ctx.Reply("You need to specify the role.")
 		return nil
@@ -67,7 +55,7 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("You need to specify the role.")
 			return nil
 		}
-		err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.roleid)
+		err := db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.roleid)
 		if err == nil {
 			ctx.Reply("Autorole is already existing, use reset_auto_role command to reset!")
 			return nil
