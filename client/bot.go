@@ -33,16 +33,16 @@ func Start() {
 
 	handler.AddCommand("ping", "Check the bot's ping.", []string{"pong"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.PingCommand)
 
-	handler.AddCommand("autorole", "Set auto role.", []string{"auto_role"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AutoRoleCommand)
+	handler.AddCommand("autorole", "Set auto role.", []string{"auto_role"}, false, false, discordgo.PermissionManageRoles, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.AutoRoleCommand)
 
-	handler.AddCommand("afk", "Sets you as AFK.", []string{"set_afk"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AfkCommand)
+	handler.AddCommand("afk", "Sets you as AFK.", []string{"set_afk"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.AfkCommand)
 
 	handler.AddCommand("author", "Check bot's author.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AuthorCommand)
 
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetOnErrorFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string, err error) {
-		_, _ = context.Session.ChannelMessageSend("790640302452375562", err.Error())
+		context.Reply(err.Error())
 	})
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
