@@ -33,7 +33,7 @@ func (e Embed) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 	}
 
-	if sql.IsBlocked(ctx.Guild().ID, "afk") == "true" {
+	if sql.IsBlocked(ctx.Guild().ID, "embed") == "true" {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 		return nil
 	}
