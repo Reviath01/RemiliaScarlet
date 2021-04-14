@@ -35,10 +35,9 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin")
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin")
+		return nil
 	}
 
 	if sql.IsBlocked(ctx.Guild().ID, "kiss") == "true" {
@@ -61,8 +60,7 @@ func (k Kiss) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, embed)
 
 		return nil
-	} else {
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-		return nil
 	}
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+	return nil
 }
