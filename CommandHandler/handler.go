@@ -1,4 +1,4 @@
-package CommandHandler
+package handler
 
 import (
 	"database/sql"

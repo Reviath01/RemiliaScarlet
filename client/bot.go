@@ -3,7 +3,7 @@ package client
 import (
 	"fmt"
 
-	"git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler"
+	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler"
 	commandMap "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/CommandMap"
 	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
 	"git.randomchars.net/Reviath/RemiliaScarlet/events"

@@ -1,4 +1,4 @@
-package commandMap
+package commandmap
 
 import (
 	"strings"

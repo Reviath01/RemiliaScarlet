@@ -1,4 +1,4 @@
-package commandGroup
+package commandgroup
 
 import (
 	command "git.randomchars.net/Reviath/RemiliaScarlet/CommandHandler/Command"
