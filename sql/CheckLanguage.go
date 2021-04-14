@@ -12,7 +12,6 @@ func CheckLanguage(guildid string) string {
 
 	if err != nil {
 		return "nil"
-	} else {
-		return tag.lang
 	}
+	return tag.lang
 }
