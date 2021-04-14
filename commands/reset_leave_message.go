@@ -40,11 +40,9 @@ func (r ResetLeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) erro
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Başarıyla çıkış mesajı sıfırlandı.")
 
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
+		return nil
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
@@ -68,9 +66,7 @@ func (r ResetLeaveMessage) Execute(ctx ctx.Ctx, session *discordgo.Session) erro
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Successfully reset leave message.")
 
 		return nil
-	} else {
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Leave message is not existing, so you can't reset.")
-
-		return nil
 	}
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Leave message is not existing, so you can't reset.")
+	return nil
 }
