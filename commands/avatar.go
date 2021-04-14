@@ -14,22 +14,10 @@ type Avatar struct {
 }
 
 func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-	db := sql.Connect()
-
-	type Tag struct {
-		isblocked string
-	}
-
-	var tag Tag
-
 	if sql.CheckLanguage(ctx.Guild().ID) == "tr" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
-
-		if err == nil {
-			if tag.isblocked == "True" {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
-				return nil
-			}
+		if sql.IsBlocked(ctx.Guild().ID, "avatar") == "true" {
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
+			return nil
 		}
 
 		if len(strings.Join(ctx.Args(), " ")) < 1 {
@@ -62,9 +50,7 @@ func (a Avatar) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		}
 	}
 
-	err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
-
-	if err == nil && tag.isblocked == "True" {
+	if sql.IsBlocked(ctx.Guild().ID, "avatar") == "true" {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 		return nil
 	}
