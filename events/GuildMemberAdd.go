@@ -33,21 +33,19 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 		err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 		if err != nil {
 			return
-		} else {
-			channel, err := s.Channel(tag.channelid)
-			if err != nil {
-				return
-			}
-			s.ChannelMessageSend(channel.ID, welcomemsg)
 		}
+		channel, err := s.Channel(tag.channelid)
+		if err != nil {
+			return
+		}
+		s.ChannelMessageSend(channel.ID, welcomemsg)
 		err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + event.GuildID + "'").Scan(&tag.roleid)
 		if err != nil {
 			return
-		} else {
-			err = s.GuildMemberRoleAdd(event.GuildID, event.User.ID, tag.roleid)
-			if err != nil {
-				return
-			}
+		}
+		err = s.GuildMemberRoleAdd(event.GuildID, event.User.ID, tag.roleid)
+		if err != nil {
+			return
 		}
 		return
 	}
@@ -62,20 +60,19 @@ func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 	if err != nil {
 		return
-	} else {
-		channel, err := s.Channel(tag.channelid)
-		if err != nil {
-			return
-		}
-		s.ChannelMessageSend(channel.ID, welcomemsg)
 	}
+	channel, err := s.Channel(tag.channelid)
+	if err != nil {
+		return
+	}
+	s.ChannelMessageSend(channel.ID, welcomemsg)
+
 	err = db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + event.GuildID + "'").Scan(&tag.roleid)
 	if err != nil {
 		return
-	} else {
-		err = s.GuildMemberRoleAdd(event.GuildID, event.User.ID, tag.roleid)
-		if err != nil {
-			return
-		}
+	}
+	err = s.GuildMemberRoleAdd(event.GuildID, event.User.ID, tag.roleid)
+	if err != nil {
+		return
 	}
 }
