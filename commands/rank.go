@@ -11,6 +11,10 @@ type Rank struct {
 }
 
 func (r Rank) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
+	if sql.IsBlocked(ctx.Guild().ID, "rank") == "true" {
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
+		return nil
+	}
 	db := sql.Connect()
 
 	type Tag struct {

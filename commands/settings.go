@@ -20,7 +20,6 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		welcomemessage   string
 		leavemessage     string
 		logid            string
-		isblocked        string
 	}
 
 	var tag Tag
@@ -32,14 +31,12 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 	var logchannel string
 
 	if sql.CheckLanguage(ctx.Guild().ID) == "tr" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
-
-		if err == nil && tag.isblocked == "True" {
+		if sql.IsBlocked(ctx.Guild().ID, "settings") == "true" {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut bu sunucuda engellenmiş.")
 			return nil
 		}
 
-		err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
+		err := db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
 		if err == nil {
 			welcomechannel = "<#" + tag.welcomechannelid + "> (" + tag.welcomechannelid + ")"
 		} else {
@@ -96,14 +93,12 @@ func (s Settings) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		return nil
 	}
 
-	err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
-
-	if err == nil && tag.isblocked == "True" {
+	if sql.IsBlocked(ctx.Guild().ID, "settings") == "true" {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is blocked on this guild.")
 		return nil
 	}
 
-	err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
+	err := db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild().ID + "'").Scan(&tag.welcomechannelid)
 	if err == nil {
 		welcomechannel = "<#" + tag.welcomechannelid + "> (" + tag.welcomechannelid + ")"
 	} else {
