@@ -3,21 +3,21 @@ package handler
 import "errors"
 
 var (
-	ErrBotBlocked = errors.New("handler: The given author was a bot and the IgnoreBots setting is true")
+	ErrBotBlocked = errors.New("I'm ignoring bots.")
 
-	ErrCommandAlreadyRegistered = errors.New("handler: Another command was already registered by this name")
+	ErrCommandAlreadyRegistered = errors.New("Another command was already registered by this name")
 
-	ErrCommandNotFound = errors.New("handler: Command not found")
+	ErrCommandNotFound = errors.New("Command not found")
 
-	ErrDataUnavailable = errors.New("handler: Necessary data couldn't be fetched")
+	ErrDataUnavailable = errors.New("Necessary data couldn't be fetched")
 
-	ErrDMOnly = errors.New("handler: DM-Only command on guild")
+	ErrDMOnly = errors.New("This command is only available on DMs")
 
-	ErrGuildOnly = errors.New("handler: Guild-Only command in DMs")
+	ErrGuildOnly = errors.New("This command is only available on guilds")
 
-	ErrOwnerOnly = errors.New("handler: Owner-Only command")
+	ErrOwnerOnly = errors.New("Owner-Only command")
 
-	ErrSelfInsufficientPermissions = errors.New("handler: Insufficient permissions for the bot")
+	ErrSelfInsufficientPermissions = errors.New("I don't have enough permission.")
 
-	ErrUserInsufficientPermissions = errors.New("handler: Insufficient permissions for the user")
+	ErrUserInsufficientPermissions = errors.New("You don't have enough permission.")
 )
