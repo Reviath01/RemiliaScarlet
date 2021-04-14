@@ -19,32 +19,30 @@ func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 		err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
 		if err != nil {
 			return
-		} else {
-			embed := embedutil.NewEmbed().
-				SetTitle("Rol Silindi!").
-				AddField("Rol İD'si:", event.RoleID).
-				SetColor(0xefff00).MessageEmbed
-
-			_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
-			if err != nil {
-				return
-			}
-			return
 		}
-	}
-
-	err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
-	if err != nil {
-		return
-	} else {
 		embed := embedutil.NewEmbed().
-			SetTitle("Role Deleted!").
-			AddField("Role ID:", event.RoleID).
+			SetTitle("Rol Silindi!").
+			AddField("Rol İD'si:", event.RoleID).
 			SetColor(0xefff00).MessageEmbed
 
 		_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
 		if err != nil {
 			return
 		}
+		return
+	}
+
+	err := db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + event.GuildID + "'").Scan(&tag.channelid)
+	if err != nil {
+		return
+	}
+	embed := embedutil.NewEmbed().
+		SetTitle("Role Deleted!").
+		AddField("Role ID:", event.RoleID).
+		SetColor(0xefff00).MessageEmbed
+
+	_, _ = s.ChannelMessageSendEmbed(tag.channelid, embed)
+	if err != nil {
+		return
 	}
 }
