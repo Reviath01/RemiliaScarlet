@@ -34,6 +34,8 @@ func Start() {
 
 	handler.AddCommand("afk", "Sets you as AFK.", []string{"set_afk"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AfkCommand)
 
+	handler.AddCommand("author", "Check bot's author.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AuthorCommand)
+
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetOnErrorFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string, err error) {

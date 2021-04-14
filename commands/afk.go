@@ -11,7 +11,7 @@ func AfkCommand(ctx CommandHandler.Context, _ []string) error {
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
 
 		if sql.IsBlocked(ctx.Guild.ID, "afk") == "true" {
-			_, _ = ctx.Reply("Bu komut bu sunucuda engellenmiş.")
+			_, _ = ctx.Reply("Bu komut bu sunucuda kullanıma kapatılmış.")
 			return nil
 		}
 
