@@ -39,11 +39,9 @@ func (r ResetWelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) er
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin kanalı başarıyla sıfırlandı.")
 
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin kanalı ayarlanmamış, sıfırlayamazsın.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Hoş geldin kanalı ayarlanmamış, sıfırlayamazsın.")
+		return nil
 	}
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
 	if err == nil && !(int(perms)&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator) {
@@ -66,9 +64,7 @@ func (r ResetWelcomeChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) er
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Successfully reset welcome channel.")
 
 		return nil
-	} else {
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Welcome channel is not existing, so you can't reset.")
-
-		return nil
 	}
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Welcome channel is not existing, so you can't reset.")
+	return nil
 }
