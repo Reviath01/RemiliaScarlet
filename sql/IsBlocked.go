@@ -12,7 +12,6 @@ func IsBlocked(guildid string, commandname string) string {
 
 	if err != nil {
 		return "nil"
-	} else {
-		return "true"
 	}
+	return "true"
 }
