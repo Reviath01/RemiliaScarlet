@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	commands "git.randomchars.net/Reviath/RemiliaScarlet/commands"
+	"git.randomchars.net/Reviath/RemiliaScarlet/events"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"github.com/bwmarrin/discordgo"
 )
@@ -51,6 +52,13 @@ func Start() {
 		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
 		return
 	}
+
+	client.AddHandler(events.ChannelCreate)
+	client.AddHandler(events.ChannelDelete)
+	client.AddHandler(events.GuildMemberAdd)
+	client.AddHandler(events.GuildMemberRemove)
+	client.AddHandler(events.GuildRoleCreate)
+	client.AddHandler(events.GuildRoleDelete)
 
 	CommandHandler.WaitForInterrupt()
 
