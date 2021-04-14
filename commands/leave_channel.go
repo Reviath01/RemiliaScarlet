@@ -48,10 +48,9 @@ func (l LeaveChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			defer insert.Close()
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Başarıyla ayarlandı.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir kanal belirtmelisin.")
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir kanal belirtmelisin.")
+		return nil
 	}
 
 	perms, err := session.State.UserChannelPermissions(ctx.Author().ID, ctx.Channel().ID)
@@ -83,8 +82,7 @@ func (l LeaveChannel) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Leave channel set successfully.")
 		return nil
-	} else {
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the channel.")
-		return nil
 	}
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the channel.")
+	return nil
 }
