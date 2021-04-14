@@ -41,10 +41,9 @@ func (q Unban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Belirtilen kişinin banı kaldırıldı.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir üye belirtmelisin.")
+		return nil
 	}
 
 	if sql.IsBlocked(ctx.Guild().ID, "unban") == "true" {
@@ -75,9 +74,7 @@ func (q Unban) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Unbanned specified user.")
 
 		return nil
-	} else {
-		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
-
-		return nil
 	}
+	_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the user.")
+	return nil
 }
