@@ -53,11 +53,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "author" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -75,11 +73,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "avatar" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -97,11 +93,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "ban" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -119,11 +113,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "embed" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -141,11 +133,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "Channel_info" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -163,11 +153,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "hug" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -185,11 +173,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "kick" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -207,11 +193,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "kiss" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -229,11 +213,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "ping" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -251,11 +233,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "roles" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -273,11 +253,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "settings" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -295,11 +273,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "slap" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -317,11 +293,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "spoiler" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -339,11 +313,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "start_vote" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -361,11 +333,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "stats" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -383,11 +353,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else if args == "unban" {
 			err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 			if err == nil {
@@ -405,11 +373,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 				}
 				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
 				return nil
-			} else {
-				_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
-
-				return nil
 			}
+			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bu komut engellenmemiş.")
+			return nil
 		} else {
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "Bir komut belirtmelisin.")
 
@@ -457,11 +423,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "author" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -479,11 +443,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "avatar" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -501,11 +463,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "ban" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -523,11 +483,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "embed" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -545,11 +503,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "Channel_info" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -567,11 +523,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "hug" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -589,11 +543,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "kick" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -611,11 +563,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "kiss" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -633,11 +583,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "ping" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -655,11 +603,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "roles" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -677,11 +623,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "settings" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -699,11 +643,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "slap" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -721,11 +663,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "spoiler" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -743,11 +683,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "start_vote" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -765,11 +703,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "stats" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -787,11 +723,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else if args == "unban" {
 		err = db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild().ID + "'").Scan(&tag.isblocked)
 		if err == nil {
@@ -809,11 +743,9 @@ func (e Enable) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
 			}
 			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
 			return nil
-		} else {
-			_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
-
-			return nil
 		}
+		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "This command is not disabled.")
+		return nil
 	} else {
 		_, _ = session.ChannelMessageSend(ctx.Channel().ID, "You need to specify the command.")
 		return nil
