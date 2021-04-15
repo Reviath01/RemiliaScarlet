@@ -43,9 +43,6 @@ func Start() {
 	handler.AddCommand("hug", "Sends hug gif.", []string{"sarıl"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.HugCommand)
 	handler.AddCommand("icon", "Fetch server icon.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.IconCommand)
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
-	handler.SetOnErrorFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string, err error) {
-		context.Reply("Error: " + err.Error())
-	})
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
 		fmt.Printf("Command \"%s\" is being run by \"%s#%s\" (ID: %s).\n", command.Name, context.User.Username, context.User.Discriminator, context.User.ID)
