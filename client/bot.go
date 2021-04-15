@@ -44,6 +44,7 @@ func Start() {
 	handler.AddCommand("icon", "Fetch server icon.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.IconCommand)
 	handler.AddCommand("invite", "Invite the bot.", []string{"davet"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.InviteCommand)
 	handler.AddCommand("issue", "Create an issue.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.IssueCommand)
+	handler.AddCommand("kick", "Kicks specified user.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionKickMembers, CommandHandler.CommandTypeGuild, commands.KickCommand)
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
