@@ -30,25 +30,17 @@ func Start() {
 
 	handler := CommandHandler.New([]string{BotPrefix}, []string{Owner}, true, true, client.StateEnabled)
 	client.AddHandler(handler.MessageHandler)
-
 	handler.AddCommand("ping", "Check the bot's ping.", []string{"pong"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.PingCommand)
-
 	handler.AddCommand("autorole", "Set auto role.", []string{"auto_role", "otorol"}, false, false, discordgo.PermissionManageRoles, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.AutoRoleCommand)
-
 	handler.AddCommand("afk", "Sets you as AFK.", []string{"set_afk"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.AfkCommand)
-
 	handler.AddCommand("author", "Check bot's author.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AuthorCommand)
-
 	handler.AddCommand("avatar", "Fetch the profile photo of the user.", []string{"pfp", "profile", "pp", "avatar"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AvatarCommand)
-
 	handler.AddCommand("ban", "Bans the user.", []string{"yasakla"}, false, false, discordgo.PermissionBanMembers, discordgo.PermissionBanMembers, CommandHandler.CommandTypeGuild, commands.BanCommand)
-
 	handler.AddCommand("disable", "Disables specified command.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.DisableCommand)
-
+	handler.AddCommand("embed", "Sends your message as an embed.", []string{"send_embed"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.EmbedCommand)
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
-
 	handler.SetOnErrorFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string, err error) {
-		_, _ = context.Reply(err.Error())
+		context.Reply("Error: " + err.Error())
 	})
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {

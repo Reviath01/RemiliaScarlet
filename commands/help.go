@@ -94,9 +94,8 @@ func HelpCommand(context CommandHandler.Context, args []string, commands []*Comm
 
 			return err
 		}
-
-		_, err := context.Reply("Command `" + args[0] + "` doesn't exist.")
-		return err
+		_, _ = context.Reply("Command `" + args[0] + "` doesn't exist.")
+		return nil
 	}
 
 	var (
