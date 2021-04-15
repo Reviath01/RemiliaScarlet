@@ -55,6 +55,7 @@ func Start() {
 	handler.AddCommand("reset_leave_message", "Reset leave message.", []string{"reset-leave-message"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetLeaveMessage)
 	handler.AddCommand("reset_log", "Reset log channel.", []string{"reset-log"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetLogCommand)
 	handler.AddCommand("reset_welcome_channel", "Reset welcome channel.", []string{"reset-welcome-channel"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetWelcomeChannelCommand)
+	handler.AddCommand("reset_welcome_message", "Reset welcome message.", []string{"reset-welcome-message"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetWelcomeMessageCommand)
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
