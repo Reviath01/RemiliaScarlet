@@ -41,6 +41,7 @@ func Start() {
 	handler.AddCommand("enable", "Enables specified command.", []string{"enable_command"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.EnableCommand)
 	handler.AddCommand("guildinfo", "Sends info about guild.", []string{"guild_İnfo"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.GuildInfoCommand)
 	handler.AddCommand("hug", "Sends hug gif.", []string{"sarıl"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.HugCommand)
+	handler.AddCommand("icon", "Fetch server icon.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.IconCommand)
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 	handler.SetOnErrorFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string, err error) {
 		context.Reply("Error: " + err.Error())
