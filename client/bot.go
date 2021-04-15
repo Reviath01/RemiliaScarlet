@@ -60,7 +60,8 @@ func Start() {
 	handler.AddCommand("settings", "Shows all settings of guild.", []string{"ayarlar"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SettingsCommand)
 	handler.AddCommand("shutdown", "Shutdowns the bot (Owner-only).", []string{}, true, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.ShutdownCommand)
 	handler.AddCommand("slap", "Sends slap gif", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SlapCommand)
-	handler.AddCommand("spoiler", "Sends your message as a spoiler", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SpoilerCommand)
+	handler.AddCommand("spoiler", "Sends your message as a spoiler.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SpoilerCommand)
+	handler.AddCommand("start_vote", "Start a vote.", []string{"start_vote"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionManageMessages, CommandHandler.CommandTypeGuild, commands.StartVoteCommand)
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
