@@ -62,7 +62,8 @@ func Start() {
 	handler.AddCommand("slap", "Sends slap gif", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SlapCommand)
 	handler.AddCommand("spoiler", "Sends your message as a spoiler.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SpoilerCommand)
 	handler.AddCommand("start_vote", "Start a vote.", []string{"start_vote"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionManageMessages, CommandHandler.CommandTypeGuild, commands.StartVoteCommand)
-	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
+	handler.AddCommand("stats", "Shows bot stats.", []string{"istatistik"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionManageMessages, CommandHandler.CommandTypeGuild, commands.StatsCommand)
+	handler.SetHelpCommand("help", []string{"yardım"}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
 		fmt.Printf("Command \"%s\" is being run by \"%s#%s\" (ID: %s).\n", command.Name, context.User.Username, context.User.Discriminator, context.User.ID)
