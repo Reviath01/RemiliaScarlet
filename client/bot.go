@@ -65,7 +65,8 @@ func Start() {
 	handler.AddCommand("stats", "Shows bot stats.", []string{"istatistik"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionManageMessages, CommandHandler.CommandTypeGuild, commands.StatsCommand)
 	handler.AddCommand("unban", "Unbans specified user.", []string{}, false, false, discordgo.PermissionBanMembers, discordgo.PermissionBanMembers, CommandHandler.CommandTypeGuild, commands.UnbanCommand)
 	handler.AddCommand("vote", "Vote for the bot on Top.gg.", []string{"top.gg"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.VoteCommand)
-	handler.AddCommand("welcome_channel", "Set welcome channel.", []string{"welcomechannel", "welcome-channel"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.WelcomeChannelCommand)
+	handler.AddCommand("welcome_channel", "Set welcome channel.", []string{"welcomechannel", "welcome-channel"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.WelcomeChannelCommand)
+	handler.AddCommand("welcome_message", "Set welcome message.", []string{"welcomemessage", "welcome-message"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.WelcomeMessageCommand)
 	handler.SetHelpCommand("help", []string{"yardım"}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
