@@ -36,9 +36,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -62,9 +61,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -88,9 +86,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -114,9 +111,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -140,9 +136,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -166,9 +161,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -192,9 +186,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -218,9 +211,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -244,9 +236,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -270,9 +261,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -296,9 +286,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -322,9 +311,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -348,9 +336,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -374,9 +361,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -400,9 +386,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -426,9 +411,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -452,9 +436,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 						ctx.Reply("Bir hata oluştu.")
 
 						return nil
-					} else {
-						ctx.Reply(args + " komutu tekrar kullanılabilir!")
 					}
+					ctx.Reply(args + " komutu tekrar kullanılabilir!")
 
 					defer delete.Close()
 
@@ -501,10 +484,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -528,10 +509,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -555,10 +534,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -582,10 +559,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -609,10 +584,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -636,10 +609,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -663,10 +634,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -690,10 +659,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -717,10 +684,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -744,10 +709,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -771,10 +734,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -798,10 +759,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -825,10 +784,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -852,10 +809,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -879,10 +834,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -906,10 +859,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
@@ -933,10 +884,8 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 					ctx.Reply("An error occurred.")
 
 					return nil
-				} else {
-					ctx.Reply("Enabled " + args)
-
 				}
+				ctx.Reply("Enabled " + args)
 
 				defer delete.Close()
 
