@@ -52,6 +52,7 @@ func Start() {
 	handler.AddCommand("log", "Set log channel.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.LogCommand)
 	handler.AddCommand("reset_auto_role", "Reset auto role.", []string{"reset-auto-role", "resetautorole"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetAutoroleCommand)
 	handler.AddCommand("reset_leave_channel", "Reset leave channel.", []string{"reset-leave-channel"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetLeaveChannel)
+	handler.AddCommand("reset_leave_message", "Reset leave message.", []string{"reset-leave-message"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetLeaveMessage)
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
