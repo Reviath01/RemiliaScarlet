@@ -46,6 +46,7 @@ func Start() {
 	handler.AddCommand("issue", "Create an issue.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.IssueCommand)
 	handler.AddCommand("kick", "Kicks specified user.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionKickMembers, CommandHandler.CommandTypeGuild, commands.KickCommand)
 	handler.AddCommand("kiss", "Sends kiss gif.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.KissCommand)
+	handler.AddCommand("language", "Change bot language.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.LanguageCommand)
 	handler.SetHelpCommand("help", []string{}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
