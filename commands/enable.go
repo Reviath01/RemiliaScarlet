@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
@@ -27,10 +28,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 		args := multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]
 
 		if args == "afk" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -52,10 +53,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "author" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -77,10 +78,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "avatar" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -102,10 +103,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "ban" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -127,10 +128,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "embed" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -152,10 +153,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "Channel_info" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -177,10 +178,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "hug" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -202,10 +203,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "kick" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -227,10 +228,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "kiss" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -252,10 +253,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "ping" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -277,10 +278,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "roles" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -302,10 +303,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "settings" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -327,10 +328,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "slap" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -352,10 +353,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "spoiler" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -377,10 +378,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "start_vote" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -402,10 +403,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "stats" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -427,10 +428,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "unban" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
-					delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+					delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 					if err != nil {
 						ctx.Reply("Bir hata oluştu.")
@@ -475,10 +476,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 	args = multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]
 
 	if args == "afk" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -500,10 +501,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "author" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -525,10 +526,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "avatar" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -550,10 +551,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "ban" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -575,10 +576,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "embed" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -600,10 +601,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "Channel_info" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -625,10 +626,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "hug" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -650,10 +651,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "kick" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -675,10 +676,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "kiss" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -700,10 +701,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "ping" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -725,10 +726,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "roles" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -750,10 +751,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "settings" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -775,10 +776,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "slap" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -800,10 +801,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "spoiler" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -825,10 +826,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "start_vote" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -850,10 +851,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "stats" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
@@ -875,10 +876,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "unban" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='" + args + "' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
-				delete, err := db.Query("DELETE FROM disabledcommands WHERE guildid ='" + ctx.Guild.ID + "' AND commandname ='" + args + "'")
+				delete, err := db.Query(fmt.Sprintf("DELETE FROM disabledcommands WHERE guildid ='%s' AND commandname ='%s'", ctx.Guild.ID, args))
 
 				if err != nil {
 					ctx.Reply("An error occurred.")
