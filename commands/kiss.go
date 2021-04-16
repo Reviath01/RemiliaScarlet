@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
@@ -26,7 +27,7 @@ func KissCommand(ctx CommandHandler.Context, _ []string) error {
 		if err == nil {
 			embed := embedutil.NewEmbed().
 				SetColor(0xff1000).
-				SetDescription("<@" + ctx.Message.Author.ID + ">, <@" + u.ID + "> isimli kişiyi öptü 😘").
+				SetDescription(fmt.Sprintf("<@%s>, <@%s> isimli kişiyi öptü 😘", ctx.Message.Author.ID, u.ID)).
 				SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif").MessageEmbed
 			ctx.ReplyEmbed(embed)
 
@@ -52,7 +53,7 @@ func KissCommand(ctx CommandHandler.Context, _ []string) error {
 	if err == nil {
 		embed := embedutil.NewEmbed().
 			SetColor(0xff1000).
-			SetDescription("<@" + ctx.Message.Author.ID + "> kisses <@" + u.ID + ">").
+			SetDescription(fmt.Sprintf("<@%s> kisses <@%s>", ctx.Message.Author.ID, u.ID)).
 			SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif").MessageEmbed
 		ctx.ReplyEmbed(embed)
 
