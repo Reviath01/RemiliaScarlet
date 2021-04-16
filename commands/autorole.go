@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
@@ -27,12 +28,12 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 				ctx.Reply("Rolü belirtmelisin.")
 				return nil
 			}
-			err := db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.roleid)
+			err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.roleid)
 			if err == nil {
 				ctx.Reply("Otorol zaten ayarlanmış, tekrar ayarlamak için reset_autorole komutunu kullan!")
 				return nil
 			} else {
-				insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args + "', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO autorole (roleid, guildid) VALUES ('%s', '%s')", args, ctx.Guild.ID))
 				if err != nil {
 					ctx.Reply("Bir hata oluştu.")
 
@@ -55,12 +56,12 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("You need to specify the role.")
 			return nil
 		}
-		err := db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.roleid)
+		err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.roleid)
 		if err == nil {
 			ctx.Reply("Autorole is already existing, use reset_auto_role command to reset!")
 			return nil
 		} else {
-			insert, err := db.Query("INSERT INTO autorole (roleid, guildid) VALUES ('" + args + "', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO autorole (roleid, guildid) VALUES ('%s', '%s')", args, ctx.Guild.ID))
 			if err != nil {
 				ctx.Reply("An error occurred.")
 
