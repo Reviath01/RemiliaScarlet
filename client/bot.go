@@ -74,17 +74,18 @@ func Start() {
 		return true
 	})
 
-	if err = client.Open(); err != nil {
-		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
-		return
-	}
-
 	client.AddHandler(events.ChannelCreate)
 	client.AddHandler(events.ChannelDelete)
 	client.AddHandler(events.GuildMemberAdd)
 	client.AddHandler(events.GuildMemberRemove)
 	client.AddHandler(events.GuildRoleCreate)
 	client.AddHandler(events.GuildRoleDelete)
+	client.AddHandler(events.Ready)
+
+	if err = client.Open(); err != nil {
+		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
+		return
+	}
 
 	CommandHandler.WaitForInterrupt()
 
