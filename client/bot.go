@@ -10,7 +10,7 @@ import (
 )
 
 func Start() {
-	client, err := discordgo.New("Bot " + Token)
+	client, err := discordgo.New(fmt.Sprintf("Bot %s", Token))
 	if err != nil {
 		fmt.Printf("Creating a session failed: %s.\n", err.Error())
 		return
@@ -19,7 +19,7 @@ func Start() {
 	u, err := client.User("@me")
 
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Printf("Fetching client user failed: %s.\n", err.Error())
 	}
 
 	BotID := u.ID
