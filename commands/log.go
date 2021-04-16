@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
@@ -24,12 +25,12 @@ func LogCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 		c, err := ctx.Session.Channel(multiplexer.GetChannel(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 		if err == nil {
-			err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.channelid)
+			err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM log WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
 			if err == nil {
 				ctx.Reply("Log kanalı zaten ayarlanmış, sıfırlamak için reset_log komutunu kullan.")
 				return nil
 			} else {
-				insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
 				if err != nil {
 					ctx.Reply("Bir hata oluştu.")
 					return nil
@@ -54,16 +55,15 @@ func LogCommand(ctx CommandHandler.Context, _ []string) error {
 	c, err := ctx.Session.Channel(multiplexer.GetChannel(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 	if err == nil {
 
-		err = db.QueryRow("SELECT channelid FROM log WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.channelid)
+		err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM log WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
 		if err == nil {
 			ctx.Reply("Log is already existing (to reset, use reset_log command).")
 
 			return nil
 		} else {
-			insert, err := db.Query("INSERT INTO log (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
 			if err != nil {
 				ctx.Reply("An error occurred, please try again.")
-
 				return nil
 			}
 			defer insert.Close()
