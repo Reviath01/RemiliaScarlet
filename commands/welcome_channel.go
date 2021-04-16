@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
@@ -25,13 +26,13 @@ func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 		c, err := ctx.Session.Channel(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 		if err == nil {
-			err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.channelid)
+			err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM welcomechannel WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
 			if err == nil {
 				ctx.Reply("Hoş geldin kanalı zaten ayarlanmış, sıfırlamak için reset_welcome_channel komutunu kullan.")
 
 				return nil
 			} else {
-				insert, err := db.Query("INSERT INTO welcomechannel (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
 				if err != nil {
 					ctx.Reply("Bir hata oluştu.")
 					return nil
@@ -55,13 +56,13 @@ func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 	}
 	c, err := ctx.Session.Channel(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 	if err == nil {
-		err = db.QueryRow("SELECT channelid FROM welcomechannel WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.channelid)
+		err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM welcomechannel WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
 		if err == nil {
 			ctx.Reply("Welcome channel is already existing (to reset, use reset_welcome_channel command).")
 
 			return nil
 		} else {
-			insert, err := db.Query("INSERT INTO welcomechannel (channelid, guildid) VALUES ('" + c.ID + "', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
 			if err != nil {
 				ctx.Reply("An error occurred, please try again.")
 
