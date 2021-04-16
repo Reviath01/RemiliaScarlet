@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
@@ -18,12 +19,11 @@ func SpoilerCommand(ctx CommandHandler.Context, _ []string) error {
 
 		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
 			ctx.Reply("Spoiler olarak gönderilecek mesajı belirtmelisin.")
-
 			return nil
 		}
 		spoilerembed := embedutil.NewEmbed().
 			SetColor(0xe9ff00).
-			SetDescription("|| " + strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") + " ||").MessageEmbed
+			SetDescription(fmt.Sprintf("|| %s ||", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "))).MessageEmbed
 		ctx.ReplyEmbed(spoilerembed)
 		return nil
 	}
@@ -40,7 +40,7 @@ func SpoilerCommand(ctx CommandHandler.Context, _ []string) error {
 	}
 	spoilerembed := embedutil.NewEmbed().
 		SetColor(0xe9ff00).
-		SetDescription("|| " + strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") + " ||").MessageEmbed
+		SetDescription(fmt.Sprintf("|| %s ||", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "))).MessageEmbed
 	ctx.ReplyEmbed(spoilerembed)
 
 	return nil
