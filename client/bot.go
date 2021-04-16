@@ -31,6 +31,7 @@ func Start() {
 	handler := CommandHandler.New([]string{BotPrefix}, []string{Owner}, true, true, client.StateEnabled)
 	client.AddHandler(handler.MessageHandler)
 	handler.AddCommand("ping", "Check the bot's ping.", []string{"pong"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.PingCommand)
+	handler.AddCommand("add_prefix", "Adds prefix to bot. (Owner-only).", []string{"addprefix", "add-prefix"}, true, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.AddPrefixCommand)
 	handler.AddCommand("autorole", "Set auto role.", []string{"auto_role", "otorol"}, false, false, discordgo.PermissionManageRoles, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.AutoRoleCommand)
 	handler.AddCommand("author", "Check bot's author.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AuthorCommand)
 	handler.AddCommand("avatar", "Fetch the profile photo of the user.", []string{"pfp", "profile", "pp", "avatar"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.AvatarCommand)
