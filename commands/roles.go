@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"fmt"
+
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -16,7 +18,7 @@ func RolesCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 
 		for _, i := range ctx.Guild.Roles {
-			roles += "<@&" + i.ID + ">" + ", \n"
+			roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
 		}
 
 		embed := embedutil.NewEmbed().
@@ -33,7 +35,7 @@ func RolesCommand(ctx CommandHandler.Context, _ []string) error {
 	}
 
 	for _, i := range ctx.Guild.Roles {
-		roles += "<@&" + i.ID + ">" + ", \n"
+		roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
 	}
 
 	embed := embedutil.NewEmbed().
