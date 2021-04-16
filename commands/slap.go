@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
@@ -25,7 +26,7 @@ func SlapCommand(ctx CommandHandler.Context, _ []string) error {
 		if err == nil {
 			embed := embedutil.NewEmbed().
 				SetColor(0xff1000).
-				SetDescription("<@" + ctx.Message.Author.ID + ">, <@" + u.ID + "> isimli kişiye vurdu!").
+				SetDescription(fmt.Sprintf("<@%s>, <@%s> isimli kişiye vurdu", ctx.Message.Author.ID, u.ID)).
 				SetImage("https://images-ext-1.discordapp.net/external/79sCWyD-TmmyjFxlaQIxAkAANAfV529d-LDHNkGDM0M/%3Fitemid%3D10426943/https/media1.tenor.com/images/b6d8a83eb652a30b95e87cf96a21e007/tenor.gif").MessageEmbed
 			ctx.ReplyEmbed(embed)
 
@@ -50,10 +51,9 @@ func SlapCommand(ctx CommandHandler.Context, _ []string) error {
 	if err == nil {
 		embed := embedutil.NewEmbed().
 			SetColor(0xff1000).
-			SetDescription("<@" + ctx.Message.Author.ID + "> slaps <@" + u.ID + ">").
+			SetDescription(fmt.Sprintf("<@%s> slaps <@%s>", ctx.Message.Author.ID, u.ID)).
 			SetImage("https://images-ext-1.discordapp.net/external/79sCWyD-TmmyjFxlaQIxAkAANAfV529d-LDHNkGDM0M/%3Fitemid%3D10426943/https/media1.tenor.com/images/b6d8a83eb652a30b95e87cf96a21e007/tenor.gif").MessageEmbed
 		ctx.ReplyEmbed(embed)
-
 		return nil
 	} else {
 		ctx.Reply("You need to specify the user.")
