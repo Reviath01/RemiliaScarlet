@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
@@ -46,7 +47,7 @@ func BanCommand(ctx CommandHandler.Context, _ []string) error {
 		} else {
 			err = ctx.Session.GuildBanCreate(ctx.Guild.ID, u.ID, 0)
 			if err != nil {
-				ctx.Reply("An error occurred " + err.Error())
+				ctx.Reply(fmt.Sprintf("An error occurred %s", err.Error()))
 				return nil
 			}
 			ctx.Reply("Successfully banned user.")
