@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
@@ -28,7 +29,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 		args := multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]
 
 		if args == "afk" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -36,7 +37,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'afk', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'afk', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -53,7 +54,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "author" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -61,7 +62,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'author', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'author', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -78,7 +79,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "avatar" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='avatar' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='avatar' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -86,7 +87,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'avatar', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'avatar', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -103,7 +104,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "ban" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ban' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='ban' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -111,7 +112,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ban', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ban', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -128,7 +129,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "embed" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='embed' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='embed' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -136,7 +137,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'embed', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'embed', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -153,7 +154,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "guild_info" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -161,7 +162,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'guild_info', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'guild_info', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -178,7 +179,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "hug" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -186,7 +187,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'hug', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'hug', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -203,7 +204,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "icon" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='icon' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='icon' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -211,7 +212,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'icon', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'icon', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -229,7 +230,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "kick" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -237,7 +238,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kick', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kick', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -254,7 +255,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "kiss" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -262,7 +263,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kiss', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kiss', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -279,7 +280,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "ping" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ping' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='ping' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -287,7 +288,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ping', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ping', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -304,7 +305,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "roles" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='roles' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='roles' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -312,7 +313,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'roles', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'roles', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -329,7 +330,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "settings" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -337,7 +338,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'settings', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'settings', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -354,7 +355,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "slap" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='slap' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='slap' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -362,7 +363,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'slap', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'slap', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -378,7 +379,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "spoiler" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='spoiler' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='spoiler' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -386,7 +387,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'spoiler', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'spoiler', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -402,7 +403,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "start_vote" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='start_vote' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='start_vote' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -410,7 +411,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'start_vote', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'start_vote', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -426,7 +427,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "stats" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -434,7 +435,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'stats', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'stats', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -451,7 +452,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else if args == "unban" {
-			err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='unban' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='unban' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
 					ctx.Reply("Bu komut zaten engellenmiş.")
@@ -459,7 +460,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 					return nil
 				}
 			} else {
-				insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'unban', '" + ctx.Guild.ID + "')")
+				insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'unban', '%s')", ctx.Guild.ID))
 
 				if err != nil {
 					return nil
@@ -488,7 +489,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 	args := multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]
 
 	if args == "afk" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='afk' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -496,7 +497,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'afk', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'afk', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -518,7 +519,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "author" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='author' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -526,7 +527,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'author', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'author', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -548,7 +549,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "avatar" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='avatar' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='avatar' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -556,7 +557,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'avatar', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'avatar', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -578,7 +579,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "ban" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ban' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='ban' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -586,7 +587,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ban', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ban', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -608,7 +609,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "embed" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='embed' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='embed' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -616,7 +617,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'embed', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'embed', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -638,7 +639,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "guild_info" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='guild_info' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -646,7 +647,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'guild_info', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'guild_info', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -668,7 +669,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "hug" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='hug' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -676,7 +677,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'hug', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'hug', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -698,7 +699,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "icon" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='icon' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='icon' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -706,7 +707,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'icon', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'icon', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -728,7 +729,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "kick" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='kick' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -736,7 +737,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kick', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kick', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -757,7 +758,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "kiss" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='kiss' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -765,7 +766,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kiss', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'kiss', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -786,7 +787,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "ping" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='ping' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='ping' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -794,7 +795,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ping', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'ping', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -815,7 +816,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "roles" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='roles' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='roles' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -823,7 +824,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'roles', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'roles', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -844,7 +845,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "settings" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='settings' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -852,7 +853,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'settings', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'settings', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -873,7 +874,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "slap" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='slap' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='slap' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -881,7 +882,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'slap', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'slap', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -902,7 +903,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "spoiler" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='spoiler' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='spoiler' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -910,7 +911,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'spoiler', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'spoiler', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -931,7 +932,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "start_vote" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='start_vote' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='start_vote' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -939,7 +940,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'start_vote', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'start_vote', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -960,7 +961,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "stats" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='stats' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -968,7 +969,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'stats', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'stats', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
@@ -989,7 +990,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else if args == "unban" {
-		err := db.QueryRow("SELECT isblocked FROM disabledcommands WHERE commandname ='unban' AND guildid ='" + ctx.Guild.ID + "'").Scan(&tag.isblocked)
+		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='unban' AND guildid ='%s'", ctx.Guild.ID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
 				ctx.Reply("This command is already blocked.")
@@ -997,7 +998,7 @@ func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 				return nil
 			}
 		} else {
-			insert, err := db.Query("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'unban', '" + ctx.Guild.ID + "')")
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO disabledcommands (isblocked, commandname, guildid) VALUES ('True', 'unban', '%s')", ctx.Guild.ID))
 
 			if err != nil {
 				return nil
