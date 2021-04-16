@@ -1,5 +1,7 @@
 package sql
 
+import "fmt"
+
 func CheckLanguage(guildid string) string {
 	db := Connect()
 	type Tag struct {
@@ -8,7 +10,7 @@ func CheckLanguage(guildid string) string {
 
 	var tag Tag
 
-	err := db.QueryRow("SELECT language FROM languages WHERE guildid ='" + guildid + "'").Scan(&tag.lang)
+	err := db.QueryRow(fmt.Sprintf("SELECT language FROM languages WHERE guildid ='%s'", guildid)).Scan(&tag.lang)
 
 	if err != nil {
 		return "nil"
