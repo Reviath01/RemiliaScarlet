@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
@@ -19,7 +20,7 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
 			avatarembed := embedutil.NewEmbed().
 				SetColor(0xff1000).
-				SetDescription(ctx.Message.Author.Username + "#" + ctx.Message.Author.Discriminator + " isimli kişinin profil fotoğrafı").
+				SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
 				SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
 			ctx.ReplyEmbed(avatarembed)
 
@@ -30,7 +31,7 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 		if err == nil {
 			avatarembed := embedutil.NewEmbed().
 				SetColor(0xff1000).
-				SetDescription(u.Username + "#" + u.Discriminator + " isimli kişinin profil fotoğrafı").
+				SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", u.Username, u.Discriminator)).
 				SetImage(u.AvatarURL("1024")).MessageEmbed
 			ctx.ReplyEmbed(avatarembed)
 
@@ -38,7 +39,7 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 		} else {
 			avatarembed := embedutil.NewEmbed().
 				SetColor(0xff1000).
-				SetDescription(ctx.Message.Author.Username + "#" + ctx.Message.Author.Discriminator + " isimli kişinin profil fotoğrafı").
+				SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
 				SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
 			ctx.ReplyEmbed(avatarembed)
 
@@ -54,7 +55,7 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
 		avatarembed := embedutil.NewEmbed().
 			SetColor(0xff1000).
-			SetDescription("Avatar of " + ctx.Message.Author.Username + "#" + ctx.Message.Author.Discriminator).
+			SetDescription(fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
 			SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
 		ctx.ReplyEmbed(avatarembed)
 
@@ -65,7 +66,7 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 	if err == nil {
 		avatarembed := embedutil.NewEmbed().
 			SetColor(0xff1000).
-			SetDescription("Avatar of " + u.Username + "#" + u.Discriminator).
+			SetDescription(fmt.Sprintf("Avatar of %s#%s", u.Username, u.Discriminator)).
 			SetImage(u.AvatarURL("1024")).MessageEmbed
 		ctx.ReplyEmbed(avatarembed)
 
@@ -73,7 +74,7 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 	} else {
 		avatarembed := embedutil.NewEmbed().
 			SetColor(0xff1000).
-			SetDescription("Avatar of " + ctx.Message.Author.Username + "#" + ctx.Message.Author.Discriminator).
+			SetDescription(fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
 			SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
 		ctx.ReplyEmbed(avatarembed)
 		return nil
