@@ -47,7 +47,7 @@ func Start() {
 	handler.AddCommand("kiss", "Sends kiss gif.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.KissCommand)
 	handler.AddCommand("language", "Change bot language.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.LanguageCommand)
 	handler.AddCommand("leave_channel", "Set leave channel.", []string{"leavechannel", "leave-channel"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.LeaveChannelCommand)
-	handler.AddCommand("leave_message", "Set leave message.", []string{"leavemessage", "leave-message"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.LeaveMessageCommand)
+	handler.AddCommand("leave_message", "Set leave message. \nPlaceholders: `{mention}`, `{username}`", []string{"leavemessage", "leave-message"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.LeaveMessageCommand)
 	handler.AddCommand("log", "Set log channel.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.LogCommand)
 	handler.AddCommand("reset_auto_role", "Reset auto role.", []string{"reset-auto-role", "resetautorole"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetAutoroleCommand)
 	handler.AddCommand("reset_leave_channel", "Reset leave channel.", []string{"reset-leave-channel"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.ResetLeaveChannel)
@@ -65,7 +65,7 @@ func Start() {
 	handler.AddCommand("unban", "Unbans specified user.", []string{}, false, false, discordgo.PermissionBanMembers, discordgo.PermissionBanMembers, CommandHandler.CommandTypeGuild, commands.UnbanCommand)
 	handler.AddCommand("vote", "Vote for the bot on Top.gg.", []string{"top.gg"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.VoteCommand)
 	handler.AddCommand("welcome_channel", "Set welcome channel.", []string{"welcomechannel", "welcome-channel"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.WelcomeChannelCommand)
-	handler.AddCommand("welcome_message", "Set welcome message.", []string{"welcomemessage", "welcome-message"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.WelcomeMessageCommand)
+	handler.AddCommand("welcome_message", "Set welcome message. \nPlaceholders: `{mention}`, `{username}`", []string{"welcomemessage", "welcome-message"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionAdministrator, CommandHandler.CommandTypeGuild, commands.WelcomeMessageCommand)
 	handler.SetHelpCommand("help", []string{"yardım"}, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, commands.HelpCommand)
 
 	handler.SetPrerunFunc(func(context CommandHandler.Context, command *CommandHandler.Command, content []string) bool {
