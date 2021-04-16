@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strconv"
 
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
@@ -16,6 +17,6 @@ func PingCommand(ctx CommandHandler.Context, _ []string) error {
 		_, _ = ctx.Reply("This command is blocked on this guild.")
 		return nil
 	}
-	_, _ = ctx.Reply("Pong! " + strconv.Itoa(int(ctx.Session.HeartbeatLatency().Milliseconds())) + "ms")
+	_, _ = ctx.Reply(fmt.Sprintf("Pong! %sms", strconv.Itoa(int(ctx.Session.HeartbeatLatency().Milliseconds()))))
 	return nil
 }
