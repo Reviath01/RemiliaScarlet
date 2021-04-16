@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strconv"
 
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
@@ -20,7 +21,7 @@ func GuildInfoCommand(ctx CommandHandler.Context, _ []string) error {
 			AddField("Sunucu İsmi", ctx.Guild.Name).
 			AddField("Kişi Sayısı", strconv.Itoa(ctx.Guild.MemberCount)).
 			AddField("Bölge", ctx.Guild.Region).
-			AddField("Sunucu Sahibi", "<@"+ctx.Guild.OwnerID+">").
+			AddField("Sunucu Sahibi", fmt.Sprintf("<@%s>", ctx.Guild.OwnerID)).
 			AddField("Sunucu Sahibinin ID'si", ctx.Guild.OwnerID).
 			AddField("Afk Süresi", strconv.Itoa(ctx.Guild.AfkTimeout)).
 			AddField("ID:", ctx.Guild.ID).
@@ -40,7 +41,7 @@ func GuildInfoCommand(ctx CommandHandler.Context, _ []string) error {
 		AddField("Guild Name", ctx.Guild.Name).
 		AddField("Member Count", strconv.Itoa(ctx.Guild.MemberCount)).
 		AddField("Region", ctx.Guild.Region).
-		AddField("Guild Owner", "<@"+ctx.Guild.OwnerID+">").
+		AddField("Guild Owner", fmt.Sprintf("<@%s>", ctx.Guild.OwnerID)).
 		AddField("Guild Owner ID", ctx.Guild.OwnerID).
 		AddField("Afk Timeout", strconv.Itoa(ctx.Guild.AfkTimeout)).
 		AddField("ID:", ctx.Guild.ID).
