@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"fmt"
+
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
@@ -17,9 +19,9 @@ func ResetAutoroleCommand(ctx CommandHandler.Context, _ []string) error {
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
 		var tag Tag
 
-		err := db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.roleid)
+		err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.roleid)
 		if err == nil {
-			delete, err := db.Query("DELETE FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'")
+			delete, err := db.Query(fmt.Sprintf("DELETE FROM autorole WHERE guildid ='%s'", ctx.Guild.ID))
 			if err != nil {
 				ctx.Reply("Bir hata oluştu.")
 
@@ -38,9 +40,9 @@ func ResetAutoroleCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 	}
 
-	err := db.QueryRow("SELECT roleid FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.roleid)
+	err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.roleid)
 	if err == nil {
-		delete, err := db.Query("DELETE FROM autorole WHERE guildid ='" + ctx.Guild.ID + "'")
+		delete, err := db.Query(fmt.Sprintf("DELETE FROM autorole WHERE guildid ='%s'", ctx.Guild.ID))
 		if err != nil {
 			ctx.Reply("An error occurred, please try again.")
 
