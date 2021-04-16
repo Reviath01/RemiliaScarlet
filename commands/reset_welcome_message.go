@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"fmt"
+
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
@@ -15,9 +17,9 @@ func ResetWelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 	var tag Tag
 
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
-		err := db.QueryRow("SELECT message FROM welcomemessage WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.message)
+		err := db.QueryRow(fmt.Sprintf("SELECT message FROM welcomemessage WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.message)
 		if err == nil {
-			delete, err := db.Query("DELETE FROM welcomemessage WHERE guildid ='" + ctx.Guild.ID + "'")
+			delete, err := db.Query(fmt.Sprintf("DELETE FROM welcomemessage WHERE guildid ='%s'", ctx.Guild.ID))
 			if err != nil {
 				ctx.Reply("Bir hata oluştu.")
 				return nil
@@ -35,9 +37,9 @@ func ResetWelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 	}
 
-	err := db.QueryRow("SELECT message FROM welcomemessage WHERE guildid ='" + ctx.Guild.ID + "'").Scan(&tag.message)
+	err := db.QueryRow(fmt.Sprintf("SELECT message FROM welcomemessage WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.message)
 	if err == nil {
-		delete, err := db.Query("DELETE FROM welcomemessage WHERE guildid ='" + ctx.Guild.ID + "'")
+		delete, err := db.Query(fmt.Sprintf("DELETE FROM welcomemessage WHERE guildid ='%s'", ctx.Guild.ID))
 		if err != nil {
 			ctx.Reply("An error occurred, please try again.")
 			return nil
