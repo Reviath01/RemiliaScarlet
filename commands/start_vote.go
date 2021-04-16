@@ -12,19 +12,19 @@ import (
 func StartVoteCommand(ctx CommandHandler.Context, _ []string) error {
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
 		if sql.IsBlocked(ctx.Guild.ID, "start_vote") == "true" {
-			_, _ = ctx.Session.ChannelMessageSend(ctx.Channel.ID, "Bu komut bu sunucuda engellenmiş.")
+			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
 		}
 
 		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
-			_, _ = ctx.Session.ChannelMessageSend(ctx.Channel.ID, "Oylama başlatmak için bir mesaj belirtmelisin.")
+			ctx.Reply("Oylama başlatmak için bir mesaj belirtmelisin.")
 			return nil
 		}
 		embed := embedutil.NewEmbed().
 			SetTitle("Oylama Başladı!").
 			SetColor(0xff9100).
 			AddField("Oylama Sorusu:", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")).MessageEmbed
-		msg, err := ctx.Session.ChannelMessageSendEmbed(ctx.Channel.ID, embed)
+		msg, err := ctx.ReplyEmbed(embed)
 		if err != nil {
 			return nil
 		}
@@ -35,12 +35,12 @@ func StartVoteCommand(ctx CommandHandler.Context, _ []string) error {
 	}
 
 	if sql.IsBlocked(ctx.Guild.ID, "start_vote") == "true" {
-		_, _ = ctx.Session.ChannelMessageSend(ctx.Channel.ID, "This command is blocked on this guild.")
+		ctx.Reply("This command is blocked on this guild.")
 		return nil
 	}
 
 	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
-		_, _ = ctx.Session.ChannelMessageSend(ctx.Channel.ID, "You need to specify a message.")
+		ctx.Reply("You need to specify a message.")
 
 		return nil
 	}
@@ -48,7 +48,7 @@ func StartVoteCommand(ctx CommandHandler.Context, _ []string) error {
 		SetTitle("Vote started!").
 		SetColor(0xff9100).
 		AddField("Vote question:", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")).MessageEmbed
-	msg, err := ctx.Session.ChannelMessageSendEmbed(ctx.Channel.ID, embed)
+	msg, err := ctx.ReplyEmbed(embed)
 
 	if err != nil {
 		return nil
