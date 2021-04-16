@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"strings"
 
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
@@ -30,7 +31,7 @@ func HugCommand(ctx CommandHandler.Context, _ []string) error {
 			}
 			embed := embedutil.NewEmbed().
 				SetColor(0xff1000).
-				SetDescription("<@" + ctx.Message.Author.ID + ">, <@" + u.ID + "> isimli kişiye sarıldı 💖").
+				SetDescription(fmt.Sprintf("<@%s>, <@%s> isimli kişiye sarıldı 💖", ctx.Message.Author.ID, u.ID)).
 				SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
 			ctx.ReplyEmbed(embed)
 			return nil
@@ -62,7 +63,7 @@ func HugCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 		embed := embedutil.NewEmbed().
 			SetColor(0xff1000).
-			SetDescription("<@" + ctx.Message.Author.ID + "> hugs <@" + u.ID + ">").
+			SetDescription(fmt.Sprintf("<@%s> hugs <@%s>", ctx.Message.Author.ID, u.ID)).
 			SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
 		ctx.ReplyEmbed(embed)
 
