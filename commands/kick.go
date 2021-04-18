@@ -35,11 +35,9 @@ func KickCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Belirtilen kişi sunucudan atıldı.")
 
 			return nil
-		} else {
-			ctx.Reply("Bir üye belirtmelisin.")
-
-			return nil
 		}
+		ctx.Reply("Bir üye belirtmelisin.")
+		return nil
 	}
 
 	if !multiplexer.CheckKickPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -69,9 +67,7 @@ func KickCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("Kicked specified user.")
 
 		return nil
-	} else {
-		ctx.Reply("You need to specify the user.")
-
-		return nil
 	}
+	ctx.Reply("You need to specify the user.")
+	return nil
 }
