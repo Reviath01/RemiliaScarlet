@@ -19,6 +19,10 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 	var tag Tag
 
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("Yeterli yetkiye sahip değilsin.")
+			return nil
+		}
 		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
 			ctx.Reply("Rolü belirtmelisin.")
 			return nil
@@ -47,6 +51,12 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 			}
 		}
 	}
+
+	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		ctx.Reply("You don't have enough permission.")
+		return nil
+	}
+
 	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
 		ctx.Reply("You need to specify the role.")
 		return nil
