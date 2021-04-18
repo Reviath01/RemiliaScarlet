@@ -26,5 +26,12 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 				return
 			}
 		}
+		if interaction.Data.Name == "autorole" {
+			response := Commands.InteractiveAutoRoleCommand(session, interaction)
+			err = interaction.Respond(session, response)
+			if err != nil {
+				return
+			}
+		}
 	}
 }
