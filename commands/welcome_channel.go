@@ -35,22 +35,19 @@ func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 				ctx.Reply("Hoş geldin kanalı zaten ayarlanmış, sıfırlamak için reset_welcome_channel komutunu kullan.")
 
 				return nil
-			} else {
-				insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
-				if err != nil {
-					ctx.Reply("Bir hata oluştu.")
-					return nil
-				}
-				defer insert.Close()
-
-				ctx.Reply("Hoş geldin kanalı başarıyla ayarlandı.")
-
+			}
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
+			if err != nil {
+				ctx.Reply("Bir hata oluştu.")
 				return nil
 			}
-		} else {
-			ctx.Reply("Bir kanal belirtmelisin.")
+			defer insert.Close()
+
+			ctx.Reply("Hoş geldin kanalı başarıyla ayarlandı.")
 			return nil
 		}
+		ctx.Reply("Bir kanal belirtmelisin.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -70,22 +67,17 @@ func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Welcome channel is already existing (to reset, use reset_welcome_channel command).")
 
 			return nil
-		} else {
-			insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
-			if err != nil {
-				ctx.Reply("An error occurred, please try again.")
-
-				return nil
-			}
-			defer insert.Close()
-
-			ctx.Reply("Welcome channel set successfully.")
-
+		}
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
+		if err != nil {
+			ctx.Reply("An error occurred, please try again.")
 			return nil
 		}
-	} else {
-		ctx.Reply("You need to specify the channel.")
+		defer insert.Close()
 
+		ctx.Reply("Welcome channel set successfully.")
 		return nil
 	}
+	ctx.Reply("You need to specify the channel.")
+	return nil
 }

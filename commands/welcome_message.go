@@ -39,19 +39,16 @@ func WelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Hoş geldin mesajı zaten ayarlanmış, sıfırlamak için reset_welcome_message komutunu kullan.")
 
 			return nil
-		} else {
-			insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
-			if err != nil {
-				ctx.Reply("Bir hata oluştu.")
-
-				return nil
-			}
-			defer insert.Close()
-
-			ctx.Reply("Hoş geldin mesajı başarıyla ayarlandı.")
+		}
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
+		if err != nil {
+			ctx.Reply("Bir hata oluştu.")
 
 			return nil
 		}
+		defer insert.Close()
+		ctx.Reply("Hoş geldin mesajı başarıyla ayarlandı.")
+		return nil
 	}
 	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
 		ctx.Reply("You need to specify the message.")
@@ -68,19 +65,17 @@ func WelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 	err := db.QueryRow(fmt.Sprintf("SELECT message FROM welcomemessage WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.message)
 	if err == nil {
 		ctx.Reply("Welcome message is already existing (to reset, use reset_welcome_message command).")
-
 		return nil
-	} else {
-		insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
-		if err != nil {
-			ctx.Reply("An error occurred, please try again.")
-
-			return nil
-		}
-		defer insert.Close()
-
-		ctx.Reply("Welcome message set successfully.")
+	}
+	insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
+	if err != nil {
+		ctx.Reply("An error occurred, please try again.")
 
 		return nil
 	}
+	defer insert.Close()
+
+	ctx.Reply("Welcome message set successfully.")
+
+	return nil
 }

@@ -33,10 +33,9 @@ func UnbanCommand(ctx CommandHandler.Context, _ []string) error {
 			}
 			ctx.Reply("Belirtilen kişinin banı kaldırıldı.")
 			return nil
-		} else {
-			ctx.Reply("Bir üye belirtmelisin.")
-			return nil
 		}
+		ctx.Reply("Bir üye belirtmelisin.")
+		return nil
 	}
 
 	if !multiplexer.CheckBanPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -66,9 +65,7 @@ func UnbanCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("Unbanned specified user.")
 
 		return nil
-	} else {
-		ctx.Reply("You need to specify the user.")
-
-		return nil
 	}
+	ctx.Reply("You need to specify the user.")
+	return nil
 }
