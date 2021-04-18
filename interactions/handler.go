@@ -19,7 +19,7 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 			}
 			embed := embedutil.NewEmbed().
 				SetColor(0xc000ff).
-				SetDescription(fmt.Sprintf("Click [here](https://discord.com/oauth2/authorize?client_id=%s&scope=bot&permissions=8) to invite me!", session.State.User.ID)).MessageEmbed
+				SetDescription(fmt.Sprintf("Click [here](https://discord.com/oauth2/authorize?client_id=%s&scope=applications.commands+bot&permissions=8) to invite me!", session.State.User.ID)).MessageEmbed
 			response := InteractionResponse{
 				Type: InteractionResponseTypeChannelMessageWithSource,
 				Data: InteractionResponseData{
