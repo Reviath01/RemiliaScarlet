@@ -23,7 +23,6 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 				SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
 				SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
 			ctx.ReplyEmbed(avatarembed)
-
 			return nil
 		}
 
@@ -36,15 +35,13 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.ReplyEmbed(avatarembed)
 
 			return nil
-		} else {
-			avatarembed := embedutil.NewEmbed().
-				SetColor(0xff1000).
-				SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
-				SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
-			ctx.ReplyEmbed(avatarembed)
-
-			return nil
 		}
+		avatarembed := embedutil.NewEmbed().
+			SetColor(0xff1000).
+			SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
+			SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
+		ctx.ReplyEmbed(avatarembed)
+		return nil
 	}
 
 	if sql.IsBlocked(ctx.Guild.ID, "avatar") == "true" {
@@ -71,12 +68,11 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.ReplyEmbed(avatarembed)
 
 		return nil
-	} else {
-		avatarembed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
-			SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
-		ctx.ReplyEmbed(avatarembed)
-		return nil
 	}
+	avatarembed := embedutil.NewEmbed().
+		SetColor(0xff1000).
+		SetDescription(fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
+		SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
+	ctx.ReplyEmbed(avatarembed)
+	return nil
 }
