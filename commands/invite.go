@@ -18,7 +18,7 @@ func InviteCommand(ctx CommandHandler.Context, _ []string) error {
 	return nil
 }
 
-func InteractiveInviteCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
+func InteractionInviteCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	embed := embedutil.NewEmbed().
 		SetColor(0xc000ff).
 		SetDescription(fmt.Sprintf("Click [here](https://discord.com/oauth2/authorize?client_id=%s&scope=applications.commands+bot&permissions=8) to invite me!", session.State.User.ID)).MessageEmbed

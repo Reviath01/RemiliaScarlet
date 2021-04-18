@@ -105,6 +105,7 @@ func Start() {
 	if err != nil {
 		return
 	}
+
 	autorolecommand := interactions.Command{
 		Name:        "autorole",
 		Description: "Set auto role.",
@@ -121,6 +122,24 @@ func Start() {
 	err = interactions.GlobalCommandCreate(client, BotID, autorolecommand)
 	if err != nil {
 		return
+	}
+
+	avatarcommand := interactions.Command{
+		Name:        "avatar",
+		Description: "Fetch a user's avatar.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "User",
+				Required:    true,
+				Description: "Mention a user or give an ID",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, avatarcommand)
+	if err != nil {
+		print(err.Error())
 	}
 
 	if err = client.Open(); err != nil {

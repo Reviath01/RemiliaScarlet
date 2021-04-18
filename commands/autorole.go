@@ -78,7 +78,7 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 	}
 }
 
-func InteractiveAutoRoleCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
+func InteractionAutoRoleCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
 
 	type Tag struct {

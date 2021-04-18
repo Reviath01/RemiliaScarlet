@@ -13,21 +13,28 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 			panic(err)
 		}
 		if interaction.Data.Name == "invite" {
-			response := Commands.InteractiveInviteCommand(session, interaction)
+			response := Commands.InteractionInviteCommand(session, interaction)
 			err = interaction.Respond(session, response)
 			if err != nil {
 				return
 			}
 		}
 		if interaction.Data.Name == "author" {
-			response := Commands.InteractiveAuthorCommand(session, interaction)
+			response := Commands.InteractionAuthorCommand(session, interaction)
 			err = interaction.Respond(session, response)
 			if err != nil {
 				return
 			}
 		}
 		if interaction.Data.Name == "autorole" {
-			response := Commands.InteractiveAutoRoleCommand(session, interaction)
+			response := Commands.InteractionAutoRoleCommand(session, interaction)
+			err = interaction.Respond(session, response)
+			if err != nil {
+				return
+			}
+		}
+		if interaction.Data.Name == "avatar" {
+			response := Commands.InteractionAvatarCommand(session, interaction)
 			err = interaction.Respond(session, response)
 			if err != nil {
 				return

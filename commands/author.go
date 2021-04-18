@@ -75,7 +75,7 @@ func AuthorCommand(ctx CommandHandler.Context, _ []string) error {
 	return nil
 }
 
-func InteractiveAuthorCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
+func InteractionAuthorCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	file, _ := ioutil.ReadFile("./config.json")
 
 	type configStruct struct {
