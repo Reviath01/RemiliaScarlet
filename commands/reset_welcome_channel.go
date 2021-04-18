@@ -34,11 +34,9 @@ func ResetWelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Hoş geldin kanalı başarıyla sıfırlandı.")
 
 			return nil
-		} else {
-			ctx.Reply("Hoş geldin kanalı ayarlanmamış, sıfırlayamazsın.")
-
-			return nil
 		}
+		ctx.Reply("Hoş geldin kanalı ayarlanmamış, sıfırlayamazsın.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -60,9 +58,7 @@ func ResetWelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("Successfully reset welcome channel.")
 
 		return nil
-	} else {
-		ctx.Reply("Welcome channel is not existing, so you can't reset.")
-
-		return nil
 	}
+	ctx.Reply("Welcome channel is not existing, so you can't reset.")
+	return nil
 }
