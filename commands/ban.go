@@ -11,6 +11,10 @@ import (
 
 func BanCommand(ctx CommandHandler.Context, _ []string) error {
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+		if !multiplexer.CheckBanPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("Yeterli yetkiye sahip değilsin.")
+			return nil
+		}
 		if sql.IsBlocked(ctx.Guild.ID, "ban") == "true" {
 			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
@@ -30,6 +34,11 @@ func BanCommand(ctx CommandHandler.Context, _ []string) error {
 				}
 			}
 		}
+	}
+
+	if !multiplexer.CheckBanPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		ctx.Reply("You don't have enough permission.")
+		return nil
 	}
 
 	if sql.IsBlocked(ctx.Guild.ID, "ban") == "true" {
