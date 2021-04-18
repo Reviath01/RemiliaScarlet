@@ -19,6 +19,10 @@ func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 	var tag Tag
 
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("Yeterli yetkiye sahip değilsin.")
+			return nil
+		}
 		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
 			ctx.Reply("Bir kanal belirtmelisin.")
 
@@ -47,6 +51,11 @@ func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Bir kanal belirtmelisin.")
 			return nil
 		}
+	}
+
+	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		ctx.Reply("You don't have enough permission.")
+		return nil
 	}
 
 	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
