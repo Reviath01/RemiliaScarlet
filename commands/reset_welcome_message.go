@@ -36,11 +36,9 @@ func ResetWelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Hoş geldin mesajı başarıyla sıfırlandı.")
 
 			return nil
-		} else {
-			ctx.Reply("Hoş geldin mesajı ayarlanmamış, sıfırlayamazsın.")
-
-			return nil
 		}
+		ctx.Reply("Hoş geldin mesajı ayarlanmamış, sıfırlayamazsın.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -59,8 +57,7 @@ func ResetWelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 
 		ctx.Reply("Successfully reset welcome message.")
 		return nil
-	} else {
-		ctx.Reply("Welcome message is not existing, so you can't reset.")
-		return nil
 	}
+	ctx.Reply("Welcome message is not existing, so you can't reset.")
+	return nil
 }
