@@ -35,11 +35,9 @@ func ResetLeaveMessage(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Başarıyla çıkış mesajı sıfırlandı.")
 
 			return nil
-		} else {
-			ctx.Reply("Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
-
-			return nil
 		}
+		ctx.Reply("Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -61,9 +59,7 @@ func ResetLeaveMessage(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("Successfully reset leave message.")
 
 		return nil
-	} else {
-		ctx.Reply("Leave message is not existing, so you can't reset.")
-
-		return nil
 	}
+	ctx.Reply("Leave message is not existing, so you can't reset.")
+	return nil
 }
