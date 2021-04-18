@@ -8,7 +8,8 @@ import (
 )
 
 func Connect() *sql.DB {
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/remilia")
+	ReadConfig()
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", User, Password, Host, Database))
 	if err != nil {
 		fmt.Printf("Cannot connect MySQL database %s\n", err.Error())
 		return nil

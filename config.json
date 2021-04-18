@@ -2,5 +2,9 @@
     "Token": "TOKEN",
     "BotPrefix": "PREFIX",
     "Presence": "PRESENCE",
-    "Owner": "OWNER_ID"
+    "Owner": "OWNER_ID",
+    "Database": "DATABASE_NAME",
+    "User": "USER",
+    "Password": "PASSWORD",
+    "Host": "HOST"
 }

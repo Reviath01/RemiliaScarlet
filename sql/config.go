@@ -1,4 +1,4 @@
-package client
+package sql
 
 import (
 	"encoding/json"
@@ -30,8 +30,6 @@ type configStruct struct {
 }
 
 func ReadConfig() error {
-	fmt.Println("Getting data from config file.")
-
 	file, err := ioutil.ReadFile("./config.json")
 
 	if err != nil {

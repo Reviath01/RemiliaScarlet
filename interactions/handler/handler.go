@@ -1,7 +1,7 @@
 package interactions_handler
 
 import (
-	Commands "git.randomchars.net/Reviath/RemiliaScarlet/commands"
+	"git.randomchars.net/Reviath/RemiliaScarlet/interaction_commands"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"github.com/bwmarrin/discordgo"
 )
@@ -13,28 +13,28 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 			panic(err)
 		}
 		if interaction.Data.Name == "invite" {
-			response := Commands.InteractionInviteCommand(session, interaction)
+			response := interaction_commands.InviteCommand(session, interaction)
 			err = interaction.Respond(session, response)
 			if err != nil {
 				return
 			}
 		}
 		if interaction.Data.Name == "author" {
-			response := Commands.InteractionAuthorCommand(session, interaction)
+			response := interaction_commands.AuthorCommand(session, interaction)
 			err = interaction.Respond(session, response)
 			if err != nil {
 				return
 			}
 		}
 		if interaction.Data.Name == "autorole" {
-			response := Commands.InteractionAutoRoleCommand(session, interaction)
+			response := interaction_commands.AutoRoleCommand(session, interaction)
 			err = interaction.Respond(session, response)
 			if err != nil {
 				return
 			}
 		}
 		if interaction.Data.Name == "avatar" {
-			response := Commands.InteractionAvatarCommand(session, interaction)
+			response := interaction_commands.AvatarCommand(session, interaction)
 			err = interaction.Respond(session, response)
 			if err != nil {
 				return
