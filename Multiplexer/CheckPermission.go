@@ -16,3 +16,8 @@ func CheckManageMessagesPermission(s *discordgo.Session, userID string, channelI
 	p, err := s.State.UserChannelPermissions(userID, channelID)
 	return (err == nil) && (p&discordgo.PermissionManageMessages == discordgo.PermissionManageMessages)
 }
+
+func CheckKickPermission(s *discordgo.Session, userID string, channelID string) bool {
+	p, err := s.State.UserChannelPermissions(userID, channelID)
+	return (err == nil) && (p&discordgo.PermissionKickMembers == discordgo.PermissionKickMembers)
+}
