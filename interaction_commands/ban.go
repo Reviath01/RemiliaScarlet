@@ -10,7 +10,7 @@ import (
 )
 
 func BanCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
-	if multiplexer.CheckPermission(session, interaction.Member.User.ID, interaction.ChannelID) == false {
+	if multiplexer.CheckBanPermission(session, interaction.Member.User.ID, interaction.ChannelID) == false {
 		response := interactions.InteractionResponse{
 			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
 			Data: interactions.InteractionResponseData{
