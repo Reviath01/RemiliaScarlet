@@ -31,10 +31,9 @@ func SlapCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.ReplyEmbed(embed)
 
 			return nil
-		} else {
-			ctx.Reply("Bir üye belirtmelisin.")
-			return nil
 		}
+		ctx.Reply("Bir üye belirtmelisin.")
+		return nil
 	}
 
 	if sql.IsBlocked(ctx.Guild.ID, "slap") == "true" {
@@ -55,8 +54,7 @@ func SlapCommand(ctx CommandHandler.Context, _ []string) error {
 			SetImage("https://images-ext-1.discordapp.net/external/79sCWyD-TmmyjFxlaQIxAkAANAfV529d-LDHNkGDM0M/%3Fitemid%3D10426943/https/media1.tenor.com/images/b6d8a83eb652a30b95e87cf96a21e007/tenor.gif").MessageEmbed
 		ctx.ReplyEmbed(embed)
 		return nil
-	} else {
-		ctx.Reply("You need to specify the user.")
-		return nil
 	}
+	ctx.Reply("You need to specify the user.")
+	return nil
 }
