@@ -36,20 +36,19 @@ func AvatarCommand(session *discordgo.Session, interaction interactions.Interact
 				},
 			}
 			return response
-		} else {
-			avatarembed := embedutil.NewEmbed().
-				SetColor(0xff1000).
-				SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", interaction.Member.User.Username, interaction.Member.User.Discriminator)).
-				SetImage(interaction.Member.User.AvatarURL("1024")).MessageEmbed
-			response := interactions.InteractionResponse{
-				Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-				Data: interactions.InteractionResponseData{
-					TTS:    false,
-					Embeds: []discordgo.MessageEmbed{*avatarembed},
-				},
-			}
-			return response
 		}
+		avatarembed := embedutil.NewEmbed().
+			SetColor(0xff1000).
+			SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", interaction.Member.User.Username, interaction.Member.User.Discriminator)).
+			SetImage(interaction.Member.User.AvatarURL("1024")).MessageEmbed
+		response := interactions.InteractionResponse{
+			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
+			Data: interactions.InteractionResponseData{
+				TTS:    false,
+				Embeds: []discordgo.MessageEmbed{*avatarembed},
+			},
+		}
+		return response
 	}
 
 	if sql.IsBlocked(interaction.GuildID, "avatar") == "true" {
@@ -77,18 +76,17 @@ func AvatarCommand(session *discordgo.Session, interaction interactions.Interact
 			},
 		}
 		return response
-	} else {
-		avatarembed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("Avatar of %s#%s", interaction.Member.User.Username, interaction.Member.User.Discriminator)).
-			SetImage(interaction.Member.User.AvatarURL("1024")).MessageEmbed
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:    false,
-				Embeds: []discordgo.MessageEmbed{*avatarembed},
-			},
-		}
-		return response
 	}
+	avatarembed := embedutil.NewEmbed().
+		SetColor(0xff1000).
+		SetDescription(fmt.Sprintf("Avatar of %s#%s", interaction.Member.User.Username, interaction.Member.User.Discriminator)).
+		SetImage(interaction.Member.User.AvatarURL("1024")).MessageEmbed
+	response := interactions.InteractionResponse{
+		Type: interactions.InteractionResponseTypeChannelMessageWithSource,
+		Data: interactions.InteractionResponseData{
+			TTS:    false,
+			Embeds: []discordgo.MessageEmbed{*avatarembed},
+		},
+	}
+	return response
 }

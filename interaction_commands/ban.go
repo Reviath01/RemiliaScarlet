@@ -41,18 +41,17 @@ func BanCommand(session *discordgo.Session, interaction interactions.Interaction
 				},
 			}
 			return response
-		} else {
-			err = session.GuildBanCreate(interaction.GuildID, u.ID, 0)
-			if err != nil {
-				response := interactions.InteractionResponse{
-					Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-					Data: interactions.InteractionResponseData{
-						TTS:     false,
-						Content: "Yeterli yetkiye sahip değilim",
-					},
-				}
-				return response
+		}
+		err = session.GuildBanCreate(interaction.GuildID, u.ID, 0)
+		if err != nil {
+			response := interactions.InteractionResponse{
+				Type: interactions.InteractionResponseTypeChannelMessageWithSource,
+				Data: interactions.InteractionResponseData{
+					TTS:     false,
+					Content: "Yeterli yetkiye sahip değilim",
+				},
 			}
+			return response
 		}
 	}
 
