@@ -33,21 +33,19 @@ func LeaveChannelCommand(ctx CommandHandler.Context, _ []string) error {
 			if err == nil {
 				ctx.Reply("Çıkış kanalı zaten ayarlanmış reset'lemek için reset_leave_channel komutunu kullanın.")
 				return nil
-			} else {
-				insert, err := db.Query(fmt.Sprintf("INSERT INTO leavechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
-				if err != nil {
-					ctx.Reply("Bir hata oluştu.")
+			}
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO leavechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
+			if err != nil {
+				ctx.Reply("Bir hata oluştu.")
 
-					return nil
-				}
-				defer insert.Close()
-				ctx.Reply("Başarıyla ayarlandı.")
 				return nil
 			}
-		} else {
-			ctx.Reply("Bir kanal belirtmelisin.")
+			defer insert.Close()
+			ctx.Reply("Başarıyla ayarlandı.")
 			return nil
 		}
+		ctx.Reply("Bir kanal belirtmelisin.")
+		return nil
 	}
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
 		ctx.Reply("You don't have enough permission.")
@@ -64,23 +62,20 @@ func LeaveChannelCommand(ctx CommandHandler.Context, _ []string) error {
 		err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM leavechannel WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
 		if err == nil {
 			ctx.Reply("Leave channel is already existing (to reset, use reset_leave_channel command).")
-
 			return nil
-		} else {
-			insert, err := db.Query(fmt.Sprintf("INSERT INTO leavechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
-			if err != nil {
-				ctx.Reply("An error occurred, please try again.")
-
-				return nil
-			}
-			defer insert.Close()
-
-			ctx.Reply("Leave channel set successfully.")
+		}
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO leavechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
+		if err != nil {
+			ctx.Reply("An error occurred, please try again.")
 
 			return nil
 		}
-	} else {
-		ctx.Reply("You need to specify the channel.")
+		defer insert.Close()
+
+		ctx.Reply("Leave channel set successfully.")
+
 		return nil
 	}
+	ctx.Reply("You need to specify the channel.")
+	return nil
 }
