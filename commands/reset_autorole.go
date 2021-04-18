@@ -38,11 +38,9 @@ func ResetAutoroleCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Başarıyla otorol sıfırlandı.")
 
 			return nil
-		} else {
-			ctx.Reply("Otorol ayarlanmadığı için sıfırlanamaz.")
-
-			return nil
 		}
+		ctx.Reply("Otorol ayarlanmadığı için sıfırlanamaz.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -64,9 +62,7 @@ func ResetAutoroleCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("Successfully reset auto role.")
 
 		return nil
-	} else {
-		ctx.Reply("Auto role is not existing, so you can't reset.")
-
-		return nil
 	}
+	ctx.Reply("Auto role is not existing, so you can't reset.")
+	return nil
 }
