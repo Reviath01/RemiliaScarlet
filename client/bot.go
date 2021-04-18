@@ -105,6 +105,23 @@ func Start() {
 	if err != nil {
 		return
 	}
+	autorolecommand := interactions.Command{
+		Name:        "autorole",
+		Description: "Set auto role.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "Role",
+				Required:    true,
+				Description: "This is the role you want to set as auto role",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, autorolecommand)
+	if err != nil {
+		return
+	}
 
 	if err = client.Open(); err != nil {
 		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
