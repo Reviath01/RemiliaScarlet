@@ -86,12 +86,22 @@ func Start() {
 	client.AddHandler(events.Ready)
 	client.AddHandler(interactions_handler.InteractionHandler)
 
-	command := interactions.Command{
+	invitecommand := interactions.Command{
 		Name:        "invite",
 		Description: "Invite the bot.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, command)
+	err = interactions.GlobalCommandCreate(client, BotID, invitecommand)
+	if err != nil {
+		return
+	}
+
+	authorcommand := interactions.Command{
+		Name:        "author",
+		Description: "Check bot's author.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, authorcommand)
 	if err != nil {
 		return
 	}

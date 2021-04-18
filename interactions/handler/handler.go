@@ -13,7 +13,14 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 			panic(err)
 		}
 		if interaction.Data.Name == "invite" {
-			response := Commands.InteractiveInviteCommand(session)
+			response := Commands.InteractiveInviteCommand(session, interaction)
+			err = interaction.Respond(session, response)
+			if err != nil {
+				return
+			}
+		}
+		if interaction.Data.Name == "author" {
+			response := Commands.InteractiveAuthorCommand(session, interaction)
 			err = interaction.Respond(session, response)
 			if err != nil {
 				return
