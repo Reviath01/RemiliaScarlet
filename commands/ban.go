@@ -23,15 +23,14 @@ func BanCommand(ctx CommandHandler.Context, _ []string) error {
 		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
 			ctx.Reply("Bir üye belirtmelisiniz.")
 			return nil
+		}
+		u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
+		if err != nil {
+			ctx.Reply("Bir üye belirtmelisiniz.")
 		} else {
-			u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
+			err = ctx.Session.GuildBanCreate(ctx.Guild.ID, u.ID, 0)
 			if err != nil {
-				ctx.Reply("Bir üye belirtmelisiniz.")
-			} else {
-				err = ctx.Session.GuildBanCreate(ctx.Guild.ID, u.ID, 0)
-				if err != nil {
-					ctx.Reply("Yeterli yetkiye sahip değilim.")
-				}
+				ctx.Reply("Yeterli yetkiye sahip değilim.")
 			}
 		}
 	}
@@ -49,18 +48,17 @@ func BanCommand(ctx CommandHandler.Context, _ []string) error {
 	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
 		ctx.Reply("You need to specify the user.")
 		return nil
+	}
+	u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
+	if err != nil {
+		ctx.Reply("You need to specify the user.")
 	} else {
-		u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
+		err = ctx.Session.GuildBanCreate(ctx.Guild.ID, u.ID, 0)
 		if err != nil {
-			ctx.Reply("You need to specify the user.")
-		} else {
-			err = ctx.Session.GuildBanCreate(ctx.Guild.ID, u.ID, 0)
-			if err != nil {
-				ctx.Reply(fmt.Sprintf("An error occurred %s", err.Error()))
-				return nil
-			}
-			ctx.Reply("Successfully banned user.")
+			ctx.Reply(fmt.Sprintf("An error occurred %s", err.Error()))
+			return nil
 		}
+		ctx.Reply("Successfully banned user.")
 	}
 	return nil
 }
