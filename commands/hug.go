@@ -35,11 +35,9 @@ func HugCommand(ctx CommandHandler.Context, _ []string) error {
 				SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
 			ctx.ReplyEmbed(embed)
 			return nil
-		} else {
-			ctx.Reply("Bir kişiyi etiketlemelisin.")
-
-			return nil
 		}
+		ctx.Reply("Bir kişiyi etiketlemelisin.")
+		return nil
 	}
 
 	if sql.IsBlocked(ctx.Guild.ID, "hug") == "true" {
@@ -68,9 +66,7 @@ func HugCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.ReplyEmbed(embed)
 
 		return nil
-	} else {
-		ctx.Reply("You need to specify the user.")
-
-		return nil
 	}
+	ctx.Reply("You need to specify the user.")
+	return nil
 }
