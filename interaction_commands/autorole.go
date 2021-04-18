@@ -10,6 +10,17 @@ import (
 )
 
 func AutoRoleCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
+	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		response := interactions.InteractionResponse{
+			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
+			Data: interactions.InteractionResponseData{
+				TTS:     false,
+				Content: "You don't have enough permission.",
+			},
+		}
+		return response
+	}
+
 	db := sql.Connect()
 
 	type Tag struct {
