@@ -40,5 +40,12 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 				return
 			}
 		}
+		if interaction.Data.Name == "ban" {
+			response := interaction_commands.BanCommand(session, interaction)
+			err = interaction.Respond(session, response)
+			if err != nil {
+				return
+			}
+		}
 	}
 }
