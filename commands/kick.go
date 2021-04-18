@@ -10,6 +10,10 @@ import (
 
 func KickCommand(ctx CommandHandler.Context, _ []string) error {
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+		if !multiplexer.CheckKickPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("Yeterli yetkiye sahip değilsin.")
+			return nil
+		}
 		if sql.IsBlocked(ctx.Guild.ID, "kick") == "true" {
 			ctx.Reply("This command is blocked on this guild.")
 			return nil
@@ -36,6 +40,11 @@ func KickCommand(ctx CommandHandler.Context, _ []string) error {
 
 			return nil
 		}
+	}
+
+	if !multiplexer.CheckKickPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		ctx.Reply("You don't have enough permission.")
+		return nil
 	}
 
 	if sql.IsBlocked(ctx.Guild.ID, "kick") == "true" {
