@@ -32,10 +32,9 @@ func KissCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.ReplyEmbed(embed)
 
 			return nil
-		} else {
-			ctx.Reply("Bir üye belirtmelisin")
-			return nil
 		}
+		ctx.Reply("Bir üye belirtmelisin")
+		return nil
 	}
 
 	if sql.IsBlocked(ctx.Guild.ID, "kiss") == "true" {
@@ -58,8 +57,7 @@ func KissCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.ReplyEmbed(embed)
 
 		return nil
-	} else {
-		ctx.Reply("You need to specify the user.")
-		return nil
 	}
+	ctx.Reply("You need to specify the user.")
+	return nil
 }
