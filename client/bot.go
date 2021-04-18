@@ -142,6 +142,24 @@ func Start() {
 		print(err.Error())
 	}
 
+	bancommand := interactions.Command{
+		Name:        "ban",
+		Description: "Ban a user.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "User",
+				Required:    true,
+				Description: "Specify a user to ban.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, bancommand)
+	if err != nil {
+		print(err.Error())
+	}
+
 	if err = client.Open(); err != nil {
 		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
 		return
