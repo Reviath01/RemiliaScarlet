@@ -20,14 +20,10 @@ func HelpCommand(context CommandHandler.Context, args []string, commands []*Comm
 				return true
 			}
 
-			break
-
 		case CommandHandler.CommandTypeGuild:
 			if chn == discordgo.ChannelTypeGuildText {
 				return true
 			}
-
-			break
 		}
 
 		return false
@@ -55,11 +51,9 @@ func HelpCommand(context CommandHandler.Context, args []string, commands []*Comm
 			switch command.Type {
 			case CommandHandler.CommandTypePrivate:
 				typestring = "Private"
-				break
 
 			case CommandHandler.CommandTypeGuild:
 				typestring = "Guild-only"
-				break
 			}
 
 			prefixesBuilder := strings.Builder{}
@@ -123,7 +117,7 @@ func HelpCommand(context CommandHandler.Context, args []string, commands []*Comm
 		}
 
 		if commandsSorted[i] == nil {
-			return fmt.Errorf("Sort failure")
+			return fmt.Errorf("sort failure")
 		}
 	}
 
