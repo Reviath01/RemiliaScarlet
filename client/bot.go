@@ -124,6 +124,24 @@ func Start() {
 		return
 	}
 
+	disablecommand := interactions.Command{
+		Name:        "disable",
+		Description: "Disable a command.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "Command",
+				Required:    true,
+				Description: "Specify a command to disable.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, disablecommand)
+	if err != nil {
+		return
+	}
+
 	avatarcommand := interactions.Command{
 		Name:        "avatar",
 		Description: "Fetch a user's avatar.",
