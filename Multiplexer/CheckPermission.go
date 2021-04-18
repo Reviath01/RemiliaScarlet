@@ -6,3 +6,8 @@ func CheckBanPermission(s *discordgo.Session, userID string, channelID string) b
 	p, err := s.State.UserChannelPermissions(userID, channelID)
 	return (err == nil) && (p&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers)
 }
+
+func CheckAdministratorPermission(s *discordgo.Session, userID string, channelID string) bool {
+	p, err := s.State.UserChannelPermissions(userID, channelID)
+	return (err == nil) && (p&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator)
+}
