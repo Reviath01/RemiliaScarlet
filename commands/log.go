@@ -33,22 +33,18 @@ func LogCommand(ctx CommandHandler.Context, _ []string) error {
 			if err == nil {
 				ctx.Reply("Log kanalı zaten ayarlanmış, sıfırlamak için reset_log komutunu kullan.")
 				return nil
-			} else {
-				insert, err := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
-				if err != nil {
-					ctx.Reply("Bir hata oluştu.")
-					return nil
-				}
-				defer insert.Close()
-
-				ctx.Reply("Log kanalı başarıyla ayarlandı!")
-
+			}
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
+			if err != nil {
+				ctx.Reply("Bir hata oluştu.")
 				return nil
 			}
-		} else {
-			ctx.Reply("Log kanalını belirtmelisin.")
+			defer insert.Close()
+			ctx.Reply("Log kanalı başarıyla ayarlandı!")
 			return nil
 		}
+		ctx.Reply("Log kanalını belirtmelisin.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -69,21 +65,16 @@ func LogCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Log is already existing (to reset, use reset_log command).")
 
 			return nil
-		} else {
-			insert, err := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
-			if err != nil {
-				ctx.Reply("An error occurred, please try again.")
-				return nil
-			}
-			defer insert.Close()
-
-			ctx.Reply("Logging channel set successfully.")
-
+		}
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
+		if err != nil {
+			ctx.Reply("An error occurred, please try again.")
 			return nil
 		}
-	} else {
-		ctx.Reply("You need to specify the channel.")
-
+		defer insert.Close()
+		ctx.Reply("Logging channel set successfully.")
 		return nil
 	}
+	ctx.Reply("You need to specify the channel.")
+	return nil
 }
