@@ -34,18 +34,15 @@ func LeaveMessageCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Çıkış mesajı zaten ayarlanmış, reset'lemek için reset_leave_message komutunu kullan.")
 
 			return nil
-		} else {
-			insert, err := db.Query(fmt.Sprintf("INSERT INTO leavemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
-			if err != nil {
-				ctx.Reply("Bir hata oluştu.")
-				return nil
-			}
-			defer insert.Close()
-
-			ctx.Reply("Başarıyla çıkış mesajı ayarlandı.")
-
+		}
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO leavemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
+		if err != nil {
+			ctx.Reply("Bir hata oluştu.")
 			return nil
 		}
+		defer insert.Close()
+		ctx.Reply("Başarıyla çıkış mesajı ayarlandı.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -62,16 +59,13 @@ func LeaveMessageCommand(ctx CommandHandler.Context, _ []string) error {
 	if err == nil {
 		ctx.Reply("Leave message is already existing (to reset, use reset_leave_message command).")
 		return nil
-	} else {
-		insert, err := db.Query(fmt.Sprintf("INSERT INTO leavemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
-		if err != nil {
-			ctx.Reply("An error occurred, please try again.")
-			return nil
-		}
-		defer insert.Close()
-
-		ctx.Reply("Leave message set successfully.")
-
+	}
+	insert, err := db.Query(fmt.Sprintf("INSERT INTO leavemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
+	if err != nil {
+		ctx.Reply("An error occurred, please try again.")
 		return nil
 	}
+	defer insert.Close()
+	ctx.Reply("Leave message set successfully.")
+	return nil
 }
