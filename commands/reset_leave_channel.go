@@ -35,11 +35,9 @@ func ResetLeaveChannel(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Başarıyla çıkış kanalı sıfırlandı.")
 
 			return nil
-		} else {
-			ctx.Reply("Çıkış kanalı ayarlanmamış, yani sıfırlayamazsın.")
-
-			return nil
 		}
+		ctx.Reply("Çıkış kanalı ayarlanmamış, yani sıfırlayamazsın.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -61,9 +59,7 @@ func ResetLeaveChannel(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("Successfully reset leave channel.")
 
 		return nil
-	} else {
-		ctx.Reply("Leave channel is not existing, so you can't reset.")
-
-		return nil
 	}
+	ctx.Reply("Leave channel is not existing, so you can't reset.")
+	return nil
 }
