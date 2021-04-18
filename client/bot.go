@@ -7,6 +7,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/events"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
+	interactions_handler "git.randomchars.net/Reviath/RemiliaScarlet/interactions/handler"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -83,7 +84,7 @@ func Start() {
 	client.AddHandler(events.GuildRoleCreate)
 	client.AddHandler(events.GuildRoleDelete)
 	client.AddHandler(events.Ready)
-	client.AddHandler(interactions.InteractionHandler)
+	client.AddHandler(interactions_handler.InteractionHandler)
 
 	command := interactions.Command{
 		Name:        "invite",
