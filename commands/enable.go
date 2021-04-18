@@ -19,6 +19,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 	var tag Tag
 
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("Yeterli yetkiye sahip değilsin.")
+			return nil
+		}
 		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
 			ctx.Reply("Bir komut belirtmelisin.")
 
@@ -458,7 +462,10 @@ func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 		return nil
 	}
-
+	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		ctx.Reply("You don't have enough permission.")
+		return nil
+	}
 	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
 		ctx.Reply("You need to specify a command.")
 
