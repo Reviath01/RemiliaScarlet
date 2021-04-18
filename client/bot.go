@@ -6,6 +6,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
 	"git.randomchars.net/Reviath/RemiliaScarlet/events"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
+	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -82,6 +83,17 @@ func Start() {
 	client.AddHandler(events.GuildRoleCreate)
 	client.AddHandler(events.GuildRoleDelete)
 	client.AddHandler(events.Ready)
+	client.AddHandler(interactions.InteractionHandler)
+
+	command := interactions.Command{
+		Name:        "invite",
+		Description: "Invite the bot.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, command)
+	if err != nil {
+		return
+	}
 
 	if err = client.Open(); err != nil {
 		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
