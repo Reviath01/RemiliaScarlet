@@ -35,11 +35,9 @@ func ResetLogCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Başarıyla log kanalı sıfırlandı.")
 
 			return nil
-		} else {
-			ctx.Reply("Log kanalı ayarlanmamış, sıfırlayamazsın.")
-
-			return nil
 		}
+		ctx.Reply("Log kanalı ayarlanmamış, sıfırlayamazsın.")
+		return nil
 	}
 
 	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
@@ -60,8 +58,7 @@ func ResetLogCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("Successfully reset log.")
 
 		return nil
-	} else {
-		ctx.Reply("Log channel is not existing, so you can't reset.")
-		return nil
 	}
+	ctx.Reply("Log channel is not existing, so you can't reset.")
+	return nil
 }
