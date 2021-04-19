@@ -160,6 +160,24 @@ func Start() {
 		print(err.Error())
 	}
 
+	embedcommand := interactions.Command{
+		Name:        "embed",
+		Description: "Sends your message as an embed.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "Message",
+				Required:    true,
+				Description: "Specify a message to send as an embed.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, embedcommand)
+	if err != nil {
+		print(err.Error())
+	}
+
 	bancommand := interactions.Command{
 		Name:        "ban",
 		Description: "Ban a user.",
