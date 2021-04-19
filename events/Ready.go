@@ -31,5 +31,5 @@ func Ready(s *discordgo.Session, event *discordgo.Ready) {
 		return
 	}
 
-	s.UpdateStatus(0, config.Presence)
+	s.UpdateGameStatus(0, config.Presence)
 }
