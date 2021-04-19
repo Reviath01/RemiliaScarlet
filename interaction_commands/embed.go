@@ -2,6 +2,7 @@ package interaction_commands
 
 import (
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
@@ -10,14 +11,7 @@ import (
 func EmbedCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	if sql.CheckLanguage(interaction.GuildID) == "tr" {
 		if sql.IsBlocked(interaction.GuildID, "embed") == "true" {
-			response := interactions.InteractionResponse{
-				Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-				Data: interactions.InteractionResponseData{
-					TTS:     false,
-					Content: "Bu komut bu sunucuda engellenmiş.",
-				},
-			}
-			return response
+			return multiplexer.CreateResponse("Bu komut bu sunucuda engellenmiş.")
 		}
 
 		embed := embedutil.NewEmbed().
@@ -34,14 +28,7 @@ func EmbedCommand(session *discordgo.Session, interaction interactions.Interacti
 	}
 
 	if sql.IsBlocked(interaction.GuildID, "embed") == "true" {
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:     false,
-				Content: "This command is blocked on this guild.",
-			},
-		}
-		return response
+		return multiplexer.CreateResponse("This command is blocked on this guild.")
 	}
 
 	embed := embedutil.NewEmbed().
