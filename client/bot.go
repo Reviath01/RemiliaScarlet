@@ -25,11 +25,11 @@ func Start() {
 	BotUsername := u.Username
 	BotDiscriminator := u.Discriminator
 
-	fmt.Printf("Logging in as %s#%s (%s)\n", BotUsername, BotDiscriminator, BotID)
-
 	executor.RunAllCommands(client)
 	executor.RunAllEvents(client)
 	executor.RunAllInteractions(client, BotID)
+
+	fmt.Printf("Logging in as %s#%s (%s)\n", BotUsername, BotDiscriminator, BotID)
 
 	if err = client.Open(); err != nil {
 		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
