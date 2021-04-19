@@ -222,7 +222,7 @@ func permissionCheck(session *discordgo.Session, member *discordgo.Member, guild
 		return nil
 	}
 
-	permissions |= guild.Roles[0].Permissions
+	permissions |= int(guild.Roles[0].Permissions)
 
 	for _, roleID := range member.Roles {
 		var (
@@ -257,19 +257,19 @@ func permissionCheck(session *discordgo.Session, member *discordgo.Member, guild
 			return nil
 		}
 
-		permissions |= role.Permissions
+		permissions |= int(role.Permissions)
 	}
 
 	for _, overwrite := range channel.PermissionOverwrites {
 		if overwrite.ID == member.User.ID {
-			permissions |= overwrite.Allow
-			permissions = permissions &^ overwrite.Deny
+			permissions |= int(overwrite.Allow)
+			permissions = permissions &^ int(overwrite.Deny)
 		}
 
 		for _, roleID := range member.Roles {
 			if overwrite.ID == roleID {
-				permissions |= overwrite.Allow
-				permissions = permissions &^ overwrite.Deny
+				permissions |= int(overwrite.Allow)
+				permissions = permissions &^ int(overwrite.Deny)
 			}
 		}
 	}
