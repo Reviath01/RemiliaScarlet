@@ -2,6 +2,7 @@ package client
 
 import (
 	"fmt"
+	"time"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/executor"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
@@ -28,6 +29,8 @@ func Start() {
 	executor.RunAllCommands(client)
 	executor.RunAllEvents(client)
 	executor.RunAllInteractions(client, BotID)
+
+	time.Sleep(1 * time.Second)
 
 	fmt.Printf("Logging in as %s#%s (%s)\n", BotUsername, BotDiscriminator, BotID)
 
