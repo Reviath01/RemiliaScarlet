@@ -11,89 +11,34 @@ import (
 
 func BanCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	if !multiplexer.CheckBanPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:     false,
-				Content: "You don't have enough permission.",
-			},
-		}
-		return response
+		return multiplexer.CreateResponse("You don't have enough permission.")
 	}
 	if sql.CheckLanguage(interaction.GuildID) == "tr" {
 		if sql.IsBlocked(interaction.GuildID, "ban") == "true" {
-			response := interactions.InteractionResponse{
-				Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-				Data: interactions.InteractionResponseData{
-					TTS:     false,
-					Content: "Bu komut bu sunucuda engellenmiş",
-				},
-			}
-			return response
+			return multiplexer.CreateResponse("Bu komut bu sunucuda engellenmiş")
 		}
 		u, err := session.User(multiplexer.GetUser(interaction.Data.Options[0].Value.(string)))
 		if err != nil {
-			response := interactions.InteractionResponse{
-				Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-				Data: interactions.InteractionResponseData{
-					TTS:     false,
-					Content: "Bir üye belirtmelisiniz",
-				},
-			}
-			return response
+			return multiplexer.CreateResponse("Bir üye belirtmelisin.")
 		}
+
 		err = session.GuildBanCreate(interaction.GuildID, u.ID, 0)
 		if err != nil {
-			response := interactions.InteractionResponse{
-				Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-				Data: interactions.InteractionResponseData{
-					TTS:     false,
-					Content: "Yeterli yetkiye sahip değilim",
-				},
-			}
-			return response
+			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilim.")
 		}
 	}
 
 	if sql.IsBlocked(interaction.GuildID, "ban") == "true" {
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:     false,
-				Content: "This command is blocked on this guild.",
-			},
-		}
-		return response
+		return multiplexer.CreateResponse("This command is blocked on this guild.")
 	}
 
 	u, err := session.User(multiplexer.GetUser(interaction.Data.Options[0].Value.(string)))
 	if err != nil {
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:     false,
-				Content: "You need to specify a user.",
-			},
-		}
-		return response
+		return multiplexer.CreateResponse("You need to specify a user.")
 	}
 	err = session.GuildBanCreate(interaction.GuildID, u.ID, 0)
 	if err != nil {
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:     false,
-				Content: fmt.Sprintf("An error occurred: %s", err.Error()),
-			},
-		}
-		return response
+		return multiplexer.CreateResponse(fmt.Sprintf("An error occurred: %s", err.Error()))
 	}
-	response := interactions.InteractionResponse{
-		Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-		Data: interactions.InteractionResponseData{
-			TTS:     false,
-			Content: "Banned specified user.",
-		},
-	}
-	return response
+	return multiplexer.CreateResponse("Successfully performed ban on specified user.")
 }

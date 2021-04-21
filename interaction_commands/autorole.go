@@ -11,14 +11,7 @@ import (
 
 func AutoRoleCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:     false,
-				Content: "You don't have enough permission.",
-			},
-		}
-		return response
+		return multiplexer.CreateResponse("You don't have enough permission.")
 	}
 
 	db := sql.Connect()
@@ -31,35 +24,14 @@ func AutoRoleCommand(session *discordgo.Session, interaction interactions.Intera
 
 	err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.roleid)
 	if err == nil {
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:     false,
-				Content: "Autorole is already existing.",
-			},
-		}
-		return response
+		return multiplexer.CreateResponse("Autorole is already existing.")
 	}
 
 	if multiplexer.GetRole(interaction.Data.Options[0].Value.(string)) == "Error" {
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:     false,
-				Content: "You need to specify a role.",
-			},
-		}
-		return response
+		return multiplexer.CreateResponse("You need to specify a role.")
 	}
 
 	insert, _ := db.Query(fmt.Sprintf("INSERT INTO autorole (roleid, guildid) VALUES ('%s', '%s')", multiplexer.GetRole(interaction.Data.Options[0].Value.(string)), interaction.GuildID))
 	defer insert.Close()
-	response := interactions.InteractionResponse{
-		Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-		Data: interactions.InteractionResponseData{
-			TTS:     false,
-			Content: "Successfully set autorole.",
-		},
-	}
-	return response
+	return multiplexer.CreateResponse("Successfully set autorole.")
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"github.com/bwmarrin/discordgo"
 )
@@ -12,12 +13,5 @@ func InviteCommand(session *discordgo.Session, interaction interactions.Interact
 	embed := embedutil.NewEmbed().
 		SetColor(0xc000ff).
 		SetDescription(fmt.Sprintf("Click [here](https://discord.com/oauth2/authorize?client_id=%s&scope=applications.commands+bot&permissions=8) to invite me!", session.State.User.ID)).MessageEmbed
-	response := interactions.InteractionResponse{
-		Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-		Data: interactions.InteractionResponseData{
-			TTS:    false,
-			Embeds: []discordgo.MessageEmbed{*embed},
-		},
-	}
-	return response
+	return multiplexer.CreateEmbedResponse(embed)
 }

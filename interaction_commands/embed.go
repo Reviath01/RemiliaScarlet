@@ -17,14 +17,7 @@ func EmbedCommand(session *discordgo.Session, interaction interactions.Interacti
 		embed := embedutil.NewEmbed().
 			SetColor(0xc000ff).
 			SetDescription(interaction.Data.Options[0].Value.(string)).MessageEmbed
-		response := interactions.InteractionResponse{
-			Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-			Data: interactions.InteractionResponseData{
-				TTS:    false,
-				Embeds: []discordgo.MessageEmbed{*embed},
-			},
-		}
-		return response
+		return multiplexer.CreateEmbedResponse(embed)
 	}
 
 	if sql.IsBlocked(interaction.GuildID, "embed") == "true" {
@@ -34,12 +27,5 @@ func EmbedCommand(session *discordgo.Session, interaction interactions.Interacti
 	embed := embedutil.NewEmbed().
 		SetColor(0xc000ff).
 		SetDescription(interaction.Data.Options[0].Value.(string)).MessageEmbed
-	response := interactions.InteractionResponse{
-		Type: interactions.InteractionResponseTypeChannelMessageWithSource,
-		Data: interactions.InteractionResponseData{
-			TTS:    false,
-			Embeds: []discordgo.MessageEmbed{*embed},
-		},
-	}
-	return response
+	return multiplexer.CreateEmbedResponse(embed)
 }
