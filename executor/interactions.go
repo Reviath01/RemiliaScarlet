@@ -10,7 +10,7 @@ import (
 
 func RunAllInteractions(client *discordgo.Session, BotID string) {
 	time.Sleep(2 * time.Second)
-	fmt.Print("Loading interactions... \n")
+	fmt.Print("Loading interactions. \n")
 	invitecommand := interactions.Command{
 		Name:        "invite",
 		Description: "Invite the bot.",
@@ -120,5 +120,4 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
-	fmt.Print("Loaded all interactions. \n")
 }
