@@ -1,6 +1,7 @@
 package events
 
 import (
+	"fmt"
 	"strconv"
 
 	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
@@ -29,8 +30,10 @@ func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 		channeltype = "Stage"
 	} else if strconv.Itoa(int(event.Channel.Type)) == "5" {
 		channeltype = "News"
+	} else if strconv.Itoa(int(event.Channel.Type)) == "4" {
+		channeltype = "Category"
 	} else {
-		channeltype = "Unknown Type (Type ID: " + strconv.Itoa(int(event.Channel.Type))
+		channeltype = fmt.Sprintf("Unknown Type (Type ID: %s)", strconv.Itoa(int(event.Channel.Type)))
 	}
 
 	if sql.CheckLanguage(event.GuildID) == "tr" {
