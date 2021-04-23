@@ -34,7 +34,7 @@ go get github.com/bwmarrin/discordgo
 
 ## Issue
 
-You can open issues [here](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new) or you can come to my Discord [server](https://discord.gg/xqsTvtM2hk).
+You can open issues [here](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new) or you can come to my Discord [server](https://discord.gg/FshmaUh9eV).
 
 
 ## License
