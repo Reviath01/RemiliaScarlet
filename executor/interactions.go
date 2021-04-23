@@ -157,4 +157,13 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+	issuecommand := interactions.Command{
+		Name:        "issue",
+		Description: "Create an issue.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, issuecommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
