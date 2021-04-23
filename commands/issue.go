@@ -11,7 +11,7 @@ func IssueCommand(ctx CommandHandler.Context, _ []string) error {
 		issueembed := embedutil.NewEmbed().
 			SetColor(0xffa935).
 			SetDescription("GitLab üzerinden bir issue oluşturmak için [buraya](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new) tıkla!").
-			AddField("Eğer GitLab kullanmayı bilmiyorsan,", "[Sunucumuza](https://discord.gg/xqsTvtM2hk) gelip sorunu belirtebilirsin.").MessageEmbed
+			AddField("Eğer GitLab kullanmayı bilmiyorsan,", "[Sunucumuza](https://discord.gg/FshmaUh9eV) gelip sorunu belirtebilirsin.").MessageEmbed
 		ctx.ReplyEmbed(issueembed)
 
 		return nil
@@ -19,7 +19,7 @@ func IssueCommand(ctx CommandHandler.Context, _ []string) error {
 	issueembed := embedutil.NewEmbed().
 		SetColor(0xffa935).
 		SetDescription("Click [here](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new) to create an issue on GitLab").
-		AddField("If you don't know how to use GitLab,", "You can come to our [guild](https://discord.gg/xqsTvtM2hk) and specify the problem.").MessageEmbed
+		AddField("If you don't know how to use GitLab,", "You can come to our [guild](https://discord.gg/FshmaUh9eV) and specify the problem.").MessageEmbed
 	ctx.ReplyEmbed(issueembed)
 
 	return nil
