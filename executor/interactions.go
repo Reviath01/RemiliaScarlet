@@ -147,4 +147,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	guildinfocommand := interactions.Command{
+		Name:        "guild_info",
+		Description: "Get information about guild.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, guildinfocommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
