@@ -137,4 +137,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	iconcommand := interactions.Command{
+		Name:        "icon",
+		Description: "Sends server icon.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, iconcommand)
+	if err != nil {
+		print(err.Error())
+	}
 }

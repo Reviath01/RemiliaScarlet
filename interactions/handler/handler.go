@@ -68,5 +68,12 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 				return
 			}
 		}
+		if interaction.Data.Name == "icon" {
+			response := interaction_commands.IconCommand(session, interaction)
+			err = interaction.Respond(session, response)
+			if err != nil {
+				return
+			}
+		}
 	}
 }
