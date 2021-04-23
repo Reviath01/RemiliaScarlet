@@ -15,7 +15,7 @@ func KickCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 		if sql.IsBlocked(ctx.Guild.ID, "kick") == "true" {
-			ctx.Reply("This command is blocked on this guild.")
+			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
 		}
 
