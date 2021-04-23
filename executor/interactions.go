@@ -120,4 +120,21 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+	hugcommand := interactions.Command{
+		Name:        "hug",
+		Description: "Sends hug gif.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "User",
+				Required:    true,
+				Description: "Specify a user to hug.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, hugcommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
