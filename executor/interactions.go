@@ -185,4 +185,22 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	kisscommand := interactions.Command{
+		Name:        "kiss",
+		Description: "Sends kiss gif.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "User",
+				Required:    true,
+				Description: "Specify a user to kiss.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, kisscommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
