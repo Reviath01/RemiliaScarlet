@@ -203,4 +203,21 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+	languagecommand := interactions.Command{
+		Name:        "language",
+		Description: "Set bot language.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "Language",
+				Required:    true,
+				Description: "New language of bot.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, languagecommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
