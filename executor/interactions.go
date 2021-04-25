@@ -203,7 +203,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
-	
+
 	languagecommand := interactions.Command{
 		Name:        "language",
 		Description: "Set bot language.",

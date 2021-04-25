@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
-	"github.com/bwmarrin/discordgo"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
+	"github.com/bwmarrin/discordgo"
 )
 
 func LeaveMessageCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
@@ -20,7 +20,7 @@ func LeaveMessageCommand(session *discordgo.Session, interaction interactions.In
 
 	if sql.CheckLanguage(interaction.GuildID) == "tr" {
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-			return multiplexer.CreateResponse ("Yeterli yetkiye sahip değilsin.")
+			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
 		if len(interaction.Data.Options[0].Value.(string)) > 254 {
 			return multiplexer.CreateResponse("Mesajınız 1 ve 255 karakter aralığında olmalıdır.")
