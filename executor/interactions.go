@@ -257,4 +257,21 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+	logcommand := interactions.Command{
+		Name:        "log",
+		Description: "Set log channel.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "Channel",
+				Required:    true,
+				Description: "Specify a channel.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, logcommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
