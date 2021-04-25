@@ -131,5 +131,12 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 				return
 			}
 		}
+		if interaction.Data.Name == "ping" {
+			response := interaction_commands.PingCommand(session, interaction)
+			err = interaction.Respond(session, response)
+			if err != nil {
+				return
+			}
+		}
 	}
 }

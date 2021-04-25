@@ -257,6 +257,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
 	logcommand := interactions.Command{
 		Name:        "log",
 		Description: "Set log channel.",
@@ -271,6 +272,16 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	}
 
 	err = interactions.GlobalCommandCreate(client, BotID, logcommand)
+	if err != nil {
+		print(err.Error())
+	}
+
+	pingcommand := interactions.Command{
+		Name:        "ping",
+		Description: "Fetch bots ping.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, pingcommand)
 	if err != nil {
 		print(err.Error())
 	}
