@@ -203,6 +203,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+	
 	languagecommand := interactions.Command{
 		Name:        "language",
 		Description: "Set bot language.",
@@ -217,6 +218,24 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	}
 
 	err = interactions.GlobalCommandCreate(client, BotID, languagecommand)
+	if err != nil {
+		print(err.Error())
+	}
+
+	leavechannelcommand := interactions.Command{
+		Name:        "leave_channel",
+		Description: "Set leave channel..",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "Channel",
+				Required:    true,
+				Description: "Specify a channel.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, leavechannelcommand)
 	if err != nil {
 		print(err.Error())
 	}
