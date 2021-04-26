@@ -173,5 +173,12 @@ func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 				return
 			}
 		}
+		if interaction.Data.Name == "reset_welcome_message" {
+			response := interaction_commands.ResetWelcomeMessageCommand(session, interaction)
+			err = interaction.Respond(session, response)
+			if err != nil {
+				return
+			}
+		}
 	}
 }
