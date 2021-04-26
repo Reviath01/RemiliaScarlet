@@ -355,4 +355,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	settings_command := interactions.Command{
+		Name:        "settings",
+		Description: "Get server settings.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, settings_command)
+	if err != nil {
+		print(err.Error())
+	}
 }
