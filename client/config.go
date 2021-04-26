@@ -7,26 +7,28 @@ import (
 )
 
 var (
-	Token     string
-	BotPrefix string
-	Presence  string
-	Owner     string
-	Database  string
-	User      string
-	config    *configStruct
-	Password  string
-	Host      string
+	Token            string
+	BotPrefix        string
+	Presence         string
+	Owner            string
+	LoadInteractions string
+	Database         string
+	User             string
+	config           *configStruct
+	Password         string
+	Host             string
 )
 
 type configStruct struct {
-	Token     string `json:"Token"`
-	BotPrefix string `json:"BotPrefix"`
-	Presence  string `json:"Presence"`
-	Owner     string `json:"Owner"`
-	Database  string `json:"Database"`
-	Host      string `json:"Host"`
-	User      string `json:"User"`
-	Password  string `json:"Password"`
+	Token            string `json:"Token"`
+	BotPrefix        string `json:"BotPrefix"`
+	Presence         string `json:"Presence"`
+	Owner            string `json:"Owner"`
+	LoadInteractions string `json:"LoadInteractions"`
+	Database         string `json:"Database"`
+	Host             string `json:"Host"`
+	User             string `json:"User"`
+	Password         string `json:"Password"`
 }
 
 func ReadConfig() error {
@@ -54,6 +56,7 @@ func ReadConfig() error {
 	Host = config.Host
 	User = config.User
 	Password = config.Password
+	LoadInteractions = config.LoadInteractions
 
 	return nil
 }
