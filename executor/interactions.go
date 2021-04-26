@@ -325,4 +325,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	reset_welcome_message_command := interactions.Command{
+		Name:        "reset_welcome_message",
+		Description: "Reset welcome message.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, reset_welcome_message_command)
+	if err != nil {
+		print(err.Error())
+	}
 }
