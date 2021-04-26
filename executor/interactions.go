@@ -345,4 +345,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	roles_command := interactions.Command{
+		Name:        "roles",
+		Description: "Fetch all roles at your guild.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, roles_command)
+	if err != nil {
+		print(err.Error())
+	}
 }
