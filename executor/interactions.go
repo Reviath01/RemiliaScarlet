@@ -401,4 +401,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	stats_command := interactions.Command{
+		Name:        "stats",
+		Description: "Fetch bot's stats.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, stats_command)
+	if err != nil {
+		print(err.Error())
+	}
 }
