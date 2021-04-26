@@ -1,4 +1,4 @@
-package client
+package config
 
 import (
 	"encoding/json"
@@ -17,6 +17,9 @@ var (
 	config           *configStruct
 	Password         string
 	Host             string
+	WebURL           string
+	ClientID         string
+	ClientSecret     string
 )
 
 type configStruct struct {
@@ -29,11 +32,12 @@ type configStruct struct {
 	Host             string `json:"Host"`
 	User             string `json:"User"`
 	Password         string `json:"Password"`
+	WebURL           string `json:"WebURL"`
+	ClientID         string `json:"ClientID"`
+	ClientSecret     string `json:"ClientSecret"`
 }
 
 func ReadConfig() error {
-	fmt.Println("Getting data from config file.")
-
 	file, err := ioutil.ReadFile("./config.json")
 
 	if err != nil {
@@ -57,6 +61,9 @@ func ReadConfig() error {
 	User = config.User
 	Password = config.Password
 	LoadInteractions = config.LoadInteractions
+	WebURL = config.WebURL
+	ClientID = config.ClientID
+	ClientSecret = config.ClientSecret
 
 	return nil
 }

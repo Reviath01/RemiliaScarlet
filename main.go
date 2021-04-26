@@ -5,6 +5,5 @@ import (
 )
 
 func main() {
-	client.ReadConfig()
 	client.Start()
 }

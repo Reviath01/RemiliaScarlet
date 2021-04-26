@@ -3,13 +3,15 @@ package client
 import (
 	"fmt"
 
+	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"git.randomchars.net/Reviath/RemiliaScarlet/executor"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"github.com/bwmarrin/discordgo"
 )
 
 func Start() {
-	client, err := discordgo.New(fmt.Sprintf("Bot %s", Token))
+	config.ReadConfig()
+	client, err := discordgo.New(fmt.Sprintf("Bot %s", config.Token))
 	if err != nil {
 		fmt.Printf("Creating a session failed: %s.\n", err.Error())
 		return
@@ -27,7 +29,7 @@ func Start() {
 
 	executor.RunAllCommands(client)
 	executor.RunAllEvents(client)
-	if LoadInteractions == "true" {
+	if config.LoadInteractions == "true" {
 		executor.RunAllInteractions(client, BotID)
 	}
 
