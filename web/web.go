@@ -1,6 +1,7 @@
 package web
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -38,7 +39,7 @@ func Listen() {
 				"user": "nil",
 			})
 		}
-		token, err := conf.Exchange(oauth2.NoContext, c.Query("code"))
+		token, err := conf.Exchange(context.TODO(), c.Query("code"))
 		if err != nil {
 			fmt.Println("An error occured while getting token: " + err.Error())
 			return
@@ -66,7 +67,7 @@ func Listen() {
 	})
 
 	server.GET("/invite", func(c *gin.Context) {
-		c.Redirect(http.StatusTemporaryRedirect, "https://discord.com/oauth2/authorize?client_id=811652323159834646&scope=bot&permissions=8")
+		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("https://discord.com/oauth2/authorize?client_id=%s&scope=bot&permissions=8", config.ClientID))
 	})
 
 	server.GET("/", func(c *gin.Context) {
@@ -78,7 +79,7 @@ func Listen() {
 		} else {
 			var token = &oauth2.Token{}
 			_ = jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-			res, err := conf.Client(oauth2.NoContext, token).Get("https://discordapp.com/api/v8/users/@me")
+			res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
 
 			if err != nil || res.StatusCode != 200 {
 				fmt.Println("An error occured on api: " + err.Error())
