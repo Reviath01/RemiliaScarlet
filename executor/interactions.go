@@ -315,4 +315,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	reset_logcommand := interactions.Command{
+		Name:        "reset_log",
+		Description: "Reset log channel.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, reset_logcommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
