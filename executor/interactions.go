@@ -285,4 +285,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	reset_autorolecommand := interactions.Command{
+		Name:        "reset_autorole",
+		Description: "Reset auto role.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, reset_autorolecommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
