@@ -297,11 +297,21 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	}
 
 	reset_leavechannelcommand := interactions.Command{
+		Name:        "reset_leave_channel",
+		Description: "Reset leave channel.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, reset_leavechannelcommand)
+	if err != nil {
+		print(err.Error())
+	}
+
+	reset_leavemessagecommand := interactions.Command{
 		Name:        "reset_leave_message",
 		Description: "Reset leave message.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, reset_leavechannelcommand)
+	err = interactions.GlobalCommandCreate(client, BotID, reset_leavemessagecommand)
 	if err != nil {
 		print(err.Error())
 	}
