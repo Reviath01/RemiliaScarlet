@@ -27,7 +27,9 @@ func Start() {
 
 	executor.RunAllCommands(client)
 	executor.RunAllEvents(client)
-	executor.RunAllInteractions(client, BotID)
+	if LoadInteractions == "true" {
+		executor.RunAllInteractions(client, BotID)
+	}
 
 	fmt.Printf("Logging in as %s#%s (%s)\n", BotUsername, BotDiscriminator, BotID)
 
