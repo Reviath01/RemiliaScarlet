@@ -365,4 +365,22 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	slap_command := interactions.Command{
+		Name:        "slap",
+		Description: "Sends slap gif.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "User",
+				Required:    true,
+				Description: "Specify a user.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, slap_command)
+	if err != nil {
+		print(err.Error())
+	}
 }
