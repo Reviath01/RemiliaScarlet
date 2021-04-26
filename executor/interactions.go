@@ -295,4 +295,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	reset_leavechannelcommand := interactions.Command{
+		Name:        "reset_leave_message",
+		Description: "Reset leave message.",
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, reset_leavechannelcommand)
+	if err != nil {
+		print(err.Error())
+	}
 }
