@@ -3,6 +3,7 @@
     "BotPrefix": "PREFIX",
     "Presence": "PRESENCE",
     "Owner": "OWNER_ID",
+    "LoadInteractions": "true_or_false",
     "Database": "DATABASE_NAME",
     "User": "USER",
     "Password": "PASSWORD",
