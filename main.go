@@ -1,9 +1,7 @@
 package main
 
-import (
-	"git.randomchars.net/Reviath/RemiliaScarlet/client"
-)
+import "git.randomchars.net/Reviath/RemiliaScarlet/web"
 
 func main() {
-	client.Start()
+	web.Listen()
 }

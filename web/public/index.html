@@ -7,15 +7,16 @@
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 body {
-    background-color: #36393F;
+  background-color: #36393F;
 }
 
 </style>
 <body>
     {{if eq .login "nil"}}
-    <!-- NOT LOGGED IN -->
+    <a href="/login">Login</a>
     {{else}}
-    <!-- LOGGED IN -->
+    <h2>Welcome {{.user.Name}}#{{.user.Discriminator}}</h2>
+    <a href="/logout">Logout</a>
     {{end}}
 </body>
 </html>

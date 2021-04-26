@@ -33,6 +33,7 @@ func Listen() {
 	server.GET("/login", func(c *gin.Context) {
 		c.Redirect(http.StatusTemporaryRedirect, conf.AuthCodeURL(state))
 	})
+
 	server.GET("/callback", func(c *gin.Context) {
 		if c.Request.FormValue("state") != state {
 			c.HTML(200, "index.html", gin.H{
