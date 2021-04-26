@@ -383,4 +383,22 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	spoiler_command := interactions.Command{
+		Name:        "spoiler",
+		Description: "Sends your message as spoiler.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "Message",
+				Required:    true,
+				Description: "Specify a message.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, spoiler_command)
+	if err != nil {
+		print(err.Error())
+	}
 }
