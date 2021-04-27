@@ -24,17 +24,9 @@ git clone https://git.randomchars.net/Reviath/RemiliaScarlet
 2. Edit config file (config.json)
 
 
-3. Get required packages
-
-```
-go get github.com/go-sql-driver/mysql
-
-go get github.com/bwmarrin/discordgo
-```
-
 ## Issue
 
-You can open issues [here](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new) or you can come to my Discord [server](https://discord.gg/FshmaUh9eV).
+You can open issues [here](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new).
 
 
 ## License
