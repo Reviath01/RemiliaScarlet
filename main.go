@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	go web.Listen()
-	client.Start()
+	go client.Start()
+	web.Listen()
 }
