@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -25,12 +25,10 @@ func KissCommand(ctx CommandHandler.Context, _ []string) error {
 
 		u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 		if err == nil {
-			embed := embedutil.NewEmbed().
-				SetColor(0xff1000).
-				SetDescription(fmt.Sprintf("<@%s>, <@%s> isimli kişiyi öptü 😘", ctx.Message.Author.ID, u.ID)).
-				SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif").MessageEmbed
+			embed := embedutil.New("", fmt.Sprintf("<@%s>, <@%s> isimli kişiyi öptü 😘", ctx.Message.Author.ID, u.ID))
+			embed.Color = 0xff1000
+			embed.SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif")
 			ctx.ReplyEmbed(embed)
-
 			return nil
 		}
 		ctx.Reply("Bir üye belirtmelisin")
@@ -50,10 +48,9 @@ func KissCommand(ctx CommandHandler.Context, _ []string) error {
 
 	u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 	if err == nil {
-		embed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("<@%s> kisses <@%s>", ctx.Message.Author.ID, u.ID)).
-			SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif").MessageEmbed
+		embed := embedutil.New("", fmt.Sprintf("<@%s> kisses <@%s>", ctx.Message.Author.ID, u.ID))
+		embed.Color = 0xff1000
+		embed.SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif")
 		ctx.ReplyEmbed(embed)
 
 		return nil
