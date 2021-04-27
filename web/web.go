@@ -56,7 +56,7 @@ func Listen(session *discordgo.Session) {
 		}
 		token, err := conf.Exchange(context.TODO(), c.Query("code"))
 		if err != nil {
-			fmt.Println("An error occured while getting token: " + err.Error())
+			fmt.Println("An error occurred while getting token: " + err.Error())
 			return
 		}
 		tokenJSON, err := jsoniter.Marshal(token)
@@ -106,19 +106,19 @@ func Listen(session *discordgo.Session) {
 			res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
 
 			if err != nil || res.StatusCode != 200 {
-				fmt.Println("An error occured on api: " + err.Error())
+				fmt.Println("An error occurred on api: " + err.Error())
 				return
 			}
 			var user discordgo.User
 			data, _ := ioutil.ReadAll(res.Body)
 			err = json.Unmarshal(data, &user)
 			if err != nil {
-				fmt.Println("An error occured on api: " + err.Error())
+				fmt.Println("An error occurred on api: " + err.Error())
 				return
 			}
 
 			if err != nil {
-				fmt.Println("An error occured: " + err.Error())
+				fmt.Println("An error occurred: " + err.Error())
 			} else {
 				c.HTML(200, "index.html", gin.H{
 					"login": "yes",
