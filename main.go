@@ -9,6 +9,7 @@ import (
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"git.randomchars.net/Reviath/RemiliaScarlet/executor"
+	interactions_handler "git.randomchars.net/Reviath/RemiliaScarlet/interactions/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/web"
 	"github.com/bwmarrin/discordgo"
 )
@@ -34,6 +35,8 @@ func main() {
 	if config.LoadInteractions == "true" {
 		executor.RunAllInteractions(client, BotID)
 	}
+
+	client.AddHandler(interactions_handler.InteractionHandler)
 
 	fmt.Printf("Logging in as %s#%s (%s)\n", BotUsername, BotDiscriminator, BotID)
 
