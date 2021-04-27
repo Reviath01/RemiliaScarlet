@@ -12,6 +12,7 @@ import (
 
 func SettingsCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
+	defer db.Close()
 
 	Guild, _ := session.Guild(interaction.GuildID)
 

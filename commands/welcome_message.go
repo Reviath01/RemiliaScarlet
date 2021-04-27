@@ -14,6 +14,7 @@ type WelcomeMessage struct {
 
 func WelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		message string

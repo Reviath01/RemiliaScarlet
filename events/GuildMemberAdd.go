@@ -9,6 +9,7 @@ import (
 
 func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid      string

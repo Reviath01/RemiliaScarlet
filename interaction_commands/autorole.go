@@ -15,6 +15,7 @@ func AutoRoleCommand(session *discordgo.Session, interaction interactions.Intera
 	}
 
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		roleid string

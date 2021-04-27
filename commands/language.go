@@ -10,6 +10,7 @@ import (
 
 func LanguageCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
+	defer db.Close()
 
 	args := multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())
 

@@ -10,6 +10,7 @@ import (
 
 func ResetLeaveChannel(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid string

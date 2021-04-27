@@ -11,6 +11,7 @@ import (
 
 func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid string

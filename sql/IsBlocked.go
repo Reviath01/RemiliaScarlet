@@ -4,6 +4,7 @@ import "fmt"
 
 func IsBlocked(guildid string, commandname string) string {
 	db := Connect()
+	defer db.Close()
 	type Tag struct {
 		isblocked string
 	}

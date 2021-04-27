@@ -10,6 +10,7 @@ import (
 
 func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid string

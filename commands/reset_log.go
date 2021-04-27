@@ -10,6 +10,7 @@ import (
 
 func ResetLogCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid string

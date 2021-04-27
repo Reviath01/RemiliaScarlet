@@ -9,6 +9,7 @@ import (
 
 func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove) {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid    string

@@ -8,6 +8,7 @@ import (
 
 func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid string

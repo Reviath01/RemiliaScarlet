@@ -11,6 +11,7 @@ import (
 
 func ResetLeaveChannel(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid string

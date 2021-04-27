@@ -10,6 +10,7 @@ import (
 
 func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 	db := sql.Connect()
+	defer db.Close()
 
 	type Tag struct {
 		channelid string
