@@ -77,7 +77,7 @@ func HelpCommand(context CommandHandler.Context, args []string, commands []*Comm
 				aliases = "`" + aliases + "`"
 			}
 
-			_, err := context.ReplyEmbed(&discordgo.MessageEmbed{
+			_, err := context.ReplyDiscordgoEmbed(&discordgo.MessageEmbed{
 				Title:       "Help",
 				Color:       0x08a4ff,
 				Description: fmt.Sprintf("**%s**\nAliases: %s\nOwner only: **%s**\nUsable: **%s**", command.Description, aliases, owneronlystring, typestring),
@@ -161,6 +161,6 @@ func HelpCommand(context CommandHandler.Context, args []string, commands []*Comm
 
 	embed.Footer = &discordgo.MessageEmbedFooter{Text: footer.String()}
 
-	_, err := context.ReplyEmbed(embed)
+	_, err := context.ReplyDiscordgoEmbed(embed)
 	return err
 }
