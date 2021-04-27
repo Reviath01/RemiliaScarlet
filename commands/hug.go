@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -29,10 +29,9 @@ func HugCommand(ctx CommandHandler.Context, _ []string) error {
 
 				return nil
 			}
-			embed := embedutil.NewEmbed().
-				SetColor(0xff1000).
-				SetDescription(fmt.Sprintf("<@%s>, <@%s> isimli kişiye sarıldı 💖", ctx.Message.Author.ID, u.ID)).
-				SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
+			embed := embedutil.New("", fmt.Sprintf("<@%s>, <@%s> isimli kişiye sarıldı 💖", ctx.Message.Author.ID, u.ID))
+			embed.Color = 0xff1000
+			embed.SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif")
 			ctx.ReplyEmbed(embed)
 			return nil
 		}
@@ -59,10 +58,9 @@ func HugCommand(ctx CommandHandler.Context, _ []string) error {
 
 			return nil
 		}
-		embed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("<@%s> hugs <@%s>", ctx.Message.Author.ID, u.ID)).
-			SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
+		embed := embedutil.New("", fmt.Sprintf("<@%s> hugs <@%s>", ctx.Message.Author.ID, u.ID))
+		embed.Color = 0xff1000
+		embed.SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif")
 		ctx.ReplyEmbed(embed)
 
 		return nil
