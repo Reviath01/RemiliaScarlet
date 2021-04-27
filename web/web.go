@@ -36,6 +36,11 @@ func Listen(session *discordgo.Session) {
 		Scopes:       []string{discord.ScopeIdentify},
 		Endpoint:     discord.Endpoint,
 	}
+
+	server.NoRoute(func(c *gin.Context) {
+		c.HTML(200, "404.html", gin.H{})
+	})
+
 	server.GET("/login", func(c *gin.Context) {
 		c.Redirect(http.StatusTemporaryRedirect, conf.AuthCodeURL(state))
 	})
@@ -80,6 +85,10 @@ func Listen(session *discordgo.Session) {
 
 	server.GET("/invite", func(c *gin.Context) {
 		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("https://discord.com/oauth2/authorize?client_id=%s&scope=bot+applications.commands&permissions=8", config.ClientID))
+	})
+
+	server.GET("/support", func(c *gin.Context) {
+		c.Redirect(http.StatusTemporaryRedirect, "https://discord.gg/zVVWWDtSr2")
 	})
 
 	server.GET("/", func(c *gin.Context) {
