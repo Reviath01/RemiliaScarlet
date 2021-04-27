@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -18,28 +18,25 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 
 		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
-			avatarembed := embedutil.NewEmbed().
-				SetColor(0xff1000).
-				SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
-				SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
+			avatarembed := embedutil.New("", fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator))
+			avatarembed.Color = 0xff1000
+			avatarembed.SetImage(ctx.Message.Author.AvatarURL("1024"))
 			ctx.ReplyEmbed(avatarembed)
 			return nil
 		}
 
 		u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 		if err == nil {
-			avatarembed := embedutil.NewEmbed().
-				SetColor(0xff1000).
-				SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", u.Username, u.Discriminator)).
-				SetImage(u.AvatarURL("1024")).MessageEmbed
+			avatarembed := embedutil.New("", fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", u.Username, u.Discriminator))
+			avatarembed.Color = 0xff1000
+			avatarembed.SetImage(u.AvatarURL("1024"))
 			ctx.ReplyEmbed(avatarembed)
 
 			return nil
 		}
-		avatarembed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
-			SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
+		avatarembed := embedutil.New("", fmt.Sprintf("%s#%s isimli kişinin profil fotoğrafı", ctx.Message.Author.Username, ctx.Message.Author.Discriminator))
+		avatarembed.Color = 0xff1000
+		avatarembed.SetImage(ctx.Message.Author.AvatarURL("1024"))
 		ctx.ReplyEmbed(avatarembed)
 		return nil
 	}
@@ -50,29 +47,24 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 	}
 
 	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
-		avatarembed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
-			SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
+		avatarembed := embedutil.New("", fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator))
+		avatarembed.Color = 0xff1000
+		avatarembed.SetImage(ctx.Message.Author.AvatarURL("1024"))
 		ctx.ReplyEmbed(avatarembed)
-
 		return nil
 	}
 
 	u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 	if err == nil {
-		avatarembed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("Avatar of %s#%s", u.Username, u.Discriminator)).
-			SetImage(u.AvatarURL("1024")).MessageEmbed
+		avatarembed := embedutil.New("", fmt.Sprintf("Avatar of %s#%s", u.Username, u.Discriminator))
+		avatarembed.Color = 0xff1000
+		avatarembed.SetImage(u.AvatarURL("1024"))
 		ctx.ReplyEmbed(avatarembed)
-
 		return nil
 	}
-	avatarembed := embedutil.NewEmbed().
-		SetColor(0xff1000).
-		SetDescription(fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator)).
-		SetImage(ctx.Message.Author.AvatarURL("1024")).MessageEmbed
+	avatarembed := embedutil.New("", fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator))
+	avatarembed.Color = 0xff1000
+	avatarembed.SetImage(ctx.Message.Author.AvatarURL("1024"))
 	ctx.ReplyEmbed(avatarembed)
 	return nil
 }
