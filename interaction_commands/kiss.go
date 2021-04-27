@@ -3,7 +3,7 @@ package interaction_commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -18,10 +18,9 @@ func KissCommand(session *discordgo.Session, interaction interactions.Interactio
 
 		u, err := session.User(multiplexer.GetUser(interaction.Data.Options[0].Value.(string)))
 		if err == nil {
-			embed := embedutil.NewEmbed().
-				SetColor(0xff1000).
-				SetDescription(fmt.Sprintf("<@%s>, <@%s> isimli kişiyi öptü 😘", interaction.Member.User.ID, u.ID)).
-				SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif").MessageEmbed
+			embed := embedutil.New("", fmt.Sprintf("<@%s>, <@%s> isimli kişiyi öptü 😘", interaction.Member.User.ID, u.ID))
+			embed.Color = 0xff1000
+			embed.SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif")
 			return multiplexer.CreateEmbedResponse(embed)
 		}
 		return multiplexer.CreateResponse("Bir üye belirtmelisin")
@@ -33,10 +32,9 @@ func KissCommand(session *discordgo.Session, interaction interactions.Interactio
 
 	u, err := session.User(multiplexer.GetUser(interaction.Data.Options[0].Value.(string)))
 	if err == nil {
-		embed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("<@%s> kisses <@%s>", interaction.Member.User.ID, u.ID)).
-			SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif").MessageEmbed
+		embed := embedutil.New("", fmt.Sprintf("<@%s> kisses <@%s>", interaction.Member.User.ID, u.ID))
+		embed.Color = 0xff1000
+		embed.SetImage("https://media.tenor.com/images/d68747a5865b12c465e5dff31c65d5c2/tenor.gif")
 		return multiplexer.CreateEmbedResponse(embed)
 	}
 	return multiplexer.CreateResponse("You need to specify the user.")

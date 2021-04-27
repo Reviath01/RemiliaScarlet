@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"git.randomchars.net/Reviath/RemiliaScarlet/executor"
-	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/web"
 	"github.com/bwmarrin/discordgo"
 )
@@ -30,8 +31,6 @@ func main() {
 	BotUsername := u.Username
 	BotDiscriminator := u.Discriminator
 
-	executor.RunAllCommands(client)
-	executor.RunAllEvents(client)
 	if config.LoadInteractions == "true" {
 		executor.RunAllInteractions(client, BotID)
 	}
@@ -47,9 +46,15 @@ func main() {
 		return
 	}
 
-	CommandHandler.WaitForInterrupt()
+	WaitForInterrupt()
 
 	fmt.Println("Shutting down.")
 	client.Close()
 	os.Exit(1)
+}
+
+func WaitForInterrupt() {
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
+	<-sc
 }

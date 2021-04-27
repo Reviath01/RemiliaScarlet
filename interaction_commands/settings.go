@@ -3,7 +3,7 @@ package interaction_commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -80,15 +80,14 @@ func SettingsCommand(session *discordgo.Session, interaction interactions.Intera
 			logchannel = "Ayarlanmamış."
 		}
 
-		embed := embedutil.NewEmbed().
-			SetTitle(Guild.Name+" Settings").
-			AddField("Hoş Geldin Kanalı:", welcomechannel).
-			AddField("Çıkış Kanalı:", leavechannel).
-			AddField("Otorol:", autorole).
-			AddField("Çıkış Mesajı:", leavemsg).
-			AddField("Hoş Geldin Mesajı:", welcomemsg).
-			AddField("Log Kanalı:", logchannel).
-			SetColor(0x00f0ff).MessageEmbed
+		embed := embedutil.New(Guild.Name+" Settings", "")
+		embed.AddField("Hoş Geldin Kanalı:", welcomechannel, true)
+		embed.AddField("Çıkış Kanalı:", leavechannel, true)
+		embed.AddField("Otorol:", autorole, true)
+		embed.AddField("Çıkış Mesajı:", leavemsg, true)
+		embed.AddField("Hoş Geldin Mesajı:", welcomemsg, true)
+		embed.AddField("Log Kanalı:", logchannel, true)
+		embed.Color = 0x00f0ff
 
 		return multiplexer.CreateEmbedResponse(embed)
 	}
@@ -139,14 +138,13 @@ func SettingsCommand(session *discordgo.Session, interaction interactions.Intera
 		logchannel = "Not existing."
 	}
 
-	embed := embedutil.NewEmbed().
-		SetTitle(Guild.Name+" Settings").
-		AddField("Welcome Channel:", welcomechannel).
-		AddField("Leave Channel:", leavechannel).
-		AddField("Autorole:", autorole).
-		AddField("Leave Message:", leavemsg).
-		AddField("Welcome Message:", welcomemsg).
-		AddField("Log Channel:", logchannel).
-		SetColor(0x00f0ff).MessageEmbed
+	embed := embedutil.New(Guild.Name+" Settings", "")
+	embed.AddField("Welcome Channel:", welcomechannel, true)
+	embed.AddField("Leave Channel:", leavechannel, true)
+	embed.AddField("Autorole:", autorole, true)
+	embed.AddField("Leave Message:", leavemsg, true)
+	embed.AddField("Welcome Message:", welcomemsg, true)
+	embed.AddField("Log Channel:", logchannel, true)
+	embed.Color = 0x00f0ff
 	return multiplexer.CreateEmbedResponse(embed)
 }

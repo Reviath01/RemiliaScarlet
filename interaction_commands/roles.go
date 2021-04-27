@@ -3,7 +3,7 @@ package interaction_commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -22,8 +22,8 @@ func RolesCommand(session *discordgo.Session, interaction interactions.Interacti
 		for _, i := range Guild.Roles {
 			roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
 		}
-		embed := embedutil.NewEmbed().
-			AddField("Roller:", roles).MessageEmbed
+		embed := embedutil.New("", "")
+		embed.AddField("Roller:", roles, true)
 		return multiplexer.CreateEmbedResponse(embed)
 	}
 	if sql.IsBlocked(interaction.GuildID, "roles") == "true" {
@@ -32,8 +32,8 @@ func RolesCommand(session *discordgo.Session, interaction interactions.Interacti
 	for _, i := range Guild.Roles {
 		roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
 	}
-	embed := embedutil.NewEmbed().
-		AddField("Roles:", roles).MessageEmbed
+	embed := embedutil.New("", "")
+	embed.AddField("Roles:", roles, true)
 
 	return multiplexer.CreateEmbedResponse(embed)
 }

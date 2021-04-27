@@ -1,7 +1,7 @@
 package interaction_commands
 
 import (
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -15,9 +15,9 @@ func IconCommand(session *discordgo.Session, interaction interactions.Interactio
 			return multiplexer.CreateResponse("Bu komut bu sunucuda engellenmiş.")
 		}
 
-		iconembed := embedutil.NewEmbed().
-			SetColor(0x00f6ff).
-			SetImage(guild.IconURL()).MessageEmbed
+		iconembed := embedutil.New("", "")
+		iconembed.Color = 0x00f6ff
+		iconembed.SetImage(guild.IconURL())
 		return multiplexer.CreateEmbedResponse(iconembed)
 	}
 
@@ -25,8 +25,8 @@ func IconCommand(session *discordgo.Session, interaction interactions.Interactio
 		return multiplexer.CreateResponse("This command is blocked on this guild.")
 	}
 
-	iconembed := embedutil.NewEmbed().
-		SetColor(0x00f6ff).
-		SetImage(guild.IconURL()).MessageEmbed
+	iconembed := embedutil.New("", "")
+	iconembed.Color = 0x00f6ff
+	iconembed.SetImage(guild.IconURL())
 	return multiplexer.CreateEmbedResponse(iconembed)
 }

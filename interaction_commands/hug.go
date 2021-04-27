@@ -3,7 +3,7 @@ package interaction_commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -21,10 +21,9 @@ func HugCommand(session *discordgo.Session, interaction interactions.Interaction
 			if u.ID == interaction.Member.User.ID {
 				return multiplexer.CreateResponse("Kendine sarılamazsın")
 			}
-			embed := embedutil.NewEmbed().
-				SetColor(0xff1000).
-				SetDescription(fmt.Sprintf("<@%s>, <@%s> isimli kişiye sarıldı 💖", interaction.Member.User.ID, u.ID)).
-				SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
+			embed := embedutil.New("", fmt.Sprintf("<@%s>, <@%s> isimli kişiye sarıldı 💖", interaction.Member.User.ID, u.ID))
+			embed.Color = 0xff1000
+			embed.SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif")
 			return multiplexer.CreateEmbedResponse(embed)
 		}
 		return multiplexer.CreateResponse("Bir kişiyi etiketlemelisin.")
@@ -39,10 +38,9 @@ func HugCommand(session *discordgo.Session, interaction interactions.Interaction
 		if u.ID == interaction.Member.User.ID {
 			return multiplexer.CreateResponse("You can't hug yourself.")
 		}
-		embed := embedutil.NewEmbed().
-			SetColor(0xff1000).
-			SetDescription(fmt.Sprintf("<@%s> hugs <@%s>", interaction.Member.User.ID, u.ID)).
-			SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif").MessageEmbed
+		embed := embedutil.New("", fmt.Sprintf("<@%s> hugs <@%s>", interaction.Member.User.ID, u.ID))
+		embed.Color = 0xff1000
+		embed.SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif")
 		return multiplexer.CreateEmbedResponse(embed)
 	}
 	return multiplexer.CreateResponse("You need to specify the user.")

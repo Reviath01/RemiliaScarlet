@@ -3,7 +3,7 @@ package interaction_commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -16,9 +16,8 @@ func SpoilerCommand(session *discordgo.Session, interaction interactions.Interac
 			return multiplexer.CreateResponse("Bu komut bu sunucuda engellenmiş.")
 		}
 
-		spoilerembed := embedutil.NewEmbed().
-			SetColor(0xe9ff00).
-			SetDescription(fmt.Sprintf("|| %s ||", interaction.Data.Options[0].Value.(string))).MessageEmbed
+		spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", interaction.Data.Options[0].Value.(string)))
+		spoilerembed.Color = 0xe9ff00
 		return multiplexer.CreateEmbedResponse(spoilerembed)
 	}
 
@@ -26,8 +25,7 @@ func SpoilerCommand(session *discordgo.Session, interaction interactions.Interac
 		return multiplexer.CreateResponse("This command is blocked on this guild.")
 	}
 
-	spoilerembed := embedutil.NewEmbed().
-		SetColor(0xe9ff00).
-		SetDescription(fmt.Sprintf("|| %s ||", interaction.Data.Options[0].Value.(string))).MessageEmbed
+	spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", interaction.Data.Options[0].Value.(string)))
+	spoilerembed.Color = 0xe9ff00
 	return multiplexer.CreateEmbedResponse(spoilerembed)
 }
