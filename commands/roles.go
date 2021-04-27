@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
@@ -21,8 +21,8 @@ func RolesCommand(ctx CommandHandler.Context, _ []string) error {
 			roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
 		}
 
-		embed := embedutil.NewEmbed().
-			AddField("Roller:", roles).MessageEmbed
+		embed := embedutil.New("", "")
+		embed.AddField("Roller:", roles, true)
 
 		ctx.ReplyEmbed(embed)
 
@@ -38,10 +38,9 @@ func RolesCommand(ctx CommandHandler.Context, _ []string) error {
 		roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
 	}
 
-	embed := embedutil.NewEmbed().
-		AddField("Roles:", roles).MessageEmbed
+	embed := embedutil.New("", "")
+	embed.AddField("Roles:", roles, true)
 
 	ctx.ReplyEmbed(embed)
-
 	return nil
 }
