@@ -3,7 +3,7 @@ package commands
 import (
 	"strings"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -24,10 +24,9 @@ func StartVoteCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Oylama başlatmak için bir mesaj belirtmelisin.")
 			return nil
 		}
-		embed := embedutil.NewEmbed().
-			SetTitle("Oylama Başladı!").
-			SetColor(0xff9100).
-			AddField("Oylama Sorusu:", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")).MessageEmbed
+		embed := embedutil.New("Oylama Başladı!", "")
+		embed.Color = 0xff9100
+		embed.AddField("Oylama Sorusu:", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), true)
 		msg, err := ctx.ReplyEmbed(embed)
 		if err != nil {
 			return nil
@@ -52,10 +51,9 @@ func StartVoteCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("You need to specify a message.")
 		return nil
 	}
-	embed := embedutil.NewEmbed().
-		SetTitle("Vote started!").
-		SetColor(0xff9100).
-		AddField("Vote question:", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")).MessageEmbed
+	embed := embedutil.New("Vote started!", "")
+	embed.Color = 0xff9100
+	embed.AddField("Vote question:", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), true)
 	msg, err := ctx.ReplyEmbed(embed)
 
 	if err != nil {
