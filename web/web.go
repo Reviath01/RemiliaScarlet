@@ -44,15 +44,14 @@ func Listen() {
 		if err != nil {
 			fmt.Println("An error occured while getting token: " + err.Error())
 			return
-		} else {
-			tokenJSON, err := jsoniter.Marshal(token)
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
-			c.SetCookie("key", string(tokenJSON), 60*60*24*7, "/", "localhost", false, false)
-			c.Redirect(http.StatusTemporaryRedirect, "/")
 		}
+		tokenJSON, err := jsoniter.Marshal(token)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		c.SetCookie("key", string(tokenJSON), 60*60*24*7, "/", "localhost", false, false)
+		c.Redirect(http.StatusTemporaryRedirect, "/")
 	})
 
 	server.GET("/logout", func(c *gin.Context) {
