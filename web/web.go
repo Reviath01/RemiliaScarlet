@@ -113,6 +113,7 @@ func Listen() {
 	fmt.Printf("Attempting to run website at \"%s\" \n", config.WebURL)
 	time.Sleep(1 * time.Second)
 	if err := server.Run(config.WebURL[7:]); err != nil {
-		fmt.Printf("Cannot run website at \"%s\", passing.\n", config.WebURL)
+		fmt.Printf("Cannot run website at \"%s\", running on http://localhost:8000.\n", config.WebURL)
+		server.Run(":8000")
 	}
 }
