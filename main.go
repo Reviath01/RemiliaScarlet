@@ -39,7 +39,7 @@ func main() {
 
 	time.Sleep(1 * time.Second)
 
-	go web.Listen()
+	go web.Listen(client)
 
 	if err = client.Open(); err != nil {
 		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
