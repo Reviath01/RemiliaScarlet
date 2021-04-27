@@ -65,10 +65,10 @@ func AuthorCommand(ctx CommandHandler.Context, _ []string) error {
 		return nil
 	}
 
-	authorembed := embedutil.NewEmbed().
-		SetColor(0x007bff).
-		AddField("My Author:", fmt.Sprintf("<@%s> ([%s#%s](https://discord.com/users/%s))", u.ID, u.Username, u.Discriminator, u.ID)).MessageEmbed
-	_, _ = ctx.ReplyEmbed(authorembed)
+	authorembed := embedutil.New("", "")
+	authorembed.Color = 0x007bff
+	authorembed.AddField("My Author:", fmt.Sprintf("<@%s> ([%s#%s](https://discord.com/users/%s))", u.ID, u.Username, u.Discriminator, u.ID), true)
+	ctx.ReplyEmbed(authorembed)
 
 	return nil
 }
