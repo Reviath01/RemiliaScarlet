@@ -2,12 +2,14 @@ package executor
 
 import (
 	"fmt"
+	"time"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"github.com/bwmarrin/discordgo"
 )
 
 func RunAllInteractions(client *discordgo.Session, BotID string) {
+	time.Sleep(2 * time.Second)
 	fmt.Print("Loading interactions. \n")
 	invitecommand := interactions.Command{
 		Name:        "invite",

@@ -110,5 +110,6 @@ func Listen() {
 			}
 		}
 	})
+	fmt.Printf("Website is ready at %s \n", config.WebURL)
 	server.Run(config.WebURL[7:])
 }

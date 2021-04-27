@@ -1,7 +1,11 @@
 package main
 
-import "git.randomchars.net/Reviath/RemiliaScarlet/web"
+import (
+	"git.randomchars.net/Reviath/RemiliaScarlet/client"
+	"git.randomchars.net/Reviath/RemiliaScarlet/web"
+)
 
 func main() {
-	web.Listen()
+	go web.Listen()
+	client.Start()
 }
