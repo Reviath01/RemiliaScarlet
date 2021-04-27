@@ -23,7 +23,6 @@ func Listen(session *discordgo.Session) {
 	server := gin.Default()
 	server.LoadHTMLGlob("web/public/*.html")
 	server.Static("/css", "./web/public/css")
-	server.Static("/js", "./web/public/js")
 
 	cli, _ := session.User(config.ClientID)
 	avatarURL := cli.AvatarURL("1024")
