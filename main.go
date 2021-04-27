@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
@@ -49,7 +50,6 @@ func main() {
 	CommandHandler.WaitForInterrupt()
 
 	fmt.Println("Shutting down.")
-	if err := client.Close(); err != nil {
-		fmt.Printf("Closing the session failed. \"%s\". Ignoring.\n", err.Error())
-	}
+	client.Close()
+	os.Exit(1)
 }
