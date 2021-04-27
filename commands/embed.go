@@ -3,7 +3,7 @@ package commands
 import (
 	"strings"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -21,9 +21,8 @@ func EmbedCommand(ctx CommandHandler.Context, _ []string) error {
 
 			return nil
 		}
-		embed := embedutil.NewEmbed().
-			SetColor(0xc000ff).
-			SetDescription(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")).MessageEmbed
+		embed := embedutil.New("", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "))
+		embed.Color = 0xc000ff
 		ctx.ReplyEmbed(embed)
 
 		return nil
@@ -40,10 +39,8 @@ func EmbedCommand(ctx CommandHandler.Context, _ []string) error {
 
 		return nil
 	}
-	embed := embedutil.NewEmbed().
-		SetColor(0xc000ff).
-		SetDescription(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")).MessageEmbed
+	embed := embedutil.New("", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "))
+	embed.Color = 0xc000ff
 	ctx.ReplyEmbed(embed)
-
 	return nil
 }
