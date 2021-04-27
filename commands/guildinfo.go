@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
@@ -16,16 +16,16 @@ func GuildInfoCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 
-		embed := embedutil.NewEmbed().
-			SetColor(0xefff00).
-			AddField("Sunucu İsmi", ctx.Guild.Name).
-			AddField("Kişi Sayısı", strconv.Itoa(ctx.Guild.MemberCount)).
-			AddField("Bölge", ctx.Guild.Region).
-			AddField("Sunucu Sahibi", fmt.Sprintf("<@%s>", ctx.Guild.OwnerID)).
-			AddField("Sunucu Sahibinin ID'si", ctx.Guild.OwnerID).
-			AddField("Afk Süresi", strconv.Itoa(ctx.Guild.AfkTimeout)).
-			AddField("ID:", ctx.Guild.ID).
-			AddField("Yer", ctx.Guild.PreferredLocale).MessageEmbed
+		embed := embedutil.New("", "")
+		embed.Color = 0xefff00
+		embed.AddField("Sunucu İsmi", ctx.Guild.Name, true)
+		embed.AddField("Kişi Sayısı", strconv.Itoa(ctx.Guild.MemberCount), true)
+		embed.AddField("Bölge", ctx.Guild.Region, true)
+		embed.AddField("Sunucu Sahibi", fmt.Sprintf("<@%s>", ctx.Guild.OwnerID), true)
+		embed.AddField("Sunucu Sahibinin ID'si", ctx.Guild.OwnerID, true)
+		embed.AddField("Afk Süresi", strconv.Itoa(ctx.Guild.AfkTimeout), true)
+		embed.AddField("ID:", ctx.Guild.ID, true)
+		embed.AddField("Yer", ctx.Guild.PreferredLocale, true)
 		ctx.ReplyEmbed(embed)
 
 		return nil
@@ -36,17 +36,16 @@ func GuildInfoCommand(ctx CommandHandler.Context, _ []string) error {
 		return nil
 	}
 
-	embed := embedutil.NewEmbed().
-		SetColor(0xefff00).
-		AddField("Guild Name", ctx.Guild.Name).
-		AddField("Member Count", strconv.Itoa(ctx.Guild.MemberCount)).
-		AddField("Region", ctx.Guild.Region).
-		AddField("Guild Owner", fmt.Sprintf("<@%s>", ctx.Guild.OwnerID)).
-		AddField("Guild Owner ID", ctx.Guild.OwnerID).
-		AddField("Afk Timeout", strconv.Itoa(ctx.Guild.AfkTimeout)).
-		AddField("ID:", ctx.Guild.ID).
-		AddField("Locale", ctx.Guild.PreferredLocale).MessageEmbed
+	embed := embedutil.New("", "")
+	embed.Color = 0xefff00
+	embed.AddField("Guild Name", ctx.Guild.Name, true)
+	embed.AddField("Member Count", strconv.Itoa(ctx.Guild.MemberCount), true)
+	embed.AddField("Region", ctx.Guild.Region, true)
+	embed.AddField("Guild Owner", fmt.Sprintf("<@%s>", ctx.Guild.OwnerID), true)
+	embed.AddField("Guild Owner ID", ctx.Guild.OwnerID, true)
+	embed.AddField("Afk Timeout", strconv.Itoa(ctx.Guild.AfkTimeout), true)
+	embed.AddField("ID:", ctx.Guild.ID, true)
+	embed.AddField("Locale", ctx.Guild.PreferredLocale, true)
 	ctx.ReplyEmbed(embed)
-
 	return nil
 }
