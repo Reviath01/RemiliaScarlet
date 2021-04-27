@@ -1,7 +1,7 @@
 package commands
 
 import (
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
@@ -13,10 +13,10 @@ func IconCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 
-		iconeembed := embedutil.NewEmbed().
-			SetColor(0x00f6ff).
-			SetImage(ctx.Guild.IconURL()).MessageEmbed
-		ctx.ReplyEmbed(iconeembed)
+		iconembed := embedutil.New("", "")
+		iconembed.Color = 0x00f6ff
+		iconembed.SetImage(ctx.Guild.IconURL())
+		ctx.ReplyEmbed(iconembed)
 
 		return nil
 	}
@@ -26,10 +26,10 @@ func IconCommand(ctx CommandHandler.Context, _ []string) error {
 		return nil
 	}
 
-	iconeembed := embedutil.NewEmbed().
-		SetColor(0x00f6ff).
-		SetImage(ctx.Guild.IconURL()).MessageEmbed
-	ctx.ReplyEmbed(iconeembed)
+	iconembed := embedutil.New("", "")
+	iconembed.Color = 0x00f6ff
+	iconembed.SetImage(ctx.Guild.IconURL())
+	ctx.ReplyEmbed(iconembed)
 
 	return nil
 }
