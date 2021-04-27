@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	embedutil "git.randomchars.net/Reviath/RemiliaScarlet/EmbedUtil"
+	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
@@ -21,9 +21,8 @@ func SpoilerCommand(ctx CommandHandler.Context, _ []string) error {
 			ctx.Reply("Spoiler olarak gönderilecek mesajı belirtmelisin.")
 			return nil
 		}
-		spoilerembed := embedutil.NewEmbed().
-			SetColor(0xe9ff00).
-			SetDescription(fmt.Sprintf("|| %s ||", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "))).MessageEmbed
+		spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")))
+		spoilerembed.Color = 0xe9ff00
 		ctx.ReplyEmbed(spoilerembed)
 		return nil
 	}
@@ -38,9 +37,8 @@ func SpoilerCommand(ctx CommandHandler.Context, _ []string) error {
 
 		return nil
 	}
-	spoilerembed := embedutil.NewEmbed().
-		SetColor(0xe9ff00).
-		SetDescription(fmt.Sprintf("|| %s ||", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "))).MessageEmbed
+	spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")))
+	spoilerembed.Color = 0xe9ff00
 	ctx.ReplyEmbed(spoilerembed)
 
 	return nil
