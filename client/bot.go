@@ -2,10 +2,12 @@ package client
 
 import (
 	"fmt"
+	"time"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"git.randomchars.net/Reviath/RemiliaScarlet/executor"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
+	"git.randomchars.net/Reviath/RemiliaScarlet/web"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -34,6 +36,10 @@ func Start() {
 	}
 
 	fmt.Printf("Logging in as %s#%s (%s)\n", BotUsername, BotDiscriminator, BotID)
+
+	time.Sleep(1 * time.Second)
+
+	go web.Listen()
 
 	if err = client.Open(); err != nil {
 		fmt.Printf("Opening the session failed: \"%s\".\n", err.Error())
