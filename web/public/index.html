@@ -4,11 +4,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/bootstrap.css">
+    <title>{{.botusername}}</title>
 </head>
 <body class="bg-dark text-light">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg p-3 mb-5 rounded">
     <img src="{{.botavatar}}" class="shadow-lg" style="width:40px; height:40px; float: left; border-radius: 50%;"/>&emsp;
-   <a class="navbar-brand" href="/">{{.botusername}}</a>
+   <a class="navbar-brand" href="{{.botlink}}">{{.botusername}}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -21,12 +22,12 @@
         </li>
   {{else}}
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       {{.user.Name}}
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li><a class="dropdown-item" href="/features">Features</a></li>
-      <li><a class="dropdown-item" href="/servers">Servers</a></li>
+      <li><a class="dropdown-item" href="/logout">Logout</a></li>
     </ul>
   </li>
 </ul>

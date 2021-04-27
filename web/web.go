@@ -27,6 +27,7 @@ func Listen(session *discordgo.Session) {
 	cli, _ := session.User(config.ClientID)
 	avatarURL := cli.AvatarURL("1024")
 	userName := cli.Username
+	botID := cli.ID
 
 	conf := &oauth2.Config{
 		RedirectURL:  fmt.Sprintf("%s/callback", config.WebURL),
@@ -45,6 +46,7 @@ func Listen(session *discordgo.Session) {
 				"user":        "nil",
 				"botavatar":   avatarURL,
 				"botusername": userName,
+				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
 			})
 		}
 		token, err := conf.Exchange(context.TODO(), c.Query("code"))
@@ -71,6 +73,7 @@ func Listen(session *discordgo.Session) {
 				"login":       "nil",
 				"botavatar":   avatarURL,
 				"botusername": userName,
+				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
 			})
 		}
 	})
@@ -86,6 +89,7 @@ func Listen(session *discordgo.Session) {
 				"login":       "nil",
 				"botavatar":   avatarURL,
 				"botusername": userName,
+				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
 			})
 		} else {
 			var token = &oauth2.Token{}
@@ -118,6 +122,7 @@ func Listen(session *discordgo.Session) {
 					},
 					"botavatar":   avatarURL,
 					"botusername": userName,
+					"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
 				})
 			}
 		}
