@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"github.com/bwmarrin/discordgo"
@@ -109,6 +110,9 @@ func Listen() {
 			}
 		}
 	})
-	fmt.Printf("Website is ready at %s \n", config.WebURL)
-	server.Run(config.WebURL[7:])
+	fmt.Printf("Attempting to run website at \"%s\" \n", config.WebURL)
+	time.Sleep(1 * time.Second)
+	if err := server.Run(config.WebURL[7:]); err != nil {
+		fmt.Printf("Cannot run website at \"%s\", passing.\n", config.WebURL)
+	}
 }
