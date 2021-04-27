@@ -2,26 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Remilia Scarlet</title>
+    <link rel="stylesheet" href="css/index.css"/>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-
-body {
-  background-color: #36393F;
-}
-
-</style>
 <body>
     {{if eq .login "nil"}}
     <a href="/login">Login</a>
     {{else}}
-      {{if eq .user.Bot true}}
-      <h2>Bot's cannot login.</h2>
-      <a href="/logout">Logout</a>
-      {{else}}
     <h2>Welcome {{.user.Name}}#{{.user.Discriminator}}</h2>
     <a href="/logout">Logout</a>
-    {{end}}
     {{end}}
 </body>
 </html>

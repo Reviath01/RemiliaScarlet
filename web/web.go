@@ -68,7 +68,7 @@ func Listen() {
 	})
 
 	server.GET("/invite", func(c *gin.Context) {
-		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("https://discord.com/oauth2/authorize?client_id=%s&scope=bot&permissions=8", config.ClientID))
+		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("https://discord.com/oauth2/authorize?client_id=%s&scope=bot+applications.commands&permissions=8", config.ClientID))
 	})
 
 	server.GET("/", func(c *gin.Context) {
