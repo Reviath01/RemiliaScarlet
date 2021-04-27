@@ -16,13 +16,18 @@ import (
 	"golang.org/x/oauth2"
 )
 
-func Listen() {
+func Listen(session *discordgo.Session) {
 	config.ReadConfig()
 	gin.SetMode(gin.ReleaseMode)
 	var state = "random"
 	server := gin.Default()
 	server.LoadHTMLGlob("web/public/*.html")
 	server.Static("/css", "./web/public/css")
+	server.Static("/js", "./web/public/js")
+
+	cli, _ := session.User(config.ClientID)
+	avatarURL := cli.AvatarURL("1024")
+	userName := cli.Username
 
 	conf := &oauth2.Config{
 		RedirectURL:  fmt.Sprintf("%s/callback", config.WebURL),
@@ -38,7 +43,9 @@ func Listen() {
 	server.GET("/callback", func(c *gin.Context) {
 		if c.Request.FormValue("state") != state {
 			c.HTML(200, "index.html", gin.H{
-				"user": "nil",
+				"user":        "nil",
+				"botavatar":   avatarURL,
+				"botusername": userName,
 			})
 		}
 		token, err := conf.Exchange(context.TODO(), c.Query("code"))
@@ -62,7 +69,9 @@ func Listen() {
 			c.Redirect(http.StatusTemporaryRedirect, "/")
 		} else {
 			c.HTML(200, "index.html", gin.H{
-				"login": "nil",
+				"login":       "nil",
+				"botavatar":   avatarURL,
+				"botusername": userName,
 			})
 		}
 	})
@@ -75,7 +84,9 @@ func Listen() {
 		val, _ := c.Cookie("key")
 		if val == "" {
 			c.HTML(200, "index.html", gin.H{
-				"login": "nil",
+				"login":       "nil",
+				"botavatar":   avatarURL,
+				"botusername": userName,
 			})
 		} else {
 			var token = &oauth2.Token{}
@@ -106,6 +117,8 @@ func Listen() {
 						Discriminator: user.Discriminator,
 						Bot:           user.Bot,
 					},
+					"botavatar":   avatarURL,
+					"botusername": userName,
 				})
 			}
 		}
