@@ -13,5 +13,6 @@ func RunAllEvents(client *discordgo.Session) {
 	client.AddHandler(events.Ready)
 	client.AddHandler(events.GuildMemberRemove)
 	client.AddHandler(events.ChannelCreate)
+	client.AddHandler(events.ChannelDelete)
 	client.AddHandler(interactions_handler.InteractionHandler)
 }
