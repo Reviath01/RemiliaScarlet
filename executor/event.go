@@ -8,6 +8,7 @@ import (
 
 func RunAllEvents(client *discordgo.Session) {
 	client.AddHandler(events.GuildMemberAdd)
+	client.AddHandler(events.GuildRoleDelete)
 	client.AddHandler(events.Ready)
 	client.AddHandler(interactions_handler.InteractionHandler)
 }
