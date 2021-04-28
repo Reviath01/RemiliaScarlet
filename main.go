@@ -27,6 +27,8 @@ func main() {
 		fmt.Printf("Fetching client user failed: %s.\n", err.Error())
 	}
 
+	client.Identify.Intents = discordgo.IntentsAll
+
 	BotID := u.ID
 	BotUsername := u.Username
 	BotDiscriminator := u.Discriminator
