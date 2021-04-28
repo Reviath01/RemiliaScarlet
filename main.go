@@ -36,6 +36,7 @@ func main() {
 	}
 
 	executor.RunAllEvents(client)
+	executor.RunAllCommands(client)
 
 	fmt.Printf("Logging in as %s#%s (%s)\n", BotUsername, BotDiscriminator, BotID)
 
