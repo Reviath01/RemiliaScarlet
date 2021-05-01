@@ -409,4 +409,22 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 	if err != nil {
 		print(err.Error())
 	}
+
+	unban_command := interactions.Command{
+		Name:        "unban",
+		Description: "Unban a user.",
+		Options: []interactions.CommandOption{
+			{
+				Type:        interactions.OptionTypeString,
+				Name:        "User",
+				Required:    true,
+				Description: "Specify a user.",
+			},
+		},
+	}
+
+	err = interactions.GlobalCommandCreate(client, BotID, unban_command)
+	if err != nil {
+		print(err.Error())
+	}
 }

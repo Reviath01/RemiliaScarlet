@@ -136,6 +136,7 @@ func Listen(session *discordgo.Session) {
 			}
 		}
 	})
+
 	fmt.Printf("Attempting to run website at \"%s\" \n", config.WebURL)
 	time.Sleep(1 * time.Second)
 	if err := server.Run(config.WebURL[7:]); err != nil {
