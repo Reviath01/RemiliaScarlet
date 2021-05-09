@@ -11,7 +11,8 @@ import (
 func RolesCommand(ctx CommandHandler.Context, _ []string) error {
 	var roles string
 
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if sql.IsBlocked(ctx.Guild.ID, "roles") == "true" {
 			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
@@ -27,20 +28,20 @@ func RolesCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.ReplyEmbed(embed)
 
 		return nil
-	}
+	default:
+		if sql.IsBlocked(ctx.Guild.ID, "roles") == "true" {
+			ctx.Reply("This command is blocked on this guild.")
+			return nil
+		}
 
-	if sql.IsBlocked(ctx.Guild.ID, "roles") == "true" {
-		ctx.Reply("This command is blocked on this guild.")
+		for _, i := range ctx.Guild.Roles {
+			roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
+		}
+
+		embed := embedutil.New("", "")
+		embed.AddField("Roles:", roles, true)
+
+		ctx.ReplyEmbed(embed)
 		return nil
 	}
-
-	for _, i := range ctx.Guild.Roles {
-		roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
-	}
-
-	embed := embedutil.New("", "")
-	embed.AddField("Roles:", roles, true)
-
-	ctx.ReplyEmbed(embed)
-	return nil
 }

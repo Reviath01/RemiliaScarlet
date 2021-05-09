@@ -15,7 +15,8 @@ import (
 var startTime = time.Now()
 
 func StatsCommand(ctx CommandHandler.Context, _ []string) error {
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if sql.IsBlocked(ctx.Guild.ID, "stats") == "true" {
 			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
@@ -31,21 +32,22 @@ func StatsCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.ReplyEmbed(statembed)
 
 		return nil
-	}
+	default:
 
-	if sql.IsBlocked(ctx.Guild.ID, "stats") == "true" {
-		ctx.Reply("This command is blocked on this guild.")
+		if sql.IsBlocked(ctx.Guild.ID, "stats") == "true" {
+			ctx.Reply("This command is blocked on this guild.")
+			return nil
+		}
+
+		statembed := embedutil.New("Stats", "")
+		statembed.Color = 0x00ff03
+		statembed.AddField("Uptime", multiplexer.GetDuration(time.Since(startTime)), true)
+		statembed.AddField("Go version", runtime.Version(), true)
+		statembed.AddField("Discordgo version", discordgo.VERSION, true)
+		statembed.AddField("Server size", strconv.Itoa(len(ctx.Session.State.Guilds)), true)
+		statembed.AddField("Goroutines", strconv.Itoa(runtime.NumGoroutine()), true)
+		ctx.ReplyEmbed(statembed)
+
 		return nil
 	}
-
-	statembed := embedutil.New("Stats", "")
-	statembed.Color = 0x00ff03
-	statembed.AddField("Uptime", multiplexer.GetDuration(time.Since(startTime)), true)
-	statembed.AddField("Go version", runtime.Version(), true)
-	statembed.AddField("Discordgo version", discordgo.VERSION, true)
-	statembed.AddField("Server size", strconv.Itoa(len(ctx.Session.State.Guilds)), true)
-	statembed.AddField("Goroutines", strconv.Itoa(runtime.NumGoroutine()), true)
-	ctx.ReplyEmbed(statembed)
-
-	return nil
 }

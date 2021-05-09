@@ -18,7 +18,8 @@ func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 
 	var tag Tag
 
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
@@ -48,36 +49,37 @@ func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 		ctx.Reply("Bir kanal belirtmelisin.")
 		return nil
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
-		ctx.Reply("You don't have enough permission.")
-		return nil
-	}
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("You don't have enough permission.")
+			return nil
+		}
 
-	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
-		ctx.Reply("You need to specify the channel.")
+		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
+			ctx.Reply("You need to specify the channel.")
 
-		return nil
-	}
-	c, err := ctx.Session.Channel(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
-	if err == nil {
-		err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM welcomechannel WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
+			return nil
+		}
+		c, err := ctx.Session.Channel(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 		if err == nil {
-			ctx.Reply("Welcome channel is already existing (to reset, use reset_welcome_channel command).")
+			err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM welcomechannel WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
+			if err == nil {
+				ctx.Reply("Welcome channel is already existing (to reset, use reset_welcome_channel command).")
 
+				return nil
+			}
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
+			if err != nil {
+				ctx.Reply("An error occurred, please try again.")
+				return nil
+			}
+			defer insert.Close()
+
+			ctx.Reply("Welcome channel set successfully.")
 			return nil
 		}
-		insert, err := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
-		if err != nil {
-			ctx.Reply("An error occurred, please try again.")
-			return nil
-		}
-		defer insert.Close()
-
-		ctx.Reply("Welcome channel set successfully.")
+		ctx.Reply("You need to specify the channel.")
 		return nil
 	}
-	ctx.Reply("You need to specify the channel.")
-	return nil
 }

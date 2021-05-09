@@ -17,7 +17,8 @@ func LeaveChannelCommand(ctx CommandHandler.Context, _ []string) error {
 	}
 
 	var tag Tag
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
@@ -46,36 +47,37 @@ func LeaveChannelCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 		ctx.Reply("Bir kanal belirtmelisin.")
 		return nil
-	}
-	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
-		ctx.Reply("You don't have enough permission.")
-		return nil
-	}
-	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
-		ctx.Reply("You need to specify the channel.")
+	default:
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("You don't have enough permission.")
+			return nil
+		}
+		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
+			ctx.Reply("You need to specify the channel.")
 
-		return nil
-	}
+			return nil
+		}
 
-	c, err := ctx.Session.Channel(multiplexer.GetChannel(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
-	if err == nil {
-		err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM leavechannel WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
+		c, err := ctx.Session.Channel(multiplexer.GetChannel(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
 		if err == nil {
-			ctx.Reply("Leave channel is already existing (to reset, use reset_leave_channel command).")
-			return nil
-		}
-		insert, err := db.Query(fmt.Sprintf("INSERT INTO leavechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
-		if err != nil {
-			ctx.Reply("An error occurred, please try again.")
+			err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM leavechannel WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.channelid)
+			if err == nil {
+				ctx.Reply("Leave channel is already existing (to reset, use reset_leave_channel command).")
+				return nil
+			}
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO leavechannel (channelid, guildid) VALUES ('%s', '%s')", c.ID, ctx.Guild.ID))
+			if err != nil {
+				ctx.Reply("An error occurred, please try again.")
+
+				return nil
+			}
+			defer insert.Close()
+
+			ctx.Reply("Leave channel set successfully.")
 
 			return nil
 		}
-		defer insert.Close()
-
-		ctx.Reply("Leave channel set successfully.")
-
+		ctx.Reply("You need to specify the channel.")
 		return nil
 	}
-	ctx.Reply("You need to specify the channel.")
-	return nil
 }

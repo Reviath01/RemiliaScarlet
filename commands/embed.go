@@ -10,7 +10,8 @@ import (
 )
 
 func EmbedCommand(ctx CommandHandler.Context, _ []string) error {
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if sql.IsBlocked(ctx.Guild.ID, "embed") == "true" {
 			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
@@ -27,20 +28,20 @@ func EmbedCommand(ctx CommandHandler.Context, _ []string) error {
 
 		return nil
 
-	}
+	default:
+		if sql.IsBlocked(ctx.Guild.ID, "embed") == "true" {
+			ctx.Reply("This command is blocked on this guild.")
+			return nil
+		}
 
-	if sql.IsBlocked(ctx.Guild.ID, "embed") == "true" {
-		ctx.Reply("This command is blocked on this guild.")
+		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
+			ctx.Reply("You need to specify the message.")
+
+			return nil
+		}
+		embed := embedutil.New("", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "))
+		embed.Color = 0xc000ff
+		ctx.ReplyEmbed(embed)
 		return nil
 	}
-
-	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
-		ctx.Reply("You need to specify the message.")
-
-		return nil
-	}
-	embed := embedutil.New("", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "))
-	embed.Color = 0xc000ff
-	ctx.ReplyEmbed(embed)
-	return nil
 }

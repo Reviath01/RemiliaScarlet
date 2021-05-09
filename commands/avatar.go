@@ -11,7 +11,8 @@ import (
 )
 
 func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if sql.IsBlocked(ctx.Guild.ID, "avatar") == "true" {
 			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
@@ -39,32 +40,34 @@ func AvatarCommand(ctx CommandHandler.Context, _ []string) error {
 		avatarembed.SetImage(ctx.Message.Author.AvatarURL("1024"))
 		ctx.ReplyEmbed(avatarembed)
 		return nil
-	}
 
-	if sql.IsBlocked(ctx.Guild.ID, "avatar") == "true" {
-		ctx.Reply("This command is blocked on this guild.")
-		return nil
-	}
+	default:
 
-	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
+		if sql.IsBlocked(ctx.Guild.ID, "avatar") == "true" {
+			ctx.Reply("This command is blocked on this guild.")
+			return nil
+		}
+
+		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
+			avatarembed := embedutil.New("", fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator))
+			avatarembed.Color = 0xff1000
+			avatarembed.SetImage(ctx.Message.Author.AvatarURL("1024"))
+			ctx.ReplyEmbed(avatarembed)
+			return nil
+		}
+
+		u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
+		if err == nil {
+			avatarembed := embedutil.New("", fmt.Sprintf("Avatar of %s#%s", u.Username, u.Discriminator))
+			avatarembed.Color = 0xff1000
+			avatarembed.SetImage(u.AvatarURL("1024"))
+			ctx.ReplyEmbed(avatarembed)
+			return nil
+		}
 		avatarembed := embedutil.New("", fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator))
 		avatarembed.Color = 0xff1000
 		avatarembed.SetImage(ctx.Message.Author.AvatarURL("1024"))
 		ctx.ReplyEmbed(avatarembed)
 		return nil
 	}
-
-	u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
-	if err == nil {
-		avatarembed := embedutil.New("", fmt.Sprintf("Avatar of %s#%s", u.Username, u.Discriminator))
-		avatarembed.Color = 0xff1000
-		avatarembed.SetImage(u.AvatarURL("1024"))
-		ctx.ReplyEmbed(avatarembed)
-		return nil
-	}
-	avatarembed := embedutil.New("", fmt.Sprintf("Avatar of %s#%s", ctx.Message.Author.Username, ctx.Message.Author.Discriminator))
-	avatarembed.Color = 0xff1000
-	avatarembed.SetImage(ctx.Message.Author.AvatarURL("1024"))
-	ctx.ReplyEmbed(avatarembed)
-	return nil
 }

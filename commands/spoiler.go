@@ -11,7 +11,8 @@ import (
 )
 
 func SpoilerCommand(ctx CommandHandler.Context, _ []string) error {
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if sql.IsBlocked(ctx.Guild.ID, "spoiler") == "true" {
 			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
@@ -25,21 +26,22 @@ func SpoilerCommand(ctx CommandHandler.Context, _ []string) error {
 		spoilerembed.Color = 0xe9ff00
 		ctx.ReplyEmbed(spoilerembed)
 		return nil
-	}
+	default:
 
-	if sql.IsBlocked(ctx.Guild.ID, "spoiler") == "true" {
-		ctx.Reply("This command is blocked on this guild.")
+		if sql.IsBlocked(ctx.Guild.ID, "spoiler") == "true" {
+			ctx.Reply("This command is blocked on this guild.")
+			return nil
+		}
+
+		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
+			ctx.Reply("You need to specify the message.")
+
+			return nil
+		}
+		spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")))
+		spoilerembed.Color = 0xe9ff00
+		ctx.ReplyEmbed(spoilerembed)
+
 		return nil
 	}
-
-	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
-		ctx.Reply("You need to specify the message.")
-
-		return nil
-	}
-	spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")))
-	spoilerembed.Color = 0xe9ff00
-	ctx.ReplyEmbed(spoilerembed)
-
-	return nil
 }

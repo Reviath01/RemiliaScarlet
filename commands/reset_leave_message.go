@@ -17,7 +17,8 @@ func ResetLeaveMessage(ctx CommandHandler.Context, _ []string) error {
 
 	var tag Tag
 
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
@@ -38,28 +39,29 @@ func ResetLeaveMessage(ctx CommandHandler.Context, _ []string) error {
 		}
 		ctx.Reply("Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
 		return nil
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
-		ctx.Reply("You don't have enough permission.")
-		return nil
-	}
-
-	err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.message)
-	if err == nil {
-		delete, err := db.Query(fmt.Sprintf("DELETE FROM leavemessage WHERE guildid ='%s'", ctx.Guild.ID))
-		if err != nil {
-			ctx.Reply("An error occurred, please try again.")
-
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("You don't have enough permission.")
 			return nil
 		}
 
-		defer delete.Close()
+		err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.message)
+		if err == nil {
+			delete, err := db.Query(fmt.Sprintf("DELETE FROM leavemessage WHERE guildid ='%s'", ctx.Guild.ID))
+			if err != nil {
+				ctx.Reply("An error occurred, please try again.")
 
-		ctx.Reply("Successfully reset leave message.")
+				return nil
+			}
 
+			defer delete.Close()
+
+			ctx.Reply("Successfully reset leave message.")
+
+			return nil
+		}
+		ctx.Reply("Leave message is not existing, so you can't reset.")
 		return nil
 	}
-	ctx.Reply("Leave message is not existing, so you can't reset.")
-	return nil
 }

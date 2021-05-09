@@ -18,7 +18,8 @@ func LeaveMessageCommand(ctx CommandHandler.Context, _ []string) error {
 
 	var tag Tag
 
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
@@ -43,29 +44,30 @@ func LeaveMessageCommand(ctx CommandHandler.Context, _ []string) error {
 		defer insert.Close()
 		ctx.Reply("Başarıyla çıkış mesajı ayarlandı.")
 		return nil
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
-		ctx.Reply("You don't have enough permission.")
-		return nil
-	}
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("You don't have enough permission.")
+			return nil
+		}
 
-	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 || len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) > 254 {
-		ctx.Reply("Your message must be between 1 and 255 characters.")
-		return nil
-	}
+		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 || len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) > 254 {
+			ctx.Reply("Your message must be between 1 and 255 characters.")
+			return nil
+		}
 
-	err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.message)
-	if err == nil {
-		ctx.Reply("Leave message is already existing (to reset, use reset_leave_message command).")
+		err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.message)
+		if err == nil {
+			ctx.Reply("Leave message is already existing (to reset, use reset_leave_message command).")
+			return nil
+		}
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO leavemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
+		if err != nil {
+			ctx.Reply("An error occurred, please try again.")
+			return nil
+		}
+		defer insert.Close()
+		ctx.Reply("Leave message set successfully.")
 		return nil
 	}
-	insert, err := db.Query(fmt.Sprintf("INSERT INTO leavemessage (message, guildid) VALUES ('%s', '%s')", strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " "), ctx.Guild.ID))
-	if err != nil {
-		ctx.Reply("An error occurred, please try again.")
-		return nil
-	}
-	defer insert.Close()
-	ctx.Reply("Leave message set successfully.")
-	return nil
 }

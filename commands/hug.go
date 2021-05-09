@@ -11,7 +11,8 @@ import (
 )
 
 func HugCommand(ctx CommandHandler.Context, _ []string) error {
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if sql.IsBlocked(ctx.Guild.ID, "hug") == "true" {
 			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
@@ -37,34 +38,35 @@ func HugCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 		ctx.Reply("Bir kişiyi etiketlemelisin.")
 		return nil
-	}
 
-	if sql.IsBlocked(ctx.Guild.ID, "hug") == "true" {
-		ctx.Reply("This command is blocked on this guild.")
-		return nil
-	}
+	default:
+		if sql.IsBlocked(ctx.Guild.ID, "hug") == "true" {
+			ctx.Reply("This command is blocked on this guild.")
+			return nil
+		}
 
-	if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
-		ctx.Reply("You need to specify the user.")
+		if len(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")) < 1 {
+			ctx.Reply("You need to specify the user.")
 
-		return nil
+			return nil
 
-	}
+		}
 
-	u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
-	if err == nil {
-		if u.ID == ctx.Message.Author.ID {
-			ctx.Reply("You can't hug yourself.")
+		u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
+		if err == nil {
+			if u.ID == ctx.Message.Author.ID {
+				ctx.Reply("You can't hug yourself.")
+
+				return nil
+			}
+			embed := embedutil.New("", fmt.Sprintf("<@%s> hugs <@%s>", ctx.Message.Author.ID, u.ID))
+			embed.Color = 0xff1000
+			embed.SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif")
+			ctx.ReplyEmbed(embed)
 
 			return nil
 		}
-		embed := embedutil.New("", fmt.Sprintf("<@%s> hugs <@%s>", ctx.Message.Author.ID, u.ID))
-		embed.Color = 0xff1000
-		embed.SetImage("https://i.pinimg.com/originals/4d/d7/49/4dd749423de10a319b5d9e8850bbace4.gif")
-		ctx.ReplyEmbed(embed)
-
+		ctx.Reply("You need to specify the user.")
 		return nil
 	}
-	ctx.Reply("You need to specify the user.")
-	return nil
 }

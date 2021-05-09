@@ -10,7 +10,8 @@ import (
 )
 
 func BanCommand(ctx CommandHandler.Context, _ []string) error {
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if !multiplexer.CheckBanPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
@@ -33,32 +34,35 @@ func BanCommand(ctx CommandHandler.Context, _ []string) error {
 				ctx.Reply("Yeterli yetkiye sahip değilim.")
 			}
 		}
-	}
 
-	if !multiplexer.CheckBanPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
-		ctx.Reply("You don't have enough permission.")
-		return nil
-	}
+	default:
 
-	if sql.IsBlocked(ctx.Guild.ID, "ban") == "true" {
-		ctx.Reply("This command is blocked on this guild.")
-		return nil
-	}
-
-	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
-		ctx.Reply("You need to specify the user.")
-		return nil
-	}
-	u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
-	if err != nil {
-		ctx.Reply("You need to specify the user.")
-	} else {
-		err = ctx.Session.GuildBanCreate(ctx.Guild.ID, u.ID, 0)
-		if err != nil {
-			ctx.Reply(fmt.Sprintf("An error occurred %s", err.Error()))
+		if !multiplexer.CheckBanPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("You don't have enough permission.")
 			return nil
 		}
-		ctx.Reply("Successfully banned user.")
+
+		if sql.IsBlocked(ctx.Guild.ID, "ban") == "true" {
+			ctx.Reply("This command is blocked on this guild.")
+			return nil
+		}
+
+		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
+			ctx.Reply("You need to specify the user.")
+			return nil
+		}
+		u, err := ctx.Session.User(multiplexer.GetUser(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0]))
+		if err != nil {
+			ctx.Reply("You need to specify the user.")
+		} else {
+			err = ctx.Session.GuildBanCreate(ctx.Guild.ID, u.ID, 0)
+			if err != nil {
+				ctx.Reply(fmt.Sprintf("An error occurred %s", err.Error()))
+				return nil
+			}
+			ctx.Reply("Successfully banned user.")
+		}
+		return nil
 	}
 	return nil
 }

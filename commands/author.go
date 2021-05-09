@@ -14,8 +14,9 @@ func AuthorCommand(ctx CommandHandler.Context, _ []string) error {
 
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":
-		if sql.IsBlocked(ctx.Guild.ID, "author") == "true" {
-			_, _ = ctx.Reply("Bu komut bu sunucuda engellenmiş.")
+		switch sql.IsBlocked(ctx.Guild.ID, "author") {
+		case "true":
+			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
 		}
 
@@ -32,8 +33,9 @@ func AuthorCommand(ctx CommandHandler.Context, _ []string) error {
 
 		return nil
 	default:
-		if sql.IsBlocked(ctx.Guild.ID, "author") == "true" {
-			_, _ = ctx.Reply("This command is blocked on this guild.")
+		switch sql.IsBlocked(ctx.Guild.ID, "author") {
+		case "true":
+			ctx.Reply("This command is blocked on this guild.")
 			return nil
 		}
 

@@ -18,7 +18,8 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 
 	var tag Tag
 
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
@@ -40,7 +41,6 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 		insert, err := db.Query(fmt.Sprintf("INSERT INTO autorole (roleid, guildid) VALUES ('%s', '%s')", args, ctx.Guild.ID))
 		if err != nil {
 			ctx.Reply("Bir hata oluştu.")
-
 			return nil
 		}
 		defer insert.Close()
@@ -48,33 +48,33 @@ func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply("Otorol başarıyla ayarlandı.")
 
 		return nil
-	}
+	default:
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+			ctx.Reply("You don't have enough permission.")
+			return nil
+		}
 
-	if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
-		ctx.Reply("You don't have enough permission.")
+		if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
+			ctx.Reply("You need to specify the role.")
+			return nil
+		}
+		args := multiplexer.GetRole(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0])
+		if args == "Error" {
+			ctx.Reply("You need to specify the role.")
+			return nil
+		}
+		err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.roleid)
+		if err == nil {
+			ctx.Reply("Autorole is already existing, use reset_auto_role command to reset!")
+			return nil
+		}
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO autorole (roleid, guildid) VALUES ('%s', '%s')", args, ctx.Guild.ID))
+		if err != nil {
+			ctx.Reply("An error occurred.")
+			return nil
+		}
+		defer insert.Close()
+		ctx.Reply("Successfully set autorole.")
 		return nil
 	}
-
-	if strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ") == "" {
-		ctx.Reply("You need to specify the role.")
-		return nil
-	}
-	args := multiplexer.GetRole(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0])
-	if args == "Error" {
-		ctx.Reply("You need to specify the role.")
-		return nil
-	}
-	err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", ctx.Guild.ID)).Scan(&tag.roleid)
-	if err == nil {
-		ctx.Reply("Autorole is already existing, use reset_auto_role command to reset!")
-		return nil
-	}
-	insert, err := db.Query(fmt.Sprintf("INSERT INTO autorole (roleid, guildid) VALUES ('%s', '%s')", args, ctx.Guild.ID))
-	if err != nil {
-		ctx.Reply("An error occurred.")
-		return nil
-	}
-	defer insert.Close()
-	ctx.Reply("Successfully set autorole.")
-	return nil
 }

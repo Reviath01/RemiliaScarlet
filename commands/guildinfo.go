@@ -10,7 +10,8 @@ import (
 )
 
 func GuildInfoCommand(ctx CommandHandler.Context, _ []string) error {
-	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
+	switch sql.CheckLanguage(ctx.Guild.ID) {
+	case "tr":
 		if sql.IsBlocked(ctx.Guild.ID, "guild_info") == "true" {
 			ctx.Reply("Bu komut bu sunucuda engellenmiş.")
 			return nil
@@ -29,23 +30,25 @@ func GuildInfoCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.ReplyEmbed(embed)
 
 		return nil
-	}
 
-	if sql.IsBlocked(ctx.Guild.ID, "guild_info") == "true" {
-		ctx.Reply("This command is blocked on this guild.")
+	default:
+
+		if sql.IsBlocked(ctx.Guild.ID, "guild_info") == "true" {
+			ctx.Reply("This command is blocked on this guild.")
+			return nil
+		}
+
+		embed := embedutil.New("", "")
+		embed.Color = 0xefff00
+		embed.AddField("Guild Name", ctx.Guild.Name, true)
+		embed.AddField("Member Count", strconv.Itoa(ctx.Guild.MemberCount), true)
+		embed.AddField("Region", ctx.Guild.Region, true)
+		embed.AddField("Guild Owner", fmt.Sprintf("<@%s>", ctx.Guild.OwnerID), true)
+		embed.AddField("Guild Owner ID", ctx.Guild.OwnerID, true)
+		embed.AddField("Afk Timeout", strconv.Itoa(ctx.Guild.AfkTimeout), true)
+		embed.AddField("ID:", ctx.Guild.ID, true)
+		embed.AddField("Locale", ctx.Guild.PreferredLocale, true)
+		ctx.ReplyEmbed(embed)
 		return nil
 	}
-
-	embed := embedutil.New("", "")
-	embed.Color = 0xefff00
-	embed.AddField("Guild Name", ctx.Guild.Name, true)
-	embed.AddField("Member Count", strconv.Itoa(ctx.Guild.MemberCount), true)
-	embed.AddField("Region", ctx.Guild.Region, true)
-	embed.AddField("Guild Owner", fmt.Sprintf("<@%s>", ctx.Guild.OwnerID), true)
-	embed.AddField("Guild Owner ID", ctx.Guild.OwnerID, true)
-	embed.AddField("Afk Timeout", strconv.Itoa(ctx.Guild.AfkTimeout), true)
-	embed.AddField("ID:", ctx.Guild.ID, true)
-	embed.AddField("Locale", ctx.Guild.PreferredLocale, true)
-	ctx.ReplyEmbed(embed)
-	return nil
 }
