@@ -24,14 +24,14 @@ func Listen(session *discordgo.Session) {
 	server.LoadHTMLGlob("web/public/*.html")
 	server.Static("/css", "./web/public/css")
 
-	cli, _ := session.User(config.ClientID)
+	cli := session.State.User
 	avatarURL := cli.AvatarURL("1024")
 	userName := cli.Username
 	botID := cli.ID
 
 	conf := &oauth2.Config{
 		RedirectURL:  fmt.Sprintf("%s/callback", config.WebURL),
-		ClientID:     config.ClientID,
+		ClientID:     botID,
 		ClientSecret: config.ClientSecret,
 		Scopes:       []string{discord.ScopeIdentify},
 		Endpoint:     discord.Endpoint,
