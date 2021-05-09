@@ -40,7 +40,7 @@ func Listen(session *discordgo.Session) {
 		RedirectURL:  fmt.Sprintf("%s/callback", config.WebURL),
 		ClientID:     botID,
 		ClientSecret: config.ClientSecret,
-		Scopes:       []string{discord.ScopeIdentify},
+		Scopes:       []string{discord.ScopeIdentify, discord.ScopeGuilds},
 		Endpoint:     discord.Endpoint,
 	}
 
@@ -109,13 +109,14 @@ func Listen(session *discordgo.Session) {
 			})
 		} else {
 			var token = &oauth2.Token{}
-			_ = jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
+			jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
 			res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
 
 			if err != nil || res.StatusCode != 200 {
 				fmt.Println("An error occurred on api: " + err.Error())
 				return
 			}
+
 			var user discordgo.User
 			data, _ := ioutil.ReadAll(res.Body)
 			err = json.Unmarshal(data, &user)
@@ -123,24 +124,51 @@ func Listen(session *discordgo.Session) {
 				fmt.Println("An error occurred on api: " + err.Error())
 				return
 			}
+			res2, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me/guilds")
 
-			if err != nil {
-				fmt.Println("An error occurred: " + err.Error())
-			} else {
-				c.HTML(200, "index.html", gin.H{
-					"login": "yes",
-					"user": UserInfo{
-						Name:          user.Username,
-						ID:            user.ID,
-						AvatarURL:     user.AvatarURL("4096"),
-						Discriminator: user.Discriminator,
-						Bot:           user.Bot,
-					},
-					"botavatar":   avatarURL,
-					"botusername": userName,
-					"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
-				})
+			if err != nil || res2.StatusCode != 200 {
+				fmt.Println("An error occurred on api: " + err.Error())
+				return
 			}
+
+			var guilds []discordgo.Guild
+
+			data2, _ := ioutil.ReadAll(res2.Body)
+			err = json.Unmarshal(data2, &guilds)
+			if err != nil {
+				fmt.Println("An error occurred on api: " + err.Error())
+				return
+			}
+			var userguildids []string
+			var userguildnames []string
+			var userguildicons []string
+			for _, guild := range guilds {
+				_ = append(userguildids, guild.ID)
+			}
+			for _, guild := range guilds {
+				_ = append(userguildnames, guild.Name)
+			}
+			for _, guild := range guilds {
+				_ = append(userguildicons, guild.IconURL())
+			}
+			c.HTML(200, "index.html", gin.H{
+				"login": "yes",
+				"user": UserInfo{
+					Name:          user.Username,
+					ID:            user.ID,
+					AvatarURL:     user.AvatarURL("4096"),
+					Discriminator: user.Discriminator,
+					Bot:           user.Bot,
+				},
+				"guild": GuildInfo{
+					Name: userguildnames,
+					ID:   userguildids,
+					Icon: userguildicons,
+				},
+				"botavatar":   avatarURL,
+				"botusername": userName,
+				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
+			})
 		}
 	})
 

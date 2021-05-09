@@ -58,7 +58,16 @@
   <h1>Remilia Scarlet</h1>
   <p>Multipurpose Discord bot written in Golang.</p>
   <a href="/invite"><button class="btn btn-outline-light btn-lg rounded-pill">Invite Bot</button></a>&nbsp;
-  <a href="/guilds"><button class="btn btn-outline-light btn-lg rounded-pill">Edit Features</button></a>
+  {{range .guild}}
+  <div class="row">
+    <br/>
+    <img src="{{.Icon}}" class="guildicon"/>
+  <p>{{.Name}}</p>
+  <br/>
+    <a href="/invite" class="dashboard">Add Bot</a>
+    {{end}}
+</div>
+
 </section>
 {{end}}
 

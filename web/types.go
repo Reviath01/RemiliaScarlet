@@ -7,3 +7,9 @@ type UserInfo struct {
 	Discriminator string
 	Bot           bool
 }
+
+type GuildInfo struct {
+	Name []string
+	ID   []string
+	Icon []string
+}
