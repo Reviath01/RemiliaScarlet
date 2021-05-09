@@ -13,7 +13,8 @@ func LanguageCommand(session *discordgo.Session, interaction interactions.Intera
 
 	args := interaction.Data.Options[0].Value.(string)
 
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -29,7 +30,7 @@ func LanguageCommand(session *discordgo.Session, interaction interactions.Intera
 		} else {
 			return multiplexer.CreateResponse("Kullanılabilir diller: `tr`, `en`")
 		}
-	} else {
+	default:
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("You don't have enough permission.")
 		}

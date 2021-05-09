@@ -18,7 +18,8 @@ func ResetWelcomeChannelCommand(session *discordgo.Session, interaction interact
 	}
 
 	var tag Tag
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -34,24 +35,25 @@ func ResetWelcomeChannelCommand(session *discordgo.Session, interaction interact
 			return multiplexer.CreateResponse("Hoş geldin kanalı başarıyla sıfırlandı.")
 		}
 		return multiplexer.CreateResponse("Hoş geldin kanalı ayarlanmamış, sıfırlayamazsın.")
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-	}
-
-	err := db.QueryRow(fmt.Sprintf("SELECT channelid FROM welcomechannel WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
-	if err == nil {
-		delete, err := db.Query(fmt.Sprintf("DELETE FROM welcomechannel WHERE guildid ='%s'", interaction.GuildID))
-		if err != nil {
-			return multiplexer.CreateResponse("An error occurred, please try again.")
-
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 
-		defer delete.Close()
+		err := db.QueryRow(fmt.Sprintf("SELECT channelid FROM welcomechannel WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
+		if err == nil {
+			delete, err := db.Query(fmt.Sprintf("DELETE FROM welcomechannel WHERE guildid ='%s'", interaction.GuildID))
+			if err != nil {
+				return multiplexer.CreateResponse("An error occurred, please try again.")
 
-		return multiplexer.CreateResponse("Successfully reset welcome channel.")
+			}
 
+			defer delete.Close()
+
+			return multiplexer.CreateResponse("Successfully reset welcome channel.")
+
+		}
+		return multiplexer.CreateResponse("Welcome channel is not existing, so you can't reset.")
 	}
-	return multiplexer.CreateResponse("Welcome channel is not existing, so you can't reset.")
 }

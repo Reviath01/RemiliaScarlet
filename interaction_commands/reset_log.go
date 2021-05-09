@@ -19,7 +19,8 @@ func ResetLogCommand(session *discordgo.Session, interaction interactions.Intera
 
 	var tag Tag
 
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -36,23 +37,24 @@ func ResetLogCommand(session *discordgo.Session, interaction interactions.Intera
 
 		}
 		return multiplexer.CreateResponse("Log kanalı ayarlanmamış, sıfırlayamazsın.")
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-	}
-
-	err := db.QueryRow(fmt.Sprintf("SELECT channelid FROM log WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
-	if err == nil {
-		delete, err := db.Query(fmt.Sprintf("DELETE FROM log WHERE guildid ='%s'", interaction.GuildID))
-		if err != nil {
-			return multiplexer.CreateResponse("An error occurred, please try again.")
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 
-		defer delete.Close()
+		err := db.QueryRow(fmt.Sprintf("SELECT channelid FROM log WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
+		if err == nil {
+			delete, err := db.Query(fmt.Sprintf("DELETE FROM log WHERE guildid ='%s'", interaction.GuildID))
+			if err != nil {
+				return multiplexer.CreateResponse("An error occurred, please try again.")
+			}
 
-		return multiplexer.CreateResponse("Successfully reset log.")
+			defer delete.Close()
 
+			return multiplexer.CreateResponse("Successfully reset log.")
+
+		}
+		return multiplexer.CreateResponse("Log channel is not existing, so you can't reset.")
 	}
-	return multiplexer.CreateResponse("Log channel is not existing, so you can't reset.")
 }

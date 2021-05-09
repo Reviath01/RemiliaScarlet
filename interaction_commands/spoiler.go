@@ -11,7 +11,8 @@ import (
 )
 
 func SpoilerCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if sql.IsBlocked(interaction.GuildID, "spoiler") == "true" {
 			return multiplexer.CreateResponse("Bu komut bu sunucuda engellenmiş.")
 		}
@@ -19,13 +20,14 @@ func SpoilerCommand(session *discordgo.Session, interaction interactions.Interac
 		spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", interaction.Data.Options[0].Value.(string)))
 		spoilerembed.Color = 0xe9ff00
 		return multiplexer.CreateEmbedResponse(spoilerembed)
-	}
+	default:
 
-	if sql.IsBlocked(interaction.GuildID, "spoiler") == "true" {
-		return multiplexer.CreateResponse("This command is blocked on this guild.")
-	}
+		if sql.IsBlocked(interaction.GuildID, "spoiler") == "true" {
+			return multiplexer.CreateResponse("This command is blocked on this guild.")
+		}
 
-	spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", interaction.Data.Options[0].Value.(string)))
-	spoilerembed.Color = 0xe9ff00
-	return multiplexer.CreateEmbedResponse(spoilerembed)
+		spoilerembed := embedutil.New("", fmt.Sprintf("|| %s ||", interaction.Data.Options[0].Value.(string)))
+		spoilerembed.Color = 0xe9ff00
+		return multiplexer.CreateEmbedResponse(spoilerembed)
+	}
 }

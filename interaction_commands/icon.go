@@ -10,7 +10,8 @@ import (
 
 func IconCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	guild, _ := session.Guild(string(interaction.GuildID))
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if sql.IsBlocked(interaction.GuildID, "icon") == "true" {
 			return multiplexer.CreateResponse("Bu komut bu sunucuda engellenmiş.")
 		}
@@ -19,14 +20,15 @@ func IconCommand(session *discordgo.Session, interaction interactions.Interactio
 		iconembed.Color = 0x00f6ff
 		iconembed.SetImage(guild.IconURL())
 		return multiplexer.CreateEmbedResponse(iconembed)
-	}
+	default:
 
-	if sql.IsBlocked(interaction.GuildID, "icon") == "true" {
-		return multiplexer.CreateResponse("This command is blocked on this guild.")
-	}
+		if sql.IsBlocked(interaction.GuildID, "icon") == "true" {
+			return multiplexer.CreateResponse("This command is blocked on this guild.")
+		}
 
-	iconembed := embedutil.New("", "")
-	iconembed.Color = 0x00f6ff
-	iconembed.SetImage(guild.IconURL())
-	return multiplexer.CreateEmbedResponse(iconembed)
+		iconembed := embedutil.New("", "")
+		iconembed.Color = 0x00f6ff
+		iconembed.SetImage(guild.IconURL())
+		return multiplexer.CreateEmbedResponse(iconembed)
+	}
 }

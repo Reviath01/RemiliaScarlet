@@ -13,7 +13,8 @@ import (
 
 func GuildInfoCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	Guild, _ := session.Guild(string(interaction.GuildID))
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if sql.IsBlocked(interaction.GuildID, "guild_info") == "true" {
 			return multiplexer.CreateResponse("Bu komut bu sunucuda engellenmiş.")
 		}
@@ -29,21 +30,22 @@ func GuildInfoCommand(session *discordgo.Session, interaction interactions.Inter
 		embed.AddField("ID:", interaction.GuildID, true)
 		embed.AddField("Yer", Guild.PreferredLocale, true)
 		return multiplexer.CreateEmbedResponse(embed)
-	}
+	default:
 
-	if sql.IsBlocked(interaction.GuildID, "guild_info") == "true" {
-		return multiplexer.CreateResponse("This command is blocked on this guild.")
-	}
+		if sql.IsBlocked(interaction.GuildID, "guild_info") == "true" {
+			return multiplexer.CreateResponse("This command is blocked on this guild.")
+		}
 
-	embed := embedutil.New("", "")
-	embed.Color = 0xefff00
-	embed.AddField("Guild Name", Guild.Name, true)
-	embed.AddField("Member Size", strconv.Itoa(Guild.MemberCount), true)
-	embed.AddField("Region", Guild.Region, true)
-	embed.AddField("Server Owner", fmt.Sprintf("<@%s>", Guild.OwnerID), true)
-	embed.AddField("Server Owner ID", Guild.OwnerID, true)
-	embed.AddField("AFK Timeout", strconv.Itoa(Guild.AfkTimeout), true)
-	embed.AddField("ID", interaction.GuildID, true)
-	embed.AddField("Locale", Guild.PreferredLocale, true)
-	return multiplexer.CreateEmbedResponse(embed)
+		embed := embedutil.New("", "")
+		embed.Color = 0xefff00
+		embed.AddField("Guild Name", Guild.Name, true)
+		embed.AddField("Member Size", strconv.Itoa(Guild.MemberCount), true)
+		embed.AddField("Region", Guild.Region, true)
+		embed.AddField("Server Owner", fmt.Sprintf("<@%s>", Guild.OwnerID), true)
+		embed.AddField("Server Owner ID", Guild.OwnerID, true)
+		embed.AddField("AFK Timeout", strconv.Itoa(Guild.AfkTimeout), true)
+		embed.AddField("ID", interaction.GuildID, true)
+		embed.AddField("Locale", Guild.PreferredLocale, true)
+		return multiplexer.CreateEmbedResponse(embed)
+	}
 }

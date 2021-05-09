@@ -19,7 +19,8 @@ func LeaveMessageCommand(session *discordgo.Session, interaction interactions.In
 
 	var tag Tag
 
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -38,24 +39,25 @@ func LeaveMessageCommand(session *discordgo.Session, interaction interactions.In
 		}
 		defer insert.Close()
 		return multiplexer.CreateResponse("Başarıyla çıkış mesajı ayarlandı.")
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-	}
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
+		}
 
-	if len(interaction.Data.Options[0].Value.(string)) > 254 {
-		return multiplexer.CreateResponse("Your message must be between 1 and 255 characters.")
-	}
+		if len(interaction.Data.Options[0].Value.(string)) > 254 {
+			return multiplexer.CreateResponse("Your message must be between 1 and 255 characters.")
+		}
 
-	err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.message)
-	if err == nil {
-		return multiplexer.CreateResponse("Leave message is already existing (to reset, use reset_leave_message command).")
+		err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.message)
+		if err == nil {
+			return multiplexer.CreateResponse("Leave message is already existing (to reset, use reset_leave_message command).")
+		}
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO leavemessage (message, guildid) VALUES ('%s', '%s')", interaction.Data.Options[0].Value.(string), interaction.GuildID))
+		if err != nil {
+			return multiplexer.CreateResponse("An error occurred, please try again.")
+		}
+		defer insert.Close()
+		return multiplexer.CreateResponse("Leave message set successfully.")
 	}
-	insert, err := db.Query(fmt.Sprintf("INSERT INTO leavemessage (message, guildid) VALUES ('%s', '%s')", interaction.Data.Options[0].Value.(string), interaction.GuildID))
-	if err != nil {
-		return multiplexer.CreateResponse("An error occurred, please try again.")
-	}
-	defer insert.Close()
-	return multiplexer.CreateResponse("Leave message set successfully.")
 }

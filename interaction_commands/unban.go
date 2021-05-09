@@ -8,7 +8,8 @@ import (
 )
 
 func UnbanCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckBanPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -29,28 +30,29 @@ func UnbanCommand(session *discordgo.Session, interaction interactions.Interacti
 		}
 		return multiplexer.CreateResponse("Bir üye belirtmelisin.")
 
-	}
+	default:
 
-	if !multiplexer.CheckBanPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-
-	}
-
-	if sql.IsBlocked(interaction.GuildID, "unban") == "true" {
-		return multiplexer.CreateResponse("This command is blocked on this guild.")
-
-	}
-
-	u, err := session.User(multiplexer.GetUser(interaction.Data.Options[0].Value.(string)))
-
-	if err == nil {
-		err = session.GuildBanDelete(interaction.GuildID, u.ID)
-		if err != nil {
-			return multiplexer.CreateResponse("This user is not banned or I don't have enough permission.")
+		if !multiplexer.CheckBanPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
 
 		}
-		return multiplexer.CreateResponse("Unbanned specified user.")
 
+		if sql.IsBlocked(interaction.GuildID, "unban") == "true" {
+			return multiplexer.CreateResponse("This command is blocked on this guild.")
+
+		}
+
+		u, err := session.User(multiplexer.GetUser(interaction.Data.Options[0].Value.(string)))
+
+		if err == nil {
+			err = session.GuildBanDelete(interaction.GuildID, u.ID)
+			if err != nil {
+				return multiplexer.CreateResponse("This user is not banned or I don't have enough permission.")
+
+			}
+			return multiplexer.CreateResponse("Unbanned specified user.")
+
+		}
+		return multiplexer.CreateResponse("You need to specify the user.")
 	}
-	return multiplexer.CreateResponse("You need to specify the user.")
 }

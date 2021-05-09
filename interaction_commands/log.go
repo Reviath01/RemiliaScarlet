@@ -19,7 +19,8 @@ func LogCommand(session *discordgo.Session, interaction interactions.Interaction
 
 	var tag Tag
 
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -37,26 +38,27 @@ func LogCommand(session *discordgo.Session, interaction interactions.Interaction
 			return multiplexer.CreateResponse("Log kanalı başarıyla ayarlandı!")
 		}
 		return multiplexer.CreateResponse("Log kanalını belirtmelisin.")
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-	}
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
+		}
 
-	c, err := session.Channel(multiplexer.GetChannel(interaction.Data.Options[0].Value.(string)))
-	if err == nil {
-
-		err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM log WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
+		c, err := session.Channel(multiplexer.GetChannel(interaction.Data.Options[0].Value.(string)))
 		if err == nil {
-			return multiplexer.CreateResponse("Log is already existing (to reset, use reset_log command).")
 
+			err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM log WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
+			if err == nil {
+				return multiplexer.CreateResponse("Log is already existing (to reset, use reset_log command).")
+
+			}
+			insert, err := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", c.ID, interaction.GuildID))
+			if err != nil {
+				return multiplexer.CreateResponse("An error occurred, please try again.")
+			}
+			defer insert.Close()
+			return multiplexer.CreateResponse("Logging channel set successfully.")
 		}
-		insert, err := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", c.ID, interaction.GuildID))
-		if err != nil {
-			return multiplexer.CreateResponse("An error occurred, please try again.")
-		}
-		defer insert.Close()
-		return multiplexer.CreateResponse("Logging channel set successfully.")
+		return multiplexer.CreateResponse("You need to specify the channel.")
 	}
-	return multiplexer.CreateResponse("You need to specify the channel.")
 }

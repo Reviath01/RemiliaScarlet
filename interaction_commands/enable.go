@@ -26,7 +26,8 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 
 		args := interaction.Data.Options[0].Value.(string)
 
-		if args == "afk" {
+		switch args {
+		case "afk":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -44,7 +45,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "author" {
+		case "author":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -62,7 +63,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "avatar" {
+		case "avatar":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -80,7 +81,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "ban" {
+		case "ban":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -98,7 +99,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "embed" {
+		case "embed":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -116,7 +117,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "Channel_info" {
+		case "Channel_info":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -134,7 +135,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "hug" {
+		case "hug":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -152,7 +153,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "kick" {
+		case "kick":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -170,7 +171,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "kiss" {
+		case "kiss":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -188,7 +189,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "ping" {
+		case "ping":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -206,7 +207,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "roles" {
+		case "roles":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -224,7 +225,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "settings" {
+		case "settings":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -242,7 +243,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "slap" {
+		case "slap":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -260,7 +261,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "spoiler" {
+		case "spoiler":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -278,7 +279,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "start_vote" {
+		case "start_vote":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -296,7 +297,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "stats" {
+		case "stats":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -314,7 +315,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else if args == "unban" {
+		case "unban":
 			err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 			if err == nil {
 				if tag.isblocked == "True" {
@@ -332,7 +333,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			} else {
 				return multiplexer.CreateResponse("Bu komut engellenmemiş.")
 			}
-		} else {
+		default:
 			return multiplexer.CreateResponse("Bir komut belirtmelisin")
 		}
 	}
@@ -342,7 +343,8 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 
 	args := interaction.Data.Options[0].Value.(string)
 
-	if args == "afk" {
+	switch args {
+	case "afk":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -361,7 +363,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "author" {
+	case "author":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -380,7 +382,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "avatar" {
+	case "avatar":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -399,7 +401,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "ban" {
+	case "ban":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -418,7 +420,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "embed" {
+	case "embed":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -437,7 +439,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "Channel_info" {
+	case "Channel_info":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -456,7 +458,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "hug" {
+	case "hug":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -475,7 +477,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "kick" {
+	case "kick":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -494,7 +496,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "kiss" {
+	case "kiss":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -513,7 +515,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "ping" {
+	case "ping":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -532,7 +534,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "roles" {
+	case "roles":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -551,7 +553,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "settings" {
+	case "settings":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -570,7 +572,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "slap" {
+	case "slap":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -589,7 +591,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "spoiler" {
+	case "spoiler":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -608,7 +610,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "start_vote" {
+	case "start_vote":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -627,7 +629,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "stats" {
+	case "stats":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {
@@ -646,7 +648,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 		} else {
 			return multiplexer.CreateResponse("This command is not disabled.")
 		}
-	} else if args == "unban" {
+	case "unban":
 		err := db.QueryRow(fmt.Sprintf("SELECT isblocked FROM disabledcommands WHERE commandname ='%s' AND guildid ='%s'", args, interaction.GuildID)).Scan(&tag.isblocked)
 		if err == nil {
 			if tag.isblocked == "True" {

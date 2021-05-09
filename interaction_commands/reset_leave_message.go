@@ -19,7 +19,8 @@ func ResetLeaveMessage(session *discordgo.Session, interaction interactions.Inte
 
 	var tag Tag
 
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -36,20 +37,21 @@ func ResetLeaveMessage(session *discordgo.Session, interaction interactions.Inte
 
 		}
 		return multiplexer.CreateResponse("Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-	}
-
-	err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.message)
-	if err == nil {
-		delete, err := db.Query(fmt.Sprintf("DELETE FROM leavemessage WHERE guildid ='%s'", interaction.GuildID))
-		if err != nil {
-			return multiplexer.CreateResponse("An error occurred, please try again.")
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
-		defer delete.Close()
-		return multiplexer.CreateResponse("Successfully reset leave message.")
+
+		err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.message)
+		if err == nil {
+			delete, err := db.Query(fmt.Sprintf("DELETE FROM leavemessage WHERE guildid ='%s'", interaction.GuildID))
+			if err != nil {
+				return multiplexer.CreateResponse("An error occurred, please try again.")
+			}
+			defer delete.Close()
+			return multiplexer.CreateResponse("Successfully reset leave message.")
+		}
+		return multiplexer.CreateResponse("Leave message is not existing, so you can't reset.")
 	}
-	return multiplexer.CreateResponse("Leave message is not existing, so you can't reset.")
 }

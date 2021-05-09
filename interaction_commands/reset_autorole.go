@@ -19,7 +19,8 @@ func ResetAutoroleCommand(session *discordgo.Session, interaction interactions.I
 
 	var tag Tag
 
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -38,24 +39,25 @@ func ResetAutoroleCommand(session *discordgo.Session, interaction interactions.I
 
 		}
 		return multiplexer.CreateResponse("Otorol ayarlanmadığı için sıfırlanamaz.")
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-	}
-
-	err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.roleid)
-	if err == nil {
-		delete, err := db.Query(fmt.Sprintf("DELETE FROM autorole WHERE guildid ='%s'", interaction.GuildID))
-		if err != nil {
-			return multiplexer.CreateResponse("An error occurred, please try again.")
-
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 
-		defer delete.Close()
+		err := db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.roleid)
+		if err == nil {
+			delete, err := db.Query(fmt.Sprintf("DELETE FROM autorole WHERE guildid ='%s'", interaction.GuildID))
+			if err != nil {
+				return multiplexer.CreateResponse("An error occurred, please try again.")
 
-		return multiplexer.CreateResponse("Successfully reset auto role.")
+			}
 
+			defer delete.Close()
+
+			return multiplexer.CreateResponse("Successfully reset auto role.")
+
+		}
+		return multiplexer.CreateResponse("Auto role is not existing, so you can't reset.")
 	}
-	return multiplexer.CreateResponse("Auto role is not existing, so you can't reset.")
 }

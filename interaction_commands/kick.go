@@ -8,7 +8,8 @@ import (
 )
 
 func KickCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckKickPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -26,23 +27,24 @@ func KickCommand(session *discordgo.Session, interaction interactions.Interactio
 
 		}
 		return multiplexer.CreateResponse("Bir üye belirtmelisin.")
-	}
+	default:
 
-	if !multiplexer.CheckKickPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-	}
-
-	if sql.IsBlocked(interaction.GuildID, "kick") == "true" {
-		return multiplexer.CreateResponse("This command is blocked on this guild.")
-	}
-
-	u, err := session.User(multiplexer.GetUser(interaction.Data.Options[0].Value.(string)))
-	if err == nil {
-		err = session.GuildMemberDelete(interaction.GuildID, u.ID)
-		if err != nil {
-			return multiplexer.CreateResponse("I do not have enough permission.")
+		if !multiplexer.CheckKickPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
-		return multiplexer.CreateResponse("Kicked specified user.")
+
+		if sql.IsBlocked(interaction.GuildID, "kick") == "true" {
+			return multiplexer.CreateResponse("This command is blocked on this guild.")
+		}
+
+		u, err := session.User(multiplexer.GetUser(interaction.Data.Options[0].Value.(string)))
+		if err == nil {
+			err = session.GuildMemberDelete(interaction.GuildID, u.ID)
+			if err != nil {
+				return multiplexer.CreateResponse("I do not have enough permission.")
+			}
+			return multiplexer.CreateResponse("Kicked specified user.")
+		}
+		return multiplexer.CreateResponse("You need to specify the user.")
 	}
-	return multiplexer.CreateResponse("You need to specify the user.")
 }

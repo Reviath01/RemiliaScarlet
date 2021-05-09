@@ -19,7 +19,8 @@ func ResetLeaveChannel(session *discordgo.Session, interaction interactions.Inte
 
 	var tag Tag
 
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
@@ -34,24 +35,25 @@ func ResetLeaveChannel(session *discordgo.Session, interaction interactions.Inte
 			return multiplexer.CreateResponse("Başarıyla çıkış kanalı sıfırlandı.")
 		}
 		return multiplexer.CreateResponse("Çıkış kanalı ayarlanmamış, yani sıfırlayamazsın.")
-	}
+	default:
 
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
-		return multiplexer.CreateResponse("You don't have enough permission.")
-	}
-
-	err := db.QueryRow(fmt.Sprintf("SELECT channelid FROM leavechannel WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
-	if err == nil {
-		delete, err := db.Query(fmt.Sprintf("DELETE FROM leavechannel WHERE guildid ='%s'", interaction.GuildID))
-		if err != nil {
-			return multiplexer.CreateResponse("An error occurred, please try again.")
-
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 
-		defer delete.Close()
+		err := db.QueryRow(fmt.Sprintf("SELECT channelid FROM leavechannel WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
+		if err == nil {
+			delete, err := db.Query(fmt.Sprintf("DELETE FROM leavechannel WHERE guildid ='%s'", interaction.GuildID))
+			if err != nil {
+				return multiplexer.CreateResponse("An error occurred, please try again.")
 
-		return multiplexer.CreateResponse("Successfully reset leave channel.")
+			}
 
+			defer delete.Close()
+
+			return multiplexer.CreateResponse("Successfully reset leave channel.")
+
+		}
+		return multiplexer.CreateResponse("Leave channel is not existing, so you can't reset.")
 	}
-	return multiplexer.CreateResponse("Leave channel is not existing, so you can't reset.")
 }

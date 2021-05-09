@@ -15,7 +15,8 @@ func RolesCommand(session *discordgo.Session, interaction interactions.Interacti
 
 	Guild, _ := session.Guild(interaction.GuildID)
 
-	if sql.CheckLanguage(interaction.GuildID) == "tr" {
+	switch sql.CheckLanguage(interaction.GuildID) {
+	case "tr":
 		if sql.IsBlocked(interaction.GuildID, "roles") == "true" {
 			return multiplexer.CreateResponse("Bu komut bu sunucuda engellenmiş.")
 		}
@@ -25,15 +26,16 @@ func RolesCommand(session *discordgo.Session, interaction interactions.Interacti
 		embed := embedutil.New("", "")
 		embed.AddField("Roller:", roles, true)
 		return multiplexer.CreateEmbedResponse(embed)
-	}
-	if sql.IsBlocked(interaction.GuildID, "roles") == "true" {
-		return multiplexer.CreateResponse("This command is blocked on this guild.")
-	}
-	for _, i := range Guild.Roles {
-		roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
-	}
-	embed := embedutil.New("", "")
-	embed.AddField("Roles:", roles, true)
+	default:
+		if sql.IsBlocked(interaction.GuildID, "roles") == "true" {
+			return multiplexer.CreateResponse("This command is blocked on this guild.")
+		}
+		for _, i := range Guild.Roles {
+			roles += fmt.Sprintf("<@&%s> ,\n", i.ID)
+		}
+		embed := embedutil.New("", "")
+		embed.AddField("Roles:", roles, true)
 
-	return multiplexer.CreateEmbedResponse(embed)
+		return multiplexer.CreateEmbedResponse(embed)
+	}
 }
