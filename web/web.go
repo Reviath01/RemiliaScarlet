@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
@@ -24,7 +25,13 @@ func Listen(session *discordgo.Session) {
 	server.LoadHTMLGlob("web/public/*.html")
 	server.Static("/css", "./web/public/css")
 
-	cli := session.State.User
+	cli, err := session.User(config.ClientID)
+	if err != nil {
+		fmt.Println("An error occurred while getting client user on web panel (please be sure that you wrote ClientID correct)")
+		time.Sleep(1 * time.Second)
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
 	avatarURL := cli.AvatarURL("1024")
 	userName := cli.Username
 	botID := cli.ID
