@@ -139,18 +139,7 @@ func Listen(session *discordgo.Session) {
 				fmt.Println("An error occurred on api: " + err.Error())
 				return
 			}
-			var userguildids []string
-			var userguildnames []string
-			var userguildicons []string
-			for _, guild := range guilds {
-				_ = append(userguildids, guild.ID)
-			}
-			for _, guild := range guilds {
-				_ = append(userguildnames, guild.Name)
-			}
-			for _, guild := range guilds {
-				_ = append(userguildicons, guild.IconURL())
-			}
+
 			c.HTML(200, "index.html", gin.H{
 				"login": "yes",
 				"user": UserInfo{
@@ -160,11 +149,7 @@ func Listen(session *discordgo.Session) {
 					Discriminator: user.Discriminator,
 					Bot:           user.Bot,
 				},
-				"guild": GuildInfo{
-					Name: userguildnames,
-					ID:   userguildids,
-					Icon: userguildicons,
-				},
+				"guilds":      guilds,
 				"botavatar":   avatarURL,
 				"botusername": userName,
 				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
