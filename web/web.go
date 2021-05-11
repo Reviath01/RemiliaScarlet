@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"time"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
@@ -25,27 +24,18 @@ func Listen(session *discordgo.Session) {
 	server.LoadHTMLGlob("web/public/*.html")
 	server.Static("/css", "./web/public/css")
 
-	cli, err := session.User(config.ClientID)
-	if err != nil {
-		fmt.Println("An error occurred while getting client user on web panel (please be sure that you wrote ClientID correct)")
-		time.Sleep(1 * time.Second)
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-	avatarURL := cli.AvatarURL("1024")
-	userName := cli.Username
-	botID := cli.ID
+	cli := GetClientUser(session)
 
 	conf := &oauth2.Config{
 		RedirectURL:  fmt.Sprintf("%s/callback", config.WebURL),
-		ClientID:     botID,
+		ClientID:     cli.ID,
 		ClientSecret: config.ClientSecret,
 		Scopes:       []string{discord.ScopeIdentify, discord.ScopeGuilds},
 		Endpoint:     discord.Endpoint,
 	}
 
 	server.NoRoute(func(c *gin.Context) {
-		c.HTML(200, "404.html", gin.H{})
+		c.HTML(404, "404.html", gin.H{})
 	})
 
 	server.GET("/login", func(c *gin.Context) {
@@ -56,10 +46,10 @@ func Listen(session *discordgo.Session) {
 		if c.Request.FormValue("state") != state {
 			c.HTML(200, "index.html", gin.H{
 				"user":        "nil",
-				"botavatar":   avatarURL,
-				"botusername": userName,
-				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
-				"botid":       botID,
+				"botavatar":   cli.AvatarURL("1024"),
+				"botusername": cli.Username,
+				"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
+				"botid":       cli.ID,
 			})
 		}
 		token, err := conf.Exchange(context.TODO(), c.Query("code"))
@@ -84,10 +74,10 @@ func Listen(session *discordgo.Session) {
 		} else {
 			c.HTML(200, "index.html", gin.H{
 				"login":       "nil",
-				"botavatar":   avatarURL,
-				"botusername": userName,
-				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
-				"botid":       botID,
+				"botavatar":   cli.AvatarURL("1024"),
+				"botusername": cli.Username,
+				"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
+				"botid":       cli.ID,
 			})
 		}
 	})
@@ -121,10 +111,10 @@ func Listen(session *discordgo.Session) {
 		case "":
 			c.HTML(200, "index.html", gin.H{
 				"login":       "nil",
-				"botavatar":   avatarURL,
-				"botusername": userName,
-				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
-				"botid":       botID,
+				"botavatar":   cli.AvatarURL("1024"),
+				"botusername": cli.Username,
+				"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
+				"botid":       cli.ID,
 			})
 		default:
 			var token = &oauth2.Token{}
@@ -177,10 +167,10 @@ func Listen(session *discordgo.Session) {
 					Bot:           user.Bot,
 				},
 				"guilds":      guilds,
-				"botavatar":   avatarURL,
-				"botusername": userName,
-				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
-				"botid":       botID,
+				"botavatar":   cli.AvatarURL("1024"),
+				"botusername": cli.Username,
+				"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
+				"botid":       cli.ID,
 			})
 		}
 	})
