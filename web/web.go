@@ -100,6 +100,21 @@ func Listen(session *discordgo.Session) {
 		c.Redirect(http.StatusTemporaryRedirect, "https://discord.gg/zVVWWDtSr2")
 	})
 
+	server.GET("/guild/:guildid", func(c *gin.Context) {
+		val, _ := c.Cookie("key")
+		switch val {
+		case "":
+			c.Redirect(http.StatusTemporaryRedirect, "/")
+		default:
+			guild, err := session.Guild(c.Param("guildid"))
+			if err != nil {
+				c.Redirect(http.StatusTemporaryRedirect, "/login")
+			} else {
+				fmt.Fprintf(c.Writer, guild.Name)
+			}
+		}
+	})
+
 	server.GET("/", func(c *gin.Context) {
 		val, _ := c.Cookie("key")
 		switch val {
