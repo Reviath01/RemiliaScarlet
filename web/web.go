@@ -135,13 +135,21 @@ func Listen(session *discordgo.Session) {
 				return
 			}
 
+			var allguilds []discordgo.Guild
 			var guilds []discordgo.Guild
 
 			data2, _ := ioutil.ReadAll(res2.Body)
-			err = json.Unmarshal(data2, &guilds)
+			err = json.Unmarshal(data2, &allguilds)
 			if err != nil {
 				fmt.Println("An error occurred on api: " + err.Error())
 				return
+			}
+
+			for _, g := range allguilds {
+				_, err := session.State.Guild(g.ID)
+				if err == nil {
+					guilds = append(guilds, g)
+				}
 			}
 
 			c.HTML(200, "index.html", gin.H{

@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav pull-right">
         <li class="nav-item">
-          <a class="nav-link" href="/invite">Invite</a>
+          <a class="nav-link" href="/invite">Add Bot</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/support">Support</a>
@@ -57,14 +57,13 @@
   <br/><br/>
   <h1>Remilia Scarlet</h1>
   <p>Multipurpose Discord bot written in Golang.</p>
-  <a href="/invite"><button class="btn btn-outline-light btn-lg rounded-pill">Invite Bot</button></a>&nbsp;
   <br /><br />
   {{$BotID := .botid}}
   {{range .guilds}}
   <p>{{.Name}}</p>
   <img src="https://cdn.discordapp.com/icons/{{.ID}}/{{.Icon}}.png" class="rounded-circle"/>
   <br/>
-    <a href="https://discord.com/oauth2/authorize?client_id={{$BotID}}&scope=bot+applications.commands&permissions=8&guild_id={{.ID}}" class="rounded-circle">Add Bot</a>
+    <a>Edit Features</a>
     <br/><br/>
 {{end}}
 </section>
