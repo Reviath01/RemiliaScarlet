@@ -104,11 +104,11 @@ func Listen(session *discordgo.Session) {
 		val, _ := c.Cookie("key")
 		switch val {
 		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/")
+			c.Redirect(http.StatusTemporaryRedirect, "/login")
 		default:
 			guild, err := session.Guild(c.Param("guildid"))
 			if err != nil {
-				c.Redirect(http.StatusTemporaryRedirect, "/login")
+				c.Redirect(http.StatusTemporaryRedirect, "/")
 			} else {
 				fmt.Fprintf(c.Writer, guild.Name)
 			}
