@@ -59,11 +59,13 @@
   <p>Multipurpose Discord bot written in Golang.</p>
   <a href="/invite"><button class="btn btn-outline-light btn-lg rounded-pill">Invite Bot</button></a>&nbsp;
   <br /><br />
+  {{$BotID := .botid}}
   {{range .guilds}}
   <p>{{.Name}}</p>
   <img src="https://cdn.discordapp.com/icons/{{.ID}}/{{.Icon}}.png" class="rounded-circle"/>
-  <br/><br/>
-    <a href="/invite" class="rounded-circle">Add Bot</a>
+  <br/>
+    <a href="https://discord.com/oauth2/authorize?client_id={{$BotID}}&scope=bot+applications.commands&permissions=8&guild_id={{.ID}}" class="rounded-circle">Add Bot</a>
+    <br/><br/>
 {{end}}
 </section>
 {{end}}

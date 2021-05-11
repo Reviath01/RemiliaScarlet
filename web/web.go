@@ -59,6 +59,7 @@ func Listen(session *discordgo.Session) {
 				"botavatar":   avatarURL,
 				"botusername": userName,
 				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
+				"botid":       botID,
 			})
 		}
 		token, err := conf.Exchange(context.TODO(), c.Query("code"))
@@ -86,6 +87,7 @@ func Listen(session *discordgo.Session) {
 				"botavatar":   avatarURL,
 				"botusername": userName,
 				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
+				"botid":       botID,
 			})
 		}
 	})
@@ -100,14 +102,16 @@ func Listen(session *discordgo.Session) {
 
 	server.GET("/", func(c *gin.Context) {
 		val, _ := c.Cookie("key")
-		if val == "" {
+		switch val {
+		case "":
 			c.HTML(200, "index.html", gin.H{
 				"login":       "nil",
 				"botavatar":   avatarURL,
 				"botusername": userName,
 				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
+				"botid":       botID,
 			})
-		} else {
+		default:
 			var token = &oauth2.Token{}
 			jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
 			res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
@@ -153,6 +157,7 @@ func Listen(session *discordgo.Session) {
 				"botavatar":   avatarURL,
 				"botusername": userName,
 				"botlink":     fmt.Sprintf("https://discord.com/users/%s", botID),
+				"botid":       botID,
 			})
 		}
 	})
