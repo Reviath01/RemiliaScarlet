@@ -44,13 +44,7 @@ func Listen(session *discordgo.Session) {
 
 	server.GET("/callback", func(c *gin.Context) {
 		if c.Request.FormValue("state") != state {
-			c.HTML(200, "index.html", gin.H{
-				"user":        "nil",
-				"botavatar":   cli.AvatarURL("1024"),
-				"botusername": cli.Username,
-				"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
-				"botid":       cli.ID,
-			})
+			c.Redirect(http.StatusTemporaryRedirect, "/")
 		}
 		token, err := conf.Exchange(context.TODO(), c.Query("code"))
 		if err != nil {
@@ -72,13 +66,7 @@ func Listen(session *discordgo.Session) {
 			c.SetCookie("key", "nil", -1, "/", "localhost", false, false)
 			c.Redirect(http.StatusTemporaryRedirect, "/")
 		} else {
-			c.HTML(200, "index.html", gin.H{
-				"login":       "nil",
-				"botavatar":   cli.AvatarURL("1024"),
-				"botusername": cli.Username,
-				"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
-				"botid":       cli.ID,
-			})
+			c.Redirect(http.StatusTemporaryRedirect, "/")
 		}
 	})
 
