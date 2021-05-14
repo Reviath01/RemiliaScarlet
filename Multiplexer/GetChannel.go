@@ -1,6 +1,6 @@
 package multiplexer
 
-//Get channel function for commands.
+// GetChannel function provides to get a channel with id or mention
 func GetChannel(channel string) string {
 	switch len(channel) {
 	case 18:

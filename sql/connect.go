@@ -8,7 +8,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-//Connecting to MySQL database.
+// Connect returns to MySQL database
 func Connect() *sql.DB {
 	config.ReadConfig()
 	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", config.User, config.Password, config.Host, config.Database))

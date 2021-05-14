@@ -9,7 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Log command
+// LogCommand is a handler for log command
 func LogCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

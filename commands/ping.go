@@ -8,7 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Ping command
+// PingCommand is a handler for ping command
 func PingCommand(ctx CommandHandler.Context, _ []string) error {
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" && sql.IsBlocked(ctx.Guild.ID, "ping") == "true" {
 		ctx.Reply("Bu komut bu sunucuda kullanıma kapatılmış.")

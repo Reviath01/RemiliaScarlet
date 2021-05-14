@@ -37,7 +37,7 @@ type configStruct struct {
 	ClientSecret     string `json:"ClientSecret"`
 }
 
-//Reads config file.
+// ReadConfig reads config.json file, returns error
 func ReadConfig() error {
 	file, err := ioutil.ReadFile("./config.json")
 

@@ -15,7 +15,7 @@ type configStruct struct {
 	BotPrefix string `json:"BotPrefix"`
 }
 
-//Getting bot prefix function
+// GetPrefix returns to Bot's prefix from config.json file
 func GetPrefix() string {
 	file, err := ioutil.ReadFile("./config.json")
 

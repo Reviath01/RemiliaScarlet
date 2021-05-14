@@ -10,7 +10,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Spoiler command
+// SpoilerCommand is a handler for spoiler command
 func SpoilerCommand(ctx CommandHandler.Context, _ []string) error {
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":

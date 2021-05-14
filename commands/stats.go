@@ -14,7 +14,7 @@ import (
 
 var startTime = time.Now()
 
-//Stats command
+// StatsCommand is a handler for stats command
 func StatsCommand(ctx CommandHandler.Context, _ []string) error {
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":

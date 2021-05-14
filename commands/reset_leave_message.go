@@ -8,7 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Reset leave message command
+// ResetLeaveMessage is a handler for reset leave message command
 func ResetLeaveMessage(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

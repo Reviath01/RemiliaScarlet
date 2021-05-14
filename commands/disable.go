@@ -9,7 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Disable command
+// DisableCommand is a handler for disable command
 func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

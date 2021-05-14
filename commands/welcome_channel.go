@@ -9,7 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Welcome channel command
+// WelcomeChannelCommand is a handler for welcome channel command
 func WelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

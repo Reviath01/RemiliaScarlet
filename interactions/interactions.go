@@ -51,13 +51,13 @@ type CommandOptionChoice struct {
 	Value interface{} `json:"value"`
 }
 
-//Creates slash command for all guilds that bot in.
+// GlobalCommandCreate returns an error, it posts your command to all servers your bot is in.
 func GlobalCommandCreate(s *discordgo.Session, aID string, command Command) (err error) {
 	_, err = s.RequestWithBucketID("POST", EndpointApplicationCommands(aID), command, EndpointApplicationCommands(""))
 	return
 }
 
-//Creates slash command for specified guild.
+// GuildCommandCreate returns an error, it posts your command to specified guild.
 func GuildCommandCreate(s *discordgo.Session, aID string, gID string, command Command) (err error) {
 	_, err = s.RequestWithBucketID("POST", EndpointApplicationGuildCommands(aID, gID), command, EndpointApplicationGuildCommands("", ""))
 	return
@@ -120,6 +120,7 @@ type InteractionResponse struct {
 	Data InteractionResponseData `json:"data,omitempty"`
 }
 
+// Respond send a response to interaction, returns to error
 func (interaction *Interaction) Respond(s *discordgo.Session, resp InteractionResponse) (err error) {
 	_, err = s.RequestWithBucketID("POST", EndpointInteractionResponse(interaction.ID, interaction.Token), resp, EndpointInteractionResponse("", ""))
 	return

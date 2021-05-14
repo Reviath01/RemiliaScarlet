@@ -8,7 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Channel delete event handler.
+// ChannelDelete is an event handler for channel delete event
 func ChannelDelete(s *discordgo.Session, event *discordgo.ChannelDelete) {
 	db := sql.Connect()
 	defer db.Close()

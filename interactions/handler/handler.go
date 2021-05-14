@@ -1,12 +1,12 @@
 package interactions_handler
 
 import (
-	"git.randomchars.net/Reviath/RemiliaScarlet/interaction_commands"
+	interaction_commands "git.randomchars.net/Reviath/RemiliaScarlet/InteractionCommands"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"github.com/bwmarrin/discordgo"
 )
 
-//If someone uses interaction, bot will send response.
+// InteractionHandler gets events from discordgo, if event is interaction_create it sends response.
 func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 	if event.Type == "INTERACTION_CREATE" {
 		interaction, err := interactions.InteractionFromRaw(event.RawData)

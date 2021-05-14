@@ -5,7 +5,7 @@ import (
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 )
 
-//Remove prefix command
+// RemovePrefixCommand is a handler for remove prefix command
 func RemovePrefixCommand(ctx CommandHandler.Context, _ []string) error {
 	ctx.Handler.RemovePrefix(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())[0])
 	ctx.Reply("Successful")

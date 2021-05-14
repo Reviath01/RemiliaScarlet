@@ -9,7 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Help command
+// HelpCommand is a handler for help command
 func HelpCommand(context CommandHandler.Context, args []string, commands []*CommandHandler.Command, prefixes []string) error {
 	typeCheck := func(chn discordgo.ChannelType, cmd CommandHandler.CommandType) bool {
 		switch cmd {

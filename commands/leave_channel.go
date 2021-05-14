@@ -9,7 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Leave channel command
+// LeaveChannelCommand is a handler for leave channel command
 func LeaveChannelCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

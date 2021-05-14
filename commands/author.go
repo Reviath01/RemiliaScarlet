@@ -9,7 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Author command
+// AuthorCommand is a handler for author command
 func AuthorCommand(ctx CommandHandler.Context, _ []string) error {
 	config.ReadConfig()
 

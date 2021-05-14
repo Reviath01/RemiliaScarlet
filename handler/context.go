@@ -7,12 +7,12 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Sends reply.
+// Reply sends a reply to message channel, returns *discordgo.Message and error
 func (c *Context) Reply(message string) (*discordgo.Message, error) {
 	return c.Session.ChannelMessageSend(c.Channel.ID, message)
 }
 
-//Sends complex reply.
+// ReplyComplex sends complex reply to message channel, returns *discordgo.Message and error
 func (c *Context) ReplyComplex(message string, tts bool, embed *discordgo.MessageEmbed, files []*discordgo.File) (*discordgo.Message, error) {
 	return c.Session.ChannelMessageSendComplex(c.Channel.ID, &discordgo.MessageSend{
 		Content: message,
@@ -22,17 +22,17 @@ func (c *Context) ReplyComplex(message string, tts bool, embed *discordgo.Messag
 	})
 }
 
-//Reply to message channel with embedutil's embed.
+// ReplyEmbed replys to message channel with embedutil's embed
 func (c *Context) ReplyEmbed(embed embedutil.Embed) (*discordgo.Message, error) {
 	return c.Session.ChannelMessageSendEmbed(c.Channel.ID, embed.MessageEmbed)
 }
 
-//Reply to message channel with discordgo's embed.
+// ReplyEmbed replys to message channel with discordgo's embed
 func (c *Context) ReplyDiscordgoEmbed(embed *discordgo.MessageEmbed) (*discordgo.Message, error) {
 	return c.Session.ChannelMessageSendEmbed(c.Channel.ID, embed)
 }
 
-//Reply to message channel with file.
+// ReplyFile replys to message channel with file
 func (c *Context) ReplyFile(filename string, file io.Reader) (*discordgo.Message, error) {
 	return c.Session.ChannelFileSend(c.Channel.ID, filename, file)
 }

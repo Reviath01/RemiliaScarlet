@@ -6,7 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Guild role delete event handler.
+// GuildRoleDelete is an event handler for guild role delete event
 func GuildRoleDelete(s *discordgo.Session, event *discordgo.GuildRoleDelete) {
 	db := sql.Connect()
 	defer db.Close()

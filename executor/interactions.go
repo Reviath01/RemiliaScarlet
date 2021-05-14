@@ -7,7 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Creates all interactions.
+// RunAllInteractions creates global interaction commands for bot
 func RunAllInteractions(client *discordgo.Session, BotID string) {
 	fmt.Print("Loading interactions. \n")
 	invitecommand := interactions.Command{
@@ -15,20 +15,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		Description: "Invite the bot.",
 	}
 
-	err := interactions.GlobalCommandCreate(client, BotID, invitecommand)
-	if err != nil {
-		return
-	}
+	interactions.GlobalCommandCreate(client, BotID, invitecommand)
 
 	authorcommand := interactions.Command{
 		Name:        "author",
 		Description: "Check bot's author.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, authorcommand)
-	if err != nil {
-		return
-	}
+	interactions.GlobalCommandCreate(client, BotID, authorcommand)
 
 	autorolecommand := interactions.Command{
 		Name:        "autorole",
@@ -43,10 +37,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, autorolecommand)
-	if err != nil {
-		return
-	}
+	interactions.GlobalCommandCreate(client, BotID, autorolecommand)
 
 	disablecommand := interactions.Command{
 		Name:        "disable",
@@ -61,10 +52,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, disablecommand)
-	if err != nil {
-		return
-	}
+	interactions.GlobalCommandCreate(client, BotID, disablecommand)
 
 	avatarcommand := interactions.Command{
 		Name:        "avatar",
@@ -79,10 +67,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, avatarcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, avatarcommand)
 
 	embedcommand := interactions.Command{
 		Name:        "embed",
@@ -97,10 +82,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, embedcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, embedcommand)
 
 	bancommand := interactions.Command{
 		Name:        "ban",
@@ -115,10 +97,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, bancommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, bancommand)
 	hugcommand := interactions.Command{
 		Name:        "hug",
 		Description: "Sends hug gif.",
@@ -132,40 +111,28 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, hugcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, hugcommand)
 
 	iconcommand := interactions.Command{
 		Name:        "icon",
 		Description: "Sends server icon.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, iconcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, iconcommand)
 
 	guildinfocommand := interactions.Command{
 		Name:        "guild_info",
 		Description: "Get information about guild.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, guildinfocommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, guildinfocommand)
 
 	issuecommand := interactions.Command{
 		Name:        "issue",
 		Description: "Create an issue.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, issuecommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, issuecommand)
 
 	kickcommand := interactions.Command{
 		Name:        "kick",
@@ -180,10 +147,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, kickcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, kickcommand)
 
 	kisscommand := interactions.Command{
 		Name:        "kiss",
@@ -198,10 +162,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, kisscommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, kisscommand)
 
 	languagecommand := interactions.Command{
 		Name:        "language",
@@ -216,10 +177,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, languagecommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, languagecommand)
 
 	leavechannelcommand := interactions.Command{
 		Name:        "leave_channel",
@@ -234,10 +192,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, leavechannelcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, leavechannelcommand)
 
 	leavemessagecommand := interactions.Command{
 		Name:        "leave_message",
@@ -252,10 +207,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, leavemessagecommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, leavemessagecommand)
 
 	logcommand := interactions.Command{
 		Name:        "log",
@@ -270,100 +222,70 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, logcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, logcommand)
 
 	pingcommand := interactions.Command{
 		Name:        "ping",
 		Description: "Fetch bots ping.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, pingcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, pingcommand)
 
 	reset_autorolecommand := interactions.Command{
 		Name:        "reset_autorole",
 		Description: "Reset auto role.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, reset_autorolecommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, reset_autorolecommand)
 
 	reset_leavechannelcommand := interactions.Command{
 		Name:        "reset_leave_channel",
 		Description: "Reset leave channel.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, reset_leavechannelcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, reset_leavechannelcommand)
 
 	reset_leavemessagecommand := interactions.Command{
 		Name:        "reset_leave_message",
 		Description: "Reset leave message.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, reset_leavemessagecommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, reset_leavemessagecommand)
 
 	reset_logcommand := interactions.Command{
 		Name:        "reset_log",
 		Description: "Reset log channel.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, reset_logcommand)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, reset_logcommand)
 
 	reset_welcome_message_command := interactions.Command{
 		Name:        "reset_welcome_message",
 		Description: "Reset welcome message.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, reset_welcome_message_command)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, reset_welcome_message_command)
 
 	reset_welcome_channel_command := interactions.Command{
 		Name:        "reset_welcome_channel",
 		Description: "Reset welcome channel.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, reset_welcome_channel_command)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, reset_welcome_channel_command)
 
 	roles_command := interactions.Command{
 		Name:        "roles",
 		Description: "Fetch all roles at your guild.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, roles_command)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, roles_command)
 
 	settings_command := interactions.Command{
 		Name:        "settings",
 		Description: "Get server settings.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, settings_command)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, settings_command)
 
 	slap_command := interactions.Command{
 		Name:        "slap",
@@ -378,10 +300,7 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, slap_command)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, slap_command)
 
 	spoiler_command := interactions.Command{
 		Name:        "spoiler",
@@ -396,20 +315,14 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, spoiler_command)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, spoiler_command)
 
 	stats_command := interactions.Command{
 		Name:        "stats",
 		Description: "Fetch bot's stats.",
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, stats_command)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, stats_command)
 
 	unban_command := interactions.Command{
 		Name:        "unban",
@@ -424,8 +337,5 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	err = interactions.GlobalCommandCreate(client, BotID, unban_command)
-	if err != nil {
-		print(err.Error())
-	}
+	interactions.GlobalCommandCreate(client, BotID, unban_command)
 }

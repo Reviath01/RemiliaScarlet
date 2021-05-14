@@ -1,6 +1,6 @@
 package multiplexer
 
-//Get role function for all commands.
+// GetRole function provides to get a role with id or mention
 func GetRole(role string) string {
 	switch len(role) {
 	case 18:

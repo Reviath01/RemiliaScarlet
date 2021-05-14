@@ -9,7 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Enable command
+// EnableCommand is a handler for enable command
 func EnableCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

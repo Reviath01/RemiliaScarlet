@@ -7,7 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Guild member add event handler.
+// GuildMemberAdd is an event handler for guild member add event
 func GuildMemberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
 	db := sql.Connect()
 	defer db.Close()

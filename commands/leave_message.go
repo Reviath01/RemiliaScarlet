@@ -9,7 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Leave message command
+// LeaveMessageCommand is a handler for leave message command
 func LeaveMessageCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

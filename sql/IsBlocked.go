@@ -2,7 +2,7 @@ package sql
 
 import "fmt"
 
-//Checking if the command is blocked.
+// IsBlocked checks if the command is blocked, returns a string
 func IsBlocked(guildid string, commandname string) string {
 	db := Connect()
 	defer db.Close()

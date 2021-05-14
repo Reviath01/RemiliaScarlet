@@ -9,7 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Channel create event handler.
+// ChannelCreate is an event handler for channel create event
 func ChannelCreate(s *discordgo.Session, event *discordgo.ChannelCreate) {
 	db := sql.Connect()
 	defer db.Close()

@@ -8,7 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Reset log command
+// ResetLogCommand is a handler for reset log command
 func ResetLogCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

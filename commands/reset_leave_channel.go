@@ -8,7 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Reset leave channel command
+// ResetLeaveChannel is a handler for reset leave channel command
 func ResetLeaveChannel(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

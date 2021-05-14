@@ -1,5 +1,6 @@
 package multiplexer
 
+// GetUser function provides to get a user with id or mention
 func GetUser(user string) string {
 	switch len(user) {
 	case 22:

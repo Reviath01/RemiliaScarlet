@@ -4,25 +4,25 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Checking ban permission for user on specified channel.
+// CheckBanPermission checks user's permissions on channel, returns to "true" or "false"
 func CheckBanPermission(s *discordgo.Session, userID string, channelID string) bool {
 	p, _ := s.UserChannelPermissions(userID, channelID)
 	return p&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers
 }
 
-//Checking administrator permission for user on specified channel.
+// CheckAdministratorPermission checks user's permissions on channel, returns to "true" or "false"
 func CheckAdministratorPermission(s *discordgo.Session, userID string, channelID string) bool {
 	p, _ := s.UserChannelPermissions(userID, channelID)
 	return p&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator
 }
 
-//Checking manage messages permission for user on specified channel.
+// CheckManageMessagesPermission checks user's permissions on channel, returns to "true" or "false"
 func CheckManageMessagesPermission(s *discordgo.Session, userID string, channelID string) bool {
 	p, _ := s.UserChannelPermissions(userID, channelID)
 	return p&discordgo.PermissionManageMessages == discordgo.PermissionManageMessages
 }
 
-//Checking kick permission for user on specified channel.
+// CheckKickPermission checks user's permissions on channel, returns to "true" or "false"
 func CheckKickPermission(s *discordgo.Session, userID string, channelID string) bool {
 	p, _ := s.UserChannelPermissions(userID, channelID)
 	return p&discordgo.PermissionKickMembers == discordgo.PermissionKickMembers

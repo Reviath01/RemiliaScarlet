@@ -8,7 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Guild role create event handler.
+// GuildRoleCreate is an event handler for guild role create event
 func GuildRoleCreate(s *discordgo.Session, event *discordgo.GuildRoleCreate) {
 	db := sql.Connect()
 	defer db.Close()

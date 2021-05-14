@@ -9,7 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Fetching client user function.
+// GetClientUser returns to Bot's owner as *discordgo.User
 func GetClientUser(session *discordgo.Session) *discordgo.User {
 	cli, err := session.User(config.ClientID)
 	if err != nil {

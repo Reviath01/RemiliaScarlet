@@ -8,7 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-//Roles command
+// RolesCommand is a handler for roles command
 func RolesCommand(ctx CommandHandler.Context, _ []string) error {
 	var roles string
 

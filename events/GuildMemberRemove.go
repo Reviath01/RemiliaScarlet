@@ -7,7 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-//Guild member remove event handler.
+// GuildMemberRemove is an event handler for guild member remove event
 func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove) {
 	db := sql.Connect()
 	defer db.Close()
