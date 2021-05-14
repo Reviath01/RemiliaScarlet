@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"time"
 
+	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
@@ -89,6 +90,25 @@ func Listen(session *discordgo.Session) {
 			if err != nil {
 				c.Redirect(http.StatusTemporaryRedirect, "/")
 			} else {
+				var token = &oauth2.Token{}
+				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
+				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
+
+				if err != nil || res.StatusCode != 200 {
+					fmt.Println("An error occurred on api: " + err.Error())
+					return
+				}
+
+				var user discordgo.User
+				data, _ := ioutil.ReadAll(res.Body)
+				err = json.Unmarshal(data, &user)
+				if err != nil {
+					c.Redirect(http.StatusTemporaryRedirect, "/")
+				}
+				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.SystemChannelID) {
+					fmt.Fprintf(c.Writer, "Unauthorized")
+					return
+				}
 				fmt.Fprintf(c.Writer, guild.Name)
 			}
 		}
