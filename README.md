@@ -7,6 +7,8 @@
   </p>
 </p>
 
+[![Go Report Card](https://goreportcard.com/badge/git.randomchars.net/Reviath/RemiliaScarlet)](https://goreportcard.com/report/git.randomchars.net/Reviath/RemiliaScarlet)
+
 ## About The Project
 This is my first Golang Discord bot project, but I've written in javascript (Nodejs) and python before, and you can see them from my projects on GitLab.
 
