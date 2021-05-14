@@ -86,6 +86,7 @@ body{
 }
     </style>
 	<body>
+		{{if eq .is404 "true"}}
         <a href="/" class="home"><i class="fa fa-home"></i></a>
     <div>
 			<h1 class="text">
@@ -93,7 +94,19 @@ body{
 		</h1>
 		</div>
 		<h5 class="blutext">
-            The page you are looking for may have been removed or temporarily unavailable
+            {{.description}}
 		</h5>
+		{{else}}
+        <a href="/" class="home"><i class="fa fa-home"></i></a>
+	    <div>
+			<h1 class="text">
+			{{.error}}
+		</h1>
+		</div>
+		<h5 class="blutext">
+            {{.description}}
+		</h5>
+		
+		{{end}}
 	</body>
 </html>

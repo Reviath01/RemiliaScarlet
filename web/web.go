@@ -37,7 +37,11 @@ func Listen(session *discordgo.Session) {
 	}
 
 	server.NoRoute(func(c *gin.Context) {
-		c.HTML(404, "404.html", gin.H{})
+		c.HTML(404, "error.html", gin.H{
+			"is404":       "true",
+			"description": "The page you are looking for may have been removed or temporarily unavailable",
+			"error":       "404",
+		})
 	})
 
 	server.GET("/login", func(c *gin.Context) {
@@ -106,7 +110,11 @@ func Listen(session *discordgo.Session) {
 					c.Redirect(http.StatusTemporaryRedirect, "/")
 				}
 				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.SystemChannelID) {
-					fmt.Fprintf(c.Writer, "Unauthorized")
+					c.HTML(200, "error.html", gin.H{
+						"is404":       "false",
+						"description": "You don't have enough permission to access here!",
+						"error":       "Unauthorized",
+					})
 					return
 				}
 				fmt.Fprintf(c.Writer, guild.Name)
