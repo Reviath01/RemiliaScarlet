@@ -1,4 +1,4 @@
-package interaction_commands
+package interactioncommands
 
 import (
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"

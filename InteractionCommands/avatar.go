@@ -1,4 +1,4 @@
-package interaction_commands
+package interactioncommands
 
 import (
 	"fmt"
