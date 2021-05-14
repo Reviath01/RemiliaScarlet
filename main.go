@@ -15,6 +15,11 @@ import (
 
 func main() {
 	config.ReadConfig()
+	if config.Token == "TOKEN" || config.ClientID == "CLIENT_ID" || config.ClientSecret == "CLIENT_SECRET" || config.WebURL == "WEB_URL" {
+		fmt.Println("Edit config file before running.")
+		os.Exit(1)
+	}
+
 	client, err := discordgo.New(fmt.Sprintf("Bot %s", config.Token))
 	if err != nil {
 		fmt.Printf("Creating a session failed: %s.\n", err.Error())
