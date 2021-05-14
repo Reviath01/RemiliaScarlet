@@ -92,7 +92,11 @@ func Listen(session *discordgo.Session) {
 		default:
 			guild, err := session.Guild(c.Param("guildid"))
 			if err != nil {
-				c.Redirect(http.StatusTemporaryRedirect, "/")
+				c.HTML(200, "error.html", gin.H{
+					"is404":       "false",
+					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
+					"error":       "Invalid snowflake.",
+				})
 			} else {
 				var token = &oauth2.Token{}
 				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
@@ -110,7 +114,14 @@ func Listen(session *discordgo.Session) {
 					c.Redirect(http.StatusTemporaryRedirect, "/")
 				}
 
-				Guild, _ := session.State.Guild(guild.ID)
+				Guild, err := session.State.Guild(guild.ID)
+				if err != nil {
+					c.HTML(200, "error.html", gin.H{
+						"is404":       "false",
+						"description": "I was not able to fetch the guild.",
+						"error":       "Data error",
+					})
+				}
 
 				if !multiplexer.CheckAdministratorPermission(session, user.ID, Guild.Channels[0].ID) {
 					c.HTML(200, "error.html", gin.H{
