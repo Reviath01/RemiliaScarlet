@@ -7,8 +7,8 @@ import (
 )
 
 var (
-	BotPrefix string
-	config    *configStruct
+	BotPrefix string        // BotPrefix is bot's prefix to cut prefix's length
+	config    *configStruct // config structure
 )
 
 type configStruct struct {

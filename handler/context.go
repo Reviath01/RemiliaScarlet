@@ -27,7 +27,7 @@ func (c *Context) ReplyEmbed(embed embedutil.Embed) (*discordgo.Message, error) 
 	return c.Session.ChannelMessageSendEmbed(c.Channel.ID, embed.MessageEmbed)
 }
 
-// ReplyEmbed replys to message channel with discordgo's embed
+// ReplyDiscordgoEmbed replys to message channel with discordgo's embed
 func (c *Context) ReplyDiscordgoEmbed(embed *discordgo.MessageEmbed) (*discordgo.Message, error) {
 	return c.Session.ChannelMessageSendEmbed(c.Channel.ID, embed)
 }

@@ -231,63 +231,63 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 
 	interactions.GlobalCommandCreate(client, BotID, pingcommand)
 
-	reset_autorolecommand := interactions.Command{
+	resetautorolecommand := interactions.Command{
 		Name:        "reset_autorole",
 		Description: "Reset auto role.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, reset_autorolecommand)
+	interactions.GlobalCommandCreate(client, BotID, resetautorolecommand)
 
-	reset_leavechannelcommand := interactions.Command{
+	resetleavechannelcommand := interactions.Command{
 		Name:        "reset_leave_channel",
 		Description: "Reset leave channel.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, reset_leavechannelcommand)
+	interactions.GlobalCommandCreate(client, BotID, resetleavechannelcommand)
 
-	reset_leavemessagecommand := interactions.Command{
+	resetleavemessagecommand := interactions.Command{
 		Name:        "reset_leave_message",
 		Description: "Reset leave message.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, reset_leavemessagecommand)
+	interactions.GlobalCommandCreate(client, BotID, resetleavemessagecommand)
 
-	reset_logcommand := interactions.Command{
+	resetlogcommand := interactions.Command{
 		Name:        "reset_log",
 		Description: "Reset log channel.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, reset_logcommand)
+	interactions.GlobalCommandCreate(client, BotID, resetlogcommand)
 
-	reset_welcome_message_command := interactions.Command{
+	resetwelcomemessagecommand := interactions.Command{
 		Name:        "reset_welcome_message",
 		Description: "Reset welcome message.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, reset_welcome_message_command)
+	interactions.GlobalCommandCreate(client, BotID, resetwelcomemessagecommand)
 
-	reset_welcome_channel_command := interactions.Command{
+	resetwelcomechannelcommand := interactions.Command{
 		Name:        "reset_welcome_channel",
 		Description: "Reset welcome channel.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, reset_welcome_channel_command)
+	interactions.GlobalCommandCreate(client, BotID, resetwelcomechannelcommand)
 
-	roles_command := interactions.Command{
+	rolescommand := interactions.Command{
 		Name:        "roles",
 		Description: "Fetch all roles at your guild.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, roles_command)
+	interactions.GlobalCommandCreate(client, BotID, rolescommand)
 
-	settings_command := interactions.Command{
+	settingscommand := interactions.Command{
 		Name:        "settings",
 		Description: "Get server settings.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, settings_command)
+	interactions.GlobalCommandCreate(client, BotID, settingscommand)
 
-	slap_command := interactions.Command{
+	slapcommand := interactions.Command{
 		Name:        "slap",
 		Description: "Sends slap gif.",
 		Options: []interactions.CommandOption{
@@ -300,9 +300,9 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, slap_command)
+	interactions.GlobalCommandCreate(client, BotID, slapcommand)
 
-	spoiler_command := interactions.Command{
+	spoilercommand := interactions.Command{
 		Name:        "spoiler",
 		Description: "Sends your message as spoiler.",
 		Options: []interactions.CommandOption{
@@ -315,16 +315,16 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, spoiler_command)
+	interactions.GlobalCommandCreate(client, BotID, spoilercommand)
 
-	stats_command := interactions.Command{
+	statscommand := interactions.Command{
 		Name:        "stats",
 		Description: "Fetch bot's stats.",
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, stats_command)
+	interactions.GlobalCommandCreate(client, BotID, statscommand)
 
-	unban_command := interactions.Command{
+	unbancommand := interactions.Command{
 		Name:        "unban",
 		Description: "Unban a user.",
 		Options: []interactions.CommandOption{
@@ -337,5 +337,5 @@ func RunAllInteractions(client *discordgo.Session, BotID string) {
 		},
 	}
 
-	interactions.GlobalCommandCreate(client, BotID, unban_command)
+	interactions.GlobalCommandCreate(client, BotID, unbancommand)
 }

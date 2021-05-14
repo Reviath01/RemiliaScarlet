@@ -1,19 +1,18 @@
 package executor
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/commands"
+	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"github.com/bwmarrin/discordgo"
 )
 
 // RunAllCommands runs all commands and creates a CommandHandler
 func RunAllCommands(client *discordgo.Session) {
-	ReadConfig()
-	handler := CommandHandler.New([]string{BotPrefix}, []string{Owner}, true, true, client.StateEnabled)
+	config.ReadConfig()
+	handler := CommandHandler.New([]string{config.BotPrefix}, []string{config.Owner}, true, true, client.StateEnabled)
 	client.AddHandler(handler.MessageHandler)
 	handler.AddCommand("ping", "Check the bot's ping.", []string{"pong"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeEverywhere, commands.PingCommand)
 	handler.AddCommand("add_prefix", "Adds prefix to bot. (Owner-only).", []string{"addprefix", "add-prefix"}, true, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.AddPrefixCommand)
@@ -59,54 +58,4 @@ func RunAllCommands(client *discordgo.Session) {
 		fmt.Printf("Command \"%s\" is being run by \"%s#%s\" (ID: %s).\n", command.Name, context.User.Username, context.User.Discriminator, context.User.ID)
 		return true
 	})
-}
-
-var (
-	Token     string
-	BotPrefix string
-	Presence  string
-	Owner     string
-	Database  string
-	User      string
-	config    *configStruct
-	Password  string
-	Host      string
-)
-
-type configStruct struct {
-	Token     string `json:"Token"`
-	BotPrefix string `json:"BotPrefix"`
-	Presence  string `json:"Presence"`
-	Owner     string `json:"Owner"`
-	Database  string `json:"Database"`
-	Host      string `json:"Host"`
-	User      string `json:"User"`
-	Password  string `json:"Password"`
-}
-
-func ReadConfig() error {
-	file, err := ioutil.ReadFile("./config.json")
-
-	if err != nil {
-		fmt.Println(err.Error())
-		return err
-	}
-
-	err = json.Unmarshal(file, &config)
-
-	if err != nil {
-		fmt.Println(err.Error())
-		return err
-	}
-
-	Token = config.Token
-	BotPrefix = config.BotPrefix
-	Presence = config.Presence
-	Owner = config.Owner
-	Database = config.Database
-	Host = config.Host
-	User = config.User
-	Password = config.Password
-
-	return nil
 }

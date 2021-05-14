@@ -1,5 +1,6 @@
 package web
 
+// UserInfo structure to use on index.html
 type UserInfo struct {
 	Name          string
 	ID            string

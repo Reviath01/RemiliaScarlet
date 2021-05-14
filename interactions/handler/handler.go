@@ -1,4 +1,4 @@
-package interactions_handler
+package interactionshandler
 
 import (
 	interaction_commands "git.randomchars.net/Reviath/RemiliaScarlet/InteractionCommands"

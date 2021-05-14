@@ -17,12 +17,14 @@ var (
 	}
 )
 
+// Command structure
 type Command struct {
 	Name        string          `json:"name"`
 	Description string          `json:"description"`
 	Options     []CommandOption `json:"options,omitempty"`
 }
 
+// CommandOptionType int
 type CommandOptionType int
 
 const (
@@ -36,6 +38,7 @@ const (
 	OptionTypeRole
 )
 
+// CommandOption structure
 type CommandOption struct {
 	Type        CommandOptionType     `json:"type"`
 	Name        string                `json:"name"`
@@ -46,6 +49,7 @@ type CommandOption struct {
 	Options     []CommandOption       `json:"options,omitempty"`
 }
 
+// CommandOptionChoice structure
 type CommandOptionChoice struct {
 	Name  string      `json:"name"`
 	Value interface{} `json:"value"`
@@ -63,6 +67,7 @@ func GuildCommandCreate(s *discordgo.Session, aID string, gID string, command Co
 	return
 }
 
+// InteractionType int
 type InteractionType int
 
 const (
@@ -70,18 +75,21 @@ const (
 	InteractionTypeApplicationCommand
 )
 
+// InteractionData structure
 type InteractionData struct {
 	ID      string                  `json:"id"`
 	Name    string                  `json:"name"`
 	Options []InteractionDataOption `json:"options"`
 }
 
+// InteractionDataOption structure
 type InteractionDataOption struct {
 	Name    string                  `json:"name"`
 	Value   interface{}             `json:"value"`
 	Options []InteractionDataOption `json:"options"`
 }
 
+// Interaction structure
 type Interaction struct {
 	ID        string           `json:"id"`
 	Type      InteractionType  `json:"type"`
@@ -93,11 +101,13 @@ type Interaction struct {
 	Version   int              `json:"version"`
 }
 
+// InteractionFromRaw is a function to get interaction from raw data
 func InteractionFromRaw(raw json.RawMessage) (inter Interaction, err error) {
 	err = json.Unmarshal(raw, &inter)
 	return
 }
 
+// InteractionResponseType int
 type InteractionResponseType int
 
 const (
@@ -108,6 +118,7 @@ const (
 	InteractionResponseTypeACKWithSource
 )
 
+// InteractionResponseData structure
 type InteractionResponseData struct {
 	TTS             bool                         `json:"tts"`
 	Content         string                       `json:"content"`
@@ -115,6 +126,7 @@ type InteractionResponseData struct {
 	AllowedMentions discordgo.AllowedMentionType `json:"allowed_mentions,omitempty"`
 }
 
+// InteractionResponse structure
 type InteractionResponse struct {
 	Type InteractionResponseType `json:"type"`
 	Data InteractionResponseData `json:"data,omitempty"`

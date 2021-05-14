@@ -2,18 +2,25 @@ package handler
 
 import "github.com/bwmarrin/discordgo"
 
+// CommandFunc is function to run all commands
 type CommandFunc func(Context, []string) error
 
+// DebugFunc debug function
 type DebugFunc func(string)
 
+// HelpCommandFunc is help command function
 type HelpCommandFunc func(Context, []string, []*Command, []string) error
 
+// PrerunFunc is a function when command is used
 type PrerunFunc func(Context, *Command, []string) bool
 
+// OnErrorFunc is a function if error occurres on commands
 type OnErrorFunc func(Context, *Command, []string, error)
 
+// CommandType int
 type CommandType int
 
+// HelpCommand struct
 type HelpCommand struct {
 	Aliases         []string
 	Name            string
@@ -22,6 +29,7 @@ type HelpCommand struct {
 	Run             HelpCommandFunc
 }
 
+// CommandHandler structure
 type CommandHandler struct {
 	enabled          bool
 	checkPermissions bool
@@ -39,6 +47,7 @@ type CommandHandler struct {
 	prerunFunc  PrerunFunc
 }
 
+// Command structure
 type Command struct {
 	Aliases     []string
 	Description string
@@ -55,6 +64,7 @@ type Command struct {
 	Type CommandType
 }
 
+// Context structure
 type Context struct {
 	Handler *CommandHandler
 

@@ -7,19 +7,19 @@ import (
 )
 
 var (
-	Token            string
-	BotPrefix        string
-	Presence         string
-	Owner            string
-	LoadInteractions string
-	Database         string
-	User             string
-	config           *configStruct
-	Password         string
-	Host             string
-	WebURL           string
-	ClientID         string
-	ClientSecret     string
+	Token            string        // Token is to run the bot with token
+	BotPrefix        string        // BotPrefix is the prefix that the command handler will use
+	Presence         string        // Presence is bot's playing part
+	Owner            string        // Owner of the bot (needed on some commands)
+	LoadInteractions string        // LoadInteractions is bot's slash commands
+	Database         string        // Database name
+	User             string        // User to connect MySQL database
+	config           *configStruct // config structure
+	Password         string        // Password to connect MySQL database
+	Host             string        // Host to connect MySQL database
+	WebURL           string        // WebURL to run website
+	ClientID         string        // ClientID to use on website
+	ClientSecret     string        // ClientSecret for OAuth2
 )
 
 type configStruct struct {

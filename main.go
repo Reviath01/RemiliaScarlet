@@ -58,6 +58,7 @@ func main() {
 	os.Exit(1)
 }
 
+// WaitForInterrupt is a function that notifies when program is closed
 func WaitForInterrupt() {
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
