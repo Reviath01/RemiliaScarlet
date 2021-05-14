@@ -82,9 +82,9 @@ type Context struct {
 }
 
 const (
-	CommandTypeEverywhere CommandType = iota
+	CommandTypeEverywhere CommandType = iota // CommandTypeEverywhere : command can be used on everywhere (DMs + Guilds)
 
-	CommandTypeGuild
+	CommandTypeGuild // CommandTypeGuild : command can be only used on guilds (not DMs)
 
-	CommandTypePrivate
+	CommandTypePrivate // CommandTypePrivate : private command type
 )

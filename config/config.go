@@ -23,18 +23,18 @@ var (
 )
 
 type configStruct struct {
-	Token            string `json:"Token"`
-	BotPrefix        string `json:"BotPrefix"`
-	Presence         string `json:"Presence"`
-	Owner            string `json:"Owner"`
-	LoadInteractions string `json:"LoadInteractions"`
-	Database         string `json:"Database"`
-	Host             string `json:"Host"`
-	User             string `json:"User"`
-	Password         string `json:"Password"`
-	WebURL           string `json:"WebURL"`
-	ClientID         string `json:"ClientID"`
-	ClientSecret     string `json:"ClientSecret"`
+	Token            string `json:"Token"`            // Token from config file
+	BotPrefix        string `json:"BotPrefix"`        // BotPrefix from config file
+	Presence         string `json:"Presence"`         // Presence from config file
+	Owner            string `json:"Owner"`            // Owner from config file
+	LoadInteractions string `json:"LoadInteractions"` // LoadInteractions from config file
+	Database         string `json:"Database"`         // Database from config file
+	Host             string `json:"Host"`             // Host from config file
+	User             string `json:"User"`             // User from config file
+	Password         string `json:"Password"`         // Password from config file
+	WebURL           string `json:"WebURL"`           // WebURL from config file
+	ClientID         string `json:"ClientID"`         // ClientID from config file
+	ClientSecret     string `json:"ClientSecret"`     // ClientSecret from config file
 }
 
 // ReadConfig reads config.json file, returns error
