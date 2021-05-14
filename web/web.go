@@ -109,7 +109,10 @@ func Listen(session *discordgo.Session) {
 				if err != nil {
 					c.Redirect(http.StatusTemporaryRedirect, "/")
 				}
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.SystemChannelID) {
+
+				Guild, _ := session.State.Guild(guild.ID)
+
+				if !multiplexer.CheckAdministratorPermission(session, user.ID, Guild.Channels[0].ID) {
 					c.HTML(200, "error.html", gin.H{
 						"is404":       "false",
 						"description": "You don't have enough permission to access here!",
