@@ -1,11 +1,6 @@
 package handler
 
-import (
-	"os"
-	"os/signal"
-	"syscall"
-)
-
+//New handler function.
 func New(prefixes []string, owners []string, useState, ignoreBots, checkPermssions bool) CommandHandler {
 	return CommandHandler{
 		enabled:          true,
@@ -15,10 +10,4 @@ func New(prefixes []string, owners []string, useState, ignoreBots, checkPermssio
 		ignoreBots:       ignoreBots,
 		checkPermissions: checkPermssions,
 	}
-}
-
-func WaitForInterrupt() {
-	sc := make(chan os.Signal, 1)
-	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
-	<-sc
 }

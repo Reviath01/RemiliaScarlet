@@ -2,6 +2,7 @@ package sql
 
 import "fmt"
 
+//CheckLanguage function for all commands.
 func CheckLanguage(guildid string) string {
 	db := Connect()
 	defer db.Close()

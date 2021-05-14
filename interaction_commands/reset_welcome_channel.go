@@ -9,6 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Reset welcome channel slash command.
 func ResetWelcomeChannelCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
 	defer db.Close()

@@ -9,6 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Ban slash command.
 func BanCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	if !multiplexer.CheckBanPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 		return multiplexer.CreateResponse("You don't have enough permission.")

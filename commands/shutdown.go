@@ -6,6 +6,7 @@ import (
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 )
 
+//Shutdown command
 func ShutdownCommand(ctx CommandHandler.Context, _ []string) error {
 	ctx.Reply("Performing shutdown.")
 

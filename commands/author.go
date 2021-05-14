@@ -9,6 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Author command
 func AuthorCommand(ctx CommandHandler.Context, _ []string) error {
 	config.ReadConfig()
 

@@ -7,6 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Language slash command.
 func LanguageCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
 	defer db.Close()

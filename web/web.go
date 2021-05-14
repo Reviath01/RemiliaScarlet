@@ -16,6 +16,7 @@ import (
 	"golang.org/x/oauth2"
 )
 
+//Listening function for web-panel
 func Listen(session *discordgo.Session) {
 	config.ReadConfig()
 	gin.SetMode(gin.ReleaseMode)

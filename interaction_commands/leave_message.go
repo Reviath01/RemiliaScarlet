@@ -9,6 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Leave message slash command.
 func LeaveMessageCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
 	defer db.Close()

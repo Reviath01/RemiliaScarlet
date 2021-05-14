@@ -9,6 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Log command
 func LogCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

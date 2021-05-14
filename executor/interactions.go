@@ -7,6 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Creates all interactions.
 func RunAllInteractions(client *discordgo.Session, BotID string) {
 	fmt.Print("Loading interactions. \n")
 	invitecommand := interactions.Command{

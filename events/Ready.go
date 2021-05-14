@@ -5,6 +5,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Ready event handler.
 func Ready(s *discordgo.Session, event *discordgo.Ready) {
 	config.ReadConfig()
 

@@ -14,6 +14,7 @@ import (
 
 var startTime = time.Now()
 
+//Stats slash command.
 func StatsCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":

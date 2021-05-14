@@ -9,6 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Start vote command
 func StartVoteCommand(ctx CommandHandler.Context, _ []string) error {
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":

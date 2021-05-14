@@ -8,6 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Reset welcome message command
 func ResetWelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

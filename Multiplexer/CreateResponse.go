@@ -6,6 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Creating message response for interaction commands.
 func CreateResponse(message string) interactions.InteractionResponse {
 	response := interactions.InteractionResponse{
 		Type: interactions.InteractionResponseTypeChannelMessageWithSource,
@@ -17,6 +18,7 @@ func CreateResponse(message string) interactions.InteractionResponse {
 	return response
 }
 
+//Creating embed response for interaction commands.
 func CreateEmbedResponse(embed embedutil.Embed) interactions.InteractionResponse {
 	response := interactions.InteractionResponse{
 		Type: interactions.InteractionResponseTypeChannelMessageWithSource,

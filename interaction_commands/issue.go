@@ -8,6 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Issue slash command.
 func IssueCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":

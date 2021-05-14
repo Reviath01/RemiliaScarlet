@@ -10,6 +10,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Slap command
 func SlapCommand(ctx CommandHandler.Context, _ []string) error {
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":

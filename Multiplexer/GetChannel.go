@@ -1,10 +1,13 @@
 package multiplexer
 
+//Get channel function for commands.
 func GetChannel(channel string) string {
-	if len(channel) == 18 {
+	switch len(channel) {
+	case 18:
 		return channel
-	} else if len(channel) == 21 {
+	case 21:
 		return channel[2:][:18]
+	default:
+		return channel
 	}
-	return channel
 }

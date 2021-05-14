@@ -9,6 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Log slash command.
 func LogCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
 	defer db.Close()

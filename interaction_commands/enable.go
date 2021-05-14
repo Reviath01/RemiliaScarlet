@@ -9,6 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Enable slash command.
 func EnableCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
 	defer db.Close()

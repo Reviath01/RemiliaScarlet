@@ -211,6 +211,7 @@ func (c *CommandHandler) throwError(context Context, command *Command, args []st
 	}
 }
 
+//Permission check function.
 func permissionCheck(session *discordgo.Session, member *discordgo.Member, guild *discordgo.Guild, channel *discordgo.Channel, necessaryPermissions int, useState bool) error {
 	if necessaryPermissions == 0 {
 		return nil
@@ -281,6 +282,7 @@ func permissionCheck(session *discordgo.Session, member *discordgo.Member, guild
 	return nil
 }
 
+//Message handler function for Command Handler.
 func (c *CommandHandler) MessageHandler(s *discordgo.Session, event *discordgo.MessageCreate) {
 	if !c.enabled || event.Author.ID == s.State.User.ID {
 		return

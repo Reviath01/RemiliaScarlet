@@ -10,6 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Avatar slash command.
 func AvatarCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":

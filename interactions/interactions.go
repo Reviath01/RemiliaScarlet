@@ -51,10 +51,13 @@ type CommandOptionChoice struct {
 	Value interface{} `json:"value"`
 }
 
+//Creates slash command for all guilds that bot in.
 func GlobalCommandCreate(s *discordgo.Session, aID string, command Command) (err error) {
 	_, err = s.RequestWithBucketID("POST", EndpointApplicationCommands(aID), command, EndpointApplicationCommands(""))
 	return
 }
+
+//Creates slash command for specified guild.
 func GuildCommandCreate(s *discordgo.Session, aID string, gID string, command Command) (err error) {
 	_, err = s.RequestWithBucketID("POST", EndpointApplicationGuildCommands(aID, gID), command, EndpointApplicationGuildCommands("", ""))
 	return

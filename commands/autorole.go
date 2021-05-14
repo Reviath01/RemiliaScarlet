@@ -9,6 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Auto role command
 func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

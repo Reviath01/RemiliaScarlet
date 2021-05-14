@@ -7,6 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Guild member remove event handler.
 func GuildMemberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove) {
 	db := sql.Connect()
 	defer db.Close()

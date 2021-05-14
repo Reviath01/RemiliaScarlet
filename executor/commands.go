@@ -10,6 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Run all commands function.
 func RunAllCommands(client *discordgo.Session) {
 	ReadConfig()
 	handler := CommandHandler.New([]string{BotPrefix}, []string{Owner}, true, true, client.StateEnabled)

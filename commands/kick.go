@@ -8,6 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Kick command
 func KickCommand(ctx CommandHandler.Context, _ []string) error {
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":

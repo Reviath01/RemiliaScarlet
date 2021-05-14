@@ -8,6 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Roles command
 func RolesCommand(ctx CommandHandler.Context, _ []string) error {
 	var roles string
 

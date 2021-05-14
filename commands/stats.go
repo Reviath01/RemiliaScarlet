@@ -14,6 +14,7 @@ import (
 
 var startTime = time.Now()
 
+//Stats command
 func StatsCommand(ctx CommandHandler.Context, _ []string) error {
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":

@@ -4,12 +4,14 @@ import (
 	"database/sql"
 	"fmt"
 
+	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	_ "github.com/go-sql-driver/mysql"
 )
 
+//Connecting to MySQL database.
 func Connect() *sql.DB {
-	ReadConfig()
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", User, Password, Host, Database))
+	config.ReadConfig()
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@%s/%s", config.User, config.Password, config.Host, config.Database))
 	if err != nil {
 		fmt.Printf("Cannot connect MySQL database %s\n", err.Error())
 		return nil

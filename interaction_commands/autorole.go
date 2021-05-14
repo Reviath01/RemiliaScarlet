@@ -9,6 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Auto role slash command.
 func AutoRoleCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
 		return multiplexer.CreateResponse("You don't have enough permission.")

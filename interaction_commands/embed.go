@@ -8,6 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Embed slash command.
 func EmbedCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":

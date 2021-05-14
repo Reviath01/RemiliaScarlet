@@ -10,6 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Slap slash command.
 func SlapCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":

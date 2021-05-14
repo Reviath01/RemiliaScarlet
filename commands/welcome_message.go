@@ -9,9 +9,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
-type WelcomeMessage struct {
-}
-
+//Welcome message command
 func WelcomeMessageCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

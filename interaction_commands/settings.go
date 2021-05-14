@@ -10,6 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Settings slash command.
 func SettingsCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	db := sql.Connect()
 	defer db.Close()

@@ -11,6 +11,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Guild info slash command.
 func GuildInfoCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	Guild, _ := session.Guild(string(interaction.GuildID))
 	switch sql.CheckLanguage(interaction.GuildID) {

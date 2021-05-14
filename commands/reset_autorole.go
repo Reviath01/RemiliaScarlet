@@ -8,6 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Reset auto role command
 func ResetAutoroleCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

@@ -7,6 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Kick slash command.
 func KickCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":

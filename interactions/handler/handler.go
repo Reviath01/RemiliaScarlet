@@ -6,6 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//If someone uses interaction, bot will send response.
 func InteractionHandler(session *discordgo.Session, event *discordgo.Event) {
 	if event.Type == "INTERACTION_CREATE" {
 		interaction, err := interactions.InteractionFromRaw(event.RawData)

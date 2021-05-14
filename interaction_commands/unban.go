@@ -7,6 +7,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Unban slash command.
 func UnbanCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":

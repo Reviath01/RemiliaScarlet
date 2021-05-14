@@ -8,6 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Icon slash command.
 func IconCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	guild, _ := session.Guild(string(interaction.GuildID))
 	switch sql.CheckLanguage(interaction.GuildID) {

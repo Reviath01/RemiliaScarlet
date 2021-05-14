@@ -8,6 +8,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 )
 
+//Settings command
 func SettingsCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
 

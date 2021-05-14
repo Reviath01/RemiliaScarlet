@@ -6,6 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Run all events function.
 func RunAllEvents(client *discordgo.Session) {
 	client.AddHandler(events.GuildMemberAdd)
 	client.AddHandler(events.GuildRoleDelete)

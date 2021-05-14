@@ -10,6 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Ping slash command.
 func PingCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	if sql.CheckLanguage(interaction.GuildID) == "tr" && sql.IsBlocked(interaction.GuildID, "ping") == "true" {
 		return multiplexer.CreateResponse("Bu komut bu sunucuda kullanıma kapatılmış.")

@@ -11,6 +11,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Author slash command.
 func AuthorCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	config.ReadConfig()
 	switch sql.CheckLanguage(interaction.GuildID) {

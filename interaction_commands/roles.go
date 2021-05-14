@@ -10,6 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+//Roles slash command.
 func RolesCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	var roles string
 
