@@ -8,6 +8,7 @@ require (
 	github.com/gin-gonic/gin v1.7.1
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/google/go-cmp v0.5.2 // indirect
+	github.com/google/uuid v1.2.0
 	github.com/json-iterator/go v1.1.9
 	github.com/pollen5/discord-oauth2 v0.0.0-20210409042811-96ad60db2cdb
 	github.com/stretchr/testify v1.6.1 // indirect

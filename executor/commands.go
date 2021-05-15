@@ -44,6 +44,7 @@ func RunAllCommands(client *discordgo.Session) {
 	handler.AddCommand("roles", "Get all roles in guild.", []string{"roller"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.RolesCommand)
 	handler.AddCommand("settings", "Shows all settings of guild.", []string{"ayarlar"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SettingsCommand)
 	handler.AddCommand("shutdown", "Shutdowns the bot (Owner-only).", []string{}, true, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.ShutdownCommand)
+	handler.AddCommand("eval", "Test codes (Owner-only).", []string{}, true, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.EvalCommand)
 	handler.AddCommand("slap", "Sends slap gif", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SlapCommand)
 	handler.AddCommand("spoiler", "Sends your message as a spoiler.", []string{}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.SpoilerCommand)
 	handler.AddCommand("start_vote", "Start a vote.", []string{"start_vote"}, false, false, discordgo.PermissionSendMessages, discordgo.PermissionSendMessages, CommandHandler.CommandTypeGuild, commands.StartVoteCommand)
