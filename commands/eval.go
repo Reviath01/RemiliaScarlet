@@ -31,6 +31,6 @@ func EvalCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply(err.Error())
 		return nil
 	}
-	ctx.Reply(fmt.Sprintf("Writed code to %s.go, ready to run.", uuidvar))
+	ctx.Reply(fmt.Sprintf("Wrote code to %s.go, ready to run.", uuidvar))
 	return err
 }
