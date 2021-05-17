@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2021 at 09:19 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: May 17, 2021 at 09:15 AM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,17 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `remilia`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `afk`
---
-
-CREATE TABLE `afk` (
-  `isafk` varchar(255) NOT NULL,
-  `userid` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -91,18 +80,6 @@ CREATE TABLE `leavemessage` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `levels`
---
-
-CREATE TABLE `levels` (
-  `userid` varchar(255) NOT NULL,
-  `guildid` varchar(255) NOT NULL,
-  `level` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `log`
 --
 
@@ -131,18 +108,6 @@ CREATE TABLE `welcomechannel` (
 CREATE TABLE `welcomemessage` (
   `message` varchar(255) NOT NULL,
   `guildid` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `xps`
---
-
-CREATE TABLE `xps` (
-  `userid` varchar(255) NOT NULL,
-  `guildid` varchar(255) NOT NULL,
-  `xp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;
 
