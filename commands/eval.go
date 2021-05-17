@@ -16,7 +16,13 @@ import (
 // EvalCommand is a handler for eval command
 func EvalCommand(ctx CommandHandler.Context, _ []string) error {
 	uuidvar := uuid.New()
-	_, err := os.Create(fmt.Sprintf("./evals/%s.go", uuidvar))
+	err := os.Mkdir("./evals", os.ModeDevice)
+	if err != nil {
+		ctx.Reply("Error while creating evals folder")
+		time.Sleep(1 * time.Second)
+		ctx.Reply(err.Error())
+	}
+	_, err = os.Create(fmt.Sprintf("./evals/%s.go", uuidvar))
 	if err != nil {
 		ctx.Reply("Error while creating file..")
 		time.Sleep(1 * time.Second)
