@@ -24,7 +24,7 @@ This is my first Golang Discord bot project, but I've written in javascript (Nod
 git clone https://git.randomchars.net/Reviath/RemiliaScarlet
 ```
 
-2. Edit config file (config.json)
+2. Edit config file (remilia.conf)
 
 
 ## Issue
