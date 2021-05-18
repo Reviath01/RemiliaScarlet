@@ -9,6 +9,5 @@
     "Password": "PASSWORD",
     "Host": "HOST",
     "WebURL": "WEB_URL",
-    "ClientID": "CLIENT_ID",
     "ClientSecret": "CLIENT_SECRET"
 }

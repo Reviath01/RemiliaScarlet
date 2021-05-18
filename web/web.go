@@ -77,7 +77,7 @@ func Listen(session *discordgo.Session) {
 	})
 
 	server.GET("/invite", func(c *gin.Context) {
-		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("https://discord.com/oauth2/authorize?client_id=%s&scope=bot+applications.commands&permissions=8", config.ClientID))
+		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("https://discord.com/oauth2/authorize?client_id=%s&scope=bot+applications.commands&permissions=8", cli.ID))
 	})
 
 	server.GET("/support", func(c *gin.Context) {

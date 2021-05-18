@@ -15,7 +15,7 @@ import (
 
 func main() {
 	config.ReadConfig()
-	if config.Token == "TOKEN" || config.ClientID == "CLIENT_ID" || config.ClientSecret == "CLIENT_SECRET" || config.WebURL == "WEB_URL" {
+	if config.Token == "TOKEN" || config.ClientSecret == "CLIENT_SECRET" || config.WebURL == "WEB_URL" {
 		fmt.Println("Edit config file before running.")
 		os.Exit(1)
 	}

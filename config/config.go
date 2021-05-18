@@ -18,7 +18,6 @@ var (
 	Password         string        // Password to connect MySQL database
 	Host             string        // Host to connect MySQL database
 	WebURL           string        // WebURL to run website
-	ClientID         string        // ClientID to use on website
 	ClientSecret     string        // ClientSecret for OAuth2
 )
 
@@ -33,7 +32,6 @@ type configStruct struct {
 	User             string `json:"User"`             // User from config file
 	Password         string `json:"Password"`         // Password from config file
 	WebURL           string `json:"WebURL"`           // WebURL from config file
-	ClientID         string `json:"ClientID"`         // ClientID from config file
 	ClientSecret     string `json:"ClientSecret"`     // ClientSecret from config file
 }
 
@@ -63,7 +61,6 @@ func ReadConfig() error {
 	Password = config.Password
 	LoadInteractions = config.LoadInteractions
 	WebURL = config.WebURL
-	ClientID = config.ClientID
 	ClientSecret = config.ClientSecret
 
 	return nil
