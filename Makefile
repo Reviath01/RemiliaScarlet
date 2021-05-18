@@ -16,7 +16,7 @@ nowindowsgui:
 .PHONY: build
 build:
 	@echo "Building to build/remiliascarlet."
-	@go build -tags=jsoniter -ldflags="$(LDFLAGS) $(STATIC_LDFLAGS) $(WINDOW_LDFLAGS)" -o build/remiliascarlet$(shell go env GOEXE) $$PWD/main.go
+	@go build -tags=jsoniter -ldflags="$(LDFLAGS) $(STATIC_LDFLAGS) $(WINDOW_LDFLAGS)" -o build/remiliascarlet$(shell go env GOEXE) main.go
 	@echo "Successfully builded, ready to start."
 
 .PHONY: start
