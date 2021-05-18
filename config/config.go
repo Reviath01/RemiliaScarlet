@@ -25,6 +25,7 @@ var (
 )
 
 type configStruct struct {
+	// Discord stuff from remilia.conf
 	Discord struct {
 		Token            string `json:"Token"`            // Token from config file
 		BotPrefix        string `json:"BotPrefix"`        // BotPrefix from config file
@@ -33,13 +34,14 @@ type configStruct struct {
 		LoadInteractions string `json:"LoadInteractions"` // LoadInteractions from config file
 		ClientSecret     string `json:"ClientSecret"`     // ClientSecret from config file
 	}
+	// Database stuff from remilia.conf
 	Database struct {
 		DatabaseName string `json:"Database"` // DatabaseName from config file
 		Host         string `json:"Host"`     // Host from config file
 		User         string `json:"User"`     // User from config file
 		Password     string `json:"Password"` // Password from config file
-
 	}
+	// Web stuff from remilia.conf
 	Web struct {
 		WebPort string `json:"WebPort"` // WebURL from config file
 		BaseURL string `json:"BaseURL"` // BaseURL from config file
