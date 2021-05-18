@@ -22,7 +22,7 @@ func ResetAutoroleCommand(session *discordgo.Session, interaction interactions.I
 
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
 
@@ -42,7 +42,7 @@ func ResetAutoroleCommand(session *discordgo.Session, interaction interactions.I
 		return multiplexer.CreateResponse("Otorol ayarlanmadığı için sıfırlanamaz.")
 	default:
 
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 

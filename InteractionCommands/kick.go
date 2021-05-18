@@ -11,7 +11,7 @@ import (
 func KickCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
-		if !multiplexer.CheckKickPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckKickPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
 		if sql.IsBlocked(interaction.GuildID, "kick") == "true" {

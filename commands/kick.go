@@ -12,7 +12,7 @@ import (
 func KickCommand(ctx CommandHandler.Context, _ []string) error {
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":
-		if !multiplexer.CheckKickPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		if !multiplexer.CheckKickPermission(ctx.Session, ctx.Message.Author.ID, ctx.Guild.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
 		}
@@ -43,7 +43,7 @@ func KickCommand(ctx CommandHandler.Context, _ []string) error {
 
 	default:
 
-		if !multiplexer.CheckKickPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		if !multiplexer.CheckKickPermission(ctx.Session, ctx.Message.Author.ID, ctx.Guild.ID) {
 			ctx.Reply("You don't have enough permission.")
 			return nil
 		}

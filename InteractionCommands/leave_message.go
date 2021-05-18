@@ -22,7 +22,7 @@ func LeaveMessageCommand(session *discordgo.Session, interaction interactions.In
 
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
 		if len(interaction.Data.Options[0].Value.(string)) > 254 {
@@ -42,7 +42,7 @@ func LeaveMessageCommand(session *discordgo.Session, interaction interactions.In
 		return multiplexer.CreateResponse("Başarıyla çıkış mesajı ayarlandı.")
 	default:
 
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 

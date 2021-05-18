@@ -13,7 +13,7 @@ import (
 func StartVoteCommand(ctx CommandHandler.Context, _ []string) error {
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":
-		if !multiplexer.CheckManageMessagesPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		if !multiplexer.CheckManageMessagesPermission(ctx.Session, ctx.Message.Author.ID, ctx.Guild.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
 		}

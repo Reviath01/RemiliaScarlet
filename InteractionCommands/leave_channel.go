@@ -21,7 +21,7 @@ func LeaveChannelCommand(session *discordgo.Session, interaction interactions.In
 	var tag Tag
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
 		c, err := session.Channel(multiplexer.GetChannel(interaction.Data.Options[0].Value.(string)))
@@ -39,7 +39,7 @@ func LeaveChannelCommand(session *discordgo.Session, interaction interactions.In
 		}
 		return multiplexer.CreateResponse("Bir kanal belirtmelisin.")
 	default:
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 

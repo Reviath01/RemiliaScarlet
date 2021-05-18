@@ -15,7 +15,7 @@ func LanguageCommand(ctx CommandHandler.Context, _ []string) error {
 	args := multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())
 
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {
-		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Guild.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
 		}
@@ -44,7 +44,7 @@ func LanguageCommand(ctx CommandHandler.Context, _ []string) error {
 			return nil
 		}
 	} else {
-		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Guild.ID) {
 			ctx.Reply("You don't have enough permission.")
 			return nil
 		}

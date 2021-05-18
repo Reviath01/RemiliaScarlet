@@ -22,7 +22,7 @@ func ResetLogCommand(session *discordgo.Session, interaction interactions.Intera
 
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
 		err := db.QueryRow(fmt.Sprintf("SELECT channelid FROM log WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.channelid)
@@ -40,7 +40,7 @@ func ResetLogCommand(session *discordgo.Session, interaction interactions.Intera
 		return multiplexer.CreateResponse("Log kanalı ayarlanmamış, sıfırlayamazsın.")
 	default:
 
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 

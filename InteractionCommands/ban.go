@@ -11,7 +11,7 @@ import (
 
 // BanCommand is ban command for interactions
 func BanCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
-	if !multiplexer.CheckBanPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+	if !multiplexer.CheckBanPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 		return multiplexer.CreateResponse("You don't have enough permission.")
 	}
 	if sql.CheckLanguage(interaction.GuildID) == "tr" {

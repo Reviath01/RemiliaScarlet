@@ -22,7 +22,7 @@ func ResetLeaveMessage(session *discordgo.Session, interaction interactions.Inte
 
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
 		err := db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", interaction.GuildID)).Scan(&tag.message)
@@ -40,7 +40,7 @@ func ResetLeaveMessage(session *discordgo.Session, interaction interactions.Inte
 		return multiplexer.CreateResponse("Çıkış mesajı ayarlanmamış, sıfırlayamazsın.")
 	default:
 
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 

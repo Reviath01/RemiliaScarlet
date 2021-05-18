@@ -22,7 +22,7 @@ func ResetWelcomeMessageCommand(session *discordgo.Session, interaction interact
 
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 
 		}
@@ -39,7 +39,7 @@ func ResetWelcomeMessageCommand(session *discordgo.Session, interaction interact
 		return multiplexer.CreateResponse("Hoş geldin mesajı ayarlanmamış, sıfırlayamazsın.")
 	default:
 
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("You don't have enough permission.")
 
 		}

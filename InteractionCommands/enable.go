@@ -21,7 +21,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 	var tag Tag
 
 	if sql.CheckLanguage(interaction.GuildID) == "tr" {
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin")
 		}
 
@@ -270,7 +270,7 @@ func EnableCommand(session *discordgo.Session, interaction interactions.Interact
 			return multiplexer.CreateResponse("Bir komut belirtmelisin")
 		}
 	}
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 		return multiplexer.CreateResponse("You don't have enough permission.")
 	}
 

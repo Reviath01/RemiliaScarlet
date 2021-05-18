@@ -20,7 +20,7 @@ func ResetLeaveMessage(ctx CommandHandler.Context, _ []string) error {
 
 	switch sql.CheckLanguage(ctx.Guild.ID) {
 	case "tr":
-		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Guild.ID) {
 			ctx.Reply("Yeterli yetkiye sahip değilsin.")
 			return nil
 		}
@@ -42,7 +42,7 @@ func ResetLeaveMessage(ctx CommandHandler.Context, _ []string) error {
 		return nil
 	default:
 
-		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Channel.ID) {
+		if !multiplexer.CheckAdministratorPermission(ctx.Session, ctx.Message.Author.ID, ctx.Guild.ID) {
 			ctx.Reply("You don't have enough permission.")
 			return nil
 		}

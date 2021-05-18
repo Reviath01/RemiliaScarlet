@@ -22,7 +22,7 @@ func LogCommand(session *discordgo.Session, interaction interactions.Interaction
 
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("Yeterli yetkiye sahip değilsin.")
 		}
 		c, err := session.Channel(multiplexer.GetChannel(interaction.Data.Options[0].Value.(string)))
@@ -41,7 +41,7 @@ func LogCommand(session *discordgo.Session, interaction interactions.Interaction
 		return multiplexer.CreateResponse("Log kanalını belirtmelisin.")
 	default:
 
-		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+		if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 			return multiplexer.CreateResponse("You don't have enough permission.")
 		}
 

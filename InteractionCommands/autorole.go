@@ -11,7 +11,7 @@ import (
 
 // AutoRoleCommand is auto role command for interactions
 func AutoRoleCommand(session *discordgo.Session, interaction interactions.Interaction) interactions.InteractionResponse {
-	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.ChannelID) {
+	if !multiplexer.CheckAdministratorPermission(session, interaction.Member.User.ID, interaction.GuildID) {
 		return multiplexer.CreateResponse("You don't have enough permission.")
 	}
 
