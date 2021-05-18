@@ -35,6 +35,7 @@ git.randomchars.net/FreeNitori/EmbedUtil v1.0.1 h1:ig8jaH76aTm1BR5eKU+Ly/qwX4XE3
 git.randomchars.net/FreeNitori/EmbedUtil v1.0.1/go.mod h1:YOl1zIPQobbJ2TI5z+mQyd0B7ZD7AyqhbNdsn36LjPk=
 git.randomchars.net/FreeNitori/Log v1.0.0 h1:xifupyu15si9/5oNwLUz8aKMEiyvdlEMCiCq1VW5jdQ=
 git.randomchars.net/FreeNitori/Log v1.0.0/go.mod h1:d2oS6xzbzH2YIb7x2ZRYVaaLAgEqBTmu6BCqDcfyzzU=
+github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/bwmarrin/discordgo v0.23.2 h1:BzrtTktixGHIu9Tt7dEE6diysEF9HWnXeHuoJEt2fH4=
