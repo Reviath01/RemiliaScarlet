@@ -29,10 +29,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/support">Support</a>
         </li>
-        {{if eq .login "nil"}}
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
+{{if eq .login "nil"}}
   {{else}}
   <li class="nav-item">
     <a class="nav-link" href="/logout">Logout</a>
@@ -50,6 +47,7 @@
   <h1>Remilia Scarlet</h1>
   <p>Multipurpose Discord bot written in Golang.</p>
   <a href="/invite"><button class="btn btn-outline-light btn-lg rounded-pill">Invite Bot</button></a>&nbsp;
+  <a href="/login"><button class="btn btn-outline-light btn-lg rounded-pill">Login</button></a>&nbsp;
 </section>
 {{else}}
 <section align="center">
