@@ -8,6 +8,7 @@
     "User": "USER",
     "Password": "PASSWORD",
     "Host": "HOST",
-    "WebURL": "WEB_URL",
+    "WebPort": "WEB_PORT",
+    "BaseURL": "BASE_URL",
     "ClientSecret": "CLIENT_SECRET"
 }

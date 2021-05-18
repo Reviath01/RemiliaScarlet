@@ -29,7 +29,7 @@ func Listen(session *discordgo.Session) {
 	cli := GetClientUser(session)
 
 	conf := &oauth2.Config{
-		RedirectURL:  fmt.Sprintf("%s/callback", config.WebURL),
+		RedirectURL:  fmt.Sprintf("%s:%s/callback", config.BaseURL, config.WebPort),
 		ClientID:     cli.ID,
 		ClientSecret: config.ClientSecret,
 		Scopes:       []string{discord.ScopeIdentify, discord.ScopeGuilds},
@@ -206,10 +206,10 @@ func Listen(session *discordgo.Session) {
 		}
 	})
 
-	fmt.Printf("Attempting to run website at \"%s\" \n", config.WebURL)
+	fmt.Printf("Attempting to run website at \"%s:%s\" \n", config.BaseURL, config.WebPort)
 	time.Sleep(1 * time.Second)
-	if err := server.Run(config.WebURL[7:]); err != nil {
-		fmt.Printf("Cannot run website at \"%s\", running on http://localhost:8000.\n", config.WebURL)
+	if err := server.Run(":" + config.WebPort); err != nil {
+		fmt.Printf("Cannot run website at \"%s:%s\", running on http://localhost:8000.\n", config.BaseURL, config.WebPort)
 		server.Run(":8000")
 	}
 }
