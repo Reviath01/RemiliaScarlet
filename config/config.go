@@ -36,10 +36,10 @@ type configStruct struct {
 	}
 	// Database stuff from remilia.conf
 	Database struct {
-		DatabaseName string `json:"Database"` // DatabaseName from config file
-		Host         string `json:"Host"`     // Host from config file
-		User         string `json:"User"`     // User from config file
-		Password     string `json:"Password"` // Password from config file
+		Database string `json:"Database"` // DatabaseName from config file
+		Host     string `json:"Host"`     // Host from config file
+		User     string `json:"User"`     // User from config file
+		Password string `json:"Password"` // Password from config file
 	}
 	// Web stuff from remilia.conf
 	Web struct {
@@ -66,7 +66,7 @@ func ReadConfig() error {
 	BotPrefix = config.Discord.BotPrefix
 	Presence = config.Discord.Presence
 	Owner = config.Discord.Owner
-	Database = config.Database.DatabaseName
+	Database = config.Database.Database
 	Host = config.Database.Host
 	User = config.Database.User
 	Password = config.Database.Password
