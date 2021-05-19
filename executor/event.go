@@ -1,6 +1,7 @@
 package executor
 
 import (
+	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"git.randomchars.net/Reviath/RemiliaScarlet/events"
 	interactions_handler "git.randomchars.net/Reviath/RemiliaScarlet/interactions/handler"
 	"github.com/bwmarrin/discordgo"
@@ -15,5 +16,8 @@ func RunAllEvents(client *discordgo.Session) {
 	client.AddHandler(events.GuildMemberRemove)
 	client.AddHandler(events.ChannelCreate)
 	client.AddHandler(events.ChannelDelete)
-	client.AddHandler(interactions_handler.InteractionHandler)
+	config.ReadConfig()
+	if config.LoadInteractions == "true" {
+		client.AddHandler(interactions_handler.InteractionHandler)
+	}
 }
