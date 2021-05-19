@@ -90,7 +90,7 @@ func Listen(session *discordgo.Session) {
 		case "":
 			c.Redirect(http.StatusTemporaryRedirect, "/login")
 		default:
-			guild, err := session.Guild(c.Param("guildid"))
+			guild, err := session.State.Guild(c.Param("guildid"))
 			if err != nil {
 				c.HTML(200, "error.html", gin.H{
 					"is404":       "false",
@@ -114,7 +114,6 @@ func Listen(session *discordgo.Session) {
 					c.Redirect(http.StatusTemporaryRedirect, "/")
 				}
 
-				Guild, err := session.State.Guild(guild.ID)
 				if err != nil {
 					c.HTML(200, "error.html", gin.H{
 						"is404":       "false",
@@ -123,7 +122,7 @@ func Listen(session *discordgo.Session) {
 					})
 				}
 
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, Guild.Channels[0].ID) {
+				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
 					c.HTML(200, "error.html", gin.H{
 						"is404":       "false",
 						"description": "You don't have enough permission to access here!",
