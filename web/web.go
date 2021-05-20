@@ -13,6 +13,7 @@ import (
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pollen5/discord-oauth2"
 	"golang.org/x/oauth2"
@@ -22,7 +23,7 @@ import (
 func Listen(session *discordgo.Session) {
 	config.ReadConfig()
 	gin.SetMode(gin.ReleaseMode)
-	var state = "random"
+	var state = uuid.New().String()
 	server := gin.Default()
 	server.LoadHTMLGlob("web/public/*.html")
 	server.Static("/css", "./web/public/css")
