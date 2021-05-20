@@ -1,4 +1,4 @@
-package web
+package webfuncs
 
 // UserInfo structure to use on index.html
 type UserInfo struct {

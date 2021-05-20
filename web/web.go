@@ -1,21 +1,14 @@
 package web
 
 import (
-	"context"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 	"time"
 
-	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
+	webfuncs "git.randomchars.net/Reviath/RemiliaScarlet/WebFunctions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/config"
-	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	jsoniter "github.com/json-iterator/go"
-	"github.com/pollen5/discord-oauth2"
 	"golang.org/x/oauth2"
 )
 
@@ -35,784 +28,80 @@ func Listen(session *discordgo.Session) {
 		RedirectURL:  fmt.Sprintf("%s:%s/callback", config.BaseURL, config.WebPort),
 		ClientID:     cli.ID,
 		ClientSecret: config.ClientSecret,
-		Scopes:       []string{discord.ScopeIdentify, discord.ScopeGuilds},
-		Endpoint:     discord.Endpoint,
+		Scopes:       []string{"identify", "guilds"},
+		Endpoint:     Endpoint,
 	}
 
 	server.NoRoute(func(c *gin.Context) {
-		c.HTML(404, "error.html", gin.H{
-			"is404":       "true",
-			"description": "The page you are looking for may have been removed or temporarily unavailable",
-			"error":       "404",
-		})
+		webfuncs.NoRouteHandler(c)
 	})
 
 	server.GET("/login", func(c *gin.Context) {
-		c.Redirect(http.StatusTemporaryRedirect, conf.AuthCodeURL(state))
+		webfuncs.LoginHandler(c, conf, state)
 	})
 
 	server.GET("/callback", func(c *gin.Context) {
-		if c.Request.FormValue("state") != state {
-			c.Redirect(http.StatusTemporaryRedirect, "/")
-		}
-		token, err := conf.Exchange(context.TODO(), c.Query("code"))
-		if err != nil {
-			fmt.Println("An error occurred while getting token: " + err.Error())
-			return
-		}
-		tokenJSON, err := jsoniter.Marshal(token)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		c.SetCookie("key", string(tokenJSON), 60*60*24*7, "/", "localhost", false, false)
-		c.Redirect(http.StatusTemporaryRedirect, "/")
+		webfuncs.CallbackHandler(c, state, conf)
 	})
 
 	server.GET("/logout", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		if val != "" {
-			c.SetCookie("key", "nil", -1, "/", "localhost", false, false)
-			c.Redirect(http.StatusTemporaryRedirect, "/")
-		} else {
-			c.Redirect(http.StatusTemporaryRedirect, "/")
-		}
+		webfuncs.LogoutHandler(c)
 	})
 
 	server.GET("/invite", func(c *gin.Context) {
-		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("https://discord.com/oauth2/authorize?client_id=%s&scope=bot+applications.commands&permissions=8", cli.ID))
+		webfuncs.InviteHandler(c, cli)
 	})
 
 	server.GET("/support", func(c *gin.Context) {
-		c.Redirect(http.StatusTemporaryRedirect, "https://discord.gg/zVVWWDtSr2")
+		webfuncs.SupportHandler(c)
 	})
 
 	server.GET("/api/log/:guildid/:newchannel", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				channel, err := session.State.Channel(c.Param("newchannel"))
-				if err != nil {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "Cannot find channel \"" + c.Param("newchannel") + "\"",
-						"error":       "Invalid channel",
-					})
-					return
-				}
-				if channel.GuildID == guild.ID {
-					db := sql.Connect()
-					defer db.Close()
-					insert, _ := db.Query(fmt.Sprintf("INSERT INTO log (channelid, guildid) VALUES ('%s', '%s')", channel.ID, guild.ID))
-					defer insert.Close()
-				} else {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "This channel is not in this guild.",
-						"error":       "Invalid channel",
-					})
-					return
-				}
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+c.Param("guildid"))
-			}
-		}
+		webfuncs.LogHandler(c, session, conf)
 	})
 
 	server.GET("/api/leavechannel/:guildid/:newchannel", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				channel, err := session.State.Channel(c.Param("newchannel"))
-				if err != nil {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "Cannot find channel \"" + c.Param("newchannel") + "\"",
-						"error":       "Invalid channel",
-					})
-					return
-				}
-				if channel.GuildID == guild.ID {
-					db := sql.Connect()
-					defer db.Close()
-					insert, _ := db.Query(fmt.Sprintf("INSERT INTO leavechannel (channelid, guildid) VALUES ('%s', '%s')", channel.ID, guild.ID))
-					defer insert.Close()
-				} else {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "This channel is not in this guild.",
-						"error":       "Invalid channel",
-					})
-					return
-				}
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+c.Param("guildid"))
-			}
-		}
+		webfuncs.LeaveChannelHandler(c, session, conf)
 	})
 
 	server.GET("/api/welcomechannel/:guildid/:newchannel", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				channel, err := session.State.Channel(c.Param("newchannel"))
-				if err != nil {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "Cannot find channel \"" + c.Param("newchannel") + "\"",
-						"error":       "Invalid channel",
-					})
-					return
-				}
-				if channel.GuildID == guild.ID {
-					db := sql.Connect()
-					defer db.Close()
-					insert, _ := db.Query(fmt.Sprintf("INSERT INTO welcomechannel (channelid, guildid) VALUES ('%s', '%s')", channel.ID, guild.ID))
-					defer insert.Close()
-				} else {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "This channel is not in this guild.",
-						"error":       "Invalid channel",
-					})
-					return
-				}
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+c.Param("guildid"))
-			}
-		}
+		webfuncs.WelcomeChannelHandler(c, session, conf)
 	})
 
 	server.GET("/api/autorole/:guildid/:roleid", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				role, err := session.State.Role(guild.ID, c.Param("roleid"))
-
-				if err != nil {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "Cannot find role \"" + c.Param("roleid") + "\" on specified guild.",
-						"error":       "Invalid role",
-					})
-					return
-				}
-
-				db := sql.Connect()
-				defer db.Close()
-				insert, _ := db.Query(fmt.Sprintf("INSERT INTO autorole (roleid, guildid) VALUES ('%s', '%s')", role.ID, guild.ID))
-				defer insert.Close()
-
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+c.Param("guildid"))
-			}
-		}
+		webfuncs.AutoRoleHandler(c, session, conf)
 	})
 
 	server.GET("/resetlog/:guildid", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				db := sql.Connect()
-				defer db.Close()
-				delete, _ := db.Query(fmt.Sprintf("DELETE FROM log WHERE guildid ='%s'", guild.ID))
-
-				defer delete.Close()
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+guild.ID)
-			}
-		}
+		webfuncs.ResetLogHandler(c, session, conf)
 	})
 
 	server.GET("/resetwelcomechannel/:guildid", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				db := sql.Connect()
-				defer db.Close()
-				delete, _ := db.Query(fmt.Sprintf("DELETE FROM welcomechannel WHERE guildid ='%s'", guild.ID))
-
-				defer delete.Close()
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+guild.ID)
-			}
-		}
+		webfuncs.ResetWelcomeChannelHandler(c, session, conf)
 	})
 
 	server.GET("/resetwelcomemessage/:guildid", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				db := sql.Connect()
-				defer db.Close()
-				delete, _ := db.Query(fmt.Sprintf("DELETE FROM welcomemessage WHERE guildid ='%s'", guild.ID))
-
-				defer delete.Close()
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+guild.ID)
-			}
-		}
+		webfuncs.ResetWelcomeMessageHandler(c, session, conf)
 	})
 
 	server.GET("/resetleavemessage/:guildid", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				db := sql.Connect()
-				defer db.Close()
-				delete, _ := db.Query(fmt.Sprintf("DELETE FROM leavemessage WHERE guildid ='%s'", guild.ID))
-
-				defer delete.Close()
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+guild.ID)
-			}
-		}
+		webfuncs.ResetLeaveMessageHandler(c, session, conf)
 	})
 
 	server.GET("/resetleavechannel/:guildid", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				db := sql.Connect()
-				defer db.Close()
-				delete, _ := db.Query(fmt.Sprintf("DELETE FROM leavechannel WHERE guildid ='%s'", guild.ID))
-
-				defer delete.Close()
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+guild.ID)
-			}
-		}
+		webfuncs.ResetLeaveChannelHandler(c, session, conf)
 	})
 
 	server.GET("/resetautorole/:guildid", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-				db := sql.Connect()
-				defer db.Close()
-				delete, _ := db.Query(fmt.Sprintf("DELETE FROM autorole WHERE guildid ='%s'", guild.ID))
-
-				defer delete.Close()
-				c.Redirect(http.StatusTemporaryRedirect, "/guild/"+guild.ID)
-			}
-		}
+		webfuncs.ResetAutoRoleHandler(c, session, conf)
 	})
 
 	server.GET("/guild/:guildid", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-		default:
-			guild, err := session.State.Guild(c.Param("guildid"))
-			if err != nil {
-				c.HTML(200, "error.html", gin.H{
-					"is404":       "false",
-					"description": "Cannot find guild " + "\"" + c.Param("guildid") + "\"",
-					"error":       "Invalid snowflake.",
-				})
-			} else {
-				var token = &oauth2.Token{}
-				jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-				res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-				if err != nil || res.StatusCode != 200 {
-					fmt.Println("An error occurred on api: " + err.Error())
-					return
-				}
-
-				var user discordgo.User
-				data, _ := ioutil.ReadAll(res.Body)
-				err = json.Unmarshal(data, &user)
-				if err != nil {
-					c.Redirect(http.StatusTemporaryRedirect, "/")
-				}
-
-				if !multiplexer.CheckAdministratorPermission(session, user.ID, guild.ID) {
-					c.HTML(200, "error.html", gin.H{
-						"is404":       "false",
-						"description": "You don't have enough permission to access here!",
-						"error":       "Unauthorized",
-					})
-					return
-				}
-
-				db := sql.Connect()
-
-				defer db.Close()
-
-				var scansqldata ScanSQLData
-				var welcomechannel string
-				var leavechannel string
-				var autorole string
-				var leavemsg string
-				var welcomemsg string
-				var logchannel string
-
-				err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM welcomechannel WHERE guildid ='%s'", guild.ID)).Scan(&scansqldata.WelcomeChannelID)
-
-				if err == nil {
-					welcomechannel = scansqldata.WelcomeChannelID
-				} else {
-					welcomechannel = "nil"
-				}
-
-				err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM leavechannel WHERE guildid ='%s'", guild.ID)).Scan(&scansqldata.LeaveChannelID)
-
-				if err == nil {
-					leavechannel = scansqldata.LeaveChannelID
-				} else {
-					leavechannel = "nil"
-				}
-
-				err = db.QueryRow(fmt.Sprintf("SELECT roleid FROM autorole WHERE guildid ='%s'", guild.ID)).Scan(&scansqldata.RoleID)
-
-				if err == nil {
-					autorole = scansqldata.RoleID
-				} else {
-					autorole = "nil"
-				}
-
-				err = db.QueryRow(fmt.Sprintf("SELECT message FROM welcomemessage WHERE guildid ='%s'", guild.ID)).Scan(&scansqldata.WelcomeMessage)
-
-				if err == nil {
-					welcomemsg = scansqldata.WelcomeMessage
-				} else {
-					welcomemsg = "nil"
-				}
-
-				err = db.QueryRow(fmt.Sprintf("SELECT message FROM leavemessage WHERE guildid ='%s'", guild.ID)).Scan(&scansqldata.LeaveMessage)
-
-				if err == nil {
-					leavemsg = scansqldata.LeaveMessage
-				} else {
-					leavemsg = "nil"
-				}
-
-				err = db.QueryRow(fmt.Sprintf("SELECT channelid FROM log WHERE guildid ='%s'", guild.ID)).Scan(&scansqldata.LogID)
-
-				if err == nil {
-					logchannel = scansqldata.LogID
-				} else {
-					logchannel = "nil"
-				}
-
-				c.HTML(200, "guild.html", gin.H{
-					"guild": guild,
-					"settings": Settings{
-						WelcomeChannelID: welcomechannel,
-						WelcomeMessage:   welcomemsg,
-						LeaveChannelID:   leavechannel,
-						LeaveMessage:     leavemsg,
-						LogID:            logchannel,
-						RoleID:           autorole,
-					},
-					"botavatar":   cli.AvatarURL("1024"),
-					"botusername": cli.Username,
-				})
-			}
-		}
+		webfuncs.GuildHandler(c, session, conf, cli)
 	})
 
 	server.GET("/", func(c *gin.Context) {
-		val, _ := c.Cookie("key")
-		switch val {
-		case "":
-			c.HTML(200, "index.html", gin.H{
-				"login":       "nil",
-				"botavatar":   cli.AvatarURL("1024"),
-				"botusername": cli.Username,
-				"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
-				"botid":       cli.ID,
-			})
-		default:
-			var token = &oauth2.Token{}
-			jsoniter.UnmarshalFromString(fmt.Sprint(val), token)
-			res, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me")
-
-			if err != nil || res.StatusCode != 200 {
-				fmt.Println("An error occurred on api: " + err.Error())
-				return
-			}
-
-			var user discordgo.User
-			data, _ := ioutil.ReadAll(res.Body)
-			err = json.Unmarshal(data, &user)
-			if err != nil {
-				fmt.Println("An error occurred on api: " + err.Error())
-				return
-			}
-			res2, err := conf.Client(context.TODO(), token).Get("https://discordapp.com/api/v8/users/@me/guilds")
-
-			if err != nil || res2.StatusCode != 200 {
-				fmt.Println("An error occurred on api: " + err.Error())
-				return
-			}
-
-			var allguilds []discordgo.Guild
-			var guilds []discordgo.Guild
-
-			data2, _ := ioutil.ReadAll(res2.Body)
-			err = json.Unmarshal(data2, &allguilds)
-			if err != nil {
-				fmt.Println("An error occurred on api: " + err.Error())
-				return
-			}
-
-			for _, g := range allguilds {
-				_, err := session.State.Guild(g.ID)
-				if err == nil {
-					guilds = append(guilds, g)
-				}
-			}
-
-			c.HTML(200, "index.html", gin.H{
-				"login": "yes",
-				"user": UserInfo{
-					Name:          user.Username,
-					ID:            user.ID,
-					AvatarURL:     user.AvatarURL("4096"),
-					Discriminator: user.Discriminator,
-					Bot:           user.Bot,
-				},
-				"guilds":      guilds,
-				"botavatar":   cli.AvatarURL("1024"),
-				"botusername": cli.Username,
-				"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
-				"botid":       cli.ID,
-			})
-		}
+		webfuncs.MainHandler(c, cli, conf, session)
 	})
 
 	fmt.Printf("Attempting to run website at \"%s:%s\" \n", config.BaseURL, config.WebPort)
