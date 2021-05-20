@@ -10,6 +10,7 @@
 </head>
 <body class="bg-dark text-light">
 <section align="center">
+  {{$guild := .guild}}
 <h1>{{.guild.Name}} Settings </h1>
 
 {{if eq .settings.RoleID "nil"}}
@@ -21,7 +22,10 @@
 {{end}}
 <br> <br>
 {{if eq .settings.LogID "nil"}}
-<a> Set log channel </a>
+<a> Set log channel: </a>
+{{range .guild.Channels}}
+<a href="/api/log/{{$guild.ID}}/{{.ID}}">{{.Name}}</a>
+{{end}}
 {{else}}
 <a> Log channel id: {{.settings.LogID}} </a>
 <br>
@@ -38,6 +42,9 @@
 <br> <br>
 {{if eq .settings.LeaveChannelID "nil"}}
 <a> Set leave channel </a>
+{{range .guild.Channels}}
+<a href="/api/leavechannel/{{$guild.ID}}/{{.ID}}">{{.Name}}</a>
+{{end}}
 {{else}}
 <a> Leave channel id: {{.settings.LeaveChannelID}} </a>
 <br>
@@ -54,6 +61,9 @@
 <br> <br>
 {{if eq .settings.WelcomeChannelID "nil"}}
 <a> Set welcome channel </a>
+{{range .guild.Channels}}
+<a href="/api/welcomechannel/{{$guild.ID}}/{{.ID}}">{{.Name}}</a>
+{{end}}
 {{else}}
 <a> Welcome channel id: {{.settings.WelcomeChannelID}} </a>
 <br>
