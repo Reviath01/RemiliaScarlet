@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="icon" href="{{.botavatar}}">
+    <title>{{.botusername}}</title>
+</head>
+<body class="bg-dark text-light">
+<section align="center">
+<h1>{{.guild.Name}} Settings </h1>
+
+{{if eq .settings.RoleID "nil"}}
+<a> Set auto role </a>
+{{else}}
+<a> Autorole: {{.settings.RoleID}} </a>
+<br>
+<a href="/resetautorole/{{.guild.ID}}"> Reset auto role </a>
+{{end}}
+<br> <br>
+{{if eq .settings.LogID "nil"}}
+<a> Set log channel </a>
+{{else}}
+<a> Log channel id: {{.settings.LogID}} </a>
+<br>
+<a href="/resetlog/{{.guild.ID}}"> Reset log channel </a>
+{{end}}
+<br> <br>
+{{if eq .settings.LeaveMessage "nil"}}
+<a> Set leave message </a>
+{{else}}
+<a> Leave message: {{.settings.LeaveMessage}} </a>
+<br>
+<a href="/resetleavemessage/{{.guild.ID}}"> Reset leave message </a>
+{{end}}
+<br> <br>
+{{if eq .settings.LeaveChannelID "nil"}}
+<a> Set leave channel </a>
+{{else}}
+<a> Leave channel id: {{.settings.LeaveChannelID}} </a>
+<br>
+<a href="/resetleavechannel/{{.guild.ID}}"> Reset leave channel </a>
+{{end}}
+<br> <br>
+{{if eq .settings.WelcomeMessage "nil"}}
+<a> Set welcome message </a>
+{{else}}
+<a> Welcome message: {{.settings.WelcomeMessage}} </a>
+<br>
+<a href="/resetwelcomemessage/{{.guild.ID}}"> Reset welcome message </a>
+{{end}}
+<br> <br>
+{{if eq .settings.WelcomeChannelID "nil"}}
+<a> Set welcome channel </a>
+{{else}}
+<a> Welcome channel id: {{.settings.WelcomeChannelID}} </a>
+<br>
+<a href="/resetwelcomechannel/{{.guild.ID}}"> Reset welcome channel </a>
+{{end}}
+
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</body>
+</html>
