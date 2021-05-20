@@ -15,6 +15,9 @@
 
 {{if eq .settings.RoleID "nil"}}
 <a> Set auto role </a>
+{{range .guild.Roles}}
+<a href="/api/autorole/{{$guild.ID}}/{{.ID}}"> {{.Name}}</a>
+{{end}}
 {{else}}
 <a> Autorole: {{.settings.RoleID}} </a>
 <br>
