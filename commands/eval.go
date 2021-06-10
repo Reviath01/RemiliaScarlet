@@ -1,10 +1,12 @@
 package commands
 
 import (
+	"bytes"
 	"fmt"
 	"io/fs"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"strings"
 	"time"
 
@@ -42,6 +44,18 @@ func EvalCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply(err.Error())
 		return nil
 	}
-	ctx.Reply(fmt.Sprintf("Wrote code to %s.go, ready to run.", uuidvar))
+	ctx.Reply(fmt.Sprintf("Wrote code to %s.go, trying to run...", uuidvar))
+	cmd := exec.Command("go", "run", fmt.Sprintf("./evals/%s.go", uuidvar))
+	var outb bytes.Buffer
+	cmd.Stdout = &outb
+	err = cmd.Run()
+	if err != nil {
+		ctx.Reply(err.Error())
+		return nil
+	}
+
+	ctx.Reply("Output:")
+	time.Sleep(1 * time.Second)
+	ctx.Reply(outb.String())
 	return err
 }
