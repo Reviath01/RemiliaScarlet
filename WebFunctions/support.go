@@ -7,5 +7,5 @@ import (
 )
 
 func SupportHandler(c *gin.Context) {
-	c.Redirect(http.StatusTemporaryRedirect, "https://discord.com/users/770218429096656917")
+	c.Redirect(http.StatusTemporaryRedirect, "https://github.com/Reviath01/RemiliaScarlet/issues/new")
 }

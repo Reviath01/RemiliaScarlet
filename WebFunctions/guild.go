@@ -124,6 +124,13 @@ func GuildHandler(c *gin.Context, session *discordgo.Session, conf *oauth2.Confi
 					LogID:            logchannel,
 					RoleID:           autorole,
 				},
+				"user": UserInfo{
+					Name:          user.Username,
+					ID:            user.ID,
+					AvatarURL:     user.AvatarURL("4096"),
+					Discriminator: user.Discriminator,
+					Bot:           user.Bot,
+				},
 				"botavatar":   cli.AvatarURL("1024"),
 				"botusername": cli.Username,
 			})
