@@ -1,13 +1,13 @@
 <br />
 <p align="center">
-  <a href="https://git.randomchars.net/Reviath/RemiliaScarlet">
+  <a href="https://github.com/Reviath01/RemiliaScarlet">
     <img src="https://cdn.discordapp.com/attachments/820587437801209856/822117411708338236/New_Project.png" alt="Logo" width="380" height="160">
   </a>
   <p align="center">
   </p>
 </p>
 
-[![Go Report Card](https://goreportcard.com/report/github.com/Reviath01/RemiliaScarlet)](https://goreportcard.com/report/github.com/Reviath01/RemiliaScarlet)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Reviath01/RemiliaScarlet)](https://goreportcard.com/report/github.com/Reviath01/RemiliaScarlet)
 
 ## About The Project
 This is my first Golang Discord bot project, but I've written in javascript (Nodejs) and python before, and you can see them from my projects on GitLab.
