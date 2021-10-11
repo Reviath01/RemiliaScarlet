@@ -3,10 +3,10 @@ package interactioncommands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -15,7 +15,6 @@ func RolesCommand(session *discordgo.Session, interaction interactions.Interacti
 	var roles string
 
 	Guild, _ := session.Guild(interaction.GuildID)
-
 	switch sql.CheckLanguage(interaction.GuildID) {
 	case "tr":
 		if sql.IsBlocked(interaction.GuildID, "roles") == "true" {

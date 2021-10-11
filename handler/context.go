@@ -3,7 +3,7 @@ package handler
 import (
 	"io"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 	"github.com/bwmarrin/discordgo"
 )
 

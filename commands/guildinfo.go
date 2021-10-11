@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 )
 
 // GuildInfoCommand is a handler for guild info command

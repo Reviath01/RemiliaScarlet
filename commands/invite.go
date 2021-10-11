@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 )
 
 // InviteCommand is a handler for invite command

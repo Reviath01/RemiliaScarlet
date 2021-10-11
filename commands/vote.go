@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 )
 
 // VoteCommand is a handler for vote command

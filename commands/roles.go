@@ -3,9 +3,9 @@ package commands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 )
 
 // RolesCommand is a handler for roles command

@@ -16,7 +16,10 @@
 {{if eq .settings.RoleID "nil"}}
 <a> Set auto role </a>
 {{range .guild.Roles}}
+{{if eq .ID $guild.ID}}
+{{else}}
 <a href="/api/autorole/{{$guild.ID}}/{{.ID}}"> {{.Name}}</a>
+{{end}}
 {{end}}
 {{else}}
 <a> Autorole: {{.settings.RoleID}} </a>
@@ -27,7 +30,9 @@
 {{if eq .settings.LogID "nil"}}
 <a> Set log channel: </a>
 {{range .guild.Channels}}
+{{if eq .Type 0}}
 <a href="/api/log/{{$guild.ID}}/{{.ID}}">{{.Name}}</a>
+{{end}}
 {{end}}
 {{else}}
 <a> Log channel id: {{.settings.LogID}} </a>
@@ -46,7 +51,9 @@
 {{if eq .settings.LeaveChannelID "nil"}}
 <a> Set leave channel </a>
 {{range .guild.Channels}}
+{{if eq .Type 0}}
 <a href="/api/leavechannel/{{$guild.ID}}/{{.ID}}">{{.Name}}</a>
+{{end}}
 {{end}}
 {{else}}
 <a> Leave channel id: {{.settings.LeaveChannelID}} </a>
@@ -65,7 +72,9 @@
 {{if eq .settings.WelcomeChannelID "nil"}}
 <a> Set welcome channel </a>
 {{range .guild.Channels}}
+{{if eq .Type 0}}
 <a href="/api/welcomechannel/{{$guild.ID}}/{{.ID}}">{{.Name}}</a>
+{{end}}
 {{end}}
 {{else}}
 <a> Welcome channel id: {{.settings.WelcomeChannelID}} </a>

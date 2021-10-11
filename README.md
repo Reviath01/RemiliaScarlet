@@ -7,8 +7,7 @@
   </p>
 </p>
 
-[![Go Report Card](https://goreportcard.com/badge/git.randomchars.net/Reviath/RemiliaScarlet)](https://goreportcard.com/report/git.randomchars.net/Reviath/RemiliaScarlet)
-[![Pipeline](https://git.randomchars.net/Reviath/RemiliaScarlet/badges/master/pipeline.svg)](https://git.randomchars.net/Reviath/RemiliaScarlet)
+[![Go Report Card](https://goreportcard.com/badge/git.randomchars.net/Reviath/RemiliaScarlet)](https://goreportcard.com/report/github.com/Reviath01/RemiliaScarlet)
 
 ## About The Project
 This is my first Golang Discord bot project, but I've written in javascript (Nodejs) and python before, and you can see them from my projects on GitLab.
@@ -21,15 +20,10 @@ This is my first Golang Discord bot project, but I've written in javascript (Nod
 
 1. Clone this project.
 ```
-git clone https://git.randomchars.net/Reviath/RemiliaScarlet
+git clone https://github.com/Reviath01/RemiliaScarlet
 ```
 
 2. Edit config file (remilia.conf)
-
-
-## Issue
-
-You can open issues [here](https://git.randomchars.net/Reviath/RemiliaScarlet/-/issues/new).
 
 
 ## License
@@ -39,7 +33,4 @@ Distributed under the GNU GPLv3 License. See [LICENSE](LICENSE) for more informa
 
 ## Contact
 
-Discord - [Reviath#0001](https://discord.com/users/770218429096656917)
-
-## Vote
-[Top.gg](https://top.gg/bot/811652323159834646/vote)
+Discord - Reviath#0001

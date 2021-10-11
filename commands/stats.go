@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"time"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	CommandHandler "git.randomchars.net/Reviath/RemiliaScarlet/handler"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 	"github.com/bwmarrin/discordgo"
 )
 

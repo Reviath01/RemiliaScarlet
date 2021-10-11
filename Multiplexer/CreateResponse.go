@@ -1,8 +1,8 @@
 package multiplexer
 
 import (
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 	"github.com/bwmarrin/discordgo"
 )
 

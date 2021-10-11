@@ -3,8 +3,8 @@ package events
 import (
 	"strconv"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 	"github.com/bwmarrin/discordgo"
 )
 

@@ -3,9 +3,9 @@ package interactioncommands
 import (
 	"fmt"
 
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 	"github.com/bwmarrin/discordgo"
 )
 

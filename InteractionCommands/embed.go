@@ -1,10 +1,10 @@
 package interactioncommands
 
 import (
-	embedutil "git.randomchars.net/FreeNitori/EmbedUtil"
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"git.randomchars.net/Reviath/RemiliaScarlet/interactions"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
+	embedutil "git.randomchars.net/freenitori/embedutil"
 	"github.com/bwmarrin/discordgo"
 )
 
