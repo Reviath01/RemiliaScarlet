@@ -85,6 +85,7 @@ func SettingsCommand(ctx CommandHandler.Context, _ []string) error {
 		embed.AddField("Çıkış Mesajı:", leavemsg, true)
 		embed.AddField("Hoş Geldin Mesajı:", welcomemsg, true)
 		embed.AddField("Log Kanalı:", logchannel, true)
+		embed.AddField("Dil:", "Türkçe.", true)
 		embed.Color = 0x00f0ff
 
 		ctx.ReplyEmbed(embed)
@@ -146,6 +147,7 @@ func SettingsCommand(ctx CommandHandler.Context, _ []string) error {
 		embed.AddField("Leave Message:", leavemsg, true)
 		embed.AddField("Welcome Message:", welcomemsg, true)
 		embed.AddField("Log Channel:", logchannel, true)
+		embed.AddField("Language:", "English.", true)
 		embed.Color = 0x00f0ff
 		ctx.ReplyEmbed(embed)
 		return nil

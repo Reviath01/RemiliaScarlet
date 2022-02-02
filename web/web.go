@@ -2,6 +2,7 @@ package web
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	webfuncs "git.randomchars.net/Reviath/RemiliaScarlet/WebFunctions"
@@ -72,27 +73,27 @@ func Listen(session *discordgo.Session) {
 		webfuncs.AutoRoleHandler(c, session, conf)
 	})
 
-	server.GET("/resetlog/:guildid", func(c *gin.Context) {
+	server.GET("/api/resetlog/:guildid", func(c *gin.Context) {
 		webfuncs.ResetLogHandler(c, session, conf)
 	})
 
-	server.GET("/resetwelcomechannel/:guildid", func(c *gin.Context) {
+	server.GET("/api/resetwelcomechannel/:guildid", func(c *gin.Context) {
 		webfuncs.ResetWelcomeChannelHandler(c, session, conf)
 	})
 
-	server.GET("/resetwelcomemessage/:guildid", func(c *gin.Context) {
+	server.GET("/api/resetwelcomemessage/:guildid", func(c *gin.Context) {
 		webfuncs.ResetWelcomeMessageHandler(c, session, conf)
 	})
 
-	server.GET("/resetleavemessage/:guildid", func(c *gin.Context) {
+	server.GET("/api/resetleavemessage/:guildid", func(c *gin.Context) {
 		webfuncs.ResetLeaveMessageHandler(c, session, conf)
 	})
 
-	server.GET("/resetleavechannel/:guildid", func(c *gin.Context) {
+	server.GET("/api/resetleavechannel/:guildid", func(c *gin.Context) {
 		webfuncs.ResetLeaveChannelHandler(c, session, conf)
 	})
 
-	server.GET("/resetautorole/:guildid", func(c *gin.Context) {
+	server.GET("/api/resetautorole/:guildid", func(c *gin.Context) {
 		webfuncs.ResetAutoRoleHandler(c, session, conf)
 	})
 
@@ -107,7 +108,7 @@ func Listen(session *discordgo.Session) {
 	fmt.Printf("Attempting to run website at \"%s:%s\" \n", config.BaseURL, config.WebPort)
 	time.Sleep(1 * time.Second)
 	if err := server.Run(":" + config.WebPort); err != nil {
-		fmt.Printf("Cannot run website at \"%s\" port, running on 8000.\n", config.WebPort)
-		server.Run(":8000")
+		fmt.Printf("Cannot run website at \"%s\" port.\n", config.WebPort)
+		os.Exit(0)
 	}
 }

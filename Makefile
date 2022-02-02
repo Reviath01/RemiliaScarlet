@@ -15,10 +15,10 @@ nowindowsgui:
 
 .PHONY: build
 build:
-	@echo "Building to build/remiliascarlet."
+	@echo "Building to build/remiliascarlet$(shell go env GOEXE)"
 	@go build -tags=jsoniter -ldflags="$(LDFLAGS) $(STATIC_LDFLAGS) $(WINDOW_LDFLAGS)" -o build/remiliascarlet$(shell go env GOEXE) main.go
 	@echo "Successfully builded, ready to start."
 
 .PHONY: start
 start:
-	@./build/remiliascarlet
+	@./build/remiliascarlet$(shell go env GOEXE)

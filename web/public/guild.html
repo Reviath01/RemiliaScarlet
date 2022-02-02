@@ -42,7 +42,7 @@
 {{else}}
 <a> Autorole: {{.settings.RoleID}} </a>
 <br>
-<a href="/resetautorole/{{.guild.ID}}"> Reset auto role </a>
+<a href="/api/resetautorole/{{.guild.ID}}"> Reset auto role </a>
 {{end}}
 <br> <br>
 {{if eq .settings.LogID "nil"}}
@@ -55,7 +55,7 @@
 {{else}}
 <a> Log channel id: {{.settings.LogID}} </a>
 <br>
-<a href="/resetlog/{{.guild.ID}}"> Reset log channel </a>
+<a href="/api/resetlog/{{.guild.ID}}"> Reset log channel </a>
 {{end}}
 <br> <br>
 {{if eq .settings.LeaveMessage "nil"}}
@@ -63,7 +63,7 @@
 {{else}}
 <a> Leave message: {{.settings.LeaveMessage}} </a>
 <br>
-<a href="/resetleavemessage/{{.guild.ID}}"> Reset leave message </a>
+<a href="/api/resetleavemessage/{{.guild.ID}}"> Reset leave message </a>
 {{end}}
 <br> <br>
 {{if eq .settings.LeaveChannelID "nil"}}
@@ -76,7 +76,7 @@
 {{else}}
 <a> Leave channel id: {{.settings.LeaveChannelID}} </a>
 <br>
-<a href="/resetleavechannel/{{.guild.ID}}"> Reset leave channel </a>
+<a href="/api/resetleavechannel/{{.guild.ID}}"> Reset leave channel </a>
 {{end}}
 <br> <br>
 {{if eq .settings.WelcomeMessage "nil"}}
@@ -84,7 +84,7 @@
 {{else}}
 <a> Welcome message: {{.settings.WelcomeMessage}} </a>
 <br>
-<a href="/resetwelcomemessage/{{.guild.ID}}"> Reset welcome message </a>
+<a href="/api/resetwelcomemessage/{{.guild.ID}}"> Reset welcome message </a>
 {{end}}
 <br> <br>
 {{if eq .settings.WelcomeChannelID "nil"}}
@@ -97,7 +97,7 @@
 {{else}}
 <a> Welcome channel id: {{.settings.WelcomeChannelID}} </a>
 <br>
-<a href="/resetwelcomechannel/{{.guild.ID}}"> Reset welcome channel </a>
+<a href="/api/resetwelcomechannel/{{.guild.ID}}"> Reset welcome channel </a>
 {{end}}
 
 </section>
