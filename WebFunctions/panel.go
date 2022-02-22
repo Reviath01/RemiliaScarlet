@@ -50,6 +50,7 @@ func PanelHandler(c *gin.Context, cli *discordgo.User, conf *oauth2.Config, sess
 
 		var allguilds []discordgo.Guild
 		var guilds []discordgo.Guild
+		var guilds2 []discordgo.Guild
 
 		data2, _ := ioutil.ReadAll(res2.Body)
 		err = json.Unmarshal(data2, &allguilds)
@@ -67,6 +68,16 @@ func PanelHandler(c *gin.Context, cli *discordgo.User, conf *oauth2.Config, sess
 			}
 		}
 
+		for _, g := range allguilds {
+			_, err := session.State.Guild(g.ID)
+			p := g.Permissions
+			if p&discordgo.PermissionAdministrator == discordgo.PermissionAdministrator {
+				if err != nil {
+					guilds2 = append(guilds2, g)
+				}
+			}
+		}
+
 		c.HTML(200, "panel.html", gin.H{
 			"login": "yes",
 			"user": UserInfo{
@@ -77,6 +88,7 @@ func PanelHandler(c *gin.Context, cli *discordgo.User, conf *oauth2.Config, sess
 				Bot:           user.Bot,
 			},
 			"guilds":      guilds,
+			"guilds2":     guilds2,
 			"botavatar":   cli.AvatarURL("1024"),
 			"botusername": cli.Username,
 			"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),

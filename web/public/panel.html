@@ -27,20 +27,36 @@
         </div>
     </nav>
     <br /><br /><br />
-    <section>
-    {{range .guilds}}
-    <div class="card mt-3" style="width: 18rem; display:inline-block">
-        {{if eq .Icon ""}}
-        <img class="card-img-top" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Image">
-        {{else}}
-        <img class="card-img-top" src="https://cdn.discordapp.com/icons/{{.ID}}/{{.Icon}}.png" alt="Image">
+    <section align="center">
+        {{range .guilds}}
+        <div class="card mt-3" style="width: 18rem; display:inline-block">
+            {{if eq .Icon ""}}
+            <img class="card-img-top" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Image">
+            {{else}}
+            <img class="card-img-top" src="https://cdn.discordapp.com/icons/{{.ID}}/{{.Icon}}.png" alt="Image">
+            {{end}}
+            <div class="card-body">
+              <h5 class="card-title">{{.Name}}</h5>
+              <a href="/guild/{{.ID}}" class="btn btn-primary">Edit Details</a>
+            </div>
+          </div>
         {{end}}
-        <div class="card-body">
-          <h5 class="card-title">{{.Name}}</h5>
-          <a href="/guild/{{.ID}}" class="btn btn-primary">Edit Details</a>
-        </div>
-      </div>
-    {{end}}
+    </section>
+    <section align="center">
+        {{$botid := .botid}}
+        {{range .guilds2}}
+        <div class="card mt-3" style="width: 18rem; display:inline-block">
+            {{if eq .Icon ""}}
+            <img class="card-img-top" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Image">
+            {{else}}
+            <img class="card-img-top" src="https://cdn.discordapp.com/icons/{{.ID}}/{{.Icon}}.png" alt="Image">
+            {{end}}
+            <div class="card-body">
+              <h5 class="card-title">{{.Name}}</h5>
+              <a href="https://discord.com/oauth2/authorize?client_id={{$botid}}&scope=bot+applications.commands&permissions=8&guild_id={{.ID}}" class="btn btn-primary">Add Bot</a>
+            </div>
+          </div>
+        {{end}}
     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
