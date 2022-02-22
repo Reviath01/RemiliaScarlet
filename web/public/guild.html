@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>{{.botusername}} - User Panel</title>
+    <title>{{.botusername}} - Home</title>
     <meta name="title" content="Remilia Scarlet">
     <meta name="description" content="Multipurpose Discord bot written in Golang.">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -29,36 +29,35 @@
         </div>
     </nav>
     <br /><br /><br />
-    <section align="center" class="bg-secondary">
-        {{range .guilds}}
-        <div class="card mt-3" style="width: 18rem; display:inline-block">
-            {{if eq .Icon ""}}
-            <img class="card-img-top" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Image">
+    {{$guild := .guild}}
+    <section class="bg-secondary text-light" align="center">
+        <h3>Autorole</h3>
+        <div class="mb-3">
+            {{if eq .settings.RoleID "nil"}}
+            <form novalidate="novalidate" enctype="multipart/form-data" action="/autorole/{{$guild.ID}}" method="POST">
+            <label for="select" class="form-label">Select Autorole</label>
+            <select id="select" name="roleid" class="form-select form-select-lg mb-3">
+                {{range .guild.Roles}}
+                {{if eq .ID $guild.ID}}
+                {{else}}
+                    <option value="{{.ID}}">{{.Name}}</option>
+                {{end}}
+                {{end}}
+            </select>
+            <div class="mb-3"></div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
             {{else}}
-            <img class="card-img-top" src="https://cdn.discordapp.com/icons/{{.ID}}/{{.Icon}}.png" alt="Image">
+            <form novalidate="novalidate" enctype="multipart/form-data" action="/resetautorole/{{$guild.ID}}" method="POST">
+                <div class="row">
+                    <div class="w-100"></div>
+                    <div class="col-lg-12 text-center">
+                        <div id="success"></div><button class="btn btn-primary" id="resetAutoRole" type="submit" onclick="alert('Resetting autorole.')">Reset Autorole</button>
+                    </div>
+                </div>
+            </form>
             {{end}}
-            <div class="card-body">
-              <h5 class="card-title">{{.Name}}</h5>
-              <a href="/guild/{{.ID}}" class="btn btn-primary">Edit Details</a>
-            </div>
-          </div>
-        {{end}}
-    </section>
-    <section align="center">
-        {{$botid := .botid}}
-        {{range .guilds2}}
-        <div class="card mt-3" style="width: 18rem; display:inline-block">
-            {{if eq .Icon ""}}
-            <img class="card-img-top" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Image">
-            {{else}}
-            <img class="card-img-top" src="https://cdn.discordapp.com/icons/{{.ID}}/{{.Icon}}.png" alt="Image">
-            {{end}}
-            <div class="card-body">
-              <h5 class="card-title">{{.Name}}</h5>
-              <a href="https://discord.com/oauth2/authorize?client_id={{$botid}}&scope=bot+applications.commands&permissions=8&guild_id={{.ID}}" class="btn btn-primary">Add Bot</a>
-            </div>
-          </div>
-        {{end}}
+        </div>
     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>

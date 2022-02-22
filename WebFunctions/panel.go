@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
 	"github.com/bwmarrin/discordgo"
@@ -17,13 +18,7 @@ func PanelHandler(c *gin.Context, cli *discordgo.User, conf *oauth2.Config, sess
 	val, _ := c.Cookie("key")
 	switch val {
 	case "":
-		c.HTML(200, "index.html", gin.H{
-			"login":       "nil",
-			"botavatar":   cli.AvatarURL("1024"),
-			"botusername": cli.Username,
-			"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
-			"botid":       cli.ID,
-		})
+		c.Redirect(http.StatusTemporaryRedirect, "/login")
 	default:
 		var token = &oauth2.Token{}
 		jsoniter.UnmarshalFromString(fmt.Sprint(val), token)

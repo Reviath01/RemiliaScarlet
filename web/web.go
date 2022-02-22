@@ -21,6 +21,7 @@ func Listen(session *discordgo.Session) {
 	server := gin.Default()
 	server.LoadHTMLGlob("web/public/*.html")
 	server.Static("/assets", "./web/public/assets")
+	server.Static("/guild/assets", "./web/public/assets")
 
 	cli := GetClientUser(session)
 
@@ -52,13 +53,26 @@ func Listen(session *discordgo.Session) {
 		webfuncs.InviteHandler(c, cli)
 	})
 
-	server.GET("/contact", webfuncs.ContactHandler)
+	server.GET("/contact", func(c *gin.Context) {
+		webfuncs.ContactHandler(c, cli)
+	})
 
 	server.GET("/panel", func(c *gin.Context) {
 		webfuncs.PanelHandler(c, cli, conf, session)
 	})
 
+	server.GET("/guild/:guildid", func(c *gin.Context) {
+		webfuncs.GuildHandler(c, session, conf, cli)
+	})
+
 	server.POST("/send", webfuncs.SendHandler)
+	server.POST("/resetautorole/:guildid", func(c *gin.Context) {
+		webfuncs.ResetAutoroleHandler(c, session, conf)
+	})
+
+	server.POST("/autorole/:guildid", func(c *gin.Context) {
+		webfuncs.AutoroleHandler(c, session, conf)
+	})
 
 	server.GET("/", func(c *gin.Context) {
 		webfuncs.MainHandler(c, cli, conf, session)

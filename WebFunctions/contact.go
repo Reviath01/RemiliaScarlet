@@ -4,19 +4,24 @@ import (
 	"net/http"
 
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
+	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
 )
 
-func ContactHandler(c *gin.Context) {
+func ContactHandler(c *gin.Context, cli *discordgo.User) {
 	val, _ := c.Cookie("key")
 	switch val {
 	case "":
 		c.HTML(200, "contact.html", gin.H{
-			"login": "nil",
+			"login":       "nil",
+			"botavatar":   cli.AvatarURL("1024"),
+			"botusername": cli.Username,
 		})
 	default:
 		c.HTML(200, "contact.html", gin.H{
-			"login": "yes",
+			"login":       "yes",
+			"botavatar":   cli.AvatarURL("1024"),
+			"botusername": cli.Username,
 		})
 	}
 }
