@@ -11,7 +11,7 @@ import (
 // SettingsCommand is a handler for settings command
 func SettingsCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		welcomechannelid string
 		leavechannelid   string

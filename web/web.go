@@ -20,8 +20,7 @@ func Listen(session *discordgo.Session) {
 	var state = uuid.New().String()
 	server := gin.Default()
 	server.LoadHTMLGlob("web/public/*.html")
-	server.Static("/css", "./web/public/css")
-	server.Static("/guild/css", "./web/public/css")
+	server.Static("/assets", "./web/public/assets")
 
 	cli := GetClientUser(session)
 
@@ -53,53 +52,9 @@ func Listen(session *discordgo.Session) {
 		webfuncs.InviteHandler(c, cli)
 	})
 
-	server.GET("/support", func(c *gin.Context) {
-		webfuncs.SupportHandler(c)
-	})
+	server.GET("/contact", webfuncs.ContactHandler)
 
-	server.GET("/api/log/:guildid/:newchannel", func(c *gin.Context) {
-		webfuncs.LogHandler(c, session, conf)
-	})
-
-	server.GET("/api/leavechannel/:guildid/:newchannel", func(c *gin.Context) {
-		webfuncs.LeaveChannelHandler(c, session, conf)
-	})
-
-	server.GET("/api/welcomechannel/:guildid/:newchannel", func(c *gin.Context) {
-		webfuncs.WelcomeChannelHandler(c, session, conf)
-	})
-
-	server.GET("/api/autorole/:guildid/:roleid", func(c *gin.Context) {
-		webfuncs.AutoRoleHandler(c, session, conf)
-	})
-
-	server.GET("/api/resetlog/:guildid", func(c *gin.Context) {
-		webfuncs.ResetLogHandler(c, session, conf)
-	})
-
-	server.GET("/api/resetwelcomechannel/:guildid", func(c *gin.Context) {
-		webfuncs.ResetWelcomeChannelHandler(c, session, conf)
-	})
-
-	server.GET("/api/resetwelcomemessage/:guildid", func(c *gin.Context) {
-		webfuncs.ResetWelcomeMessageHandler(c, session, conf)
-	})
-
-	server.GET("/api/resetleavemessage/:guildid", func(c *gin.Context) {
-		webfuncs.ResetLeaveMessageHandler(c, session, conf)
-	})
-
-	server.GET("/api/resetleavechannel/:guildid", func(c *gin.Context) {
-		webfuncs.ResetLeaveChannelHandler(c, session, conf)
-	})
-
-	server.GET("/api/resetautorole/:guildid", func(c *gin.Context) {
-		webfuncs.ResetAutoRoleHandler(c, session, conf)
-	})
-
-	server.GET("/guild/:guildid", func(c *gin.Context) {
-		webfuncs.GuildHandler(c, session, conf, cli)
-	})
+	server.POST("/send", webfuncs.SendHandler)
 
 	server.GET("/", func(c *gin.Context) {
 		webfuncs.MainHandler(c, cli, conf, session)

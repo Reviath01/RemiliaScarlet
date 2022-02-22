@@ -11,7 +11,7 @@ import (
 // ResetAutoroleCommand is a handler for reset auto role command
 func ResetAutoroleCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		roleid string
 	}

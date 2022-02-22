@@ -12,7 +12,7 @@ import (
 // AutoRoleCommand is a handler for auto role command
 func AutoRoleCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		roleid string
 	}

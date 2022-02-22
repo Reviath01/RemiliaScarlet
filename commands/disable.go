@@ -12,7 +12,7 @@ import (
 // DisableCommand is a handler for disable command
 func DisableCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		isblocked string
 	}

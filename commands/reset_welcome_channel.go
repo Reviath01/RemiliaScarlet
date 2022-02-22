@@ -11,7 +11,7 @@ import (
 // ResetWelcomeChannelCommand is a handler for reset welcome channel command
 func ResetWelcomeChannelCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		channelid string
 	}

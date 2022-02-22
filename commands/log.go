@@ -12,7 +12,7 @@ import (
 // LogCommand is a handler for log command
 func LogCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		channelid string
 	}

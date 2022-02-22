@@ -29,13 +29,14 @@ func EvalCommand(ctx CommandHandler.Context, _ []string) error {
 		}
 	}
 
-	_, err = os.Create(fmt.Sprintf("./evals/%s.go", uuidvar))
+	file, err := os.Create(fmt.Sprintf("./evals/%s.go", uuidvar))
 	if err != nil {
 		ctx.Reply("Error while creating file..")
 		time.Sleep(1 * time.Second)
 		ctx.Reply(err.Error())
 		return nil
 	}
+	defer file.Close()
 	ctx.Reply(fmt.Sprintf("Created file %s.go", uuidvar))
 	err = ioutil.WriteFile(fmt.Sprintf("./evals/%s.go", uuidvar), []byte(strings.Join(multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix()), " ")), fs.ModeDevice)
 	if err != nil {
@@ -53,7 +54,6 @@ func EvalCommand(ctx CommandHandler.Context, _ []string) error {
 		ctx.Reply(err.Error())
 		return nil
 	}
-
 	ctx.Reply("Output:")
 	time.Sleep(1 * time.Second)
 	ctx.Reply(outb.String())

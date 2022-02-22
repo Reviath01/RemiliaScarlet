@@ -12,7 +12,7 @@ import (
 // LeaveMessageCommand is a handler for leave message command
 func LeaveMessageCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		message string
 	}

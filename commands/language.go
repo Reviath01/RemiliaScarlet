@@ -11,7 +11,7 @@ import (
 // LanguageCommand is a handler for language command
 func LanguageCommand(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	args := multiplexer.GetArgs(ctx.Message.Content, multiplexer.GetPrefix())
 
 	if sql.CheckLanguage(ctx.Guild.ID) == "tr" {

@@ -17,10 +17,10 @@
         <div class="container"><a class="navbar-brand">Remilia Scarlet</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/">Home</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/invite">Invite</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://discord.gg/DyMVEWnVTQ">Discord</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/about">About</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/contact">Contact</a></li>
                     {{if eq .login "yes"}}
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/panel">User Panel</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/logout">Logout</a></li>
@@ -31,13 +31,27 @@
             </div>
         </div>
     </nav>
-    <header class="text-center text-white bg-secondary masthead">
-        <div class="container"><img class="img-fluid d-block mx-auto mb-5 rounded-circle" src="{{.botavatar}}">
-            <h1>Remilia Scarlet</h1>
-            <hr class="star-light">
-            <h2 class="font-weight-light mb-0">Multipurpose Discord bot written in Golang.</h2>
-        </div>
-    </header>
+    <br /><br /><br />
+    <section>
+    <div class="container">
+      <h2 class="text-center text-secondary mb-0">Contact Me</h2>
+      <hr class="star-dark mb-5">
+      <div class="row">
+          <div class="col-lg-8 mx-auto">
+              <form id="contactForm" name="sentMessage" novalidate="novalidate" enctype="multipart/form-data" action="/send" method="POST">
+                  <div class="control-group">
+                      <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="text" id="name" name="name" required="" placeholder="Name"><label class="form-label">Name</label><small class="form-text text-danger help-block"></small></div>
+                    </div>
+                    <div class="control-group">
+                      <div class="mb-5 form-floating controls pb-2"><textarea class="form-control" id="message" name="message" required="" placeholder="Message" style="height: 150px;"></textarea><label class="form-label">Message</label><small class="form-text text-danger help-block"></small></div>
+                    </div>
+                    <div id="success"></div>
+                  <div><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit" onclick="alert('Your message has been sent!')">Send</button></div>
+              </form>
+            </div>
+        <div>
+    </div>
+    </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
 </body>

@@ -11,7 +11,7 @@ import (
 // ResetLeaveChannel is a handler for reset leave channel command
 func ResetLeaveChannel(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		channelid string
 	}

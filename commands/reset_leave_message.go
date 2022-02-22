@@ -11,7 +11,7 @@ import (
 // ResetLeaveMessage is a handler for reset leave message command
 func ResetLeaveMessage(ctx CommandHandler.Context, _ []string) error {
 	db := sql.Connect()
-
+	defer db.Close()
 	type Tag struct {
 		message string
 	}
