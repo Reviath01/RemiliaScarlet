@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>{{.botusername}} - Home</title>
+    <title>{{.botusername}} - User Panel</title>
     <meta name="description" content="Multipurpose Discord bot written in Golang.">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
@@ -17,26 +17,31 @@
         <div class="container"><a class="navbar-brand">{{.botusername}}</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/">Home</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/invite">Invite</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://discord.gg/DyMVEWnVTQ">Discord</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/contact">Contact</a></li>
-                    {{if eq .login "yes"}}
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/panel">User Panel</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/logout">Logout</a></li>
-                    {{else}}
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/login">Login</a></li>
-                    {{end}}
                 </ul>
             </div>
         </div>
     </nav>
-    <header class="text-center text-white bg-secondary masthead">
-        <div class="container"><img class="img-fluid d-block mx-auto mb-5 rounded-circle" src="{{.botavatar}}">
-            <h1>{{.botusername}}</h1>
-            <hr class="star-light">
-            <h2 class="font-weight-light mb-0">Multipurpose Discord bot written in Golang.</h2>
+    <br /><br /><br />
+    <section>
+    {{range .guilds}}
+    <div class="card mt-3" style="width: 18rem; display:inline-block">
+        {{if eq .Icon ""}}
+        <img class="card-img-top" src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Image">
+        {{else}}
+        <img class="card-img-top" src="https://cdn.discordapp.com/icons/{{.ID}}/{{.Icon}}.png" alt="Image">
+        {{end}}
+        <div class="card-body">
+          <h5 class="card-title">{{.Name}}</h5>
+          <a href="/guild/{{.ID}}" class="btn btn-primary">Edit Details</a>
         </div>
-    </header>
+      </div>
+    {{end}}
+    </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
 </body>

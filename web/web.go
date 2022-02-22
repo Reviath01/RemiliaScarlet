@@ -54,6 +54,10 @@ func Listen(session *discordgo.Session) {
 
 	server.GET("/contact", webfuncs.ContactHandler)
 
+	server.GET("/panel", func(c *gin.Context) {
+		webfuncs.PanelHandler(c, cli, conf, session)
+	})
+
 	server.POST("/send", webfuncs.SendHandler)
 
 	server.GET("/", func(c *gin.Context) {
