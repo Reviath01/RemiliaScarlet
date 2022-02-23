@@ -14,7 +14,7 @@
     <link rel="icon" href="{{.botavatar}}">
 </head>
 
-<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72">
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72" class="bg-secondary text-light">
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" id="mainNav">
         <div class="container"><a class="navbar-brand">{{.botusername}}</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -30,7 +30,7 @@
     </nav>
     <br /><br /><br />
     {{$guild := .guild}}
-    <section class="bg-secondary text-light" align="center">
+    <section align="center">
         <h1>{{$guild.Name}} Settings</h1>
         <br /><br />
         <!-- Autorole -->
@@ -152,6 +152,38 @@
             {{end}}
         </div>
         <!-- Log end -->
+        <br />
+        <!-- Welcome Channel -->
+        <h3>Welcome Channel</h3>
+            <div class="col-lg-4 mx-auto">
+            {{if eq .settings.WelcomeChannelID "nil"}}
+            <form novalidate="novalidate" enctype="multipart/form-data" action="/welcomechannel/{{$guild.ID}}" method="POST">
+            <label for="select" class="form-label">Select Channel</label>
+            <select id="select" name="welcomechannel" class="form-select form-select-lg col-lg-4 ">
+                {{range .channels}}
+                {{if eq .ID $guild.ID}}
+                {{else}}
+                    <option value="{{.ID}}">{{.Name}}</option>
+                {{end}}
+                {{end}}
+            </select>
+            <br />
+            <div class="col-lg-4"></div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            {{else}}
+            <h5 class="text-warning">Channel ID: {{.settings.WelcomeChannelID}}</h5>
+            <form novalidate="novalidate" enctype="multipart/form-data" action="/resetwelcomechannel/{{$guild.ID}}" method="POST">
+                <div class="row">
+                    <div class="w-100"></div>
+                    <div class="col-lg-12 text-center">
+                        <div id="success"></div><button class="btn btn-primary" id="resetWelcomeChannel" type="submit">Reset Welcome Channel</button>
+                    </div>
+                </div>
+            </form>
+            {{end}}
+        </div>
+        <!-- Welcome channel end -->
     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
