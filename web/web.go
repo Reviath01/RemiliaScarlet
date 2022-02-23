@@ -90,6 +90,14 @@ func Listen(session *discordgo.Session) {
 		webfuncs.ResetLeaveMessageHandler(c, session, conf)
 	})
 
+	server.POST("/log/:guildid", func(c *gin.Context) {
+		webfuncs.LogHandler(c, session, conf)
+	})
+
+	server.POST("/resetlog/:guildid", func(c *gin.Context) {
+		webfuncs.ResetLogHandler(c, session, conf)
+	})
+
 	server.GET("/", func(c *gin.Context) {
 		webfuncs.MainHandler(c, cli, conf, session)
 	})

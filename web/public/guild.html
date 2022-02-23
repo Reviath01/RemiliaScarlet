@@ -52,11 +52,12 @@
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             {{else}}
+            <h5 class="text-warning">Role ID: {{.settings.RoleID}}</h5>
             <form novalidate="novalidate" enctype="multipart/form-data" action="/resetautorole/{{$guild.ID}}" method="POST">
                 <div class="row">
                     <div class="w-100"></div>
                     <div class="col-lg-12 text-center">
-                        <div id="success"></div><button class="btn btn-primary" id="resetAutoRole" type="submit" onclick="alert('Resetting autorole.')">Reset Autorole</button>
+                        <div id="success"></div><button class="btn btn-primary" id="resetAutoRole" type="submit">Reset Autorole</button>
                     </div>
                 </div>
             </form>
@@ -83,11 +84,12 @@
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             {{else}}
+            <h5 class="text-warning">Channel ID: {{.settings.LeaveChannelID}}</h5>
             <form novalidate="novalidate" enctype="multipart/form-data" action="/resetleavechannel/{{$guild.ID}}" method="POST">
                 <div class="row">
                     <div class="w-100"></div>
                     <div class="col-lg-12 text-center">
-                        <div id="success"></div><button class="btn btn-primary" id="resetLeaveChannel" type="submit" onclick="alert('Resetting leave channel.')">Reset Leave Channel</button>
+                        <div id="success"></div><button class="btn btn-primary" id="resetLeaveChannel" type="submit">Reset Leave Channel</button>
                     </div>
                 </div>
             </form>
@@ -106,17 +108,50 @@
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
             {{else}}
+            <h5 class="text-warning">Message: {{.settings.LeaveMessage}}</h5>
             <form novalidate="novalidate" enctype="multipart/form-data" action="/resetleavemessage/{{$guild.ID}}" method="POST">
                 <div class="row">
                     <div class="w-100"></div>
                     <div class="col-lg-12 text-center">
-                        <div id="success"></div><button class="btn btn-primary" id="resetLeaveMessage" type="submit" onclick="alert('Resetting leave message.')">Reset Leave Message</button>
+                        <div id="success"></div><button class="btn btn-primary" id="resetLeaveMessage" type="submit">Reset Leave Message</button>
                     </div>
                 </div>
             </form>
             {{end}}
         </div>
         <!-- Leave message end -->
+        <br />
+        <!-- Log -->
+        <h3>Log</h3>
+        <div class="col-lg-4 mx-auto">
+        {{if eq .settings.LogID "nil"}}
+        <form novalidate="novalidate" enctype="multipart/form-data" action="/log/{{$guild.ID}}" method="POST">
+        <label for="select" class="form-label">Select Channel</label>
+        <select id="select" name="logchannel" class="form-select form-select-lg col-lg-4 ">
+            {{range .channels}}
+            {{if eq .ID $guild.ID}}
+            {{else}}
+                <option value="{{.ID}}">{{.Name}}</option>
+            {{end}}
+            {{end}}
+        </select>
+        <br />
+        <div class="col-lg-4"></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {{else}}
+        <h5 class="text-warning">Log ID: {{.settings.LogID}}</h5>
+        <form novalidate="novalidate" enctype="multipart/form-data" action="/resetlog/{{$guild.ID}}" method="POST">
+            <div class="row">
+                <div class="w-100"></div>
+                <div class="col-lg-12 text-center">
+                    <div id="success"></div><button class="btn btn-primary" id="resetLog" type="submit">Reset Log</button>
+                </div>
+            </div>
+        </form>
+            {{end}}
+        </div>
+        <!-- Log end -->
     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
