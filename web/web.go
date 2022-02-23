@@ -54,7 +54,7 @@ func Listen(session *discordgo.Session) {
 	})
 
 	server.GET("/contact", func(c *gin.Context) {
-		webfuncs.ContactHandler(c, cli)
+		webfuncs.ContactHandler(c, cli, conf)
 	})
 
 	server.GET("/panel", func(c *gin.Context) {
@@ -107,7 +107,7 @@ func Listen(session *discordgo.Session) {
 	})
 
 	server.GET("/", func(c *gin.Context) {
-		webfuncs.MainHandler(c, cli, conf, session)
+		webfuncs.MainHandler(c, cli, conf)
 	})
 
 	fmt.Printf("Attempting to run website at \"%s:%s\" \n", config.BaseURL, config.WebPort)

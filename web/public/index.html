@@ -23,8 +23,15 @@
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://discord.gg/DyMVEWnVTQ">Discord</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/contact">Contact</a></li>
                     {{if eq .login "yes"}}
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/panel">User Panel</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/logout">Logout</a></li>
+                    <li class="nav-item dropdown mx-0 mx-lg-1">
+                        <a class="nav-link dropdown-toggle py-3 px-0 px-lg-3 rounded" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{.user.Name}}
+                        </a>
+                        <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item bg-dark text-light" href="/panel">User Panel</a></li>
+                          <li><a class="dropdown-item bg-dark text-light" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
                     {{else}}
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/login">Login</a></li>
                     {{end}}
