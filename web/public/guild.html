@@ -31,12 +31,15 @@
     <br /><br /><br />
     {{$guild := .guild}}
     <section class="bg-secondary text-light" align="center">
+        <h1>{{$guild.Name}} Settings</h1>
+        <br /><br />
+        <!-- Autorole -->
         <h3>Autorole</h3>
-        <div class="mb-3">
+        <div class="col-lg-4 mx-auto">
             {{if eq .settings.RoleID "nil"}}
             <form novalidate="novalidate" enctype="multipart/form-data" action="/autorole/{{$guild.ID}}" method="POST">
-            <label for="select" class="form-label">Select Autorole</label>
-            <select id="select" name="roleid" class="form-select form-select-lg mb-3">
+            <label for="select" class="form-label">Select Role</label>
+            <select id="select" name="roleid" class="form-select form-select-lg col-lg-4 ">
                 {{range .guild.Roles}}
                 {{if eq .ID $guild.ID}}
                 {{else}}
@@ -44,7 +47,8 @@
                 {{end}}
                 {{end}}
             </select>
-            <div class="mb-3"></div>
+            <br />
+            <div class="col-lg-4"></div>
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             {{else}}
@@ -57,7 +61,62 @@
                 </div>
             </form>
             {{end}}
+            </div>
+            <!-- Autorole end -->
+            <br />
+            <!-- Leave Channel -->
+            <h3>Leave Channel</h3>
+            <div class="col-lg-4 mx-auto">
+            {{if eq .settings.LeaveChannelID "nil"}}
+            <form novalidate="novalidate" enctype="multipart/form-data" action="/leavechannel/{{$guild.ID}}" method="POST">
+            <label for="select" class="form-label">Select Channel</label>
+            <select id="select" name="channel" class="form-select form-select-lg col-lg-4 ">
+                {{range .channels}}
+                {{if eq .ID $guild.ID}}
+                {{else}}
+                    <option value="{{.ID}}">{{.Name}}</option>
+                {{end}}
+                {{end}}
+            </select>
+            <br />
+            <div class="col-lg-4"></div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            {{else}}
+            <form novalidate="novalidate" enctype="multipart/form-data" action="/resetleavechannel/{{$guild.ID}}" method="POST">
+                <div class="row">
+                    <div class="w-100"></div>
+                    <div class="col-lg-12 text-center">
+                        <div id="success"></div><button class="btn btn-primary" id="resetLeaveChannel" type="submit" onclick="alert('Resetting leave channel.')">Reset Leave Channel</button>
+                    </div>
+                </div>
+            </form>
+            {{end}}
         </div>
+        <!-- Leave channel end -->
+        <br />
+        <!-- Leave Message -->
+        <h3>Leave Message</h3>
+        <div class="col-lg-4 mx-auto">
+        {{if eq .settings.LeaveMessage "nil"}}
+        <form novalidate="novalidate" enctype="multipart/form-data" action="/leavemessage/{{$guild.ID}}" method="POST">
+            <textarea class="form-control" type="text" id="leavemessage" name="leavemessage" placeholder="New Message (Placeholders {mention}, {username})" required="true"></textarea><small class="form-text text-danger flex-grow-1 help-block lead"></small>
+        <br />
+        <div class="col-lg-4"></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+            {{else}}
+            <form novalidate="novalidate" enctype="multipart/form-data" action="/resetleavemessage/{{$guild.ID}}" method="POST">
+                <div class="row">
+                    <div class="w-100"></div>
+                    <div class="col-lg-12 text-center">
+                        <div id="success"></div><button class="btn btn-primary" id="resetLeaveMessage" type="submit" onclick="alert('Resetting leave message.')">Reset Leave Message</button>
+                    </div>
+                </div>
+            </form>
+            {{end}}
+        </div>
+        <!-- Leave message end -->
     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>

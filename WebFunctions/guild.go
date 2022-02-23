@@ -114,6 +114,14 @@ func GuildHandler(c *gin.Context, session *discordgo.Session, conf *oauth2.Confi
 				logchannel = "nil"
 			}
 
+			var channels []*discordgo.Channel
+
+			for _, channel := range guild.Channels {
+				if channel.Type == 0 || channel.Type == 5 {
+					channels = append(channels, channel)
+				}
+			}
+
 			c.HTML(200, "guild.html", gin.H{
 				"guild": guild,
 				"settings": Settings{
@@ -124,6 +132,7 @@ func GuildHandler(c *gin.Context, session *discordgo.Session, conf *oauth2.Confi
 					LogID:            logchannel,
 					RoleID:           autorole,
 				},
+				"channels": channels,
 				"user": UserInfo{
 					Name:          user.Username,
 					ID:            user.ID,

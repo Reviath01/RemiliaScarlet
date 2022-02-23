@@ -74,6 +74,22 @@ func Listen(session *discordgo.Session) {
 		webfuncs.AutoroleHandler(c, session, conf)
 	})
 
+	server.POST("/leavechannel/:guildid", func(c *gin.Context) {
+		webfuncs.LeaveChannelHandler(c, session, conf)
+	})
+
+	server.POST("/resetleavechannel/:guildid", func(c *gin.Context) {
+		webfuncs.ResetLeaveChannelHandler(c, session, conf)
+	})
+
+	server.POST("/leavemessage/:guildid", func(c *gin.Context) {
+		webfuncs.LeaveMessageHandler(c, session, conf)
+	})
+
+	server.POST("/resetleavemessage/:guildid", func(c *gin.Context) {
+		webfuncs.ResetLeaveMessageHandler(c, session, conf)
+	})
+
 	server.GET("/", func(c *gin.Context) {
 		webfuncs.MainHandler(c, cli, conf, session)
 	})
