@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{{.botusername}} - Home</title>
+    <meta name="title" content="Remilia Scarlet">
+    <meta name="description" content="Multipurpose Discord bot written in Golang.">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="icon" href="{{.botavatar}}">
+</head>
+
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72" class="bg-secondary text-light">
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" id="mainNav">
+        <div class="container"><a class="navbar-brand">{{.botusername}}</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/">Home</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/invite">Invite</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://discord.gg/DyMVEWnVTQ">Discord</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/contact">Contact</a></li>
+                    <li class="nav-item dropdown mx-0 mx-lg-1">
+                        <a class="nav-link dropdown-toggle py-3 px-0 px-lg-3 rounded" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{.user.Name}}
+                        </a>
+                        <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item bg-dark text-light" href="/panel">User Panel</a></li>
+                          <li><a class="dropdown-item bg-dark text-light" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section>
+    <br /><br /><br />
+    <div class="card bg-success text-light">
+        <div class="card-body">
+            <h3 class="card-title">Messages</h3>
+            {{range .messages}}
+            <p class="card-text">Sender: {{.Sender}} <br>Message {{.Content}}</p>
+            {{end}}
+        </div>
+    </div>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+</html>

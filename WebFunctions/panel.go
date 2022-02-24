@@ -16,6 +16,7 @@ import (
 )
 
 func PanelHandler(c *gin.Context, cli *discordgo.User, conf *oauth2.Config, session *discordgo.Session) {
+	config.ReadConfig()
 	val, _ := c.Cookie("key")
 	switch val {
 	case "":

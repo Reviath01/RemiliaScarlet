@@ -65,7 +65,12 @@ func Listen(session *discordgo.Session) {
 		webfuncs.GuildHandler(c, session, conf, cli)
 	})
 
+	server.GET("/admin", func(c *gin.Context) {
+		webfuncs.AdminHandler(c, conf, cli)
+	})
+
 	server.POST("/send", webfuncs.SendHandler)
+
 	server.POST("/resetautorole/:guildid", func(c *gin.Context) {
 		webfuncs.ResetAutoroleHandler(c, session, conf)
 	})
