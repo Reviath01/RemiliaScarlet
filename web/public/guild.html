@@ -29,6 +29,9 @@
                         </a>
                         <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
                           <li><a class="dropdown-item bg-dark text-light" href="/panel">User Panel</a></li>
+                          {{if eq .user.ID .owner}}
+                          <li><a class="dropdown-item bg-dark text-light" href="/admin">Admin Panel</a></li>
+                          {{end}}
                           <li><a class="dropdown-item bg-dark text-light" href="/logout">Logout</a></li>
                         </ul>
                     </li>

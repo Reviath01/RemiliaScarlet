@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
+	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
 	jsoniter "github.com/json-iterator/go"
@@ -88,6 +89,7 @@ func PanelHandler(c *gin.Context, cli *discordgo.User, conf *oauth2.Config, sess
 			"botusername": cli.Username,
 			"botlink":     fmt.Sprintf("https://discord.com/users/%s", cli.ID),
 			"botid":       cli.ID,
+			"owner":       config.Owner,
 		})
 	}
 }

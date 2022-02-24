@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	multiplexer "git.randomchars.net/Reviath/RemiliaScarlet/Multiplexer"
+	"git.randomchars.net/Reviath/RemiliaScarlet/config"
 	"git.randomchars.net/Reviath/RemiliaScarlet/sql"
 	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
@@ -16,6 +17,7 @@ import (
 )
 
 func GuildHandler(c *gin.Context, session *discordgo.Session, conf *oauth2.Config, cli *discordgo.User) {
+	config.ReadConfig()
 	val, _ := c.Cookie("key")
 	switch val {
 	case "":
@@ -140,6 +142,7 @@ func GuildHandler(c *gin.Context, session *discordgo.Session, conf *oauth2.Confi
 					Discriminator: user.Discriminator,
 					Bot:           user.Bot,
 				},
+				"owner":       config.Owner,
 				"botavatar":   cli.AvatarURL("1024"),
 				"botusername": cli.Username,
 			})
