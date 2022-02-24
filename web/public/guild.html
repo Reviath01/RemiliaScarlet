@@ -23,7 +23,15 @@
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/invite">Invite</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://discord.gg/DyMVEWnVTQ">Discord</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/contact">Contact</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/logout">Logout</a></li>
+                    <li class="nav-item dropdown mx-0 mx-lg-1">
+                        <a class="nav-link dropdown-toggle py-3 px-0 px-lg-3 rounded" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{.user.Name}}
+                        </a>
+                        <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item bg-dark text-light" href="/panel">User Panel</a></li>
+                          <li><a class="dropdown-item bg-dark text-light" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -119,7 +127,7 @@
             </form>
             {{end}}
         </div>
-        <!-- Leave message end -->
+        <!-- Leave Message end -->
         <br />
         <!-- Log -->
         <h3>Log</h3>
@@ -184,6 +192,30 @@
             {{end}}
         </div>
         <!-- Welcome channel end -->
+        <br />
+        <!-- Welcome Message -->
+        <h3>Welcome Message</h3>
+        <div class="col-lg-4 mx-auto">
+        {{if eq .settings.WelcomeMessage "nil"}}
+        <form novalidate="novalidate" enctype="multipart/form-data" action="/welcomemessage/{{$guild.ID}}" method="POST">
+            <textarea class="form-control" type="text" id="welcomemessage" name="welcomemessage" placeholder="New Message (Placeholders {mention}, {username})" required="true"></textarea><small class="form-text text-danger flex-grow-1 help-block lead"></small>
+        <br />
+        <div class="col-lg-4"></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+            {{else}}
+            <h5 class="text-warning">Message: {{.settings.WelcomeMessage}}</h5>
+            <form novalidate="novalidate" enctype="multipart/form-data" action="/resetwelcomemessage/{{$guild.ID}}" method="POST">
+                <div class="row">
+                    <div class="w-100"></div>
+                    <div class="col-lg-12 text-center">
+                        <div id="success"></div><button class="btn btn-primary" id="resetWelcomeMessage" type="submit">Reset Welcome Message</button>
+                    </div>
+                </div>
+            </form>
+            {{end}}
+        </div>
+        <!-- Welcome Message end -->
     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>

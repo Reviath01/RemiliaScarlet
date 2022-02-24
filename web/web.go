@@ -106,6 +106,14 @@ func Listen(session *discordgo.Session) {
 		webfuncs.ResetWelcomeChannelHandler(c, session, conf)
 	})
 
+	server.POST("/welcomemessage/:guildid", func(c *gin.Context) {
+		webfuncs.WelcomeMessageHandler(c, session, conf)
+	})
+
+	server.POST("/resetwelcomemessage/:guildid", func(c *gin.Context) {
+		webfuncs.ResetWelcomeMessageHandler(c, session, conf)
+	})
+
 	server.GET("/", func(c *gin.Context) {
 		webfuncs.MainHandler(c, cli, conf)
 	})
