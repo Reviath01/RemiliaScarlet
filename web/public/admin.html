@@ -38,14 +38,25 @@
     </nav>
     <section>
     <br /><br /><br />
-    <div class="card bg-success text-light">
-        <div class="card-body">
-            <h3 class="card-title">Messages</h3>
-            {{range .messages}}
-            <p class="card-text">Sender: {{.Sender}} <br>Message {{.Content}}</p>
-            {{end}}
-        </div>
-    </div>
+    <h3>Messages</h3>
+    <table class="table text-light">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range .messages}}
+          <tr>
+            <th scope="row">{{.ID}}</th>
+            <td>{{.Sender}}</td>
+            <td>{{.Content}}</td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
     </section>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>

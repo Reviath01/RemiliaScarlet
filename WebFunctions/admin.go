@@ -49,7 +49,7 @@ func AdminHandler(c *gin.Context, conf *oauth2.Config, cli *discordgo.User) {
 
 		db := sql.Connect()
 		defer db.Close()
-		row, err := db.Query("SELECT message, name FROM messages")
+		row, err := db.Query("SELECT message, name, id FROM messages")
 		if err != nil {
 			c.HTML(200, "error.html", gin.H{
 				"is404":       "false",
@@ -62,6 +62,7 @@ func AdminHandler(c *gin.Context, conf *oauth2.Config, cli *discordgo.User) {
 		type Row struct {
 			Content string
 			Sender  string
+			ID      int
 		}
 
 		type RowCollection struct {
@@ -72,7 +73,7 @@ func AdminHandler(c *gin.Context, conf *oauth2.Config, cli *discordgo.User) {
 		var2 := Row{}
 
 		for row.Next() {
-			err = row.Scan(&var2.Content, &var2.Sender)
+			err = row.Scan(&var2.Content, &var2.Sender, &var2.ID)
 			if err != nil {
 				panic(err.Error())
 			}
