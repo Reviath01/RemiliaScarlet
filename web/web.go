@@ -13,16 +13,36 @@ import (
 	"golang.org/x/oauth2"
 )
 
+func init() {
+	gin.SetMode(gin.ReleaseMode)
+}
+
+var (
+	Reset  = "\033[0m"
+	Green  = "\033[32m"
+	Yellow = "\033[43m"
+	Red    = "\033[41m"
+	server *gin.Engine
+)
+
 // Listen returns to web panel that running on specified port
 func Listen(session *discordgo.Session) {
 	config.ReadConfig()
-	gin.SetMode(gin.ReleaseMode)
 	var state = uuid.New().String()
-	server := gin.Default()
+	server = gin.New()
 	server.LoadHTMLGlob("web/public/*.html")
 	server.Static("/assets", "./web/public/assets")
 	server.Static("/guild/assets", "./web/public/assets")
-
+	server.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
+		return fmt.Sprintf(Red+"Web:    "+Reset+"| %v |"+Yellow+" %3d "+Reset+"| %13v | %15s |"+Green+" %-7s  "+Reset+"\"%s\" \n",
+			param.TimeStamp.Format("2006/01/02 - 15:04:05"),
+			param.StatusCode,
+			param.Latency,
+			param.ClientIP,
+			param.Method,
+			param.Path,
+		)
+	}))
 	cli := GetClientUser(session)
 
 	conf := &oauth2.Config{

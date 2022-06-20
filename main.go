@@ -34,18 +34,14 @@ func main() {
 
 	client.Identify.Intents = discordgo.IntentsAll
 
-	BotID := u.ID
-	BotUsername := u.Username
-	BotDiscriminator := u.Discriminator
-
 	if config.LoadInteractions == "true" {
-		executor.RunAllInteractions(client, BotID)
+		executor.RunAllInteractions(client, u.ID)
 	}
 
 	executor.RunAllEvents(client)
 	executor.RunAllCommands(client)
 
-	fmt.Printf("Logging in as %s#%s (%s)\n", BotUsername, BotDiscriminator, BotID)
+	fmt.Printf("Logging in as %s#%s (%s)\n", u.Username, u.Discriminator, u.ID)
 
 	time.Sleep(1 * time.Second)
 
