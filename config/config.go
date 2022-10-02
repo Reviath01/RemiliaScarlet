@@ -22,6 +22,7 @@ var (
 	WebPort          string        // WebPort to run website at
 	BaseURL          string        // BaseURL to run website at
 	ClientSecret     string        // ClientSecret for OAuth2
+	RunWeb           string        // RunWeb for checking if running server
 )
 
 type configStruct struct {
@@ -45,6 +46,7 @@ type configStruct struct {
 	Web struct {
 		WebPort string `json:"WebPort"` // WebURL from config file
 		BaseURL string `json:"BaseURL"` // BaseURL from config file
+		RunWeb  string `json:"RunWeb"`  // RunWeb from config file
 	}
 }
 
@@ -74,6 +76,7 @@ func ReadConfig() error {
 	WebPort = config.Web.WebPort
 	BaseURL = config.Web.BaseURL
 	ClientSecret = config.Discord.ClientSecret
+	RunWeb = config.Web.RunWeb
 
 	return nil
 }
